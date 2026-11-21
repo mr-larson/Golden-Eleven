@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
 use App\Models\Team;
+use App\Services\Support\EditorProfileCache;
 use App\Services\WorldCup\NationalTeamAssembler;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,17 +23,23 @@ class TeamController extends Controller
     {
         $this->authorize('viewAny', Team::class);
 
-        return Inertia::render('Teams/Index', [
-            // Profil du onze type du club (OVR + moyenne par stat) : titulaires choisis par l'IA parmi ses joueurs sous contrat.
-            'teams'       => Team::with('players')->orderBy('name')->get()->each(function (Team $team) use ($assembler) {
-                $team->setAttribute('eleven', $assembler->elevenProfile(
+        // Profil du onze type du club (OVR + moyenne par stat) : titulaires choisis par l'IA parmi ses joueurs sous contrat,
+        // et pays dominant. Mis en cache tant que les joueurs, équipes et contrats ne changent pas.
+        $profiles = EditorProfileCache::remember('teams', fn () => Team::with('players')->get()
+            ->mapWithKeys(fn (Team $team) => [$team->id => [
+                'eleven'  => $assembler->elevenProfile(
                     $team->players,
                     $team->default_formation,
                     $team->tactical_style ?? 'balanced',
                     $team->management_philosophy ?? 'collective',
-                ));
-                $team->setAttribute('country', self::dominantNationality($team->players));
-                $team->unsetRelation('players');
+                ),
+                'country' => self::dominantNationality($team->players),
+            ]])->all());
+
+        return Inertia::render('Teams/Index', [
+            'teams'       => Team::orderBy('name')->get()->each(function (Team $team) use ($profiles) {
+                $team->setAttribute('eleven', $profiles[$team->id]['eleven'] ?? null);
+                $team->setAttribute('country', $profiles[$team->id]['country'] ?? null);
             }),
             // Équipe à ouvrir (ex. juste après sa création) / fiche vide demandée.
             'selectedId'  => $request->integer('selected') ?: null,

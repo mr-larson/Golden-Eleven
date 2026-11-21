@@ -48,4 +48,29 @@ class NationEditorTest extends TestCase
 
         $this->actingAs(User::factory()->create())->get(route('nations.index'))->assertForbidden();
     }
+
+    public function test_profile_cache_version_changes_when_data_changes(): void
+    {
+        $before = \App\Services\Support\EditorProfileCache::version();
+        $this->assertSame($before, \App\Services\Support\EditorProfileCache::version());
+
+        \App\Models\Player::factory()->create();
+        $afterPlayer = \App\Services\Support\EditorProfileCache::version();
+        $this->assertNotSame($before, $afterPlayer);
+
+        Nation::create(['name' => 'Testland', 'code' => 'TL']);
+        $this->assertNotSame($afterPlayer, \App\Services\Support\EditorProfileCache::version());
+    }
+
+    public function test_pages_use_the_cache_and_still_render(): void
+    {
+        $admin = $this->admin();
+        Nation::create(['name' => 'Testland', 'code' => 'TL']);
+
+        $this->actingAs($admin)->get(route('nations.index'))->assertOk();
+        $this->actingAs($admin)->get(route('nations.index'))->assertOk()
+            ->assertInertia(fn ($page) => $page->component('Nations/Index'));
+        $this->actingAs($admin)->get(route('teams.index'))->assertOk()
+            ->assertInertia(fn ($page) => $page->component('Teams/Index'));
+    }
 }
