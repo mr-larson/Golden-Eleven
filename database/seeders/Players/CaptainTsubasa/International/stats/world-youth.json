@@ -80,10 +80,19 @@
     },
     "Mark Owairan": {
       "stats": {
+        "speed": 74,
+        "stamina": 82,
+        "attack": 25,
         "defense": 34,
-        "intercept": 29,
+        "shot": 21,
+        "pass": 26,
+        "dribble": 24,
         "block": 27,
-        "tackle": 29
+        "intercept": 29,
+        "tackle": 29,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Ramené sous Tsubasa : défenseur capitaine, très fort en défense."
     },
@@ -377,6 +386,24 @@
         "heading": 32,
         "hand_save": 10,
         "punch_save": 10
+      }
+    },
+    "Singprasert Bunnaak": {
+      "why": "Échelle des défenseurs (classement des défenseurs réels et de la série).",
+      "stats": {
+        "speed": 66,
+        "stamina": 80,
+        "attack": 18,
+        "defense": 32,
+        "shot": 15,
+        "pass": 20,
+        "dribble": 19,
+        "block": 27,
+        "intercept": 28,
+        "tackle": 27,
+        "heading": 28,
+        "hand_save": 15,
+        "punch_save": 15
       }
     }
   }

@@ -1,0 +1,186 @@
+{
+  "nationality": "Pays de Galles",
+  "sources": "Rééquilibrage du niveau de la sélection (OVR du onze, sous 26).",
+  "players": {
+    "Ashley Williams": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 54,
+        "stamina": 68,
+        "attack": 10,
+        "defense": 29,
+        "shot": 8,
+        "pass": 13,
+        "dribble": 10,
+        "block": 26,
+        "intercept": 26,
+        "tackle": 26,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "John Charles": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 58,
+        "stamina": 70,
+        "attack": 18,
+        "defense": 29,
+        "shot": 14,
+        "pass": 16,
+        "dribble": 14,
+        "block": 25,
+        "intercept": 22,
+        "tackle": 25,
+        "heading": 30,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Kevin Ratcliffe": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 64,
+        "stamina": 68,
+        "attack": 12,
+        "defense": 27,
+        "shot": 8,
+        "pass": 16,
+        "dribble": 12,
+        "block": 21,
+        "intercept": 24,
+        "tackle": 24,
+        "heading": 19,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Mike England": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 54,
+        "stamina": 66,
+        "attack": 11,
+        "defense": 27,
+        "shot": 8,
+        "pass": 15,
+        "dribble": 9,
+        "block": 23,
+        "intercept": 22,
+        "tackle": 24,
+        "heading": 23,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Ryan Giggs": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 78,
+        "stamina": 68,
+        "attack": 30,
+        "defense": 20,
+        "shot": 23,
+        "pass": 29,
+        "dribble": 31,
+        "block": 14,
+        "intercept": 20,
+        "tackle": 18,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Aaron Ramsey": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 64,
+        "stamina": 72,
+        "attack": 26,
+        "defense": 18,
+        "shot": 22,
+        "pass": 26,
+        "dribble": 24,
+        "block": 15,
+        "intercept": 20,
+        "tackle": 19,
+        "heading": 15,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Joe Allen": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 57,
+        "stamina": 70,
+        "attack": 16,
+        "defense": 21,
+        "shot": 14,
+        "pass": 28,
+        "dribble": 20,
+        "block": 14,
+        "intercept": 23,
+        "tackle": 20,
+        "heading": 12,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Joe Ledley": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 60,
+        "stamina": 72,
+        "attack": 20,
+        "defense": 18,
+        "shot": 16,
+        "pass": 21,
+        "dribble": 17,
+        "block": 12,
+        "intercept": 17,
+        "tackle": 17,
+        "heading": 12,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Gareth Bale": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 82,
+        "stamina": 70,
+        "attack": 37,
+        "defense": 14,
+        "shot": 30,
+        "pass": 25,
+        "dribble": 33,
+        "block": 11,
+        "intercept": 14,
+        "tackle": 12,
+        "heading": 19,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Ian Rush": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 67,
+        "stamina": 72,
+        "attack": 35,
+        "defense": 14,
+        "shot": 30,
+        "pass": 21,
+        "dribble": 25,
+        "block": 11,
+        "intercept": 14,
+        "tackle": 12,
+        "heading": 20,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    }
+  }
+}

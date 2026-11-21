@@ -24,7 +24,7 @@
       "stats": {
         "speed": 76,
         "stamina": 77,
-        "attack": 34,
+        "attack": 35,
         "defense": 16,
         "shot": 27,
         "pass": 19,
@@ -87,7 +87,17 @@
       "stats": {
         "speed": 74,
         "stamina": 81,
-        "cross": 26
+        "attack": 24,
+        "defense": 28,
+        "shot": 20,
+        "pass": 24,
+        "dribble": 23,
+        "block": 20,
+        "intercept": 22,
+        "tackle": 25,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Latéral gauche du Mondial 1994 : endurant, montées sur le côté."
     },
@@ -95,7 +105,7 @@
       "stats": {
         "speed": 68,
         "stamina": 82,
-        "attack": 26,
+        "attack": 27,
         "defense": 24,
         "shot": 24,
         "pass": 26,
@@ -114,7 +124,7 @@
         "speed": 65,
         "stamina": 82,
         "attack": 22,
-        "defense": 28,
+        "defense": 29,
         "shot": 22,
         "pass": 23,
         "dribble": 18,
@@ -131,7 +141,7 @@
       "stats": {
         "speed": 71,
         "stamina": 73,
-        "attack": 29,
+        "attack": 30,
         "defense": 18,
         "shot": 22,
         "pass": 27,
@@ -151,7 +161,7 @@
         "speed": 62,
         "stamina": 78,
         "attack": 17,
-        "defense": 29,
+        "defense": 30,
         "shot": 14,
         "pass": 17,
         "dribble": 15,
@@ -169,7 +179,7 @@
         "speed": 64,
         "stamina": 78,
         "attack": 17,
-        "defense": 28,
+        "defense": 29,
         "shot": 14,
         "pass": 17,
         "dribble": 15,

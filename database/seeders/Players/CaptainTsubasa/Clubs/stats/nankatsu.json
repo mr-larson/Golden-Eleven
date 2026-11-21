@@ -145,6 +145,24 @@
         "heading": 22
       },
       "why": "Jeu de tête relevé de 11 à 22 : génie technique, pas un spécialiste des airs mais pas le plus faible du championnat."
+    },
+    "Ryo Ishizaki": {
+      "why": "Échelle des défenseurs (classement des défenseurs réels et de la série).",
+      "stats": {
+        "speed": 65,
+        "stamina": 75,
+        "attack": 22,
+        "defense": 32,
+        "shot": 18,
+        "pass": 23,
+        "dribble": 20,
+        "block": 26,
+        "intercept": 27,
+        "tackle": 25,
+        "heading": 20,
+        "hand_save": 15,
+        "punch_save": 15
+      }
     }
   }
 }
