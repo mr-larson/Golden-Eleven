@@ -60,14 +60,14 @@
                 </template>
 
                 <template #badges>
-                    <Badge v-if="eleven">OVR {{ eleven.ovr }}</Badge>
+                    <Badge v-if="eleven">OVR {{ Number(eleven.ovr).toFixed(1) }}</Badge>
                     <Badge v-else>Pas de onze possible</Badge>
                 </template>
 
                 <Panel as="div" class="sm:p-6">
                     <PlayerStatsPreview v-if="eleven" :stats="eleven.stats" :player-id="form.id" />
                     <p v-if="eleven" class="-mt-2 mb-4 text-[11px] text-slate-400">
-                        Moyenne par stat des {{ eleven.size }} titulaires que l'IA aligne (OVR {{ eleven.ovr }}).
+                        Moyenne par stat des {{ eleven.size }} titulaires que l'IA aligne (OVR {{ Number(eleven.ovr).toFixed(1) }}).
                     </p>
                     <p v-else class="mb-4 text-sm text-slate-400">
                         Pas assez de joueurs éligibles pour aligner un onze : pas de statistiques à afficher.

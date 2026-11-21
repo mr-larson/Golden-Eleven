@@ -23,7 +23,7 @@ export function usePlayerEditorFilters(players, { gameSave = null } = {}) {
     const overall = player => {
         // `stats` (JSON, édité par la fiche) fait foi : la colonne `heading` héritée n'est plus mise à jour.
         const values = PLAYER_STATS.map(({ key }) => Number(player.stats?.[key] ?? playerStat(player, key))).filter(v => Number.isFinite(v) && v > 0);
-        return values.length ? Math.round(values.reduce((a, b) => a + b, 0) / values.length) : 0;
+        return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
     };
     const filtered = computed(() => toValue(players).filter(player => {
         if (filters.position !== 'ALL' && positionGroup(player.position) !== filters.position) return false;

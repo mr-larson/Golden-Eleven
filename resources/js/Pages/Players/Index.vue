@@ -59,7 +59,7 @@
                         {{ positionLabels[form.position] ?? form.position }}
                     </span>
                     <Badge v-if="overall">
-                        OVR {{ overall }}
+                        OVR {{ overall.toFixed(1) }}
                     </Badge>
                 </template>
 
@@ -271,7 +271,7 @@ const panelTabs = computed(() => [
 
 const overall = computed(() => {
     const values = PLAYER_STATS.map(def => Number(form.stats?.[def.key] ?? 0)).filter(v => Number.isFinite(v) && v > 0);
-    return values.length ? Math.round(values.reduce((a, b) => a + b, 0) / values.length) : 0;
+    return values.length ? Math.round(values.reduce((a, b) => a + b, 0) / values.length * 10) / 10 : 0;
 });
 
 // ---------- Joueur ----------
