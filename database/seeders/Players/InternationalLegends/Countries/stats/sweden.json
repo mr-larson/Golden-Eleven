@@ -4,33 +4,73 @@
   "players": {
     "Roland Nilsson": {
       "stats": {
-        "defense": 31,
+        "speed": 68,
         "stamina": 80,
-        "cross": 26
+        "attack": 19,
+        "defense": 29,
+        "shot": 13,
+        "pass": 22,
+        "dribble": 19,
+        "block": 21,
+        "intercept": 25,
+        "tackle": 26,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "3e du Mondial 1994, Sheffield Wednesday : latéral droit fiable et endurant."
     },
     "Björn Nordqvist": {
       "stats": {
-        "defense": 33,
-        "heading": 28
+        "speed": 60,
+        "stamina": 79,
+        "attack": 17,
+        "defense": 31,
+        "shot": 13,
+        "pass": 21,
+        "dribble": 16,
+        "block": 26,
+        "intercept": 27,
+        "tackle": 27,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Défenseur de 115 sélections, record suédois : placement et jeu de tête."
     },
     "Olof Mellberg": {
       "stats": {
-        "defense": 32,
-        "heading": 29,
-        "tackle": 28,
+        "speed": 65,
         "stamina": 80,
-        "block": 28
+        "attack": 17,
+        "defense": 30,
+        "shot": 13,
+        "pass": 20,
+        "dribble": 15,
+        "block": 27,
+        "intercept": 26,
+        "tackle": 28,
+        "heading": 29,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Aston Villa, Juventus, 117 sélections : défenseur central dominant de la tête."
     },
     "Orvar Bergmark": {
       "stats": {
+        "speed": 67,
+        "stamina": 78,
+        "attack": 20,
         "defense": 31,
-        "tackle": 27
+        "shot": 15,
+        "pass": 24,
+        "dribble": 20,
+        "block": 23,
+        "intercept": 27,
+        "tackle": 28,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Finaliste du Mondial 1958 : défenseur solide."
     },
@@ -47,14 +87,14 @@
       "stats": {
         "speed": 65,
         "stamina": 75,
-        "attack": 38,
-        "defense": 20,
-        "shot": 31,
-        "pass": 30,
-        "dribble": 32,
-        "block": 20,
-        "intercept": 20,
-        "tackle": 20,
+        "attack": 37,
+        "defense": 19,
+        "shot": 30,
+        "pass": 29,
+        "dribble": 31,
+        "block": 19,
+        "intercept": 19,
+        "tackle": 19,
         "heading": 30,
         "hand_save": 11,
         "punch_save": 11
@@ -63,19 +103,37 @@
     },
     "Henrik Larsson": {
       "stats": {
-        "attack": 35,
         "speed": 74,
         "stamina": 80,
-        "shot": 29,
-        "heading": 29
+        "attack": 34,
+        "defense": 20,
+        "shot": 28,
+        "pass": 24,
+        "dribble": 25,
+        "block": 13,
+        "intercept": 15,
+        "tackle": 15,
+        "heading": 29,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Celtic, Barcelone (Ligue des champions 2006), 3e du Mondial 1994 : attaquant complet, tête et travail."
     },
     "Thomas Ravelli": {
       "stats": {
-        "defense": 33,
-        "hand_save": 28,
-        "punch_save": 27
+        "speed": 59,
+        "stamina": 75,
+        "attack": 14,
+        "defense": 31,
+        "shot": 11,
+        "pass": 19,
+        "dribble": 13,
+        "block": 21,
+        "intercept": 23,
+        "tackle": 17,
+        "heading": 15,
+        "hand_save": 26,
+        "punch_save": 25
       },
       "why": "3e du Mondial 1994 (héros des tirs au but), 143 sélections : gardien d'expérience."
     },
@@ -109,11 +167,55 @@
       "stats": {
         "speed": 77,
         "stamina": 79,
-        "attack": 31,
+        "attack": 30,
+        "defense": 20,
         "shot": 26,
-        "dribble": 27
+        "pass": 25,
+        "dribble": 27,
+        "block": 13,
+        "intercept": 17,
+        "tackle": 15,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Arsenal Invincibles : milieu droit, accélérations et arrivées dans la surface."
+    },
+    "Ronnie Hellström": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 58,
+        "stamina": 72,
+        "attack": 14,
+        "defense": 32,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 23,
+        "intercept": 22,
+        "tackle": 17,
+        "heading": 14,
+        "hand_save": 27,
+        "punch_save": 28
+      }
+    },
+    "Alexander Isak": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 78,
+        "stamina": 72,
+        "attack": 33,
+        "defense": 17,
+        "shot": 28,
+        "pass": 25,
+        "dribble": 29,
+        "block": 14,
+        "intercept": 16,
+        "tackle": 16,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

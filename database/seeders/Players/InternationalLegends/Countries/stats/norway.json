@@ -11,18 +11,37 @@
     },
     "Rune Bratseth": {
       "stats": {
-        "defense": 34,
         "speed": 72,
+        "stamina": 77,
+        "attack": 21,
+        "defense": 34,
+        "shot": 16,
+        "pass": 24,
+        "dribble": 20,
+        "block": 24,
         "intercept": 29,
-        "pass": 24
+        "tackle": 27,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Champion d'Allemagne 1988 avec Werder Brême, capitaine : défenseur élégant et rapide."
     },
     "Ronny Johnsen": {
       "stats": {
-        "defense": 32,
         "speed": 70,
-        "heading": 28
+        "stamina": 76,
+        "attack": 20,
+        "defense": 32,
+        "shot": 16,
+        "pass": 23,
+        "dribble": 19,
+        "block": 25,
+        "intercept": 26,
+        "tackle": 26,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Triplé 1999 avec Manchester United : défenseur central sûr."
     },
@@ -30,19 +49,35 @@
       "stats": {
         "speed": 73,
         "stamina": 81,
-        "shot": 28,
-        "cross": 28,
-        "defense": 27
+        "attack": 25,
+        "defense": 26,
+        "shot": 27,
+        "pass": 23,
+        "dribble": 22,
+        "block": 20,
+        "intercept": 22,
+        "tackle": 24,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Ligue des champions 2005 avec Liverpool : latéral gauche, frappe du pied gauche."
     },
     "Ole Gunnar Solskjær": {
       "stats": {
-        "attack": 34,
-        "shot": 29,
         "speed": 71,
-        "dribble": 25,
-        "stamina": 70
+        "stamina": 70,
+        "attack": 34,
+        "defense": 18,
+        "shot": 28,
+        "pass": 23,
+        "dribble": 24,
+        "block": 14,
+        "intercept": 16,
+        "tackle": 16,
+        "heading": 24,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Buteur de la finale de la Ligue des champions 1999, joker de Manchester United : finisseur opportuniste."
     },
@@ -66,25 +101,55 @@
     },
     "Erik Thorstvedt": {
       "stats": {
+        "speed": 56,
+        "stamina": 74,
+        "attack": 14,
         "defense": 32,
+        "shot": 11,
+        "pass": 19,
+        "dribble": 13,
+        "block": 22,
+        "intercept": 24,
+        "tackle": 17,
+        "heading": 14,
         "hand_save": 27,
-        "punch_save": 27
+        "punch_save": 26
       },
       "why": "Tottenham, Mondial 1994 : gardien sûr."
     },
     "Erik Mykland": {
       "stats": {
+        "speed": 68,
+        "stamina": 80,
+        "attack": 24,
+        "defense": 24,
+        "shot": 19,
         "pass": 27,
-        "stamina": 80
+        "dribble": 26,
+        "block": 20,
+        "intercept": 25,
+        "tackle": 24,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Mondiaux 1994 et 1998 : milieu endurant."
     },
     "Kjetil Rekdal": {
       "stats": {
-        "shot": 27,
-        "attack": 27,
+        "speed": 60,
+        "stamina": 78,
+        "attack": 26,
         "defense": 28,
-        "stamina": 78
+        "shot": 26,
+        "pass": 26,
+        "dribble": 22,
+        "block": 20,
+        "intercept": 26,
+        "tackle": 26,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Penalty contre le Brésil au Mondial 1998 : milieu complet, frappe du pied droit."
     },
@@ -98,6 +163,42 @@
         "stamina": 76
       },
       "why": "Capitaine d'Arsenal, ex-prodige du Real : meneur de jeu, passes et dribbles."
+    },
+    "Brede Hangeland": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 56,
+        "stamina": 74,
+        "attack": 18,
+        "defense": 32,
+        "shot": 15,
+        "pass": 20,
+        "dribble": 16,
+        "block": 27,
+        "intercept": 23,
+        "tackle": 26,
+        "heading": 30,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Tom Lund": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 72,
+        "stamina": 72,
+        "attack": 32,
+        "defense": 18,
+        "shot": 26,
+        "pass": 26,
+        "dribble": 28,
+        "block": 16,
+        "intercept": 19,
+        "tackle": 17,
+        "heading": 21,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

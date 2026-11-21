@@ -21,11 +21,19 @@
     },
     "Pavel Nedvěd": {
       "stats": {
+        "speed": 66,
         "stamina": 82,
+        "attack": 32,
+        "defense": 27,
         "shot": 28,
-        "attack": 31,
-        "pass": 29,
-        "speed": 66
+        "pass": 30,
+        "dribble": 24,
+        "block": 20,
+        "intercept": 25,
+        "tackle": 25,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Ballon d'Or 2003, Juventus, Lazio : milieu à la frappe puissante et à l'endurance exceptionnelle."
     },
@@ -39,12 +47,174 @@
         "shot": 11,
         "pass": 18,
         "dribble": 13,
-        "block": 23,
-        "intercept": 21,
+        "block": 24,
+        "intercept": 22,
         "tackle": 17,
         "heading": 16,
         "hand_save": 30,
         "punch_save": 30
+      }
+    },
+    "Tomáš Ujfaluši": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 64,
+        "stamina": 76,
+        "attack": 18,
+        "defense": 31,
+        "shot": 15,
+        "pass": 20,
+        "dribble": 16,
+        "block": 26,
+        "intercept": 24,
+        "tackle": 28,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Zdeněk Grygera": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 68,
+        "stamina": 78,
+        "attack": 21,
+        "defense": 28,
+        "shot": 16,
+        "pass": 23,
+        "dribble": 21,
+        "block": 22,
+        "intercept": 24,
+        "tackle": 27,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Marek Jankulovski": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 76,
+        "stamina": 80,
+        "attack": 26,
+        "defense": 27,
+        "shot": 24,
+        "pass": 24,
+        "dribble": 23,
+        "block": 20,
+        "intercept": 22,
+        "tackle": 22,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Tomáš Rosický": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 70,
+        "stamina": 70,
+        "attack": 29,
+        "defense": 20,
+        "shot": 26,
+        "pass": 29,
+        "dribble": 27,
+        "block": 16,
+        "intercept": 20,
+        "tackle": 18,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Josef Masopust": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 66,
+        "stamina": 78,
+        "attack": 30,
+        "defense": 20,
+        "shot": 25,
+        "pass": 30,
+        "dribble": 27,
+        "block": 16,
+        "intercept": 20,
+        "tackle": 18,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Karel Poborský": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 74,
+        "stamina": 76,
+        "attack": 28,
+        "defense": 18,
+        "shot": 24,
+        "pass": 25,
+        "dribble": 27,
+        "block": 14,
+        "intercept": 18,
+        "tackle": 16,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Antonín Panenka": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 60,
+        "stamina": 68,
+        "attack": 28,
+        "defense": 20,
+        "shot": 26,
+        "pass": 29,
+        "dribble": 24,
+        "block": 16,
+        "intercept": 20,
+        "tackle": 18,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Milan Baroš": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 78,
+        "stamina": 74,
+        "attack": 31,
+        "defense": 17,
+        "shot": 28,
+        "pass": 20,
+        "dribble": 24,
+        "block": 14,
+        "intercept": 16,
+        "tackle": 16,
+        "heading": 21,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Patrik Schick": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 70,
+        "stamina": 72,
+        "attack": 31,
+        "defense": 19,
+        "shot": 29,
+        "pass": 20,
+        "dribble": 24,
+        "block": 18,
+        "intercept": 18,
+        "tackle": 18,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
       }
     }
   }

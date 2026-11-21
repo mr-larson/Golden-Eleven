@@ -6,50 +6,107 @@
       "stats": {
         "speed": 82,
         "stamina": 81,
-        "attack": 28,
-        "shot": 23,
-        "dribble": 26,
-        "defense": 27,
-        "cross": 28
+        "attack": 29,
+        "defense": 29,
+        "shot": 24,
+        "pass": 26,
+        "dribble": 27,
+        "block": 21,
+        "intercept": 23,
+        "tackle": 23,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Demi-finaliste du Mondial 2022, Inter, PSG : latéral droit le plus rapide de sa génération, centres et montées."
     },
     "Medhi Benatia": {
       "stats": {
-        "defense": 33,
+        "speed": 62,
+        "stamina": 76,
+        "attack": 20,
+        "defense": 34,
+        "shot": 16,
+        "pass": 22,
+        "dribble": 18,
+        "block": 30,
+        "intercept": 28,
+        "tackle": 29,
         "heading": 28,
-        "tackle": 28,
-        "speed": 62
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Roma, Bayern, Juventus : défenseur central puissant et dur."
     },
     "Noureddine Naybet": {
       "stats": {
-        "defense": 33,
-        "intercept": 28,
-        "speed": 64
+        "speed": 64,
+        "stamina": 77,
+        "attack": 21,
+        "defense": 34,
+        "shot": 16,
+        "pass": 25,
+        "dribble": 20,
+        "block": 27,
+        "intercept": 30,
+        "tackle": 28,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Deportivo, Tottenham, plus de 100 sélections : défenseur de lecture."
     },
     "Abdelkrim El Hadrioui": {
       "stats": {
-        "defense": 28
+        "speed": 69,
+        "stamina": 77,
+        "attack": 23,
+        "defense": 29,
+        "shot": 17,
+        "pass": 25,
+        "dribble": 22,
+        "block": 23,
+        "intercept": 25,
+        "tackle": 27,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Défenseur du Mondial 1998 : régulier."
     },
     "Larbi Benbarek": {
       "stats": {
-        "attack": 35,
-        "dribble": 31,
-        "pass": 29,
-        "shot": 27
+        "speed": 71,
+        "stamina": 73,
+        "attack": 38,
+        "defense": 19,
+        "shot": 28,
+        "pass": 30,
+        "dribble": 34,
+        "block": 17,
+        "intercept": 20,
+        "tackle": 18,
+        "heading": 19,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "La Perle noire, Marseille et Atlético : dribbleur de légende d'avant Pelé."
     },
     "Ahmed Faras": {
       "stats": {
-        "attack": 34,
-        "shot": 29
+        "speed": 67,
+        "stamina": 74,
+        "attack": 37,
+        "defense": 19,
+        "shot": 30,
+        "pass": 23,
+        "dribble": 27,
+        "block": 15,
+        "intercept": 17,
+        "tackle": 17,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Champion d'Afrique 1976, joueur africain de l'année 1975 : buteur."
     },
@@ -72,9 +129,18 @@
     "Mustapha Hadji": {
       "stats": {
         "speed": 72,
-        "dribble": 28,
-        "attack": 30,
-        "pass": 27
+        "stamina": 73,
+        "attack": 32,
+        "defense": 21,
+        "shot": 26,
+        "pass": 28,
+        "dribble": 31,
+        "block": 17,
+        "intercept": 21,
+        "tackle": 19,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Mondial 1998, Coventry, Aston Villa : milieu offensif rapide."
     },
@@ -91,18 +157,74 @@
     "Abdelaziz Bouderbala": {
       "stats": {
         "speed": 74,
-        "dribble": 30,
-        "attack": 30
+        "stamina": 72,
+        "attack": 32,
+        "defense": 19,
+        "shot": 24,
+        "pass": 26,
+        "dribble": 32,
+        "block": 15,
+        "intercept": 19,
+        "tackle": 17,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Milieu offensif du Mondial 1986 : accélération et dribble."
     },
     "Mohamed Timoumi": {
       "stats": {
-        "pass": 29,
-        "dribble": 29,
-        "attack": 31
+        "speed": 65,
+        "stamina": 69,
+        "attack": 33,
+        "defense": 20,
+        "shot": 25,
+        "pass": 31,
+        "dribble": 30,
+        "block": 17,
+        "intercept": 21,
+        "tackle": 19,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Joueur africain de l'année 1985, Mondial 1986 : meneur technique."
+    },
+    "Yassine Bounou": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 60,
+        "stamina": 72,
+        "attack": 14,
+        "defense": 36,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 24,
+        "intercept": 23,
+        "tackle": 17,
+        "heading": 15,
+        "hand_save": 30,
+        "punch_save": 30
+      }
+    },
+    "Youssef En-Nesyri": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 72,
+        "stamina": 74,
+        "attack": 33,
+        "defense": 20,
+        "shot": 28,
+        "pass": 22,
+        "dribble": 22,
+        "block": 19,
+        "intercept": 19,
+        "tackle": 19,
+        "heading": 30,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

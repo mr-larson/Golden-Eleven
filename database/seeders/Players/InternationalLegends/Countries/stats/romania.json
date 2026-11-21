@@ -13,34 +13,71 @@
       "stats": {
         "speed": 75,
         "stamina": 82,
-        "cross": 28,
-        "defense": 28
+        "attack": 22,
+        "defense": 26,
+        "shot": 19,
+        "pass": 24,
+        "dribble": 21,
+        "block": 19,
+        "intercept": 20,
+        "tackle": 21,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Chelsea (FA Cup 1997), 95 sélections : latéral droit infatigable, centres et montées."
     },
     "Gheorghe Popescu": {
       "stats": {
-        "defense": 32,
-        "pass": 29,
-        "intercept": 30,
-        "shot": 24
+        "speed": 65,
+        "stamina": 80,
+        "attack": 22,
+        "defense": 30,
+        "shot": 22,
+        "pass": 27,
+        "dribble": 20,
+        "block": 22,
+        "intercept": 28,
+        "tackle": 23,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Barcelone, Tottenham, capitaine de 1994 : défenseur relanceur."
     },
     "Miodrag Belodedici": {
       "stats": {
-        "defense": 32,
-        "intercept": 31,
-        "pass": 28
+        "speed": 64,
+        "stamina": 77,
+        "attack": 22,
+        "defense": 30,
+        "shot": 19,
+        "pass": 26,
+        "dribble": 20,
+        "block": 22,
+        "intercept": 29,
+        "tackle": 25,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Vainqueur de la Coupe d'Europe avec Steaua (1986) et l'Étoile rouge (1991) : libéro de lecture."
     },
     "Cristian Chivu": {
       "stats": {
-        "defense": 31,
-        "intercept": 29,
-        "pass": 27,
-        "speed": 70
+        "speed": 70,
+        "stamina": 79,
+        "attack": 20,
+        "defense": 29,
+        "shot": 15,
+        "pass": 25,
+        "dribble": 20,
+        "block": 20,
+        "intercept": 27,
+        "tackle": 26,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Triplé 2010 avec l'Inter : défenseur gaucher complet."
     },
@@ -48,34 +85,71 @@
       "stats": {
         "speed": 76,
         "stamina": 80,
-        "attack": 31,
-        "dribble": 27,
-        "shot": 25
+        "attack": 29,
+        "defense": 20,
+        "shot": 24,
+        "pass": 21,
+        "dribble": 25,
+        "block": 13,
+        "intercept": 16,
+        "tackle": 15,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Coupe d'Europe 1986 avec Steaua, Mondial 1994 : ailier endurant."
     },
     "Adrian Mutu": {
       "stats": {
-        "attack": 33,
-        "shot": 28,
-        "dribble": 29,
-        "pass": 26
+        "speed": 71,
+        "stamina": 73,
+        "attack": 31,
+        "defense": 18,
+        "shot": 27,
+        "pass": 25,
+        "dribble": 28,
+        "block": 15,
+        "intercept": 18,
+        "tackle": 16,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Fiorentina, Juventus, Chelsea : attaquant technique et vif."
     },
     "Nicolae Dobrin": {
       "stats": {
-        "pass": 28,
-        "dribble": 29,
-        "attack": 31
+        "speed": 68,
+        "stamina": 70,
+        "attack": 29,
+        "defense": 17,
+        "shot": 22,
+        "pass": 27,
+        "dribble": 27,
+        "block": 13,
+        "intercept": 17,
+        "tackle": 15,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Légende de Pitești dans les années 1960-70 : meneur technique."
     },
     "Helmuth Duckadam": {
       "stats": {
-        "defense": 31,
-        "hand_save": 29,
-        "punch_save": 27
+        "speed": 57,
+        "stamina": 71,
+        "attack": 14,
+        "defense": 29,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 20,
+        "intercept": 20,
+        "tackle": 17,
+        "heading": 14,
+        "hand_save": 27,
+        "punch_save": 25
       },
       "why": "Héros de la Coupe d'Europe 1986 avec quatre penalties arrêtés en finale."
     },
@@ -83,14 +157,14 @@
       "stats": {
         "speed": 62,
         "stamina": 71,
-        "attack": 36,
-        "defense": 24,
-        "shot": 31,
-        "pass": 32,
-        "dribble": 31,
-        "block": 18,
-        "intercept": 24,
-        "tackle": 22,
+        "attack": 35,
+        "defense": 23,
+        "shot": 30,
+        "pass": 31,
+        "dribble": 30,
+        "block": 17,
+        "intercept": 23,
+        "tackle": 21,
         "heading": 18,
         "hand_save": 11,
         "punch_save": 10
@@ -108,12 +182,39 @@
     },
     "Dorinel Munteanu": {
       "stats": {
+        "speed": 69,
         "stamina": 83,
-        "pass": 28,
-        "shot": 24,
-        "speed": 69
+        "attack": 24,
+        "defense": 24,
+        "shot": 22,
+        "pass": 26,
+        "dribble": 21,
+        "block": 19,
+        "intercept": 21,
+        "tackle": 22,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Record de sélections du pays, Mondial 1994 : milieu endurant."
+    },
+    "Alin Stoica": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 69,
+        "stamina": 68,
+        "attack": 26,
+        "defense": 17,
+        "shot": 21,
+        "pass": 24,
+        "dribble": 24,
+        "block": 15,
+        "intercept": 18,
+        "tackle": 17,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

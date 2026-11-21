@@ -4,10 +4,165 @@
   "players": {
     "Édouard Mendy": {
       "stats": {
-        "hand_save": 29,
+        "speed": 59,
+        "stamina": 76,
+        "attack": 14,
+        "defense": 31,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 22,
+        "intercept": 21,
+        "tackle": 17,
+        "heading": 14,
+        "hand_save": 30,
         "punch_save": 28
       },
       "why": "Champion d'Europe 2021 (Chelsea), champion d'Afrique 2022 : gardien solide mais pas au niveau des grands gardiens, arrêt à la main 29, au poing 28."
+    },
+    "Kalidou Koulibaly": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 69,
+        "stamina": 82,
+        "attack": 18,
+        "defense": 34,
+        "shot": 15,
+        "pass": 19,
+        "dribble": 16,
+        "block": 30,
+        "intercept": 29,
+        "tackle": 33,
+        "heading": 30,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Habib Beye": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 71,
+        "stamina": 79,
+        "attack": 21,
+        "defense": 28,
+        "shot": 16,
+        "pass": 23,
+        "dribble": 21,
+        "block": 22,
+        "intercept": 25,
+        "tackle": 28,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Roger Mendy": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 64,
+        "stamina": 77,
+        "attack": 23,
+        "defense": 30,
+        "shot": 20,
+        "pass": 27,
+        "dribble": 21,
+        "block": 24,
+        "intercept": 30,
+        "tackle": 24,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Saliou Ciss": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 72,
+        "stamina": 78,
+        "attack": 21,
+        "defense": 26,
+        "shot": 16,
+        "pass": 23,
+        "dribble": 21,
+        "block": 22,
+        "intercept": 25,
+        "tackle": 25,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Khalilou Fadiga": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 67,
+        "stamina": 74,
+        "attack": 30,
+        "defense": 20,
+        "shot": 21,
+        "pass": 30,
+        "dribble": 29,
+        "block": 16,
+        "intercept": 20,
+        "tackle": 18,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Papa Bouba Diop": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 64,
+        "stamina": 82,
+        "attack": 27,
+        "defense": 28,
+        "shot": 26,
+        "pass": 25,
+        "dribble": 22,
+        "block": 25,
+        "intercept": 23,
+        "tackle": 23,
+        "heading": 29,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Sadio Mané": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 83,
+        "stamina": 83,
+        "attack": 36,
+        "defense": 17,
+        "shot": 30,
+        "pass": 27,
+        "dribble": 32,
+        "block": 14,
+        "intercept": 17,
+        "tackle": 16,
+        "heading": 25,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "El-Hadji Diouf": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 78,
+        "stamina": 76,
+        "attack": 33,
+        "defense": 17,
+        "shot": 26,
+        "pass": 25,
+        "dribble": 31,
+        "block": 14,
+        "intercept": 17,
+        "tackle": 16,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

@@ -6,29 +6,53 @@
       "stats": {
         "speed": 79,
         "stamina": 74,
-        "attack": 33,
-        "shot": 27,
-        "dribble": 29,
-        "pass": 23
+        "attack": 31,
+        "defense": 16,
+        "shot": 26,
+        "pass": 22,
+        "dribble": 28,
+        "block": 13,
+        "intercept": 16,
+        "tackle": 15,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Auteur du but solitaire contre la Belgique au Mondial 1994 : dribble et vitesse, le Maradona du désert."
     },
     "Majed Abdullah": {
       "stats": {
-        "attack": 35,
-        "shot": 28,
+        "speed": 76,
+        "stamina": 77,
+        "attack": 34,
+        "defense": 16,
+        "shot": 27,
+        "pass": 19,
+        "dribble": 25,
+        "block": 14,
+        "intercept": 16,
+        "tackle": 16,
         "heading": 28,
-        "speed": 76
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Légende d'Al-Nassr, meilleur buteur du pays à son époque, trois Coupes d'Asie : finisseur et jeu de tête."
     },
     "Salem Al-Dawsari": {
       "stats": {
-        "attack": 33,
         "speed": 79,
-        "dribble": 29,
-        "shot": 27,
-        "stamina": 80
+        "stamina": 80,
+        "attack": 32,
+        "defense": 16,
+        "shot": 26,
+        "pass": 24,
+        "dribble": 28,
+        "block": 13,
+        "intercept": 16,
+        "tackle": 15,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Auteur du but de la victoire contre l'Argentine au Mondial 2022, Al-Hilal : ailier rapide et sang-froid."
     },
@@ -43,9 +67,19 @@
     },
     "Mohamed Al-Deayea": {
       "stats": {
-        "defense": 33,
-        "hand_save": 28,
-        "punch_save": 27
+        "speed": 57,
+        "stamina": 76,
+        "attack": 14,
+        "defense": 31,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 20,
+        "intercept": 20,
+        "tackle": 17,
+        "heading": 15,
+        "hand_save": 26,
+        "punch_save": 25
       },
       "why": "Plus de 170 sélections et trois Mondiaux : gardien d'expérience, sûr de sa ligne."
     },
@@ -59,27 +93,111 @@
     },
     "Mohammed Noor": {
       "stats": {
-        "pass": 28,
+        "speed": 68,
         "stamina": 82,
-        "shot": 25
+        "attack": 26,
+        "defense": 24,
+        "shot": 24,
+        "pass": 26,
+        "dribble": 24,
+        "block": 19,
+        "intercept": 22,
+        "tackle": 22,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Al-Ittihad, titres asiatiques : milieu organisé, volume de jeu."
     },
     "Fuad Anwar": {
       "stats": {
-        "tackle": 27,
+        "speed": 65,
         "stamina": 82,
-        "defense": 30
+        "attack": 22,
+        "defense": 28,
+        "shot": 22,
+        "pass": 23,
+        "dribble": 18,
+        "block": 22,
+        "intercept": 25,
+        "tackle": 25,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Milieu défensif du Mondial 1994 : récupération."
     },
     "Yousuf Al-Thunayan": {
       "stats": {
-        "pass": 29,
-        "dribble": 29,
-        "attack": 31
+        "speed": 71,
+        "stamina": 73,
+        "attack": 29,
+        "defense": 18,
+        "shot": 22,
+        "pass": 27,
+        "dribble": 27,
+        "block": 15,
+        "intercept": 19,
+        "tackle": 17,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Milieu offensif technique des années 1990 : passes et dribbles."
+    },
+    "Saleh Al-Nu'eimeh": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 62,
+        "stamina": 78,
+        "attack": 17,
+        "defense": 29,
+        "shot": 14,
+        "pass": 17,
+        "dribble": 15,
+        "block": 25,
+        "intercept": 24,
+        "tackle": 25,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Mohammed Al-Khilaiwi": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 64,
+        "stamina": 78,
+        "attack": 17,
+        "defense": 28,
+        "shot": 14,
+        "pass": 17,
+        "dribble": 15,
+        "block": 25,
+        "intercept": 23,
+        "tackle": 24,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Ahmad Al-Dokhi": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 71,
+        "stamina": 79,
+        "attack": 20,
+        "defense": 26,
+        "shot": 15,
+        "pass": 21,
+        "dribble": 20,
+        "block": 20,
+        "intercept": 22,
+        "tackle": 23,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }
