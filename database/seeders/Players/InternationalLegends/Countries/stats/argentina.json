@@ -92,12 +92,19 @@
     },
     "Daniel Passarella": {
       "stats": {
-        "defense": 31,
-        "pass": 27,
-        "shot": 25,
-        "attack": 25,
+        "speed": 62,
         "stamina": 78,
-        "heading": 28
+        "attack": 26,
+        "defense": 33,
+        "shot": 26,
+        "pass": 29,
+        "dribble": 22,
+        "block": 27,
+        "intercept": 28,
+        "tackle": 27,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine champion du monde 1978, défenseur buteur : coups francs et penalties."
     },
@@ -111,19 +118,37 @@
     },
     "Roberto Ayala": {
       "stats": {
-        "defense": 31,
-        "block": 27,
-        "intercept": 28,
-        "pass": 20
+        "speed": 57,
+        "stamina": 72,
+        "attack": 19,
+        "defense": 33,
+        "shot": 16,
+        "pass": 21,
+        "dribble": 17,
+        "block": 28,
+        "intercept": 30,
+        "tackle": 28,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Plus de 100 sélections : défenseur de lecture et d'anticipation."
     },
     "Javier Zanetti": {
       "stats": {
-        "stamina": 82,
-        "defense": 30,
         "speed": 70,
-        "pass": 26
+        "stamina": 82,
+        "attack": 22,
+        "defense": 32,
+        "shot": 17,
+        "pass": 27,
+        "dribble": 22,
+        "block": 27,
+        "intercept": 29,
+        "tackle": 28,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Plus de 140 sélections, triplé 2010 avec l'Inter : latéral et milieu infatigable."
     },
@@ -171,10 +196,19 @@
     },
     "Juan Sebastián Verón": {
       "stats": {
-        "pass": 30,
-        "shot": 26,
-        "attack": 28,
-        "stamina": 74
+        "speed": 66,
+        "stamina": 74,
+        "attack": 29,
+        "defense": 27,
+        "shot": 27,
+        "pass": 32,
+        "dribble": 24,
+        "block": 21,
+        "intercept": 25,
+        "tackle": 25,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Milieu de Parme et Manchester United : passes longues et frappes."
     },
@@ -196,14 +230,14 @@
       "stats": {
         "speed": 56,
         "stamina": 72,
-        "attack": 37,
-        "defense": 24,
+        "attack": 38,
+        "defense": 25,
         "shot": 31,
-        "pass": 32,
-        "dribble": 32,
-        "block": 19,
-        "intercept": 23,
-        "tackle": 21,
+        "pass": 34,
+        "dribble": 34,
+        "block": 20,
+        "intercept": 24,
+        "tackle": 22,
         "heading": 21,
         "hand_save": 11,
         "punch_save": 11
@@ -215,18 +249,36 @@
         "speed": 80,
         "stamina": 75,
         "attack": 38,
-        "defense": 19,
+        "defense": 21,
         "shot": 31,
-        "pass": 22,
-        "dribble": 32,
-        "block": 16,
-        "intercept": 18,
-        "tackle": 18,
+        "pass": 24,
+        "dribble": 34,
+        "block": 17,
+        "intercept": 19,
+        "tackle": 19,
         "heading": 19,
         "hand_save": 11,
         "punch_save": 11
       },
       "why": "Relevé à un OVR de 30 : points forts du joueur au maximum, le reste complété avec mesure."
+    },
+    "Emiliano Martínez": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 60,
+        "stamina": 72,
+        "attack": 14,
+        "defense": 36,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 24,
+        "intercept": 23,
+        "tackle": 17,
+        "heading": 15,
+        "hand_save": 30,
+        "punch_save": 30
+      }
     }
   }
 }

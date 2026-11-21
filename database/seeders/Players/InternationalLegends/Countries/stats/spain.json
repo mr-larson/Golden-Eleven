@@ -4,42 +4,73 @@
   "players": {
     "Fernando Hierro": {
       "stats": {
-        "defense": 31,
-        "pass": 28,
-        "shot": 24,
-        "heading": 28
+        "speed": 62,
+        "stamina": 72,
+        "attack": 24,
+        "defense": 32,
+        "shot": 25,
+        "pass": 29,
+        "dribble": 21,
+        "block": 27,
+        "intercept": 28,
+        "tackle": 27,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine du Real, 90 sélections : défenseur buteur, penalties et coups francs."
     },
     "Sergio Ramos": {
       "stats": {
-        "defense": 33,
         "speed": 71,
-        "heading": 30,
         "stamina": 80,
-        "attack": 25,
-        "tackle": 32
+        "attack": 26,
+        "defense": 34,
+        "shot": 23,
+        "pass": 25,
+        "dribble": 23,
+        "block": 22,
+        "intercept": 25,
+        "tackle": 33,
+        "heading": 30,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Champion du monde 2010, 5 Ligues des champions : défenseur buteur, but à la 93e minute en finale 2014. Tacle 32."
     },
     "Carles Puyol": {
       "stats": {
-        "defense": 35,
-        "block": 29,
-        "tackle": 29,
+        "speed": 65,
         "stamina": 81,
-        "pass": 20,
-        "speed": 65
+        "attack": 20,
+        "defense": 36,
+        "shot": 15,
+        "pass": 21,
+        "dribble": 18,
+        "block": 30,
+        "intercept": 29,
+        "tackle": 30,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine de Barcelone, champion du monde 2010 : cœur et engagement, tacle et placement."
     },
     "Gerard Piqué": {
       "stats": {
-        "defense": 33,
-        "pass": 28,
-        "intercept": 28,
         "speed": 59,
-        "shot": 22
+        "stamina": 76,
+        "attack": 24,
+        "defense": 34,
+        "shot": 23,
+        "pass": 29,
+        "dribble": 22,
+        "block": 25,
+        "intercept": 29,
+        "tackle": 27,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Champion du monde 2010, trois Ligues des champions : défenseur relanceur."
     },
@@ -76,13 +107,13 @@
       "stats": {
         "speed": 81,
         "stamina": 73,
-        "attack": 36,
-        "defense": 18,
-        "shot": 29,
-        "pass": 30,
-        "dribble": 32,
+        "attack": 37,
+        "defense": 19,
+        "shot": 30,
+        "pass": 31,
+        "dribble": 33,
         "block": 14,
-        "intercept": 18,
+        "intercept": 19,
         "tackle": 16,
         "heading": 23,
         "hand_save": 10,
@@ -95,12 +126,12 @@
         "speed": 65,
         "stamina": 77,
         "attack": 15,
-        "defense": 38,
+        "defense": 41,
         "shot": 12,
         "pass": 22,
         "dribble": 15,
-        "block": 25,
-        "intercept": 26,
+        "block": 27,
+        "intercept": 28,
         "tackle": 18,
         "heading": 17,
         "hand_save": 30,
@@ -112,13 +143,13 @@
       "stats": {
         "speed": 65,
         "stamina": 82,
-        "attack": 34,
-        "defense": 26,
-        "shot": 25,
-        "pass": 32,
-        "dribble": 31,
+        "attack": 35,
+        "defense": 27,
+        "shot": 26,
+        "pass": 33,
+        "dribble": 32,
         "block": 21,
-        "intercept": 25,
+        "intercept": 26,
         "tackle": 23,
         "heading": 19,
         "hand_save": 10,
@@ -130,14 +161,14 @@
       "stats": {
         "speed": 71,
         "stamina": 79,
-        "attack": 35,
-        "defense": 22,
-        "shot": 27,
-        "pass": 32,
-        "dribble": 32,
+        "attack": 36,
+        "defense": 23,
+        "shot": 28,
+        "pass": 33,
+        "dribble": 33,
         "block": 20,
-        "intercept": 24,
-        "tackle": 23,
+        "intercept": 25,
+        "tackle": 24,
         "heading": 18,
         "hand_save": 10,
         "punch_save": 10
@@ -163,6 +194,24 @@
         "attack": 22
       },
       "why": "Barcelone, Dream Team : milieu défensif cérébral."
+    },
+    "Pedri": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 66,
+        "stamina": 76,
+        "attack": 30,
+        "defense": 22,
+        "shot": 23,
+        "pass": 31,
+        "dribble": 30,
+        "block": 16,
+        "intercept": 21,
+        "tackle": 18,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

@@ -12,9 +12,19 @@
     },
     "Hugo Lloris": {
       "stats": {
-        "defense": 32,
-        "hand_save": 28,
-        "punch_save": 29
+        "speed": 57,
+        "stamina": 70,
+        "attack": 14,
+        "defense": 34,
+        "shot": 11,
+        "pass": 18,
+        "dribble": 13,
+        "block": 24,
+        "intercept": 23,
+        "tackle": 17,
+        "heading": 14,
+        "hand_save": 30,
+        "punch_save": 30
       },
       "why": "Capitaine champion du monde 2018, Tottenham : réflexes et sorties aériennes."
     },
@@ -22,9 +32,17 @@
       "stats": {
         "speed": 64,
         "stamina": 78,
-        "defense": 33,
-        "tackle": 28,
-        "heading": 29
+        "attack": 19,
+        "defense": 34,
+        "shot": 15,
+        "pass": 22,
+        "dribble": 17,
+        "block": 28,
+        "intercept": 28,
+        "tackle": 29,
+        "heading": 29,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Roc de 1998, deux Ligues des champions : puissance et vitesse pour un défenseur central."
     },
@@ -32,18 +50,35 @@
       "stats": {
         "speed": 72,
         "stamina": 78,
-        "defense": 32,
-        "tackle": 31,
-        "intercept": 27
+        "attack": 22,
+        "defense": 33,
+        "shot": 16,
+        "pass": 26,
+        "dribble": 22,
+        "block": 27,
+        "intercept": 28,
+        "tackle": 32,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Plus de 140 sélections, champion du monde 1998 : latéral et central, tacle et lecture. Tacle 31."
     },
     "Laurent Blanc": {
       "stats": {
-        "defense": 31,
-        "pass": 28,
+        "speed": 62,
+        "stamina": 72,
+        "attack": 24,
+        "defense": 32,
+        "shot": 23,
+        "pass": 29,
+        "dribble": 21,
+        "block": 27,
+        "intercept": 28,
+        "tackle": 27,
         "heading": 28,
-        "shot": 22
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Libéro élégant de 1998, buteur du premier but en or : relance et jeu de tête."
     },
@@ -104,13 +139,13 @@
         "speed": 82,
         "stamina": 73,
         "attack": 38,
-        "defense": 18,
+        "defense": 19,
         "shot": 31,
-        "pass": 25,
-        "dribble": 32,
-        "block": 14,
-        "intercept": 18,
-        "tackle": 16,
+        "pass": 26,
+        "dribble": 34,
+        "block": 15,
+        "intercept": 19,
+        "tackle": 17,
         "heading": 23,
         "hand_save": 10,
         "punch_save": 10
@@ -122,13 +157,13 @@
         "speed": 85,
         "stamina": 78,
         "attack": 38,
-        "defense": 19,
+        "defense": 20,
         "shot": 31,
-        "pass": 28,
-        "dribble": 32,
-        "block": 16,
-        "intercept": 18,
-        "tackle": 18,
+        "pass": 29,
+        "dribble": 34,
+        "block": 17,
+        "intercept": 19,
+        "tackle": 19,
         "heading": 21,
         "hand_save": 11,
         "punch_save": 11
@@ -192,13 +227,13 @@
         "speed": 66,
         "stamina": 74,
         "attack": 38,
-        "defense": 22,
+        "defense": 23,
         "shot": 31,
-        "pass": 32,
-        "dribble": 32,
-        "block": 18,
-        "intercept": 22,
-        "tackle": 20,
+        "pass": 34,
+        "dribble": 33,
+        "block": 19,
+        "intercept": 23,
+        "tackle": 21,
         "heading": 26,
         "hand_save": 11,
         "punch_save": 11
@@ -222,6 +257,24 @@
         "punch_save": 10
       },
       "why": "Relevé à un OVR de 30 : points forts du joueur au maximum, le reste complété avec mesure."
+    },
+    "Raphaël Varane": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 70,
+        "stamina": 74,
+        "attack": 19,
+        "defense": 34,
+        "shot": 15,
+        "pass": 23,
+        "dribble": 17,
+        "block": 29,
+        "intercept": 29,
+        "tackle": 29,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
+      }
     }
   }
 }

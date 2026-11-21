@@ -23,20 +23,36 @@
     "Matthias Sammer": {
       "stats": {
         "speed": 64,
-        "defense": 32,
-        "intercept": 28,
-        "tackle": 27,
-        "attack": 22,
-        "pass": 26,
-        "shot": 20
+        "stamina": 72,
+        "attack": 24,
+        "defense": 35,
+        "shot": 22,
+        "pass": 28,
+        "dribble": 23,
+        "block": 29,
+        "intercept": 30,
+        "tackle": 29,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Ballon d'Or 1996, champion d'Europe : libéro qui montait au but, anticipation."
     },
     "Philipp Lahm": {
       "stats": {
-        "intercept": 28,
-        "pass": 27,
-        "stamina": 78
+        "speed": 68,
+        "stamina": 78,
+        "attack": 23,
+        "defense": 34,
+        "shot": 18,
+        "pass": 29,
+        "dribble": 23,
+        "block": 28,
+        "intercept": 30,
+        "tackle": 29,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine champion du monde 2014, triplé 2013 : latéral intelligent, lecture et régularité."
     },
@@ -157,12 +173,12 @@
         "speed": 68,
         "stamina": 76,
         "attack": 15,
-        "defense": 38,
+        "defense": 44,
         "shot": 12,
         "pass": 25,
         "dribble": 14,
-        "block": 24,
-        "intercept": 23,
+        "block": 30,
+        "intercept": 29,
         "tackle": 18,
         "heading": 17,
         "hand_save": 30,
@@ -198,8 +214,19 @@
     },
     "Pierre Littbarski": {
       "stats": {
-        "dribble": 31,
-        "speed": 75
+        "speed": 75,
+        "stamina": 68,
+        "attack": 30,
+        "defense": 21,
+        "shot": 24,
+        "pass": 28,
+        "dribble": 34,
+        "block": 16,
+        "intercept": 21,
+        "tackle": 19,
+        "heading": 16,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Champion du monde 1990, Cologne : dribbleur rapide."
     },
