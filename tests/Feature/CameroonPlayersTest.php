@@ -19,7 +19,10 @@ class CameroonPlayersTest extends TestCase
     public function test_catalogue_adds_a_complete_illustrated_and_playable_cameroon_eleven(): void
     {
         $this->seed(PlayerSeeder::class);
-        $players = Player::where('nationality', 'Cameroun')->where('origin', 'world_legends')->get();
+        $all = Player::where('nationality', 'Cameroun')->where('origin', 'world_legends')->get();
+        // Onze illustrés + cinq joueurs de banc ajoutés ensuite (sans portrait pour l'instant).
+        $this->assertCount(16, $all);
+        $players = $all->whereNotNull('photo_path');
         $this->assertCount(11, $players);
         $this->assertCount(1, $players->where('position', 'Goalkeeper'));
         $this->assertCount(4, $players->where('position', 'Defender'));
