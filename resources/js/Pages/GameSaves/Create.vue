@@ -5,7 +5,7 @@ import ConfigSection from '@/Components/ConfigSection.vue';
 import ConfigRange from '@/Components/ConfigRange.vue';
 import CompetitionTypeCard from '@/Components/CompetitionTypeCard.vue';
 import { COMPETITIONS, isTournamentType } from '@/Pages/GameSaves/competitions.js';
-import { periodAllows, universePreset } from '@/Pages/GameSaves/periods.js';
+import { PERIODS, periodAllows, periodLabel, universePreset } from '@/Pages/GameSaves/periods.js';
 import ParticipantCountPicker from '@/Components/ParticipantCountPicker.vue';
 import ConfigToggle from '@/Components/ConfigToggle.vue';
 import { TRAINING_COST_FIELDS as trainingCostFields } from '@/Components/configFields.js';
@@ -26,7 +26,6 @@ const props = defineProps({
     humanWeeklyIncomes: { type: Object, required: true },
     draftBudgets: { type: Object, required: true },
     periodPackages: { type: Array, default: () => [] },
-    proPeriodAvailable: { type: Boolean, default: false },
     clubCounts: { type: Object, default: () => ({}) },
 });
 
@@ -319,8 +318,7 @@ function submit() {
                                         v-model="periodChoice"
                                         class="w-full px-4 py-2.5" :class="fieldClass()"
                                     >
-                                        <option value="college">Collège (effectif standard)</option>
-                                        <option v-if="proPeriodAvailable" value="pro">Professionnel (clubs pro)</option>
+                                        <option v-for="(p, key) in PERIODS" v-show="clubCounts[key] > 0" :key="key" :value="key">{{ p.label }}</option>
                                         <option v-for="pkg in availablePackages" :key="pkg.id" :value="`pkg:${pkg.id}`">
                                             📦 {{ pkg.name }} ({{ pkg.teamCount }} équipes, {{ pkg.playerCount }} joueurs)
                                         </option>
@@ -344,7 +342,7 @@ function submit() {
                                     <CompetitionTypeCard v-for="(competition, type) in COMPETITIONS" :key="type" v-model="form.competition_type"
                                                          :value="type" :icon="competition.icon" :title="competition.label" :text="competition.text"
                                                          :tone="competition.tone" :disabled="!periodAllows(form.period, type) || (type === 'club_cup' && !clubCupAvailable)"
-                                                         :disabled-text="!periodAllows(form.period, type) ? 'Indisponible pour la période Collège : choisis la période Professionnel.' : 'Pas assez de clubs dans cette période (8 minimum).'" />
+                                                         :disabled-text="!periodAllows(form.period, type) ? `Indisponible pour la période ${periodLabel(form.period)}.` : 'Pas assez de clubs dans cette période (8 minimum).'" />
                                 </div>
                                 <p v-if="form.errors.competition_type" class="text-xs text-rose-500">{{ form.errors.competition_type }}</p>
                             </div>

@@ -155,6 +155,8 @@ class GameSave extends Model
     public const PERIOD_COMPETITIONS = [
         'college' => [self::COMPETITION_LEAGUE, self::COMPETITION_CLUB_CUP],
         'pro'     => [self::COMPETITION_LEAGUE, self::COMPETITION_CLUB_CUP, self::COMPETITION_WORLD_CUP],
+        // World Youth : le Collège d'origine, ouvert à la Coupe Nation.
+        'world_youth' => [self::COMPETITION_LEAGUE, self::COMPETITION_CLUB_CUP, self::COMPETITION_WORLD_CUP],
     ];
 
     /** Partie de Coupe Nation (tournoi de sélections nationales). */

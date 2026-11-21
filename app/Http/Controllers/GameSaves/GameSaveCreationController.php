@@ -57,8 +57,6 @@ class GameSaveCreationController extends Controller
         return Inertia::render('GameSaves/Create', [
             'universeOptions' => \App\Support\UniverseOptions::forPlayers(),
             'periodPackages'    => $this->periodPackagesSummary($request->user()),
-            // Période Professionnelle proposée seulement si des clubs pro existent en base.
-            'proPeriodAvailable' => Team::where('period', 'pro')->exists(),
             // Nombre de clubs de référence par période : borne le choix « nombre de clubs ».
             'clubCounts'         => Team::selectRaw('period, count(*) as c')->groupBy('period')->pluck('c', 'period'),
             'draftBudgets'      => GameConfig::DRAFT_BUDGETS,

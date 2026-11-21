@@ -21,9 +21,8 @@ class GameSaveRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Périodes jouables côté backend : "college" et "pro".
-        // On pourra élargir à ['college', 'highschool', 'pro'] plus tard.
-        $allowedPeriods = ['college', 'pro'];
+        // Périodes jouables côté backend : celles de GameSave::PERIOD_COMPETITIONS.
+        $allowedPeriods = array_keys(GameSave::PERIOD_COMPETITIONS);
 
         $rules = [
             'label' => [

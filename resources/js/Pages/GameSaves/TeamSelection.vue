@@ -23,7 +23,7 @@
                             Partie : <span class="font-semibold text-slate-600">{{ label || 'Sans nom' }}</span>
                             &nbsp;•&nbsp;
                             <span v-if="periodPackage" class="font-semibold text-teal-600">📦 {{ periodPackage.name }}</span>
-                            <span v-else>Période : <span class="font-semibold text-slate-600">{{ period === 'pro' ? 'Professionnel' : 'Collège' }}</span></span>
+                            <span v-else>Période : <span class="font-semibold text-slate-600">{{ periodLabel(period) }}</span></span>
                             &nbsp;•&nbsp;
                             <span v-if="gameMode === 'draft'" class="font-semibold text-amber-600">🎯 Mode Draft</span>
                             <span v-else class="font-semibold text-teal-600">🏟️ Effectifs pré-faits</span>
@@ -205,6 +205,7 @@
 <script setup>
 import GameBanknote from '@/Components/GameBanknote.vue';
 import TeamLogoImage from '@/Components/TeamLogoImage.vue';
+import { periodLabel } from '@/Pages/GameSaves/periods.js';
 import SelectionList from '@/Components/Selection/SelectionList.vue';
 import SelectionRoster from '@/Components/Selection/SelectionRoster.vue';
 import SectionTitle from '@/Components/SectionTitle.vue';

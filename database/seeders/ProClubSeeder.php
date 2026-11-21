@@ -40,8 +40,7 @@ class ProClubSeeder extends Seeder
                 }
             }
 
-            Team::withTrashed()->updateOrCreate(['name' => $name], [
-                'period'                => 'pro',
+            Team::withTrashed()->updateOrCreate(['period' => 'pro', 'name' => $name], [
                 'description'           => $description,
                 'budget'                => 5000,
                 'logo_path'             => $logo,

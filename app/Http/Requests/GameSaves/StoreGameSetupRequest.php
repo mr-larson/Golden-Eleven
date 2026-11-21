@@ -26,7 +26,7 @@ class StoreGameSetupRequest extends FormRequest
     {
         return [
             'label'             => ['nullable', 'string', 'max:255'],
-            'period'            => ['required', 'string', 'in:college,pro'],
+            'period'            => ['required', 'string', \Illuminate\Validation\Rule::in(array_keys(GameSave::PERIOD_COMPETITIONS))],
             'game_mode'         => ['nullable', 'string', 'in:prebuilt,draft'],
             'competition_type'  => ['nullable', 'string', 'in:college_league,world_cup,club_cup'],
             'game_config'       => ['nullable', 'array'],

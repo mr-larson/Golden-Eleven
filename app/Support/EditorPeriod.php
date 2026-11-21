@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 final class EditorPeriod
 {
     /** Périodes proposées, avec leur libellé. */
-    public const LABELS = ['college' => 'Collège', 'pro' => 'Professionnel'];
+    public const LABELS = ['college' => 'Collège', 'pro' => 'Professionnel', 'world_youth' => 'World Youth'];
 
     /** Période courante : celle demandée dans l'URL (mémorisée), sinon celle de la session, sinon le Collège. */
     public static function current(Request $request): string

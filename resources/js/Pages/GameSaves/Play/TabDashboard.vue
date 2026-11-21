@@ -19,6 +19,7 @@ import PlayerRequestsCard from "@/Pages/GameSaves/Play/components/PlayerRequests
 import DashboardNextMatchCard from "@/Pages/GameSaves/Play/components/DashboardNextMatchCard.vue";
 import DashboardForcesCard from "@/Pages/GameSaves/Play/components/DashboardForcesCard.vue";
 import DashboardWorldCupTile from "@/Pages/GameSaves/Play/components/DashboardWorldCupTile.vue";
+import { periodLabel as basePeriodLabel } from "@/Pages/GameSaves/periods.js";
 
 const props = defineProps({
     gameSave:      { type: Object, required: true },
@@ -63,7 +64,7 @@ const wcChampion = computed(() => props.tournament?.champion ?? null);
 // ==========================
 //   HELPERS
 // ==========================
-const periodLabel = (p) => ({ college: 'Collège', highschool: 'Lycée', pro: 'Professionnel' }[p] ?? p);
+const periodLabel = (p) => ({ highschool: 'Lycée' }[p] ?? basePeriodLabel(p));
 
 const { teamLogoUrl } = usePlayerUtils();
 

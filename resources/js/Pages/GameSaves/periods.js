@@ -25,6 +25,12 @@ export const PERIODS = {
             legends_countries: null,
         }),
     },
+    // World Youth : reprise du Collège d'origine, avec la Coupe Nation ; clubs et contrats à adapter ensuite.
+    world_youth: {
+        label: 'World Youth',
+        competitions: ['college_league', 'club_cup', 'world_cup'],
+        universes: () => structuredClone(ALL_UNIVERSES),
+    },
     // Professionnel : clubs historiques bâtis avec tous les univers, tous les formats.
     pro: {
         label: 'Professionnel',
@@ -38,3 +44,6 @@ export const periodAllows = (period, competitionType) => !!PERIODS[period]?.comp
 
 /** Univers de joueurs actifs par défaut pour la période. */
 export const universePreset = (period) => (PERIODS[period] ?? PERIODS.college).universes();
+
+/** Libellé d'une période (la clé brute si elle est inconnue). */
+export const periodLabel = (period) => PERIODS[period]?.label ?? period;

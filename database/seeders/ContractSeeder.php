@@ -37,7 +37,7 @@ class ContractSeeder extends Seeder
         DB::table('contracts')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        $teamsByName   = Team::pluck('id', 'name');
+        $teamsByName   = Team::where('period', 'college')->pluck('id', 'name');
         $playersByFullName = Player::all()->keyBy(fn(Player $p) => "{$p->firstname} {$p->lastname}");
 
         $teamsPlayers = ClubRosters::players();

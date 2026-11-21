@@ -5,6 +5,7 @@ import { Head, Link, router } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
 import H2 from '@/Components/H2.vue';
 import { competitionLabel, isTournamentType } from '@/Pages/GameSaves/competitions.js';
+import { periodLabel as basePeriodLabel } from '@/Pages/GameSaves/periods.js';
 
 defineProps({
     gameSaves: { type: Array, required: true },
@@ -17,7 +18,7 @@ const destroySave = async (save) => {
     router.delete(route('game-saves.destroy', save.id), { preserveScroll: true });
 };
 
-const periodLabel = (p) => ({ college: 'Collège', highschool: 'Lycée', pro: 'Professionnel' }[p] ?? p);
+const periodLabel = (p) => ({ highschool: 'Lycée' }[p] ?? basePeriodLabel(p));
 
 </script>
 

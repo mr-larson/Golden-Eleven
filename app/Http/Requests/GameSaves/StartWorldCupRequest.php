@@ -26,7 +26,7 @@ class StartWorldCupRequest extends FormRequest
     {
         return [
             'label'            => ['nullable', 'string', 'max:255'],
-            'period'           => ['required', 'string', 'in:college,pro'],
+            'period'           => ['required', 'string', Rule::in(array_keys(GameSave::PERIOD_COMPETITIONS))],
             'competition_type' => ['required', 'string', 'in:world_cup'],
             'nation'           => ['required', 'string', Rule::exists('nations', 'name')->where('is_active', true)],
             'participant_count'    => ['nullable', 'integer', Rule::in(NewWorldCupBuilder::TOURNAMENT_SIZES)],

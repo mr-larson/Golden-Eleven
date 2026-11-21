@@ -1,5 +1,6 @@
 <script setup>
 import { Link, router } from '@inertiajs/vue3';
+import { PERIODS as PERIOD_META } from '@/Pages/GameSaves/periods.js';
 
 // Sous-navigation des écrans d'édition : lien retour + pastilles de section,
 // et (si `period` est fourni) le sélecteur de période de la base (Collège / Professionnel).
@@ -9,7 +10,7 @@ defineProps({
     period: { type: String, default: null }, // période affichée ; null = pas de sélecteur
 });
 
-const PERIODS = [{ key: 'college', label: 'Collège' }, { key: 'pro', label: 'Professionnel' }];
+const PERIODS = Object.entries(PERIOD_META).map(([key, p]) => ({ key, label: p.label }));
 
 // Recharge l'écran courant sur la période choisie (le choix est mémorisé en session côté serveur).
 function changePeriod(event) {
