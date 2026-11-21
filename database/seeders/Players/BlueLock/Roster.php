@@ -136,8 +136,8 @@ class Roster
                 [
                     'speed' => 63, 'stamina' => 72, 'defense' => 24, 'attack' => 12,
                     'shot' => 10, 'pass' => 14, 'dribble' => 12,
-                    'block' => 23, 'intercept' => 22, 'tackle' => 16,
-                    'hand_save' => 29, 'punch_save' => 27,
+                    'block' => 20, 'intercept' => 20, 'tackle' => 16,
+                    'hand_save' => 21, 'punch_save' => 19,
                 ],
                 'Reconverti gardien de but après avoir été attaquant. Sa polyvalence et ses réflexes surprenants lui permettent de réaliser des arrêts décisifs dans les grands matchs.'
             ],
