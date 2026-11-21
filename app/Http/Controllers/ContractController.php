@@ -6,6 +6,7 @@ use App\Http\Requests\ContractRequest;
 use App\Models\Contract;
 use App\Models\Player;
 use App\Models\Team;
+use App\Support\EditorPeriod;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +23,10 @@ class ContractController extends Controller
     {
         $this->authorize('viewAny', Contract::class);
 
+        $period = EditorPeriod::current($request);
+
         $contracts = Contract::with(['team', 'player'])
+            ->whereHas('team', fn ($q) => $q->where('period', $period))
             ->get()
             ->map(fn (Contract $c) => [
                 'id'                => $c->id,
@@ -43,8 +47,9 @@ class ContractController extends Controller
             ->values();
 
         return Inertia::render('Contracts/Index', [
+            'period'      => $period,
             'contracts'   => $contracts,
-            'teams'       => Team::orderBy('name')->get(['id', 'name']),
+            'teams'       => Team::where('period', $period)->orderBy('name')->get(['id', 'name']),
             'players'     => Player::orderBy('firstname')->get(['id', 'firstname', 'lastname']),
             // Contrat à ouvrir (ex. juste après sa création) / fiche vide demandée.
             'selectedId'  => $request->integer('selected') ?: null,

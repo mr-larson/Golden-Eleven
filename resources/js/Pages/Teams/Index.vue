@@ -8,7 +8,7 @@
 
         <div class="p-4 sm:p-6 max-w-8xl mx-auto flex flex-col gap-4">
             <div class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4">
-                <EditorSubNav class="shrink-0"
+                <EditorSubNav class="shrink-0" :period="period"
                     :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
                     :links="[
                         { href: route('players.index'), label: 'Joueurs' },
@@ -123,6 +123,8 @@ import TeamFormFields from '@/Components/TeamFormFields.vue';
 import { useEntityEditor, clone } from '@/Composables/useEntityEditor.js';
 
 const props = defineProps({
+    // Période de la base affichée (college / pro), choisie dans la sous-navigation.
+    period: { type: String, default: 'college' },
     teams: { type: Array, required: true },
     // Équipe à sélectionner à l'ouverture (ex. juste après sa création).
     selectedId: { type: Number, default: null },

@@ -8,6 +8,7 @@ use App\Services\Support\EditorProfileCache;
 use App\Services\WorldCup\NationalTeamAssembler;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Support\EditorPeriod;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Str;
@@ -36,8 +37,11 @@ class TeamController extends Controller
                 'country' => self::dominantNationality($team->players),
             ]])->all());
 
+        $period = EditorPeriod::current($request);
+
         return Inertia::render('Teams/Index', [
-            'teams'       => Team::orderBy('name')->get()->each(function (Team $team) use ($profiles) {
+            'period'      => $period,
+            'teams'       => Team::where('period', $period)->orderBy('name')->get()->each(function (Team $team) use ($profiles) {
                 $team->setAttribute('eleven', $profiles[$team->id]['eleven'] ?? null);
                 $team->setAttribute('country', $profiles[$team->id]['country'] ?? null);
             }),
@@ -71,6 +75,7 @@ class TeamController extends Controller
         $data = $request->validated();
 
         $team = new Team();
+        $team->period = EditorPeriod::current($request); // le club naît dans la période affichée
 
         // On ne "fill" pas logo/remove_logo
         unset($data['remove_logo'], $data['logo']);

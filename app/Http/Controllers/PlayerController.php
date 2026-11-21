@@ -7,6 +7,7 @@ use App\Http\Requests\PlayerRequest;
 use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use App\Support\EditorPeriod;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
@@ -23,9 +24,14 @@ class PlayerController extends Controller
     {
         $this->authorize('viewAny', Player::class);
 
+        $period = EditorPeriod::current($request);
+
         return Inertia::render('Players/Index', [
-            'players'        => Player::with('contracts.team')->orderBy('firstname')->get(),
-            'teams'          => Team::orderBy('name')->get(['id', 'name', 'logo_path']),
+            'period'         => $period,
+            // Contrats limités aux clubs de la période affichée : un joueur peut avoir un contrat par période.
+            'players'        => Player::with(['contracts' => fn ($q) => $q->whereHas('team', fn ($t) => $t->where('period', $period))->with('team')])
+                ->orderBy('firstname')->get(),
+            'teams'          => Team::where('period', $period)->orderBy('name')->get(['id', 'name', 'logo_path']),
             'positions'      => PlayerPosition::values(),
             'nationalities'  => \App\Models\Nation::names(),
             'origins'        => \App\Enums\PlayerOrigin::LABELS,

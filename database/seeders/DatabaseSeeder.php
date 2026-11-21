@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PlayerSeeder::class,
             PlayerLinkSeeder::class,
             ContractSeeder::class,
+            ProClubSeeder::class,
             BonusCardSeeder::class,
         ]);
     }
