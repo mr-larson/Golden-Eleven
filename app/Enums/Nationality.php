@@ -19,7 +19,6 @@ class Nationality
 {
     public const SENEGAL = 'Sénégal';
     public const CAMEROUN = 'Cameroun';
-    public const TRINITE_TOBAGO = 'Trinité-et-Tobago';
     public const DANEMARK = 'Danemark';
     public const PARAGUAY = 'Paraguay';
     public const REPUBLIQUE_TCHEQUE = 'République tchèque';
@@ -54,8 +53,6 @@ class Nationality
     public const CHINE          = 'Chine';
     public const OUZBEKISTAN    = 'Ouzbékistan';
     public const NIGERIA         = 'Nigéria';
-    public const AUSTRALIE       = 'Australie';
-    public const GHANA           = 'Ghana';
     public const THAILANDE       = 'Thaïlande';
     public const COLOMBIE        = 'Colombie';
 
@@ -79,14 +76,11 @@ class Nationality
         self::CHINE,
         self::OUZBEKISTAN,
         self::NIGERIA,
-        self::AUSTRALIE,
-        self::GHANA,
         self::THAILANDE,
         self::COLOMBIE,
         self::BELGIQUE,
         self::PORTUGAL,
         self::CROATIE,
-        self::TRINITE_TOBAGO,
         self::DANEMARK,
         self::PARAGUAY,
         self::REPUBLIQUE_TCHEQUE,
@@ -108,7 +102,6 @@ class Nationality
     public const FLAGS = [
         self::SENEGAL => '🇸🇳',
         self::CAMEROUN => '🇨🇲',
-        self::TRINITE_TOBAGO => '🇹🇹',
         self::DANEMARK => '🇩🇰',
         self::PARAGUAY => '🇵🇾',
         self::REPUBLIQUE_TCHEQUE => '🇨🇿',
@@ -143,8 +136,6 @@ class Nationality
         self::CHINE          => '🇨🇳',
         self::OUZBEKISTAN    => '🇺🇿',
         self::NIGERIA         => '🇳🇬',
-        self::AUSTRALIE       => '🇦🇺',
-        self::GHANA           => '🇬🇭',
         self::THAILANDE       => '🇹🇭',
         self::COLOMBIE        => '🇨🇴',
     ];

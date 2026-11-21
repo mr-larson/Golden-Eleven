@@ -59,7 +59,7 @@ final class LegendTuning
         'Youri Djorkaeff' => [0, ['pass']], 'Diego Forlán' => [1, ['shot']], 'Cuauhtémoc Blanco' => [0, ['dribble']],
         'Thomas Müller' => [1, ['stamina']], 'Juan Alberto Schiaffino' => [2, ['pass', 'dribble']],
         'Giuseppe Meazza' => [2, ['shot']], 'Roberto Baggio' => [2, ['dribble', 'pass']],
-        'Alessandro Del Piero' => [2, ['dribble', 'shot']], 'Aurelio Vidmar' => [-2, []], 'Dwight Yorke' => [-1, []],
+        'Alessandro Del Piero' => [2, ['dribble', 'shot']], 
         'Dominique Rocheteau' => [1, ['speed', 'dribble']], 'Claudio Caniggia' => [1, ['speed']],
         'Marc Overmars' => [1, ['speed']], 'Helmut Rahn' => [1, ['shot']], 'Jairzinho' => [2, ['speed', 'shot']],
         
@@ -108,7 +108,7 @@ final class LegendTuning
         'Egidio Arévalo Ríos' => [0, []], 'Diego Pérez' => [0, []], 'Gerardo Torrado' => [-1, []],
         'Carlos Dunga' => [1, ['stamina']], 'Gennaro Gattuso' => [1, ['tackle', 'stamina']], 'Didier Deschamps' => [1, ['intercept']],
         'Lucas Biglia' => [0, ['pass']], 'Fernando Redondo' => [2, ['pass', 'dribble']], 'Pep Guardiola' => [1, ['pass']],
-        'Roy Keane' => [2, ['stamina', 'tackle']], 'Paul Okon' => [-1, []], 
+        'Roy Keane' => [2, ['stamina', 'tackle']], 
         'Thomas Hässler' => [0, ['dribble']], 'Robert Pirès' => [1, ['dribble']], 'Gheorghe Hagi' => [2, ['shot', 'pass']],
         'Hidetoshi Nakata' => [1, ['pass']], 'Pär Zetterberg' => [0, []], 
         'Jari Litmanen' => [1, ['pass']], 'Dejan Savićević' => [1, ['dribble']], 'Walter Baseggio' => [-1, []],

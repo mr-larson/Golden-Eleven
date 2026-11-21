@@ -86,10 +86,6 @@ class AmateurMarketService
             'firstnames' => ['Chidi', 'Chinedu', 'Emeka', 'Femi', 'Ibrahim', 'Kelechi', 'Seyi', 'Tunde'],
             'lastnames' => ['Adeyemi', 'Afolabi', 'Bello', 'Eze', 'Nwosu', 'Obi', 'Okafor', 'Okeke'],
         ],
-        Nationality::GHANA => [
-            'firstnames' => ['Kofi', 'Kwame', 'Kwesi', 'Kojo', 'Yaw', 'Kwaku', 'Nana', 'Akwasi'],
-            'lastnames' => ['Adjei', 'Agyeman', 'Asante', 'Boateng', 'Mensah', 'Ofori', 'Opoku', 'Owusu'],
-        ],
         Nationality::COREE_DU_SUD => [
             'firstnames' => ['Min-jun', 'Seo-jun', 'Ji-ho', 'Do-yun', 'Hyun-woo', 'Jun-seo', 'Si-woo', 'Tae-hyun'],
             'lastnames' => ['Han', 'Jung', 'Kang', 'Kim', 'Lee', 'Lim', 'Park', 'Yoon'],

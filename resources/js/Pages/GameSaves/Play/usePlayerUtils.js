@@ -40,7 +40,6 @@ const POSITION_LABELS = {
 const NATIONALITY_FLAGS = {
     'Sénégal': '🇸🇳',
     'Cameroun': '🇨🇲',
-    "Trinité-et-Tobago": "🇹🇹",
     "Danemark": "🇩🇰",
     "Paraguay": "🇵🇾",
     "République tchèque": "🇨🇿",
@@ -75,8 +74,6 @@ const NATIONALITY_FLAGS = {
     'Arabie saoudite': '🇸🇦',
     'Corée du Sud':    '🇰🇷',
     'Nigéria':         '🇳🇬',
-    'Australie':       '🇦🇺',
-    'Ghana':           '🇬🇭',
     'Thaïlande':       '🇹🇭',
     'Colombie':        '🇨🇴',
 };
