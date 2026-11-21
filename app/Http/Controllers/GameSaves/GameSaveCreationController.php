@@ -31,13 +31,13 @@ use Inertia\Response;
  *
  *   1. create()  — affiche l'écran des réglages (nom, mode, configuration…).
  *   2. store()   — enregistre ces réglages en session (« étape 1 »).
- *   3. setup()   — affiche le choix de l'équipe (Ligue) ou de la nation (Coupe du Monde).
+ *   3. setup()   — affiche le choix de l'équipe (Ligue) ou de la nation (Coupe Nation).
  *   4. start()          — lance une partie LIGUE (la construction est dans NewGameBuilder).
  *      startWorldCup()  — lance une partie COUPE DU MONDE (construction dans NewWorldCupBuilder).
  *
  * La logique de construction d'une partie n'est PAS ici :
  *   - Ligue         → App\Services\Game\NewGameBuilder
- *   - Coupe du Monde → App\Services\WorldCup\NewWorldCupBuilder
+ *   - Coupe Nation → App\Services\WorldCup\NewWorldCupBuilder
  *
  * Ce contrôleur se limite à : vérifier les droits et les limites, lire la
  * requête, appeler le bon service, puis rediriger.
@@ -57,6 +57,10 @@ class GameSaveCreationController extends Controller
         return Inertia::render('GameSaves/Create', [
             'universeOptions' => \App\Support\UniverseOptions::forPlayers(),
             'periodPackages'    => $this->periodPackagesSummary($request->user()),
+            // Période Professionnelle proposée seulement si des clubs pro existent en base.
+            'proPeriodAvailable' => Team::where('period', 'pro')->exists(),
+            // Nombre de clubs de référence par période : borne le choix « nombre de clubs ».
+            'clubCounts'         => Team::selectRaw('period, count(*) as c')->groupBy('period')->pluck('c', 'period'),
             'draftBudgets'      => GameConfig::DRAFT_BUDGETS,
             'aiDraftBudget'     => GameConfig::DEFAULTS['ai_draft_budget'],
             'aiStartBudget'     => GameConfig::DEFAULTS['ai_start_budget'],
@@ -115,7 +119,7 @@ class GameSaveCreationController extends Controller
 
     /**
      * Affiche l'étape 2 d'après les réglages gardés en session :
-     *   - Coupe du Monde → liste des nations jouables ;
+     *   - Coupe Nation → liste des nations jouables ;
      *   - Ligue          → équipes (standard ou package de période) avec un aperçu
      *                      de leurs joueurs, tels qu'ils seront à la création.
      *
@@ -135,27 +139,43 @@ class GameSaveCreationController extends Controller
         $seed = $data['player_stats_seed'] ?? random_int(1, 2_000_000_000);
         $request->session()->put('game_save_setup.player_stats_seed', $seed);
 
-        // Coupe du Monde : on choisit une nation, pas un club.
+        // Coupe Nation : on choisit une nation, pas un club.
         if ($competitionType === 'world_cup') {
-            $nationsCount = in_array((int) $request->query('nations_count'), NewWorldCupBuilder::TOURNAMENT_SIZES, true)
-                ? (int) $request->query('nations_count')
+            // Taille : celle de l'écran en cours (query), sinon celle choisie à l'étape 1, sinon la taille par défaut.
+            $requested    = (int) ($request->query('participant_count') ?: ($data['participant_count'] ?? 0));
+            $participantCount = in_array($requested, NewWorldCupBuilder::TOURNAMENT_SIZES, true)
+                ? $requested
                 : NewWorldCupBuilder::DEFAULT_SIZE;
+            // Pas plus de sélections que de nations jouables : palier inférieur sinon.
+            $nations      = $worldCup->playableNations();
+            $playable     = collect($nations)->where('playable', true)->count();
+            $participantCount = collect(NewWorldCupBuilder::TOURNAMENT_SIZES)
+                ->filter(fn ($size) => $size <= $participantCount && $size <= max($playable, NewWorldCupBuilder::DEFAULT_SIZE))
+                ->last();
             $coNations = $this->queryNations($request, 'co_nations', $worldCup)
                 ->reject(fn ($n) => $n === $request->query('nation'))
-                ->take(NewWorldCupBuilder::maxHumans($nationsCount) - 1)->values()->all();
+                ->take(NewWorldCupBuilder::maxHumans($participantCount) - 1)->values()->all();
 
             return Inertia::render('GameSaves/NationSelection', [
                 'label'           => $data['label'] ?? null,
                 'period'          => $data['period'],
                 'competitionType' => $competitionType,
-                'nations'         => $worldCup->playableNations(),
+                'nations'         => $nations,
                 'tournamentSizes' => NewWorldCupBuilder::TOURNAMENT_SIZES,
                 'coNations'       => $coNations,
                 'opponents'       => $this->queryNations($request, 'opponents', $worldCup)
                     ->reject(fn ($n) => $n === $request->query('nation') || in_array($n, $coNations, true))
-                    ->take($nationsCount - 1)->values()->all(),
-                'nationsCount'    => $nationsCount,
-                'maxHumans'       => NewWorldCupBuilder::maxHumans($nationsCount),
+                    ->take($participantCount - 1)->values()->all(),
+                'participantCount'    => $participantCount,
+                // Effectif de la nation affichée au centre : chargé seulement sur demande (rechargement partiel).
+                'nationPreview'      => Inertia::lazy(function () use ($request, $worldCup, $gameConfig, $seed) {
+                    $nation = $request->query('preview');
+
+                    return is_string($nation) && $worldCup->isPlayable($nation)
+                        ? ($worldCup->squadPreview($nation, $gameConfig, $seed)['players'] ?? [])
+                        : [];
+                }),
+                'maxHumans'       => NewWorldCupBuilder::maxHumans($participantCount),
                 // Convocation de chaque co-manager (aperçu de son effectif), dans l'ordre des sièges.
                 'coSquads'        => $request->query('nation') ? array_map(fn ($n) => $worldCup->squadPreview($n, $gameConfig, $seed), $coNations) : [],
                 'squad'           => function () use ($request, $worldCup, $gameConfig, $seed) {
@@ -190,8 +210,10 @@ class GameSaveCreationController extends Controller
             'period'           => $data['period'],
             'teams'            => $package
                 ? $this->packageTeamsForPreview($package, $previewStats)
-                : $this->standardTeamsForPreview($previewStats),
+                : $this->standardTeamsForPreview($previewStats, $data['period']),
             'gameMode'         => $gameMode,
+            // Championnat réduit (clubs de référence uniquement, pas avec un package).
+            'participantCount'        => $package ? null : ($data['participant_count'] ?? null),
             'competitionType'  => $competitionType,
             'gameConfig'       => $gameConfig,
             'draftBudget'      => (int) $previewSave->getConfig('draft_budget'),
@@ -291,12 +313,12 @@ class GameSaveCreationController extends Controller
     }
 
     /**
-     * Équipes de la table globale (effectif standard), avec leurs contrats et
+     * Équipes de la table globale pour la période choisie (effectif standard), avec leurs contrats et
      * joueurs, auxquels on ajoute les stats de départ de l'aperçu.
      */
-    private function standardTeamsForPreview(Closure $previewStats): Collection
+    private function standardTeamsForPreview(Closure $previewStats, string $period): Collection
     {
-        $teams = Team::with(['contracts.player'])->orderBy('name')->get();
+        $teams = Team::with(['contracts.player'])->where('period', $period)->orderBy('name')->get();
 
         foreach ($teams as $team) {
             foreach ($team->contracts as $contract) {
@@ -440,7 +462,7 @@ class GameSaveCreationController extends Controller
             return back()->withErrors(['co_formations' => 'Formation reçue pour une nation qui n’a pas de manager.']);
         }
 
-        $size = (int) ($data['nations_count'] ?? NewWorldCupBuilder::DEFAULT_SIZE);
+        $size = (int) ($data['participant_count'] ?? NewWorldCupBuilder::DEFAULT_SIZE);
         $humans = 1 + count($data['co_nations'] ?? []);
         if ($humans > NewWorldCupBuilder::maxHumans($size)) {
             return back()->withErrors(['co_nations' => 'Un tournoi à '.$size.' équipes accepte au plus '.NewWorldCupBuilder::maxHumans($size).' managers.']);
@@ -459,14 +481,14 @@ class GameSaveCreationController extends Controller
             }
         }
         if ($worldCup->playableCount() < $size) {
-            return back()->withErrors(['nations_count' => "Pas assez de sélections jouables pour un tournoi à {$size} équipes."]);
+            return back()->withErrors(['participant_count' => "Pas assez de sélections jouables pour un tournoi à {$size} équipes."]);
         }
 
         $data['player_stats_seed'] = $request->session()->get('game_save_setup.player_stats_seed') ?? random_int(1, 2_000_000_000);
         $gameSave = $worldCup->build($request->user(), $data);
 
         return redirect()->route('game-saves.Play', $gameSave)
-            ->with('success', "Coupe du Monde créée — tu diriges {$data['nation']} !");
+            ->with('success', "Coupe Nation créée — tu diriges {$data['nation']} !");
     }
 
     /**

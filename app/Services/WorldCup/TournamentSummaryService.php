@@ -13,9 +13,9 @@ use App\Models\GameSaves\GameTeam;
 use App\Models\Nation;
 
 /**
- * Bilan d'une Coupe du Monde terminée, pour l'écran de fin de tournoi.
+ * Bilan d'une Coupe Nation terminée, pour l'écran de fin de tournoi.
  *
- * Domaine : Coupe du Monde. Appelé par GameSeasonController::tournamentEnd. Lecture seule : tout est
+ * Domaine : Coupe Nation. Appelé par GameSeasonController::tournamentEnd. Lecture seule : tout est
  * calculé depuis les matchs joués et `state['tournament']` (via TournamentService::presentation).
  * Contenu : podium, parcours de chaque manager humain, meilleurs buteurs (matchs joués à la main : les
  * matchs simulés n'enregistrent pas de statistiques de joueur) et chiffres clés.

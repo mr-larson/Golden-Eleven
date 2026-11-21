@@ -9,7 +9,7 @@ use Tests\Concerns\BuildsGameWorld;
 use Tests\TestCase;
 
 /**
- * Coupe du Monde : une égalité en phase finale se départage aux tirs au but
+ * Coupe Nation : une égalité en phase finale se départage aux tirs au but
  * joués dans le moteur (match_stats.shootout), et le marché est fermé.
  */
 class WorldCupShootoutTest extends TestCase

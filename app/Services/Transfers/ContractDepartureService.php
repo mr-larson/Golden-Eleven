@@ -10,7 +10,7 @@ use App\Services\Players\MoraleService;
 use App\Services\Players\PromiseService;
 
 /**
- * Départs de joueurs mécontents : toutes les deux semaines (hors Coupe du Monde), un joueur au moral très bas ou en mauvaise relation avec le coach peut résilier son contrat.
+ * Départs de joueurs mécontents : toutes les deux semaines (hors Coupe Nation), un joueur au moral très bas ou en mauvaise relation avec le coach peut résilier son contrat.
  * La probabilité va de 5 % à 45 % selon l'ampleur du mal-être. Le joueur quitte l'effectif, perd son numéro, sort de la composition et ses promesses en attente expirent.
  */
 class ContractDepartureService

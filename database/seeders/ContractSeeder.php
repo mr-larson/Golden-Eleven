@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\Traits\CalculatesWeeklyCost;
 use Database\Seeders\Concerns\GuardsReferenceReseed;
 use Database\Seeders\Players\CaptainTsubasa\Clubs\ClubRosters;
+use Database\Seeders\Players\CaptainTsubasa\Clubs\ProClubs;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -40,8 +41,9 @@ class ContractSeeder extends Seeder
         $teamsByName   = Team::pluck('id', 'name');
         $playersByFullName = Player::all()->keyBy(fn(Player $p) => "{$p->firstname} {$p->lastname}");
 
-        $teamsPlayers = ClubRosters::players();
-        $captains     = ClubRosters::captains();
+        // Collège puis Professionnel : les mêmes joueurs ont un contrat dans chaque période.
+        $teamsPlayers = ClubRosters::players() + ProClubs::players();
+        $captains     = ClubRosters::captains() + ProClubs::captains();
 
         $contracts = [];
 

@@ -20,7 +20,7 @@ final class GameConfig
     /** Budget de départ du manager en bac à sable (difficulté « none ») : l'écart relatif avec les clubs IA fait la difficulté. */
     public const SANDBOX_START_BUDGET = 2500;
 
-    /** Revenu hebdomadaire de base en bac à sable et en Coupe du Monde (celui des clubs IA). */
+    /** Revenu hebdomadaire de base en bac à sable et en Coupe Nation (celui des clubs IA). */
     public const BASE_WEEKLY_INCOME = 500;
 
     /**

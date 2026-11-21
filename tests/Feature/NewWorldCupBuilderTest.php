@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 /**
- * Création d'une Coupe du Monde : nations jouables, tirage des adversaires,
+ * Création d'une Coupe Nation : nations jouables, tirage des adversaires,
  * construction de la partie, et route de lancement.
  */
 class NewWorldCupBuilderTest extends TestCase
@@ -410,7 +410,7 @@ class NewWorldCupBuilderTest extends TestCase
         $setup = ['period' => 'college', 'competition_type' => 'world_cup'];
 
         $this->actingAs(User::factory()->create())->withSession(['game_save_setup' => $setup])
-            ->get(route('game-saves.setup', ['nation' => $nations[0], 'co_nations' => [$nations[1]], 'opponents' => [$nations[2]], 'nations_count' => 8]))
+            ->get(route('game-saves.setup', ['nation' => $nations[0], 'co_nations' => [$nations[1]], 'opponents' => [$nations[2]], 'participant_count' => 8]))
             ->assertInertia(fn ($page) => $page->component('GameSaves/NationSelection')
                 ->where('coNations', [$nations[1]])->where('opponents', [$nations[2]])
                 ->has('coSquads', 1)->where('coSquads.0.name', $nations[1])->where('maxHumans', 2));

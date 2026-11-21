@@ -10,7 +10,7 @@ use App\Support\GameConfig;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-/** Lancement d'une partie Coupe du Monde : nation choisie et configuration. */
+/** Lancement d'une partie Coupe Nation : nation choisie et configuration. */
 class StartWorldCupRequest extends FormRequest
 {
     use ChecksTrainingGains;
@@ -26,10 +26,10 @@ class StartWorldCupRequest extends FormRequest
     {
         return [
             'label'            => ['nullable', 'string', 'max:255'],
-            'period'           => ['required', 'string', 'in:college'],
+            'period'           => ['required', 'string', 'in:college,pro'],
             'competition_type' => ['required', 'string', 'in:world_cup'],
             'nation'           => ['required', 'string', Rule::exists('nations', 'name')->where('is_active', true)],
-            'nations_count'    => ['nullable', 'integer', Rule::in(NewWorldCupBuilder::TOURNAMENT_SIZES)],
+            'participant_count'    => ['nullable', 'integer', Rule::in(NewWorldCupBuilder::TOURNAMENT_SIZES)],
             'co_nations'       => ['nullable', 'array', 'list', 'max:'.(NewWorldCupBuilder::MAX_HUMANS - 1)],
             'co_nations.*'     => ['string', 'distinct', Rule::exists('nations', 'name')->where('is_active', true), 'different:nation'],
             'opponents'        => ['nullable', 'array', 'list', 'max:'.(max(NewWorldCupBuilder::TOURNAMENT_SIZES) - 1)],

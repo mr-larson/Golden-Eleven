@@ -35,7 +35,7 @@ class MatchScreenBuilder
     /** Nombre de relances de capitaine accordées à chaque match. */
     private const CAPTAIN_REROLLS = 3;
 
-    /** Rounds de Coupe du Monde où une égalité se joue aux tirs au but. */
+    /** Rounds de Coupe Nation où une égalité se joue aux tirs au but. */
     private const KNOCKOUT_ROUNDS = ['round16', 'quarter', 'semi', 'third', 'final'];
 
     public function __construct(
@@ -164,7 +164,7 @@ class MatchScreenBuilder
             'maxTurns'         => (int) $gameSave->getConfig('match_max_turns', 30),
             'criticalsEnabled' => (bool) $gameSave->getConfig('match_criticals_enabled'),
             'maxSubstitutions' => (int) $gameSave->getConfig('match_max_substitutions'),
-            // Coupe du Monde, phase finale : une égalité se joue aux tirs au but dans le moteur.
+            // Coupe Nation, phase finale : une égalité se joue aux tirs au but dans le moteur.
             'isKnockout'       => in_array($match->round, self::KNOCKOUT_ROUNDS, true),
             'controlMode'      => $this->controlMode($gameSave, $homeTeam, $awayTeam, $requestedControlMode),
             'controlledSide'   => 'internal',
@@ -218,7 +218,7 @@ class MatchScreenBuilder
             'id'                   => $team->id,
             'name'                 => $team->name,
             'description'          => $team->description,
-            'rank'                 => $gameSave->isWorldCup() ? null : $ranks->get($team->id), // pas de classement de ligue en Coupe du Monde
+            'rank'                 => $gameSave->isWorldCup() ? null : $ranks->get($team->id), // pas de classement de ligue en Coupe Nation
             'logo_path'            => $team->logo_path,
             'formation'            => $team->formation ?? '3-2-3-2',
             'tacticalStyle'        => $team->tactical_style,

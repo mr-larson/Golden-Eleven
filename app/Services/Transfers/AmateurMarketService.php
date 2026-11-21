@@ -105,7 +105,7 @@ class AmateurMarketService
      */
     public function ensureFloor(GameSave $gameSave): int
     {
-        // Coupe du Monde : pas de marché des transferts.
+        // Coupe Nation : pas de marché des transferts.
         if ($gameSave->isWorldCup()) return 0;
 
         $week = (int) ($gameSave->week ?? 1);

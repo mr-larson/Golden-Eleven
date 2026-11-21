@@ -3,18 +3,18 @@
 namespace App\Support\StateConcerns;
 
 /**
- * Accesseurs typés du `state` de la sauvegarde — Compétition : tournoi de la Coupe du Monde (`tournament`) et mandat de la direction en mode Ligue (`career`).
+ * Accesseurs typés du `state` de la sauvegarde — Compétition : tournoi de la Coupe Nation (`tournament`) et mandat de la direction en mode Ligue (`career`).
  *
  * Fait partie de GameState (qui l'utilise) : s'appuie sur ses méthodes get(), put()
  * et forget(). La forme stockée dans le JSON est décrite au-dessus de chaque clé.
  */
 trait HasCompetitionState
 {
-    // ── tournament : Coupe du Monde (poules puis élimination) ─────────
+    // ── tournament : Coupe Nation (poules puis élimination) ─────────
     //    ['groups' => [...], 'stage' => 'group'|...|'done', 'group_last_week' => int, 'champion_team_id' => ?int, ...]
     //    (détail de la structure : TournamentService)
 
-    /** La structure du tournoi de Coupe du Monde (poules, étape, champion), ou null. */
+    /** La structure du tournoi de Coupe Nation (poules, étape, champion), ou null. */
     public function tournament(): ?array
     {
         return $this->get('tournament');

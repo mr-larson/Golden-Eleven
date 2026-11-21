@@ -146,7 +146,7 @@ class GameSave extends Model
 
     public const COMPETITION_WORLD_CUP = 'world_cup';
 
-    /** Partie de Coupe du Monde (tournoi de sélections) plutôt que mode Ligue. */
+    /** Partie de Coupe Nation (tournoi de sélections) plutôt que mode Ligue. */
     public function isWorldCup(): bool
     {
         return $this->competition_type === self::COMPETITION_WORLD_CUP;
@@ -159,7 +159,7 @@ class GameSave extends Model
     }
 
     /**
-     * Phases pendant lesquelles des matchs se jouent (ligue ou Coupe du Monde,
+     * Phases pendant lesquelles des matchs se jouent (ligue ou Coupe Nation,
      * cf. GamePhase::matchPhases()). Hors de ces phases (draft, fin de saison,
      * tournoi terminé), terminer un match ou simuler une semaine est refusé.
      */

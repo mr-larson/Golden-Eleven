@@ -79,7 +79,7 @@ class GameContractController extends Controller
         return back()->with('success', 'Contrat supprimé.');
     }
 
-    /** Prolonge le contrat d'un joueur de l'équipe contrôlée de N semaines, sous le verrou de sauvegarde. Vérifie : phase de saison (pas en Coupe du monde), contrat actif, fin de prolongation dans la saison, proposition à jour, absence de chevauchement avec un autre contrat, joueur non réfractaire et budget suffisant. Débite le budget du club (salaire de renouvellement x semaines), met à jour le contrat et valide une éventuelle promesse de prolongation. */
+    /** Prolonge le contrat d'un joueur de l'équipe contrôlée de N semaines, sous le verrou de sauvegarde. Vérifie : phase de saison (pas en Coupe Nation), contrat actif, fin de prolongation dans la saison, proposition à jour, absence de chevauchement avec un autre contrat, joueur non réfractaire et budget suffisant. Débite le budget du club (salaire de renouvellement x semaines), met à jour le contrat et valide une éventuelle promesse de prolongation. */
     public function renew(RenewContractRequest $request, GameSave $gameSave, GameContract $contract, SeasonService $seasons): RedirectResponse
     {
         $this->authorizeGameSave('update', $gameSave, $contract);

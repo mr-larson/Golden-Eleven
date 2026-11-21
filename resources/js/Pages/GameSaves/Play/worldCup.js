@@ -1,5 +1,5 @@
-// Calculs d'affichage de la Coupe du Monde pour le Dashboard (fonctions pures, testées par Vitest).
-// Domaine : Coupe du Monde. Entrée : `tournament`, la structure renvoyée par TournamentService::presentation
+// Calculs d'affichage de la Coupe Nation pour le Dashboard (fonctions pures, testées par Vitest).
+// Domaine : Coupe Nation. Entrée : `tournament`, la structure renvoyée par TournamentService::presentation
 // (poules, tableau, champion, équipes éliminées). Utilisé par TabDashboard et ses sous-composants.
 
 /** Libellé d'une étape du tournoi. */

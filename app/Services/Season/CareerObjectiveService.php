@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
  * match, et tranche en fin de saison (maintien, prime, licenciement). Un objectif
  * long terme (gagner N titres) conclut la partie par une victoire de carrière.
  *
- * Toute la donnée vit dans GameSave->gameState()->career(). Le mode Coupe du Monde
+ * Toute la donnée vit dans GameSave->gameState()->career(). Le mode Coupe Nation
  * (élimination directe, fin naturelle) n'est pas concerné.
  */
 class CareerObjectiveService
@@ -79,7 +79,7 @@ class CareerObjectiveService
     private const MATCH_DRAW = 1;
     private const MATCH_LOSS = -5;
 
-    /** Indique si la boucle de carrière est active : désactivée en Coupe du Monde et quand la difficulté de carrière est 'none'. */
+    /** Indique si la boucle de carrière est active : désactivée en Coupe Nation et quand la difficulté de carrière est 'none'. */
     public function isEnabled(GameSave $gameSave): bool
     {
         if ($gameSave->isWorldCup()) {

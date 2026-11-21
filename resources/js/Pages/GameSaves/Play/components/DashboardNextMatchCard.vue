@@ -1,7 +1,7 @@
 <script setup>
 // Carte « Prochain match » du Dashboard : affrontement (logos, rang, forme récente, dernier duel), boutons
 // jouer / simuler, et les états sans match (trêve de mi-saison, semaine de repos, tournoi terminé).
-// Domaine : Match + Coupe du Monde. Utilisée par Pages/GameSaves/Play/TabDashboard.vue.
+// Domaine : Match + Coupe Nation. Utilisée par Pages/GameSaves/Play/TabDashboard.vue.
 import { Link } from '@inertiajs/vue3';
 import TeamLogoImage from '@/Components/TeamLogoImage.vue';
 import ButtonSecondary from '@/Components/ButtonSecondary.vue';
@@ -145,7 +145,7 @@ const lastHeadToHead = computed(() => {
             </div>
         </div>
 
-        <!-- Coupe du Monde terminée : plus de semaine à simuler -->
+        <!-- Coupe Nation terminée : plus de semaine à simuler -->
         <div v-else-if="isWorldCup && tournament?.stage === 'done'" class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
                 <div class="text-sm font-semibold text-slate-600">Tournoi terminé</div>

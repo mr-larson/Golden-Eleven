@@ -11,7 +11,7 @@ use App\Models\GameSaves\GameTeam;
 use App\Models\Nation;
 
 /**
- * Moteur de tournoi pour le mode Coupe du Monde (jumeau de SeasonService) : orchestre les phases.
+ * Moteur de tournoi pour le mode Coupe Nation (jumeau de SeasonService) : orchestre les phases.
  *
  * Format : phase de poules (round-robin simple par groupe de 4) puis élimination directe, les 2 premiers
  * de chaque groupe se qualifiant.

@@ -15,7 +15,7 @@ use Tests\Concerns\BuildsGameWorld;
 use Tests\TestCase;
 
 /**
- * Moteur de tournoi (TournamentService) du mode Coupe du Monde. On vérifie la
+ * Moteur de tournoi (TournamentService) du mode Coupe Nation. On vérifie la
  * structure du bracket et la progression des phases (poules → demies → finale
  * → champion), pilotées par state['tournament']. Très stateful, donc fort
  * gain de filet de sécurité.

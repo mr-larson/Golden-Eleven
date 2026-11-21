@@ -37,7 +37,7 @@ function isWinner(match, side) {
         <!-- En-tête / champion -->
         <div class="flex items-center justify-between gap-4">
             <div>
-                <div class="text-xs font-bold text-indigo-500 uppercase tracking-widest">Coupe du Monde</div>
+                <div class="text-xs font-bold text-indigo-500 uppercase tracking-widest">Coupe Nation</div>
                 <div class="text-lg font-bold text-slate-700">{{ stageLabel }}</div>
             </div>
             <div v-if="tournament.champion"

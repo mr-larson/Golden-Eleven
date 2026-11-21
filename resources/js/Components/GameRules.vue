@@ -28,7 +28,7 @@ const PAGES = [
     { icon: '👥', title: 'Mon équipe',    text: 'Compose ton onze, ta formation et tes titulaires (glisser-déposer). Gère le moral, la relation avec chaque joueur (promesses, déclarations presse) et le capitaine.' },
     { icon: '🛡️', title: 'Autres équipes', text: 'Inspecte les effectifs, formations et stats des clubs adverses pour préparer tes matchs.' },
     { icon: '📅', title: 'Calendrier',    text: 'Le calendrier de la saison et le détail de chaque match joué (score, stats, événements).' },
-    { icon: '🏆', title: 'Classement',    text: 'Le classement du championnat (ou le bracket en Coupe du Monde).' },
+    { icon: '🏆', title: 'Classement',    text: 'Le classement du championnat (ou le bracket en Coupe Nation).' },
     { icon: '📈', title: 'Stats',         text: 'Statistiques agrégées des joueurs sur la saison (buts, passes, etc.).' },
     { icon: '🏃', title: 'Entraînement',  text: 'Entraîne tes joueurs pour faire progresser leurs stats. Limité par semaine, coûte de l’endurance et de l\'argent par séance (selon la config).' },
     { icon: '🔁', title: 'Transferts',    text: 'Recrute des joueurs libres en cours de saison : tu fixes durée de contrat et salaire. L\'IA recrute aussi.' },

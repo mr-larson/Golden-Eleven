@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Nation du catalogue (mode Coupe du Monde), équivalent de Team pour les clubs.
+ * Nation du catalogue (mode Coupe Nation), équivalent de Team pour les clubs.
  *
  * Domaine : tournoi de sélections. Le nom est la valeur de App\Enums\Nationality, identique à
  * `players.nationality` : l'effectif d'une sélection est donc dérivé des joueurs de cette nationalité

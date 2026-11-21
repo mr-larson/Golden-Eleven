@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-/** Édition des nations du catalogue (mode Coupe du monde) : style tactique, philosophie de gestion et description. */
+/** Édition des nations du catalogue (mode Coupe Nation) : style tactique, philosophie de gestion et description. */
 class NationController extends Controller
 {
     /** Écran unique des nations : liste + fiche. */

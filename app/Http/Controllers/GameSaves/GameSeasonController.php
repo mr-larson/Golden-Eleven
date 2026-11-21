@@ -73,8 +73,8 @@ class GameSeasonController extends Controller
     }
 
     /**
-     * Écran de fin de tournoi (Coupe du Monde) : podium, parcours des managers, buteurs, chiffres clés.
-     * Redirige vers la page de jeu tant que le tournoi n'est pas terminé (ou hors Coupe du Monde).
+     * Écran de fin de tournoi (Coupe Nation) : podium, parcours des managers, buteurs, chiffres clés.
+     * Redirige vers la page de jeu tant que le tournoi n'est pas terminé (ou hors Coupe Nation).
      */
     public function tournamentEnd(GameSave $gameSave, TournamentSummaryService $summaries): Response|RedirectResponse
     {

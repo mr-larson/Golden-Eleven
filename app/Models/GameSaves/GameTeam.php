@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * Équipe d'une partie : budget, résultats cumulés de la saison, formation, style
  * tactique et philosophie de gestion. Peut être pilotée par un manager humain
  * (is_controlled, siège human_seat) ou par l'IA. Créée à partir d'une équipe du
- * catalogue (base_team_id) ou sans (Coupe du Monde).
+ * catalogue (base_team_id) ou sans (Coupe Nation).
  */
 class GameTeam extends Model
 {
@@ -49,7 +49,7 @@ class GameTeam extends Model
         return $this->belongsTo(Team::class, 'base_team_id');
     }
 
-    /** Nation du catalogue dont celle-ci est la sélection de partie (Coupe du Monde ; absente pour un club). */
+    /** Nation du catalogue dont celle-ci est la sélection de partie (Coupe Nation ; absente pour un club). */
     public function baseNation()
     {
         return $this->belongsTo(\App\Models\Nation::class, 'base_nation_id');

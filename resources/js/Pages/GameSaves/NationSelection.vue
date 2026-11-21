@@ -1,15 +1,23 @@
 <script setup>
 // Choix de la sélection (et des co-managers hot-seat, adversaires imposés, taille du tournoi), puis
-// convocation des joueurs de chaque manager. Domaine : Coupe du Monde.
+// convocation des joueurs de chaque manager. Domaine : Coupe Nation.
 // Rendu par GameSaveCreationController::setup ; poste vers GameSaveCreationController::startWorldCup.
 import NationFlag from '@/Components/NationFlag.vue';
 import { isValidSelectionLineup } from '@/Components/WorldCup/selectionLineup.js';
 import SquadPicker, { isValidSquad } from '@/Components/WorldCup/SquadPicker.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import ButtonPrimary from '@/Components/ButtonPrimary.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import SelectionActions from '@/Components/Selection/SelectionActions.vue';
+import TeamStrengthCard from '@/Components/Selection/TeamStrengthCard.vue';
+import SelectionProfileCard from '@/Components/Selection/SelectionProfileCard.vue';
+import TeamStyleBadges from '@/Pages/GameSaves/Play/components/TeamStyleBadges.vue';
+import HumanManagersPanel from '@/Components/Selection/HumanManagersPanel.vue';
+import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import H2 from '@/Components/H2.vue';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import Panel from '@/Components/Panel.vue';
+import SelectionList from '@/Components/Selection/SelectionList.vue';
+import SelectionRoster from '@/Components/Selection/SelectionRoster.vue';
 
 const props = defineProps({
     label: { type: String, default: null },
@@ -20,10 +28,11 @@ const props = defineProps({
     coSquads: { type: Array, default: () => [] },    // aperçus des co-managers, dans l'ordre des sièges
     gameConfig: { type: Object, default: null },
     tournamentSizes: { type: Array, default: () => [8] },
-    nationsCount: { type: Number, default: 8 },
+    participantCount: { type: Number, default: 8 },
     maxHumans: { type: Number, default: 2 },
     coNations: { type: Array, default: () => [] },
     opponents: { type: Array, default: () => [] },
+    nationPreview: { type: Array, default: () => [] },   // effectif de la nation affichée (chargé à la demande)
 });
 
 const form = useForm({
@@ -31,7 +40,7 @@ const form = useForm({
     period: props.period,
     competition_type: props.competitionType,
     nation: props.squad?.name ?? null,
-    nations_count: props.nationsCount,
+    participant_count: props.participantCount,
     co_nations: [...props.coNations],
     opponents: [...props.opponents],
     player_ids: [...(props.squad?.selectedIds ?? [])],
@@ -48,50 +57,61 @@ const form = useForm({
 const SIZE_HINTS = { 8: '2 poules, demies', 16: '4 poules, quarts', 24: '6 poules, 8es (+ 4 meilleurs 3es)', 32: '8 poules, 8es' };
 
 const playableCount = computed(() => props.nations.filter(n => n.playable).length);
-const sizeAvailable = (size) => playableCount.value >= size;
-const humanSeatLimit = computed(() => Math.max(1, Math.min(4, Math.floor(form.nations_count / 4))));
+const humanSeatLimit = computed(() => Math.max(1, Math.min(4, Math.floor(form.participant_count / 4))));
 
-/** Rôle assigné au prochain clic sur une nation : 'main' (ma sélection), 'co' (co-manager), 'opponent' (adversaire imposé). */
-const mode = ref(props.coNations.length ? 'co' : 'main');
 const humans = computed(() => 1 + form.co_nations.length);
 const seatOf = (name) => {
     if (form.nation === name) return 1;
     const index = form.co_nations.indexOf(name);
     return index === -1 ? null : index + 2;
 };
+const isOpponent = (name) => form.opponents.includes(name);
 
-function pick(nation) {
-    if (!nation.playable) return;
-    const name = nation.name;
-    const without = (list) => list.filter(n => n !== name);
+// Nation affichée au centre (profil + effectif), indépendante du rôle qu'on lui donne.
+const selected = ref(props.nations.find(n => n.name === form.nation) ?? props.nations.find(n => n.playable) ?? null);
+const preview = computed(() => props.nationPreview ?? []);
+const previewLoading = ref(false);
 
-    if (mode.value === 'main' || !form.nation) {
-        form.nation = name;
-        form.co_nations = without(form.co_nations);
-        form.opponents = without(form.opponents);
-        return;
-    }
+// L'effectif de la nation affichée est chargé à la demande (rechargement partiel), pas pour les 30+ nations d'un coup.
+function selectNation(nation) {
+    selected.value = nation;
+    loadPreview();
+}
+function loadPreview() {
+    if (!selected.value?.playable) return;
+    previewLoading.value = true;
+    router.get(route('game-saves.setup'), { ...setupQuery.value, preview: selected.value.name }, {
+        only: ['nationPreview'], preserveState: true, preserveScroll: true, replace: true,
+        onFinish: () => { previewLoading.value = false; },
+    });
+}
+onMounted(loadPreview);
+
+const without = (list, name) => list.filter(n => n !== name);
+
+/** « Jouer avec » : la nation devient la sélection principale (siège 1). */
+function setMain(name) {
+    form.nation = name;
+    form.co_nations = without(form.co_nations, name);
+    form.opponents = without(form.opponents, name);
+}
+/** Co-manager hot-seat : ajoute ou retire la nation d'un siège supplémentaire. */
+function toggleCo(name) {
     if (name === form.nation) return;
-
-    if (mode.value === 'co') {
-        form.opponents = without(form.opponents);
-        if (form.co_nations.includes(name)) form.co_nations = without(form.co_nations);
-        else if (humans.value < humanSeatLimit.value) form.co_nations.push(name);
-    } else {
-        form.co_nations = without(form.co_nations);
-        if (form.opponents.includes(name)) form.opponents = without(form.opponents);
-        else if (humans.value + form.opponents.length < form.nations_count) form.opponents.push(name);
-    }
+    form.opponents = without(form.opponents, name);
+    if (form.co_nations.includes(name)) form.co_nations = without(form.co_nations, name);
+    else if (humans.value < humanSeatLimit.value) form.co_nations.push(name);
+}
+/** Adversaire imposé : ajoute ou retire la nation des adversaires, tant qu'il reste de la place. */
+function toggleOpponent(name) {
+    if (name === form.nation) return;
+    form.co_nations = without(form.co_nations, name);
+    if (isOpponent(name)) form.opponents = without(form.opponents, name);
+    else if (humans.value + form.opponents.length < form.participant_count) form.opponents.push(name);
 }
 
-// Réduire la taille du tournoi retire les managers et adversaires en trop.
-watch(() => form.nations_count, (size) => {
-    form.co_nations = form.co_nations.slice(0, humanSeatLimit.value - 1);
-    form.opponents = form.opponents.slice(0, Math.max(0, size - humans.value));
-});
-
 const setupQuery = computed(() => ({
-    nation: form.nation, nations_count: form.nations_count, co_nations: form.co_nations, opponents: form.opponents,
+    nation: form.nation, participant_count: form.participant_count, co_nations: form.co_nations, opponents: form.opponents,
 }));
 
 // ── Étape 2 : convocation de chaque manager ───────────────────
@@ -114,10 +134,11 @@ function setFormation(squad, value) {
     else form.co_formations[squad.name] = value;
 }
 const validSquads = computed(() => squads.value.map(s => isValidSquad(s, idsOf(s)) && isValidSelectionLineup(slotsOf(s), idsOf(s))));
+// Les adversaires non imposés sont tirés au sort : aucune place à pourvoir à la main.
 const canLaunch = computed(() => squads.value.length > 0 && validSquads.value.every(Boolean));
 const errors = computed(() => [
     form.errors.lineup_slots, form.errors.co_lineup_slots, form.errors.formation, form.errors.co_formations, form.errors.player_ids, form.errors.co_player_ids, form.errors.co_nations, form.errors.opponents,
-    form.errors.nations_count, form.errors.nation, form.errors.game_save,
+    form.errors.participant_count, form.errors.nation, form.errors.game_save,
     ...Object.entries(form.errors).filter(([k]) => k.startsWith('player_ids.') || k.startsWith('co_player_ids.') || k.startsWith('co_formations.') || k.startsWith('lineup_slots.') || k.startsWith('co_lineup_slots.')).map(([, v]) => v),
 ].filter(Boolean));
 
@@ -140,100 +161,85 @@ function launch() {
 
     <AuthenticatedLayout>
         <template #header>
-            <H2>🌍 Coupe du Monde — {{ squad ? 'Convoque tes joueurs' : 'Choisis ta sélection' }}</H2>
+            <H2>🌍 Coupe Nation — {{ squad ? 'Convoque tes joueurs' : 'Choisis ta sélection' }}</H2>
         </template>
 
-        <div class="p-2 sm:p-4" :class="!squad ? 'mx-auto max-w-7xl' : ''">
-            <div v-if="!squad" class="border border-slate-200 rounded-2xl bg-white p-4 sm:p-6 shadow-card">
-
-                <div class="mb-6 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                    <div>
-                        <div class="text-xs font-bold text-teal-500 uppercase tracking-widest mb-1">Tournoi mondial</div>
-                        <h1 class="text-xl font-bold text-slate-700">{{ label || 'Nouvelle Coupe du Monde' }}</h1>
-                        <p class="text-xs text-slate-400 mt-1">
-                            {{ playableCount }} sélection(s) prête(s) à concourir. Les nations grisées n'ont pas encore
-                            assez de joueurs pour aligner un onze avec un gardien.
-                        </p>
-                    </div>
+        <div class="p-2 sm:p-4">
+            <div v-if="!squad" class="max-w-9xl mx-auto">
+                <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <p class="text-sm text-slate-400">
+                        Partie : <span class="font-semibold text-slate-600">{{ label || 'Nouvelle Coupe Nation' }}</span>
+                        &nbsp;•&nbsp; <span class="font-semibold text-teal-600">🌍 {{ form.participant_count }} sélections</span>
+                        <span class="text-slate-400"> · {{ SIZE_HINTS[form.participant_count] }}</span>
+                    </p>
                     <Link :href="route('game-saves.create')"
-                          class="shrink-0 px-4 py-2 bg-white hover:bg-slate-50 text-slate-500 text-sm font-semibold rounded-xl border border-slate-200 transition-all">
+                          class="px-4 py-2 rounded-full text-sm font-semibold border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-all">
                         ← Retour
                     </Link>
                 </div>
 
-                <!-- Taille du tournoi -->
-                <div class="mb-4 flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wide mr-1">Format</span>
-                    <button v-for="size in tournamentSizes" :key="size" type="button"
-                            :disabled="!sizeAvailable(size)" @click="form.nations_count = size"
-                            class="px-3 py-1.5 rounded-lg border text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                            :class="form.nations_count === size
-                                ? 'border-teal-500 bg-teal-50 text-teal-700'
-                                : 'border-slate-300 bg-white text-slate-600 hover:border-teal-300'">
-                        {{ size }} sélections
-                        <span class="text-2xs font-normal text-slate-400">· {{ SIZE_HINTS[size] }}</span>
-                    </button>
-                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    <!-- Colonne gauche : nations (même liste que le choix d'équipe) -->
+                    <SelectionList :items="nations" :item-key="n => n.name" :selected-key="selected?.name ?? null"
+                                   :is-active="n => !!seatOf(n.name)" :disabled="n => !n.playable"
+                                   unit="nation(s)" empty-text="Aucune nation" @select="selectNation">
+                        <template #item="{ item: nation, active }">
+                            <span class="text-xl leading-none shrink-0"><NationFlag :flag="nation.flag" :url="nation.flag_url" :name="nation.name" /></span>
+                            <span class="truncate">{{ nation.name }}</span>
+                            <span v-if="nation.rating" class="ml-auto shrink-0 px-1.5 py-0.5 rounded-md text-2xs font-black tabular-nums"
+                                  :class="active ? 'bg-white/90 text-teal-700' : 'bg-slate-100 text-slate-600'"
+                                  title="Note moyenne du onze de départ">{{ Math.round(nation.rating) }}</span>
+                            <span v-else-if="!nation.playable" class="ml-auto shrink-0 text-2xs text-rose-400">incomplet</span>
+                            <span v-if="seatOf(nation.name)"
+                                  class="shrink-0 w-5 h-5 rounded-full bg-white/90 text-teal-700 text-2xs font-black flex items-center justify-center">{{ seatOf(nation.name) }}</span>
+                            <span v-else-if="isOpponent(nation.name)"
+                                  class="shrink-0 px-1.5 py-0.5 rounded-full bg-amber-500 text-white text-2xs font-black">VS</span>
+                        </template>
+                    </SelectionList>
 
-                <!-- Rôle du prochain clic -->
-                <div class="mb-4 flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wide mr-1">Clic sur une nation</span>
-                    <button v-for="m in [
-                                { key: 'main', label: 'Ma sélection' },
-                                { key: 'co', label: `Co-manager hot-seat (${humans}/${humanSeatLimit})`, hidden: humanSeatLimit < 2 },
-                                { key: 'opponent', label: `Adversaire imposé (${form.opponents.length})` },
-                            ].filter(x => !x.hidden)" :key="m.key" type="button" @click="mode = m.key"
-                            class="px-3 py-1.5 rounded-lg border text-sm font-semibold transition-all"
-                            :class="mode === m.key
-                                ? 'border-teal-500 bg-teal-50 text-teal-700'
-                                : 'border-slate-300 bg-white text-slate-600 hover:border-teal-300'">
-                        {{ m.label }}
-                    </button>
-                    <span class="text-xs text-slate-400">Les autres places sont tirées au sort.</span>
-                </div>
+                    <div v-if="selected" class="col-span-1 lg:col-span-10 grid grid-cols-1 lg:grid-cols-12 gap-4">
+                        <!-- Profil + actions -->
+                        <div class="col-span-1 lg:col-span-3 flex flex-col gap-3">
+                            <SelectionProfileCard :title="selected.name"
+                                                  :subtitle="selected.playable ? (selected.description ?? `${selected.total} joueurs disponibles`) : 'Incomplet : pas assez de joueurs avec un gardien'">
+                                <template #visual><NationFlag :flag="selected.flag" :url="selected.flag_url" :name="selected.name" /></template>
+                                <TeamStyleBadges :team="selected" size="sm" />
+                            </SelectionProfileCard>
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                    <button v-for="nation in nations" :key="nation.name" type="button"
-                            @click="pick(nation)" :disabled="!nation.playable"
-                            class="relative flex flex-col items-center gap-1 p-4 rounded-xl border-2 transition-all"
-                            :class="[
-                                !nation.playable
-                                    ? 'border-slate-300 bg-slate-50 opacity-60 cursor-not-allowed'
-                                    : (seatOf(nation.name)
-                                        ? 'border-teal-500 bg-teal-50 shadow-sm'
-                                        : (form.opponents.includes(nation.name)
-                                            ? 'border-amber-400 bg-amber-50'
-                                            : 'border-slate-300 bg-white hover:border-teal-300')),
-                            ]">
-                        <span class="text-3xl leading-none"><NationFlag :flag="nation.flag" :url="nation.flag_url" :name="nation.name" /></span>
-                        <span class="text-sm font-bold text-slate-700 text-center">{{ nation.name }}</span>
-                        <span class="text-[11px]" :class="nation.playable ? 'text-slate-400' : 'text-rose-400'">
-                            {{ nation.total }} joueur{{ nation.total > 1 ? 's' : '' }}
-                            <template v-if="!nation.playable"> · incomplet</template>
-                        </span>
-                        <span v-if="nation.rating" class="mt-0.5 px-2 py-0.5 rounded-full bg-slate-100 text-[11px] font-bold text-slate-600"
-                              title="Note moyenne du onze de départ">
-                            Onze {{ nation.rating.toFixed(1).replace('.', ',') }}
-                        </span>
-                        <div v-if="seatOf(nation.name)"
-                             class="absolute top-2 right-2 px-1.5 h-5 rounded-full bg-teal-500 flex items-center justify-center">
-                            <span class="text-white text-2xs font-bold">{{ humans > 1 ? 'Siège ' + seatOf(nation.name) : '✓' }}</span>
+                            <template v-if="selected.playable">
+                                <SelectionActions :name="selected.name" :seat="seatOf(selected.name)" :human-count="form.nation ? humans : 0"
+                                                  :can-add-human="humanSeatLimit >= 2" :imposed="isOpponent(selected.name)"
+                                                  @main="setMain(selected.name)" @toggle-human="toggleCo(selected.name)"
+                                                  @toggle-imposed="toggleOpponent(selected.name)"
+                                                  @next="router.get(route('game-saves.setup', setupQuery))" />
+                            </template>
+
+                            <!-- Forces de la nation affichée (mêmes calculs que pour une équipe de Ligue) -->
+                            <TeamStrengthCard v-if="selected.playable" :players="preview" />
+
+                            <!-- Récap : managers, adversaires imposés -->
+                            <HumanManagersPanel :managers="(form.nation ? [form.nation, ...form.co_nations] : []).map(name => ({ key: name, name }))"
+                                                empty-text="Choisis une nation puis clique sur « Jouer avec ».">
+                                <p class="mb-2 text-center text-xs font-semibold text-slate-600">
+                                    {{ form.opponents.length }} adversaire(s) imposé(s) · les {{ Math.max(0, form.participant_count - humans - form.opponents.length) }} autres sont tirés au sort
+                                </p>
+                                <p v-for="error in errors" :key="error" class="mb-2 text-xs text-rose-500">{{ error }}</p>
+                            </HumanManagersPanel>
                         </div>
-                        <div v-else-if="form.opponents.includes(nation.name)"
-                             class="absolute top-2 right-2 px-1.5 h-5 rounded-full bg-amber-500 flex items-center justify-center">
-                            <span class="text-white text-2xs font-bold">Adversaire</span>
-                        </div>
-                    </button>
-                </div>
 
-                <p v-for="error in errors" :key="error" class="mt-4 text-xs text-rose-500">{{ error }}</p>
-
-                <div class="mt-6 pt-4 border-t border-slate-200 flex justify-end">
-                    <Link v-if="form.nation" :href="route('game-saves.setup', setupQuery)"
-                          class="rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-teal-700">
-                        Convoquer les joueurs{{ humans > 1 ? ' (' + humans + ' managers)' : ' de ' + form.nation }}
-                    </Link>
-                    <ButtonPrimary v-else type="button" tone="teal" disabled>Sélectionne une nation</ButtonPrimary>
+                        <!-- Effectif de la nation affichée (même composant que pour une équipe de Ligue) -->
+                        <Panel as="div" tone="white" class="col-span-1 lg:col-span-9 flex flex-col">
+                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 shrink-0">
+                                Joueurs de {{ selected.name }} ({{ preview.length }})
+                            </h3>
+                            <p v-if="!selected.playable" class="text-sm italic text-slate-500">Cette nation n'a pas encore assez de joueurs pour concourir.</p>
+                            <SelectionRoster v-else :players="preview" :empty-text="previewLoading ? 'Chargement…' : 'Aucun joueur'" />
+                        </Panel>
+                    </div>
+                    <div v-else class="col-span-1 lg:col-span-10 min-h-[400px] border border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center text-slate-400">
+                        <div class="text-4xl mb-3">🌍</div>
+                        <p class="font-semibold">Sélectionne une nation pour voir son effectif</p>
+                    </div>
                 </div>
             </div>
 
@@ -271,7 +277,7 @@ function launch() {
                         <p v-for="error in errors" :key="error" class="text-sm text-rose-700">{{ error }}</p>
                     </div>
                     <ButtonPrimary type="submit" tone="teal" :disabled="!canLaunch || form.processing">
-                        {{ form.processing ? 'Création…' : 'Lancer la Coupe du Monde' }}
+                        {{ form.processing ? 'Création…' : 'Lancer la Coupe Nation' }}
                     </ButtonPrimary>
                 </div>
             </form>

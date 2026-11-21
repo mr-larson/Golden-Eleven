@@ -10,9 +10,9 @@ use App\Models\GameSaves\GameTeam;
 use Illuminate\Support\Collection;
 
 /**
- * Classement des poules de la Coupe du Monde, calculé depuis les matchs joués.
+ * Classement des poules de la Coupe Nation, calculé depuis les matchs joués.
  *
- * Domaine : Coupe du Monde. Utilisé par TournamentService (qualifiés, présentation des poules) et par
+ * Domaine : Coupe Nation. Utilisé par TournamentService (qualifiés, présentation des poules) et par
  * KnockoutService via les meilleurs troisièmes. Ordre de départage, comme au Mondial :
  *   1. points ;
  *   2. confrontations directes entre les ex æquo (points, différence de buts, buts marqués entre eux) ;

@@ -24,7 +24,7 @@ const counters = [
         <section id="creer" class="mb-10 scroll-mt-6">
             <h2 class="mb-3 text-xl font-bold text-teal-300">1. Créer une partie</h2>
             <ul class="list-disc space-y-2 pl-5 text-slate-300">
-                <li>Choisis une compétition : la <strong>Ligue</strong> (championnat en aller-retour) ou la <strong>Coupe du Monde</strong> (poules puis élimination directe).</li>
+                <li>Choisis une compétition : la <strong>Ligue</strong> (championnat en aller-retour) ou la <strong>Coupe Nation</strong> (poules puis élimination directe).</li>
                 <li>Choisis un mode : <strong>effectifs pré-faits</strong> (chaque équipe a déjà ses joueurs) ou <strong>draft</strong> (toutes les équipes recrutent tour par tour, entre 14 et 18 joueurs).</li>
                 <li>Sélectionne l'équipe que tu pilotes. Pour jouer à plusieurs sur le même appareil, ajoute une équipe par manager humain : chacun joue à son tour.</li>
                 <li>
@@ -72,7 +72,7 @@ const counters = [
                 <li>Ton capitaine peut relancer les dés 3 fois par match.</li>
                 <li>L'endurance baisse au fil du match : tu peux faire jusqu’à 5 remplacements par défaut. La limite par équipe se règle dans la configuration du match.</li>
                 <li>Les fautes peuvent donner des cartons (deux jaunes = expulsion) et des blessures.</li>
-                <li>En phase finale de Coupe du Monde, une égalité se départage aux tirs au but.</li>
+                <li>En phase finale de Coupe Nation, une égalité se départage aux tirs au but.</li>
             </ul>
         </section>
 

@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * Joueur d'une partie : copie du joueur du catalogue (base_player_id) avec ses
  * stats propres, qui évoluent (entraînement, progression), son moral, sa relation
  * avec le coach et sa chance. Les stats sont des colonnes, contrairement au
- * catalogue (JSON). Peut aussi être un amateur ou un joueur fictif (Coupe du Monde).
+ * catalogue (JSON). Peut aussi être un amateur ou un joueur fictif (Coupe Nation).
  */
 class GamePlayer extends Model
 {
@@ -79,7 +79,7 @@ class GamePlayer extends Model
         });
     }
 
-    /** Origine des joueurs fictifs (générés pour compléter les sélections en Coupe du Monde). */
+    /** Origine des joueurs fictifs (générés pour compléter les sélections en Coupe Nation). */
     public const ORIGIN_FICTIONAL = 'fictional';
 
     /** Joueurs amateurs générés pour garnir le marché (cf. AmateurMarketService). */

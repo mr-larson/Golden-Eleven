@@ -99,7 +99,7 @@ watch(detailTabs, (tabs) => {
 // ==========================
 const { playerPhotoUrl, teamLogoUrl } = usePlayerUtils();
 
-// Libellé court de la colonne gauche : tour de Coupe du Monde (poule / ½ / F)
+// Libellé court de la colonne gauche : tour de Coupe Nation (poule / ½ / F)
 // si le match porte un `round`, sinon la semaine de ligue (S1, S2…).
 const homeTeamName = computed(() =>
     props.selectedCalendarMatch ? props.teamById[props.selectedCalendarMatch.home_team_id]?.name : ''

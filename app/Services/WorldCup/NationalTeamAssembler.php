@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
 
 /**
- * Monte les sélections nationales d'une partie Coupe du Monde : pour chaque
+ * Monte les sélections nationales d'une partie Coupe Nation : pour chaque
  * nation participante, crée la GameTeam, snapshot ses meilleurs joueurs
  * (GamePlayer) et leurs contrats (GameContract), et désigne l'équipe contrôlée.
  *
@@ -27,7 +27,7 @@ class NationalTeamAssembler
 {
     /**
      * Budget de départ de CHAQUE sélection : il finance entraînements, cartes bonus et demandes des joueurs (pas
-     * de transferts ni de salaires en Coupe du Monde). Mesuré sur 4 tournois (8 et 16 équipes) : l'IA reçoit
+     * de transferts ni de salaires en Coupe Nation). Mesuré sur 4 tournois (8 et 16 équipes) : l'IA reçoit
      * environ 2 500 de revenus et en dépense 2 400 à 2 700, soit presque tout ce qu'elle a (1 500 + revenus) ;
      * un manager qui ne dépense rien finit vers 4 000-4 500. Départ et revenus étant identiques pour tous,
      * l'écart ne vient que de l'usage du budget : pas de rééquilibrage nécessaire.

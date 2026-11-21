@@ -88,7 +88,7 @@ const fmt = (n) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
 
 const modes = [
     { title: 'Ligue',          desc: 'Gère un club sur une saison complète et réponds aux objectifs fixés par la direction du club.' },
-    { title: 'Coupe du Monde', desc: 'Prends en main une sélection nationale : phase de poules, puis matchs à élimination directe.' },
+    { title: 'Coupe Nation', desc: 'Prends en main une sélection nationale : phase de poules, puis matchs à élimination directe.' },
 ];
 
 // Réponses factuelles : à garder alignées avec le jeu réel.
@@ -158,7 +158,7 @@ const faq = [
                 <p v-pixel-reveal class="mb-6 max-w-[560px] text-base leading-7 text-slate-300">
                     Golden Eleven est un jeu sur navigateur inspiré de l'univers Captain Tsubasa.
                     Recrute tes joueurs, prépare ton équipe et choisis tes actions pendant les matchs.
-                    Dispute une Ligue ou une Coupe du Monde, seul face à l'IA ou à plusieurs en local, à tour de rôle.
+                    Dispute une Ligue ou une Coupe Nation, seul face à l'IA ou à plusieurs en local, à tour de rôle.
                 </p>
                 <div v-pixel-reveal class="mb-6 flex flex-wrap gap-3">
                     <Link v-if="canRegister && !$page.props.auth?.user" :href="route('register')" :class="[btnPrimary, 'neon-breathe']">Créer mon compte gratuit</Link>

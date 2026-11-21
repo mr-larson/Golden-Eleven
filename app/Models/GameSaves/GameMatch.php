@@ -26,7 +26,7 @@ class GameMatch extends Model
     use ScopedToSaveSeason;
     use HasMatchDetails;
 
-    /** Colonnes affectables en masse. `round` sert au mode Coupe du Monde (poule, demi, finale). */
+    /** Colonnes affectables en masse. `round` sert au mode Coupe Nation (poule, demi, finale). */
     protected $fillable = [
         'game_save_id',
         'season',

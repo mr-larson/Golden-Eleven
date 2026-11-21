@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 /**
  * Convocation intelligente d'une sélection nationale pilotée par l'IA.
  *
- * Domaine : Coupe du Monde. Utilisé par NationalTeamAssembler (création de partie et aperçu).
+ * Domaine : Coupe Nation. Utilisé par NationalTeamAssembler (création de partie et aperçu).
  * Reprend la logique du draft de l'IA (DraftAIService) sans budget : on « drafte » l'effectif
  * joueur après joueur parmi tout le vivier de la nation, en tenant compte
  *   - des besoins par poste du schéma (un onze complet avant tout, puis la composition cible du banc,

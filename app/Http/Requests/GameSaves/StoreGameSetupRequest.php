@@ -26,11 +26,15 @@ class StoreGameSetupRequest extends FormRequest
     {
         return [
             'label'             => ['nullable', 'string', 'max:255'],
-            'period'            => ['required', 'string', 'in:college'],
+            'period'            => ['required', 'string', 'in:college,pro'],
             'game_mode'         => ['nullable', 'string', 'in:prebuilt,draft'],
             'competition_type'  => ['nullable', 'string', 'in:college_league,world_cup'],
             'game_config'       => ['nullable', 'array'],
             'period_package_id' => ['nullable', 'integer', 'exists:period_packages,id'],
+            // Nombre de participants (clubs d'une ligue, nations d'une coupe) et façon de les choisir.
+            'participant_count' => ['nullable', 'integer', $this->input('competition_type') === 'world_cup'
+                ? \Illuminate\Validation\Rule::in(\App\Services\WorldCup\NewWorldCupBuilder::TOURNAMENT_SIZES)
+                : 'between:4,64'],
             ...GameConfig::rules('game_config.'),
         ];
     }

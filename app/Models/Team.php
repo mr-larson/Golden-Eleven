@@ -28,6 +28,7 @@ class Team extends Model
 
     protected $fillable = [
         'name',
+        'period',
         'description',
         'budget',
         'wins',

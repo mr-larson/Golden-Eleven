@@ -1,6 +1,6 @@
 <script setup>
-// Tuile « Poule » du Dashboard en Coupe du Monde : position dans la poule, étape du tournoi et parcours
-// (qualifié, éliminé, finaliste…). Domaine : Coupe du Monde. Utilisée par Pages/GameSaves/Play/TabDashboard.vue.
+// Tuile « Poule » du Dashboard en Coupe Nation : position dans la poule, étape du tournoi et parcours
+// (qualifié, éliminé, finaliste…). Domaine : Coupe Nation. Utilisée par Pages/GameSaves/Play/TabDashboard.vue.
 import SectionTitle from '@/Components/SectionTitle.vue';
 import { computed } from 'vue';
 import { outcomeOf, stageLabel, standingOf } from '../worldCup.js';

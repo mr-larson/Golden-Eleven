@@ -10,10 +10,10 @@ use App\Services\Season\CareerObjectiveService;
 use Illuminate\Support\Collection;
 
 /**
- * Phases à élimination directe de la Coupe du Monde : affiches du premier tour, vainqueurs et perdants,
+ * Phases à élimination directe de la Coupe Nation : affiches du premier tour, vainqueurs et perdants,
  * tirs au but simulés, tableau (bracket) et équipes éliminées.
  *
- * Domaine : Coupe du Monde. Utilisé par TournamentService (progression des tours) et sa présentation.
+ * Domaine : Coupe Nation. Utilisé par TournamentService (progression des tours) et sa présentation.
  * Tours possibles, dans l'ordre : round16 (8es) → quarter → semi → final + third (match pour la 3e place).
  */
 class KnockoutService

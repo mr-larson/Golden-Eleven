@@ -81,7 +81,8 @@ class NewGameBuilder
             $gameSave = $this->createSave($user, $data, $package, $isDraft, $humanTeamIds);
 
             // 2. Équipes : copie, puis budgets de départ et sièges des managers humains.
-            [$teams, $seasonLength] = $this->createTeams($gameSave, $package);
+            $participantIds = $package ? null : $this->participantTeamIds($data, $humanTeamIds);
+            [$teams, $seasonLength] = $this->createTeams($gameSave, $package, $data['period'], $participantIds);
             $this->applyStartingBudgetsAndSeats($gameSave, $teams, $humanTeamIds);
 
             // 3. Joueurs : on prépare d'abord les contrats (ils fixent les numéros de maillot),
@@ -167,13 +168,13 @@ class NewGameBuilder
     // ──────────────────────────────────────────────────────────────
 
     /**
-     * Copie les équipes de référence (ou du package) dans game_teams.
+     * Copie les équipes de référence de la période (ou du package) dans game_teams.
      *
      * @return array{0: array<int|string, GameTeam>, 1: int}
      *         [équipes de la partie indexées par clé source (team_key ou id de référence),
      *          nombre de semaines d'une saison]
      */
-    private function createTeams(GameSave $gameSave, ?PeriodPackage $package): array
+    private function createTeams(GameSave $gameSave, ?PeriodPackage $package, string $period, ?array $participantIds = null): array
     {
         $teams = [];
 
@@ -187,7 +188,9 @@ class NewGameBuilder
                 );
             }
         } else {
-            $baseTeams    = Team::orderBy('id')->get();
+            $baseTeams    = Team::where('period', $period)
+                ->when($participantIds !== null, fn ($q) => $q->whereIn('id', $participantIds))
+                ->orderBy('id')->get();
             $seasonLength = SeasonService::lengthForTeamCount($baseTeams->count());
 
             foreach ($baseTeams as $team) {
@@ -198,6 +201,37 @@ class NewGameBuilder
         }
 
         return [$teams, $seasonLength];
+    }
+
+    /**
+     * Clubs du championnat quand le joueur en réduit le nombre (participant_count), ou null
+     * pour garder tous les clubs de la période.
+     *
+     * Les équipes humaines sont toujours conservées. Les clubs choisis à la main
+     * (participant_ids) sont retenus d'abord ; s'il en manque, on complète au hasard.
+     *
+     * @param  array<int, int> $humanTeamIds
+     * @return array<int, int>|null
+     */
+    private function participantTeamIds(array $data, array $humanTeamIds): ?array
+    {
+        $count = (int) ($data['participant_count'] ?? 0);
+        $all   = Team::where('period', $data['period'])->pluck('id')->all();
+
+        if ($count <= 0 || $count >= count($all)) {
+            return null;
+        }
+
+        $humans  = array_values(array_intersect($humanTeamIds, $all));
+        $count   = max($count, count($humans));
+        $chosen  = array_values(array_diff(array_intersect(array_map('intval', $data['participant_ids'] ?? []), $all), $humans));
+        $chosen  = array_slice($chosen, 0, $count - count($humans));
+
+        $rest = array_values(array_diff($all, $humans, $chosen));
+        shuffle($rest);
+        $chosen = array_merge($chosen, array_slice($rest, 0, $count - count($humans) - count($chosen)));
+
+        return array_merge($humans, $chosen);
     }
 
     /** Attributs d'une équipe de la partie, lus dans un élément teams_json d'un package. */

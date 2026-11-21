@@ -3,6 +3,7 @@ import GameBanknote from '@/Components/GameBanknote.vue';
 import UniverseSelector from '@/Components/UniverseSelector.vue';
 import ConfigSection from '@/Components/ConfigSection.vue';
 import ConfigRange from '@/Components/ConfigRange.vue';
+import ParticipantCountPicker from '@/Components/ParticipantCountPicker.vue';
 import ConfigToggle from '@/Components/ConfigToggle.vue';
 import { TRAINING_COST_FIELDS as trainingCostFields } from '@/Components/configFields.js';
 import { fieldClass, TEXTAREA_CLASS } from '@/Components/fieldStyles';
@@ -22,6 +23,8 @@ const props = defineProps({
     humanWeeklyIncomes: { type: Object, required: true },
     draftBudgets: { type: Object, required: true },
     periodPackages: { type: Array, default: () => [] },
+    proPeriodAvailable: { type: Boolean, default: false },
+    clubCounts: { type: Object, default: () => ({}) },
 });
 
 const form = useForm({
@@ -31,11 +34,37 @@ const form = useForm({
     competition_type: 'college_league',
     game_config: null,
     period_package_id: null,
+    participant_count: null,   // Ligue : null = tous les clubs ; Coupe Nation : 8, 16, 24 ou 32 nations
 });
 
 // Périodes importées proposées dans le sélecteur : aucune en mode Draft (le
 // draft pioche dans le pool global de joueurs libres, incompatible avec un
 // roster de package pré-assigné).
+// Choix de période : 'college' / 'pro' (clubs de référence) ou 'pkg:ID' (période importée).
+const periodChoice = computed({
+    get: () => form.period_package_id ? `pkg:${form.period_package_id}` : form.period,
+    set: (v) => {
+        if (String(v).startsWith('pkg:')) {
+            form.period = 'college';
+            form.period_package_id = Number(String(v).slice(4));
+        } else {
+            form.period = v;
+            form.period_package_id = null;
+        }
+    },
+});
+
+// Nombre de clubs : curseur de 4 à « tous » (les clubs de la période choisie), impairs compris.
+const totalClubs = computed(() => Number(props.clubCounts[form.period] ?? 0));
+const clubSlider = computed({
+    get: () => form.participant_count ?? totalClubs.value,
+    set: (v) => { form.participant_count = v >= totalClubs.value ? null : v; },
+});
+// Un changement de période (ou un package) invalide le nombre de clubs déjà choisi.
+watch([() => form.period, () => form.period_package_id], () => { if (form.competition_type !== 'world_cup') form.participant_count = null; });
+// Valeur de départ du nombre de participants selon la compétition (Coupe : 8 nations ; Ligue : tous les clubs).
+watch(() => form.competition_type, (type) => { form.participant_count = type === 'world_cup' ? 8 : null; });
+
 const availablePackages = computed(() => form.game_mode === 'draft' ? [] : props.periodPackages);
 
 // Exporter la période actuellement choisie (modèle Collège par défaut, ou le
@@ -123,7 +152,7 @@ const config = reactive({
     legends_countries: null,
 });
 
-// Univers par défaut selon le mode : la Coupe du monde active tous les univers
+// Univers par défaut selon le mode : la Coupe Nation active tous les univers
 // (sélections nationales pioche partout) ; la Ligue garde le catalogue Captain Tsubasa.
 function universePreset(competitionType) {
     const all = competitionType === 'world_cup';
@@ -247,19 +276,60 @@ function submit() {
                     <form v-show="!showConfig && !showRules" @submit.prevent="submit" class="flex flex-col flex-1 gap-6 overflow-y-auto">
 
                         <div class="flex flex-col gap-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                            <!-- Nom de la partie -->
-                            <div class="flex flex-col gap-1.5">
-                                <label for="label" class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                                    Nom de la partie
-                                </label>
-                                <input
-                                    id="label"
-                                    type="text"
-                                    v-model="form.label"
-                                    placeholder="ex: Saison Nankatsu 1"
-                                    class="w-full px-4 py-2.5" :class="fieldClass()"
-                                />
-                                <p v-if="form.errors.label" class="text-xs text-rose-500">{{ form.errors.label }}</p>
+                            <!-- Nom de la partie + période, côte à côte -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
+                                <!-- Nom de la partie -->
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="label" class="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                        Nom de la partie
+                                    </label>
+                                    <input
+                                        id="label"
+                                        type="text"
+                                        v-model="form.label"
+                                        placeholder="ex: Saison Nankatsu 1"
+                                        class="w-full px-4 py-2.5" :class="fieldClass()"
+                                    />
+                                    <p v-if="form.errors.label" class="text-xs text-rose-500">{{ form.errors.label }}</p>
+                                </div>
+
+                                <!-- Période : effectif standard, ou une période importée qui le remplace entièrement -->
+                                <div v-if="form.competition_type === 'college_league'" class="flex flex-col gap-1.5">
+                                    <div class="flex items-center justify-between flex-wrap gap-1">
+                                        <label for="period_package" class="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                            Période
+                                        </label>
+                                        <div class="flex items-center gap-2 text-[11px] font-semibold">
+                                            <a :href="exportHref" download
+                                               class="text-teal-600 hover:text-teal-700 hover:underline">
+                                                📤 Exporter{{ form.period_package_id ? ' cette période' : ' un modèle' }}
+                                            </a>
+                                            <span class="text-slate-300">·</span>
+                                            <button type="button" @click="showImportModal = true"
+                                                    class="text-teal-600 hover:text-teal-700 hover:underline">
+                                                📥 Importer une période
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <select
+                                        id="period_package"
+                                        v-model="periodChoice"
+                                        class="w-full px-4 py-2.5" :class="fieldClass()"
+                                    >
+                                        <option value="college">Collège (effectif standard)</option>
+                                        <option v-if="proPeriodAvailable" value="pro">Professionnel (clubs pro)</option>
+                                        <option v-for="pkg in availablePackages" :key="pkg.id" :value="`pkg:${pkg.id}`">
+                                            📦 {{ pkg.name }} ({{ pkg.teamCount }} équipes, {{ pkg.playerCount }} joueurs)
+                                        </option>
+                                    </select>
+                                    <p v-if="form.period_package_id" class="text-xs text-slate-400">
+                                        Remplace entièrement l'effectif standard pour cette partie.
+                                    </p>
+                                    <p v-else-if="form.game_mode === 'draft' && periodPackages.length" class="text-xs text-slate-400">
+                                        Les périodes importées ne sont pas disponibles en mode Draft.
+                                    </p>
+                                    <p v-if="form.errors.period_package_id" class="text-xs text-rose-500">{{ form.errors.period_package_id }}</p>
+                                </div>
                             </div>
 
                             <!-- Format de compétition -->
@@ -301,7 +371,7 @@ function submit() {
                                             <span class="text-xl">🌍</span>
                                             <span class="text-sm font-bold"
                                                   :class="form.competition_type === 'world_cup' ? 'text-indigo-700' : 'text-slate-700'">
-                                                Coupe du Monde
+                                                Coupe Nation
                                             </span>
                                         </div>
                                         <p class="text-[11px] leading-relaxed"
@@ -317,42 +387,19 @@ function submit() {
                                 <p v-if="form.errors.competition_type" class="text-xs text-rose-500">{{ form.errors.competition_type }}</p>
                             </div>
 
-                            <!-- Période : effectif standard, ou une période importée qui le remplace entièrement -->
-                            <div v-if="form.competition_type === 'college_league'" class="flex flex-col gap-1.5">
-                                <div class="flex items-center justify-between flex-wrap gap-1">
-                                    <label for="period_package" class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                                        Période
-                                    </label>
-                                    <div class="flex items-center gap-2 text-[11px] font-semibold">
-                                        <a :href="exportHref" download
-                                           class="text-teal-600 hover:text-teal-700 hover:underline">
-                                            📤 Exporter{{ form.period_package_id ? ' cette période' : ' un modèle' }}
-                                        </a>
-                                        <span class="text-slate-300">·</span>
-                                        <button type="button" @click="showImportModal = true"
-                                                class="text-teal-600 hover:text-teal-700 hover:underline">
-                                            📥 Importer une période
-                                        </button>
-                                    </div>
-                                </div>
-                                <select
-                                    id="period_package"
-                                    v-model="form.period_package_id"
-                                    class="w-full px-4 py-2.5" :class="fieldClass()"
-                                >
-                                    <option :value="null">Collège (effectif standard)</option>
-                                    <option v-for="pkg in availablePackages" :key="pkg.id" :value="pkg.id">
-                                        📦 {{ pkg.name }} ({{ pkg.teamCount }} équipes, {{ pkg.playerCount }} joueurs)
-                                    </option>
-                                </select>
-                                <p v-if="form.period_package_id" class="text-xs text-slate-400">
-                                    Remplace entièrement l'effectif standard pour cette partie.
-                                </p>
-                                <p v-else-if="form.game_mode === 'draft' && periodPackages.length" class="text-xs text-slate-400">
-                                    Les périodes importées ne sont pas disponibles en mode Draft.
-                                </p>
-                                <p v-if="form.errors.period_package_id" class="text-xs text-rose-500">{{ form.errors.period_package_id }}</p>
-                            </div>
+                            <!-- Nombre de participants (Coupe : nations par paliers de 8 ; Ligue : clubs de référence) -->
+                            <ParticipantCountPicker v-if="form.competition_type === 'world_cup'"
+                                v-model="form.participant_count"
+                                id="participant_count_cup" label="Nombre de sélections" unit="nations" :min="8" :max="32" :step="8"
+                                hint="Les nations sont choisies à l'étape suivante : celles que tu n'imposes pas sont tirées au sort."
+                                :error="form.errors.participant_count" />
+                            <ParticipantCountPicker v-else-if="form.competition_type === 'college_league' && !form.period_package_id && totalClubs > 4"
+                                v-model="clubSlider"
+                                id="participant_count_league" label="Nombre de clubs" unit="clubs" :min="4" :max="totalClubs"
+                                :all-label="`Tous (${totalClubs})`"
+                                hint="Ton équipe en fait toujours partie ; coche des clubs à l'étape suivante pour les imposer, les autres sont tirés au sort."
+
+                                :error="form.errors.participant_count" />
 
                             <!-- Mode de jeu (Ligue collège uniquement) -->
                             <div v-if="form.competition_type === 'college_league'" class="flex flex-col gap-2">

@@ -144,7 +144,7 @@ class WeekClosingService
         }
         $this->seasonChallengeService->payCompleted($gameSave);
 
-        // 6. Coupe du Monde : progression du tournoi au lieu de la fin de saison.
+        // 6. Coupe Nation : progression du tournoi au lieu de la fin de saison.
         if ($gameSave->isWorldCup()) {
             $this->tournamentService->advance($gameSave);
             $this->passHandToHumanWithMatch($gameSave);
@@ -181,7 +181,7 @@ class WeekClosingService
     }
 
     /**
-     * Coupe du Monde en hot-seat : un manager éliminé n'a plus de match, alors que le siège 1 reprend
+     * Coupe Nation en hot-seat : un manager éliminé n'a plus de match, alors que le siège 1 reprend
      * la main à chaque semaine. On donne donc la main au premier manager (par siège) qui a un match
      * programmé cette semaine ; si aucun n'en a, la main reste inchangée.
      */

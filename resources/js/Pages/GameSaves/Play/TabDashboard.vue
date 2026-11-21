@@ -82,10 +82,10 @@ const opponentTeam = computed(() => {
 //   SAISON PROGRESSION
 // ==========================
 const totalWeeks = computed(() => {
-    // Dernière semaine du calendrier (juste aussi en Coupe du Monde).
+    // Dernière semaine du calendrier (juste aussi en Coupe Nation).
     const weeks = (props.matches ?? []).map(m => Number(m.week) || 0);
     if (weeks.length) {
-        // Coupe du Monde : les demies et la finale sont créées au fil du tournoi.
+        // Coupe Nation : les demies et la finale sont créées au fil du tournoi.
         // On ajoute les tours restants pour que la barre ne retombe pas à chaque phase.
         return Math.max(...weeks) + (props.isWorldCup ? remainingWeeks(props.tournament) : 0);
     }
@@ -198,7 +198,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
             </div>
         </Panel>
 
-        <!-- Coupe du Monde : bannière champion -->
+        <!-- Coupe Nation : bannière champion -->
         <div v-if="isWorldCup && wcChampion"
              class="flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-gradient-to-r from-amber-100 to-yellow-50 border border-amber-300">
             <span class="text-4xl">🏆</span>
@@ -218,7 +218,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
         <!-- Téléphone : Classement + Budget côte à côte, Bilan en dessous -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
 
-            <!-- Classement — Coupe du Monde : position dans la poule -->
+            <!-- Classement — Coupe Nation : position dans la poule -->
             <DashboardWorldCupTile v-if="isWorldCup" :tournament="tournament" :team="team" @open="emit('change-tab', 'standings')" />
 
             <!-- Classement — Ligue : position, points, évolution, objectif -->

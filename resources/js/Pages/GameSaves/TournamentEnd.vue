@@ -1,7 +1,7 @@
 <script setup>
 import NationFlag from '@/Components/NationFlag.vue';
-// Écran de fin de tournoi (Coupe du Monde) : podium, parcours de chaque manager, buteurs, chiffres clés.
-// Domaine : Coupe du Monde. Rendu par GameSeasonController::tournamentEnd (route game-saves.tournament-end),
+// Écran de fin de tournoi (Coupe Nation) : podium, parcours de chaque manager, buteurs, chiffres clés.
+// Domaine : Coupe Nation. Rendu par GameSeasonController::tournamentEnd (route game-saves.tournament-end),
 // atteint à la clôture de la dernière semaine (WeekClosingService::OUTCOME_TOURNAMENT_END) ou depuis le Dashboard.
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import H2 from '@/Components/H2.vue';
@@ -30,7 +30,7 @@ const letter = (g) => g.for > g.against || g.shootout === true ? 'V' : (g.for ==
 
     <AuthenticatedLayout>
         <template #header>
-            <H2>🌍 Fin de la Coupe du Monde</H2>
+            <H2>🌍 Fin de la Coupe Nation</H2>
         </template>
 
         <div class="min-h-full p-2 sm:p-4 bg-gradient-to-b from-amber-50 to-slate-50">
@@ -127,7 +127,7 @@ const letter = (g) => g.for > g.against || g.shootout === true ? 'V' : (g.for ==
                     </Link>
                     <Link :href="route('game-saves.create')"
                           class="px-5 py-2.5 rounded-xl bg-indigo-600 text-sm font-semibold text-white hover:bg-indigo-700">
-                        Nouvelle Coupe du Monde
+                        Nouvelle Coupe Nation
                     </Link>
                     <Link :href="route('game-saves.index')"
                           class="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50">

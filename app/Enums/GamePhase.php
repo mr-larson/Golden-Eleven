@@ -14,7 +14,7 @@ enum GamePhase: string
     case SeasonEnd        = 'season_end';
     case IntersaisonDraft = 'intersaison_draft';
 
-    // Coupe du Monde
+    // Coupe Nation
     case WorldCup = 'world_cup';
     case Group    = 'group';
     case Knockout = 'knockout';

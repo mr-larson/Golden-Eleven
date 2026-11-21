@@ -19,7 +19,7 @@ const ROUND_TITLE = {
     round16: 'Huitième de finale', quarter: 'Quart de finale', semi: 'Demi-finale', third: 'Match pour la 3e place', final: 'Finale',
 };
 
-/** Libellé court d'un match : tour de Coupe du Monde (Pl.A, ½, F) ou semaine de ligue (S3). */
+/** Libellé court d'un match : tour de Coupe Nation (Pl.A, ½, F) ou semaine de ligue (S3). */
 export const roundShort = (match) => ROUND_SHORT[match?.round] ?? `S${match?.week}`;
 
 /** Libellé complet d'un match : « Demi-finale » ou « Semaine 3 ». */

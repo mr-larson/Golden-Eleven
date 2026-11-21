@@ -42,7 +42,7 @@ class CareerObjectiveServiceTest extends TestCase
         $league = $this->makeSave();
         $this->assertTrue($this->service->isEnabled($league));
 
-        // Coupe du Monde → jamais de carrière.
+        // Coupe Nation → jamais de carrière.
         $cup = $this->makeSave(['competition_type' => 'world_cup']);
         $this->assertFalse($this->service->isEnabled($cup));
 

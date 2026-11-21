@@ -61,13 +61,13 @@ class NewWorldCupBuilder
     // ──────────────────────────────────────────────────────────────
 
     /**
-     * Nations ACTIVES du catalogue (table nations) proposées pour la Coupe du Monde, d'après le pool de joueurs (colonne
+     * Nations ACTIVES du catalogue (table nations) proposées pour la Coupe Nation, d'après le pool de joueurs (colonne
      * « nationality »). Une nation est « jouable » si elle peut aligner un onze :
      * au moins 11 joueurs dont 1 gardien.
      *
      * Tri : nations jouables d'abord, puis par effectif décroissant.
      *
-     * @return array<int, array<string, mixed>> une ligne par nation : name, flag, total, goalkeepers, playable, rating (note moyenne du onze)
+     * @return array<int, array<string, mixed>> une ligne par nation : name, flag, description, tactical_style, management_philosophy, total, goalkeepers, playable, rating (note moyenne du onze)
      */
     public function playableNations(): array
     {
@@ -81,6 +81,7 @@ class NewWorldCupBuilder
 
         $nations = [];
         $flagUrls = Nation::flagUrls();
+        $catalog  = Nation::active()->get()->keyBy('name');
         // La note du onze est mise en cache : elle ne change que si un joueur est modifié, ajouté ou retiré.
         $poolVersion = Player::nationalEligible()->count().'-'.Player::nationalEligible()->max('updated_at');
         foreach (Nation::names(activeOnly: true) as $name) {
@@ -92,6 +93,10 @@ class NewWorldCupBuilder
                 'name' => $name,
                 'flag' => Nationality::flag($name),
                 'flag_url' => $flagUrls[$name] ?? null,
+                // Fiche de la nation (description + étiquettes de style), comme pour une équipe de Ligue.
+                'description' => $catalog->get($name)?->description,
+                'tactical_style' => $catalog->get($name)?->tactical_style ?? 'balanced',
+                'management_philosophy' => $catalog->get($name)?->management_philosophy ?? 'collective',
                 'total' => $total,
                 'goalkeepers' => $gk,
                 'playable' => $total >= NationalTeamAssembler::MIN_PLAYERS && $gk >= self::MIN_GOALKEEPERS,
@@ -155,12 +160,12 @@ class NewWorldCupBuilder
      *
      * L'appelant doit avoir vérifié que la nation est jouable (isPlayable).
      *
-     * @param  array  $data  données validées : nation, period, label, game_config (déjà nettoyée), nations_count (8 ou 16, facultatif), co_nations (nations des autres managers hot-seat), co_player_ids (nation => convocation de chaque co-manager), opponents (adversaires imposés), tous facultatifs
+     * @param  array  $data  données validées : nation, period, label, game_config (déjà nettoyée), participant_count (8 ou 16, facultatif), co_nations (nations des autres managers hot-seat), co_player_ids (nation => convocation de chaque co-manager), opponents (adversaires imposés), tous facultatifs
      */
     public function build(User $user, array $data): GameSave
     {
         $controlled = $data['nation'];
-        $size = (int) ($data['nations_count'] ?? self::DEFAULT_SIZE);
+        $size = (int) ($data['participant_count'] ?? self::DEFAULT_SIZE);
         $coHumans = array_values(array_unique(array_diff($data['co_nations'] ?? [], [$controlled])));
         $humans = array_merge([$controlled], $coHumans);
         $nations = array_merge($humans, $this->drawOpponents($humans, $size, $data['opponents'] ?? []));

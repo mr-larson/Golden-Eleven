@@ -21,9 +21,9 @@ class GameSaveRequest extends FormRequest
      */
     public function rules(): array
     {
-        // MVP : on ne permet que la période "college" côté backend.
+        // Périodes jouables côté backend : "college" et "pro".
         // On pourra élargir à ['college', 'highschool', 'pro'] plus tard.
-        $allowedPeriods = ['college'];
+        $allowedPeriods = ['college', 'pro'];
 
         $rules = [
             'label' => [
@@ -57,6 +57,12 @@ class GameSaveRequest extends FormRequest
                 'exists:period_packages,id',
             ],
 
+            // Championnat réduit : nombre de clubs et, si le joueur les a choisis, leurs id
+            // (sans liste, le tirage au sort se fait à la création, humains toujours inclus).
+            'participant_count'       => ['nullable', 'integer', 'min:4', 'max:64'],
+            'participant_ids'  => ['nullable', 'array'],
+            'participant_ids.*' => ['integer', 'distinct', 'exists:teams,id'],
+
             'game_mode' => ['nullable', 'string', 'in:prebuilt,draft'],
 
             'competition_type' => ['nullable', 'string', 'in:college_league,world_cup'],
@@ -85,6 +91,17 @@ class GameSaveRequest extends FormRequest
     {
         return [
             function ($validator) {
+                $participants = $this->input('participant_ids');
+                if (is_array($participants) && $participants !== []) {
+                    $humans = array_map('intval', $this->input('team_ids') ?? array_filter([$this->input('team_id')]));
+                    if (array_diff($humans, array_map('intval', $participants)) !== []) {
+                        $validator->errors()->add('participant_ids', 'Les équipes pilotées doivent faire partie des clubs du championnat.');
+                    }
+                    if ((int) $this->input('participant_count') < count($participants)) {
+                        $validator->errors()->add('participant_ids', 'Trop de clubs choisis par rapport au nombre demandé.');
+                    }
+                }
+
                 $config = $this->input('game_config');
                 if (is_array($config) && ! (new GameConfig)->hasValidTrainingGains($config)) {
                     $validator->errors()->add('game_config', 'Le gain max doit être supérieur ou égal au gain min.');

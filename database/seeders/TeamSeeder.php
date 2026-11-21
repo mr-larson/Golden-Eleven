@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\TeamStyle;
+use Database\Seeders\Players\CaptainTsubasa\Clubs\ProClubs;
 use Database\Seeders\Concerns\GuardsReferenceReseed;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
- * Catalogue des 15 équipes de Captain Tsubasa (collège) : nom, description, style
+ * Catalogue des équipes de référence : les 15 clubs de Captain Tsubasa (collège, période `college`)
+ * puis les clubs de la période `pro` (voir ProClubs). Pour chaque équipe : nom, description, style
  * tactique, philosophie de gestion, formation par défaut et logo. Vide la table
  * `teams` avant de la remplir (garde-fou en production : voir GuardsReferenceReseed).
  */
@@ -92,6 +94,12 @@ class TeamSeeder extends Seeder
         ];
 
 
+        $periodByTeam = array_fill_keys(array_column($teams, 0), 'college');
+        foreach (ProClubs::teams() as $proTeam) {
+            $teams[] = $proTeam;
+            $periodByTeam[$proTeam[0]] = 'pro';
+        }
+
         foreach ($teams as [$name, $description, $tacticalStyle, $philosophy, $defaultFormation]) {
 
             // slug basé sur le nom
@@ -110,6 +118,7 @@ class TeamSeeder extends Seeder
 
             DB::table('teams')->insert([
                 'name'                  => $name,
+                'period'                => $periodByTeam[$name],
                 'budget'                => 5000,
                 'wins'                  => 0,
                 'draws'                 => 0,

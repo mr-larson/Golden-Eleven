@@ -59,7 +59,7 @@ class SeasonService
         return ($gameSave->week ?? 1) > $this->getSeasonLength($gameSave);
     }
 
-    /** Programme la pause de mi-saison (dans l'état de la partie, à la semaine suivante) si la semaine close est exactement la moitié de la saison. Sans effet en Coupe du Monde. L'appelant sauvegarde la partie. */
+    /** Programme la pause de mi-saison (dans l'état de la partie, à la semaine suivante) si la semaine close est exactement la moitié de la saison. Sans effet en Coupe Nation. L'appelant sauvegarde la partie. */
     public function scheduleMidseasonBreak(GameSave $gameSave, int $closedWeek): void
     {
         if ($gameSave->isWorldCup() || $closedWeek * 2 !== $this->getSeasonLength($gameSave)) {

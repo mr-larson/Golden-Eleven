@@ -6,7 +6,7 @@ const props = defineProps({
     // 'submit' par défaut : les formulaires BDD comptent dessus.
     type: { type: String, default: 'submit' },
     size: { type: String, default: 'md' }, // sm | md | lg
-    // teal = action principale ; indigo = Coupe du Monde ; rose = confirmation destructive ; emerald = succès.
+    // teal = action principale ; indigo = Coupe Nation ; rose = confirmation destructive ; emerald = succès.
     tone: { type: String, default: 'teal' },
 });
 

@@ -82,7 +82,7 @@ const props = defineProps({
     incomeModel:        { type: Object, required: false, default: null },
 });
 
-// Mode Coupe du Monde : adapte l'UI (onglet Classement → poules+bracket,
+// Mode Coupe Nation : adapte l'UI (onglet Classement → poules+bracket,
 // masquage de l'onglet Transferts, sans objet pour des sélections).
 const isWorldCup = computed(() => props.gameSave?.competition_type === 'world_cup');
 
@@ -479,7 +479,7 @@ const transferFocus = ref(null);
 // ==========================
 //   ONGLETS
 // ==========================
-// En Coupe du Monde : « Classement » devient « Tournoi » (poules + bracket),
+// En Coupe Nation : « Classement » devient « Tournoi » (poules + bracket),
 // et l'onglet Transferts (sans objet pour des sélections) est masqué.
 const tabs = computed(() => {
     const wc = isWorldCup.value;
@@ -519,7 +519,7 @@ function openMatchFromCalendar(match) {
     setTab('match');
 }
 
-// N'ouvre qu'un onglet existant (ex. Transferts masqué en Coupe du Monde).
+// N'ouvre qu'un onglet existant (ex. Transferts masqué en Coupe Nation).
 function setTab(key) {
     activeTab.value = tabs.value.some(t => t.key === key) ? key : 'dashboard';
 }

@@ -64,7 +64,7 @@ class SeasonChallengeService
     /** Modulation des seuils des équipes humaines selon le mandat. */
     private const DIFFICULTY_MULT = ['none' => 1.0, 'survival' => 0.9, 'standard' => 1.0, 'conquest' => 1.1];
 
-    /** Vrai si les défis de saison sont actifs : pas en Coupe du Monde et option de configuration activée (par défaut oui). */
+    /** Vrai si les défis de saison sont actifs : pas en Coupe Nation et option de configuration activée (par défaut oui). */
     public function isEnabled(GameSave $gameSave): bool
     {
         return ! $gameSave->isWorldCup()

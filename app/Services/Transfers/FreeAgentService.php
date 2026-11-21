@@ -16,7 +16,7 @@ use App\Services\Season\SeasonService;
  * Recrutement d'un AGENT LIBRE (joueur sans contrat en cours) par une équipe.
  *
  * Règles appliquées, dans cet ordre (la première qui échoue refuse la signature) :
- *   1. pas de transferts en Coupe du Monde ;
+ *   1. pas de transferts en Coupe Nation ;
  *   2. la saison doit être en cours et la durée demandée tenir dans les semaines restantes ;
  *   3. le joueur ne doit pas déjà avoir un contrat en cours ;
  *   4. l'équipe doit avoir le budget (salaire × durée) ;
@@ -52,7 +52,7 @@ class FreeAgentService
     {
         // 1. Des sélections nationales ne recrutent pas.
         if ($gameSave->isWorldCup()) {
-            return ActionOutcome::error('player', 'Pas de transferts en Coupe du Monde.');
+            return ActionOutcome::error('player', 'Pas de transferts en Coupe Nation.');
         }
 
         // 2. Il faut une saison en cours et assez de semaines restantes pour la durée demandée.

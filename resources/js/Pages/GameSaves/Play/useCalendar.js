@@ -50,7 +50,7 @@ export function useCalendar({ matches, teams, team, week }) {
     });
 
     // Nombre de semaines = dernière semaine du calendrier généré (exact en
-    // ligue comme en Coupe du Monde) ; formule round-robin tant qu'il est vide.
+    // ligue comme en Coupe Nation) ; formule round-robin tant qu'il est vide.
     const seasonWeeksCount = computed(() => {
         const weeks = (matches.value ?? []).map(m => Number(m.week) || 0);
         if (weeks.length) return Math.max(...weeks);

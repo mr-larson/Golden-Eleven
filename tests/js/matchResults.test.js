@@ -8,7 +8,7 @@ const match = (id, week, home, away, hs, as, extra = {}) => ({
 });
 
 describe('libellés de tour', () => {
-    it('donne le tour de Coupe du Monde ou la semaine de ligue', () => {
+    it('donne le tour de Coupe Nation ou la semaine de ligue', () => {
         expect(roundShort({ round: 'group_b', week: 2 })).toBe('Pl.B');
         expect(roundShort({ round: 'final', week: 9 })).toBe('F');
         expect(roundShort({ round: 'quarter', week: 6 })).toBe('¼');

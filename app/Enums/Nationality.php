@@ -3,7 +3,7 @@
 namespace App\Enums;
 
 /**
- * Source de vérité des nationalités sélectionnables (mode Coupe du Monde).
+ * Source de vérité des nationalités sélectionnables (mode Coupe Nation).
  *
  * Les valeurs SONT les chaînes stockées en base (`players.nationality`,
  * `game_players.nationality`) — en français, pour rester cohérent dans tout

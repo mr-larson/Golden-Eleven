@@ -218,7 +218,7 @@ watch(() => [props.calendarTeam?.id, props.currentWeek], async () => {
                          :title="isUpcoming(match) ? 'Voir l\'avant-match' : isPlayable(match) ? 'Ouvrir le match' : undefined"
                          @click="openRow(match)">
 
-                        <!-- Tour (Coupe du Monde) ou semaine (ligue) -->
+                        <!-- Tour (Coupe Nation) ou semaine (ligue) -->
                         <div class="w-8 text-center shrink-0" :title="roundTitle(match)">
                             <div class="text-2xs font-bold"
                                  :class="currentWeek && Number(match.week) === Number(currentWeek) ? 'text-amber-600' : 'text-slate-400'">{{ roundShort(match) }}</div>

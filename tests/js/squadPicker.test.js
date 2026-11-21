@@ -7,7 +7,7 @@ const squad = {
 };
 const ids = n => Array.from({ length: n }, (_, i) => i + 1);
 
-describe('convocation Coupe du monde', () => {
+describe('convocation Coupe Nation', () => {
     it('accepte onze à vingt joueurs avec un gardien', () => {
         expect(isValidSquad(squad, ids(11))).toBe(true);
         expect(isValidSquad(squad, ids(20))).toBe(true);
