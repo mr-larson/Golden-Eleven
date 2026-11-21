@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
 use App\Models\Team;
+use App\Services\WorldCup\NationalTeamAssembler;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,12 +18,21 @@ class TeamController extends Controller
      * Écran unique des équipes de la base : liste + fiche, création comprise
      * (fiche vide sur la même page).
      */
-    public function index(Request $request): Response
+    public function index(Request $request, NationalTeamAssembler $assembler): Response
     {
         $this->authorize('viewAny', Team::class);
 
         return Inertia::render('Teams/Index', [
-            'teams'       => Team::orderBy('name')->get(),
+            // Profil du onze type du club (OVR + moyenne par stat) : titulaires choisis par l'IA parmi ses joueurs sous contrat.
+            'teams'       => Team::with('players')->orderBy('name')->get()->each(function (Team $team) use ($assembler) {
+                $team->setAttribute('eleven', $assembler->elevenProfile(
+                    $team->players,
+                    $team->default_formation,
+                    $team->tactical_style ?? 'balanced',
+                    $team->management_philosophy ?? 'collective',
+                ));
+                $team->unsetRelation('players');
+            }),
             // Équipe à ouvrir (ex. juste après sa création) / fiche vide demandée.
             'selectedId'  => $request->integer('selected') ?: null,
             'startCreate' => $request->boolean('create'),

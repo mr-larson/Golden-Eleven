@@ -295,16 +295,8 @@ class NationalTeamAssembler
      */
     public function startingElevenRating(string $nation): ?float
     {
-        $players = Player::nationalEligible()->where('nationality', $nation)->orderBy('lastname')->orderBy('firstname')->orderBy('id')->get();
-        $catalog = Nation::where('name', $nation)->first();
-        $picked = $this->picker->pick($players, $catalog?->default_formation, $catalog?->tactical_style ?? 'balanced', $catalog?->management_philosophy ?? 'collective');
-        if ($picked === null) {
-            return null;
-        }
-        [$squad, $lineup] = $picked;
-        $byId = $squad->keyBy('id');
-        $starters = collect($lineup['slots'])->map(fn ($id) => $byId->get($id))->filter();
-        if ($starters->isEmpty()) {
+        $starters = $this->startingEleven($nation);
+        if ($starters === null) {
             return null;
         }
 
@@ -313,6 +305,70 @@ class NationalTeamAssembler
 
             return $values->isEmpty() ? 0.0 : (float) $values->avg();
         }), 1);
+    }
+
+    /**
+     * Profil du onze de départ d'une sélection pour l'éditeur de la base : OVR (même calcul que la fiche joueur,
+     * les treize stats renseignées) et moyenne de chaque stat sur les onze titulaires. Null si pas de onze possible.
+     *
+     * @return array{ovr: float, stats: array<string, float>, size: int}|null
+     */
+    public function startingElevenProfile(string $nation): ?array
+    {
+        $catalog = Nation::where('name', $nation)->first();
+        $players = Player::nationalEligible()->where('nationality', $nation)->orderBy('lastname')->orderBy('firstname')->orderBy('id')->get();
+
+        return $this->elevenProfile($players, $catalog?->default_formation, $catalog?->tactical_style ?? 'balanced', $catalog?->management_philosophy ?? 'collective');
+    }
+
+    /**
+     * Même profil (OVR + moyenne par stat) pour n'importe quel vivier : sert aux nations comme aux clubs de la base.
+     *
+     * @param  Collection<int, Player>  $players
+     * @return array{ovr: float, stats: array<string, float>, size: int}|null
+     */
+    public function elevenProfile(Collection $players, ?string $formation, string $style, string $philosophy): ?array
+    {
+        $starters = $this->pickStarters($players, $formation, $style, $philosophy);
+        if ($starters === null) {
+            return null;
+        }
+
+        $keys = ['speed', 'attack', 'defense', 'stamina', 'shot', 'pass', 'dribble', 'block', 'intercept', 'tackle', 'heading', 'hand_save', 'punch_save'];
+        $ovr = $starters->avg(function (Player $player) use ($keys): float {
+            $values = collect($keys)->map(fn ($k) => (float) ($player->stats[$k] ?? 0))->filter(fn ($v) => $v > 0);
+
+            return $values->isEmpty() ? 0.0 : (float) $values->avg();
+        });
+
+        return [
+            'ovr' => round($ovr, 1),
+            'stats' => collect($keys)->mapWithKeys(fn ($k) => [$k => round((float) $starters->avg(fn (Player $p) => (float) ($p->stats[$k] ?? 0)), 1)])->all(),
+            'size' => $starters->count(),
+        ];
+    }
+
+    /** Les onze titulaires que l'IA aligne pour une nation (null si elle ne peut pas aligner un onze). */
+    private function startingEleven(string $nation): ?Collection
+    {
+        $players = Player::nationalEligible()->where('nationality', $nation)->orderBy('lastname')->orderBy('firstname')->orderBy('id')->get();
+        $catalog = Nation::where('name', $nation)->first();
+
+        return $this->pickStarters($players, $catalog?->default_formation, $catalog?->tactical_style ?? 'balanced', $catalog?->management_philosophy ?? 'collective');
+    }
+
+    /** Titulaires choisis par l'IA dans un vivier (null si onze impossible). */
+    private function pickStarters(Collection $players, ?string $formation, string $style, string $philosophy): ?Collection
+    {
+        $picked = $this->picker->pick($players, $formation, $style, $philosophy);
+        if ($picked === null) {
+            return null;
+        }
+        [$squad, $lineup] = $picked;
+        $byId = $squad->keyBy('id');
+        $starters = collect($lineup['slots'])->map(fn ($id) => $byId->get($id))->filter();
+
+        return $starters->isEmpty() ? null : $starters;
     }
 
     /** Note synthétique d'un joueur selon son poste (définie dans NationalSquadPicker). */

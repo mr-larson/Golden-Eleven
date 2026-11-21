@@ -17,6 +17,7 @@ use App\Http\Controllers\GameSaves\GameSaveCreationController;
 use App\Http\Controllers\GameSaves\GameTeamController;
 use App\Http\Controllers\GameSaves\LineupController;
 use App\Http\Controllers\GameSaves\TrainingController;
+use App\Http\Controllers\NationController;
 use App\Http\Controllers\PeriodPackageController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProfileController;
@@ -132,6 +133,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/',         [TeamController::class, 'store'])->name('store');
         Route::post('/{team}',   [TeamController::class, 'update'])->name('update');
         Route::delete('/{team}', [TeamController::class, 'destroy'])->name('destroy');
+    });
+
+    // Nations (base) — style, philosophie et description : gestion réservée aux admins
+    Route::prefix('nations')->name('nations.')->middleware('admin')->group(function () {
+        Route::get('/',           [NationController::class, 'index'])->name('index');
+        Route::post('/{nation}',  [NationController::class, 'update'])->name('update');
     });
 
     // Joueurs (base) — données de référence : gestion réservée aux admins

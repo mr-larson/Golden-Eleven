@@ -11,7 +11,9 @@ use App\Policies\ContractPolicy;
 use App\Policies\GameSavePolicy;
 use App\Policies\PeriodPackagePolicy;
 use App\Policies\PlayerPolicy;
+use App\Policies\NationPolicy;
 use App\Policies\TeamPolicy;
+use App\Models\Nation;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -27,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         GameSave::class     => GameSavePolicy::class,
         Team::class         => TeamPolicy::class,
+        Nation::class       => NationPolicy::class,
         Player::class       => PlayerPolicy::class,
         Contract::class     => ContractPolicy::class,
         PeriodPackage::class => PeriodPackagePolicy::class,

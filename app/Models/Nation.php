@@ -19,13 +19,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $flag_path
  * @property string $tactical_style
  * @property string $management_philosophy
+ * @property string|null $description
  * @property string|null $default_formation
  * @property bool $is_active
  */
 class Nation extends Model
 {
     protected $fillable = [
-        'name', 'code', 'flag_path', 'tactical_style', 'management_philosophy', 'default_formation', 'is_active',
+        'name', 'code', 'flag_path', 'tactical_style', 'management_philosophy', 'description', 'default_formation', 'is_active',
     ];
 
     protected $casts = ['is_active' => 'boolean'];

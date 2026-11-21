@@ -18,6 +18,10 @@ const props = defineProps({
     form: { type: Object, required: true },
     layout: { type: String, default: 'rows' }, // 'rows' | 'grid'
     logoUrl: { type: String, default: null },
+    // Victoires / nuls / défaites : propres à une partie, sans objet pour une équipe de la base.
+    showRecord: { type: Boolean, default: true },
+    // Budget : fixé au début de chaque partie par la configuration, sans objet pour une équipe de la base.
+    showBudget: { type: Boolean, default: true },
 });
 
 const emit = defineEmits(['remove-logo', 'logo-preview']);
@@ -37,19 +41,19 @@ const containerClass = computed(() => (props.layout === 'grid'
             <InputText id="name" type="text" v-model="form.name" class="mt-1 w-full" autocomplete="off" />
         </FormField>
 
-        <FormField :layout="layout" label="Budget" for="budget" :error="form.errors.budget">
+        <FormField v-if="showBudget" :layout="layout" label="Budget" for="budget" :error="form.errors.budget">
             <InputText id="budget" type="number" v-model="form.budget" placeholder="Budget de l'équipe" class="mt-1 w-full" />
         </FormField>
 
-        <FormField :layout="layout" label="Victoire(s)" for="wins" :error="form.errors.wins">
+        <FormField v-if="showRecord" :layout="layout" label="Victoire(s)" for="wins" :error="form.errors.wins">
             <InputText id="wins" type="number" v-model="form.wins" placeholder="Victoire(s) de l'équipe" class="mt-1 w-full" />
         </FormField>
 
-        <FormField :layout="layout" label="Défaite(s)" for="losses" :error="form.errors.losses">
+        <FormField v-if="showRecord" :layout="layout" label="Défaite(s)" for="losses" :error="form.errors.losses">
             <InputText id="losses" type="number" v-model="form.losses" placeholder="Défaite(s) de l'équipe" class="mt-1 w-full" />
         </FormField>
 
-        <FormField :layout="layout" label="Matchs nuls" for="draws" :error="form.errors.draws">
+        <FormField v-if="showRecord" :layout="layout" label="Matchs nuls" for="draws" :error="form.errors.draws">
             <InputText id="draws" type="number" v-model="form.draws" placeholder="Matchs nuls de l'équipe" class="mt-1 w-full" />
         </FormField>
 

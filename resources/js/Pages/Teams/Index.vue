@@ -13,6 +13,7 @@
                     { href: route('players.index'), label: 'Joueurs' },
                     { href: route('teams.index'), label: 'Équipes', active: true },
                     { href: route('contracts.index'), label: 'Contrats' },
+                    { href: route('nations.index'), label: 'Pays' },
                     { href: route('users.index'), label: 'Utilisateurs' },
                 ]"
             />
@@ -37,18 +38,26 @@
                 </template>
 
                 <template #badges>
-                    <Badge>
-                        Budget : {{ Number(form.budget || 0).toLocaleString('fr-FR') }} <GameBanknote />
-                    </Badge>
+                    <Badge v-if="eleven">OVR {{ eleven.ovr }}</Badge>
                 </template>
 
                 <Panel as="div" class="sm:p-6">
-                    <form @submit.prevent="submit">
-                        <TeamRecordBars v-if="!editor.creating.value" :wins="form.wins" :draws="form.draws" :losses="form.losses" />
+                    <template v-if="!editor.creating.value">
+                        <PlayerStatsPreview v-if="eleven" :stats="eleven.stats" :player-id="form.id" />
+                        <p v-if="eleven" class="-mt-2 mb-4 text-[11px] text-slate-400">
+                            Moyenne par stat des {{ eleven.size }} titulaires que l'IA aligne (OVR {{ eleven.ovr }}).
+                        </p>
+                        <p v-else class="mb-4 text-sm text-slate-400">
+                            Pas assez de joueurs sous contrat pour aligner un onze : pas de statistiques à afficher.
+                        </p>
+                    </template>
 
+                    <form @submit.prevent="submit">
                         <TeamFormFields
                             :form="form"
                             layout="grid"
+                            :show-record="false"
+                            :show-budget="false"
                             :logo-url="logoPath ? `/storage/${logoPath}` : null"
                             @remove-logo="removeLogo"
                         />
@@ -71,18 +80,17 @@
 
 <script setup>
 import Badge from '@/Components/Badge.vue';
-import GameBanknote from '@/Components/GameBanknote.vue';
 import Panel from '@/Components/Panel.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import H2 from '@/Components/H2.vue';
 import EntityEditor from '@/Components/EntityEditor.vue';
 import EditorSubNav from '@/Components/EditorSubNav.vue';
+import PlayerStatsPreview from '@/Components/PlayerStatsPreview.vue';
 import TeamLogo from '@/Components/TeamLogo.vue';
-import TeamRecordBars from '@/Components/TeamRecordBars.vue';
 import ButtonGroup from '@/Components/ButtonGroup.vue';
 import ButtonPrimary from '@/Components/ButtonPrimary.vue';
 import ButtonDanger from '@/Components/ButtonDanger.vue';
@@ -101,10 +109,6 @@ const BLANK = {
     id: null,
     name: '',
     description: '',
-    budget: '',
-    wins: 0,
-    draws: 0,
-    losses: 0,
     logo: null,
     remove_logo: false,
     tactical_style: 'balanced',
@@ -112,6 +116,9 @@ const BLANK = {
 };
 
 const form = useForm(clone(BLANK));
+
+// Profil du onze type du club sélectionné (null : pas de onze possible).
+const eleven = computed(() => props.teams.find(t => t.id === form.id)?.eleven ?? null);
 
 // Logo enregistré : affiché seulement, jamais renvoyé au serveur (il gère seul logo_path).
 const logoPath = ref(null);
@@ -127,10 +134,6 @@ const editor = useEntityEditor({
             id: team.id,
             name: team.name,
             description: team.description ?? '',
-            budget: team.budget ?? 0,
-            wins: team.wins ?? 0,
-            draws: team.draws ?? 0,
-            losses: team.losses ?? 0,
             tactical_style: team.tactical_style ?? 'balanced',
             management_philosophy: team.management_philosophy ?? 'collective',
             logo: null,
