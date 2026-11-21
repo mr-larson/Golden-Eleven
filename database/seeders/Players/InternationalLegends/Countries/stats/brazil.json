@@ -14,8 +14,17 @@
       "stats": {
         "speed": 77,
         "stamina": 82,
-        "defense": 28,
-        "cross": 30
+        "attack": 23,
+        "defense": 31,
+        "shot": 19,
+        "pass": 26,
+        "dribble": 22,
+        "block": 26,
+        "intercept": 29,
+        "tackle": 29,
+        "heading": 29,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine champion du monde 2002, plus de 140 sélections : latéral droit infatigable, montées et centres."
     },
@@ -24,9 +33,16 @@
         "speed": 77,
         "stamina": 77,
         "attack": 24,
+        "defense": 29,
         "shot": 26,
-        "pass": 33,
-        "defense": 28
+        "pass": 32,
+        "dribble": 22,
+        "block": 24,
+        "intercept": 27,
+        "tackle": 27,
+        "heading": 27,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Champion du monde 2002, Real Madrid : coups francs surpuissants et montées sur le côté gauche. Passe 33."
     },
@@ -80,7 +96,7 @@
         "stamina": 76,
         "attack": 38,
         "defense": 19,
-        "shot": 29,
+        "shot": 28,
         "pass": 32,
         "dribble": 33,
         "block": 21,
@@ -117,7 +133,7 @@
         "attack": 38,
         "defense": 18,
         "shot": 30,
-        "pass": 32,
+        "pass": 31,
         "dribble": 32,
         "block": 16,
         "intercept": 19,
@@ -168,13 +184,13 @@
         "speed": 80,
         "stamina": 81,
         "attack": 38,
-        "defense": 20,
+        "defense": 21,
         "shot": 31,
         "pass": 31,
-        "dribble": 32,
+        "dribble": 33,
         "block": 17,
-        "intercept": 20,
-        "tackle": 18,
+        "intercept": 21,
+        "tackle": 19,
         "heading": 28,
         "hand_save": 10,
         "punch_save": 10
@@ -186,13 +202,13 @@
         "speed": 82,
         "stamina": 78,
         "attack": 38,
-        "defense": 21,
+        "defense": 22,
         "shot": 31,
         "pass": 26,
-        "dribble": 32,
+        "dribble": 33,
         "block": 18,
-        "intercept": 20,
-        "tackle": 20,
+        "intercept": 21,
+        "tackle": 21,
         "heading": 27,
         "hand_save": 12,
         "punch_save": 11
@@ -251,6 +267,24 @@
         "heading": 15,
         "hand_save": 29,
         "punch_save": 29
+      }
+    },
+    "Kaká": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 74,
+        "stamina": 70,
+        "attack": 38,
+        "defense": 22,
+        "shot": 29,
+        "pass": 31,
+        "dribble": 31,
+        "block": 17,
+        "intercept": 21,
+        "tackle": 19,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       }
     }
   }
