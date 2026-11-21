@@ -38,6 +38,9 @@
             >
                 <template #item="{ item }">
                     <span class="flex-1 truncate text-sm font-medium">{{ item.firstname }} {{ item.lastname }}</span>
+                    <span v-if="playerOverall(item) > 0" class="text-2xs font-semibold tabular-nums text-slate-500 shrink-0">
+                        {{ playerOverall(item).toFixed(1) }}
+                    </span>
                     <span v-if="item.position"
                           :class="positionBadgeClass(item.position)"
                           class="text-2xs font-bold px-2 py-0.5 rounded-full shrink-0">
@@ -144,6 +147,7 @@
 </template>
 
 <script setup>
+import { playerOverall } from '@/Composables/playerOverall.js'
 import Badge from '@/Components/Badge.vue';
 import PlayerEditorFilters from '@/Components/PlayerEditorFilters.vue';
 import { usePlayerEditorFilters } from '@/Composables/usePlayerEditorFilters.js';

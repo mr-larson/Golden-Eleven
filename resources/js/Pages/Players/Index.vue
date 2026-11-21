@@ -46,6 +46,9 @@
                             {{ origins[item.origin] ?? item.origin }} · {{ item.nationality || 'Nationalité non renseignée' }}
                         </span>
                     </span>
+                    <span v-if="playerOverall(item) > 0" class="text-2xs font-semibold tabular-nums text-slate-500 shrink-0">
+                        {{ playerOverall(item).toFixed(1) }}
+                    </span>
                     <span v-if="item.position"
                           :class="positionBadgeClass(item.position)"
                           class="text-2xs font-bold px-2 py-0.5 rounded-full shrink-0">
@@ -150,6 +153,7 @@
 <script setup>
 import Badge from '@/Components/Badge.vue';
 import PlayerEditorFilters from '@/Components/PlayerEditorFilters.vue';
+import { playerOverall } from '@/Composables/playerOverall.js';
 import { usePlayerEditorFilters } from '@/Composables/usePlayerEditorFilters.js';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
