@@ -139,7 +139,19 @@
     },
     "Genzo Wakabayashi": {
       "stats": {
-        "hand_save": 33
+        "speed": 70,
+        "stamina": 70,
+        "attack": 18,
+        "defense": 42,
+        "shot": 16,
+        "pass": 20,
+        "dribble": 16,
+        "block": 24,
+        "intercept": 27,
+        "tackle": 18,
+        "heading": 18,
+        "hand_save": 33,
+        "punch_save": 30
       },
       "why": "Arrêts à la main à 33 : le meilleur gardien de club."
     }

@@ -4,10 +4,19 @@
   "players": {
     "Bobby Moore": {
       "stats": {
+        "speed": 59,
+        "stamina": 77,
+        "attack": 19,
         "defense": 35,
+        "shot": 15,
+        "pass": 23,
+        "dribble": 20,
+        "block": 26,
         "intercept": 29,
-        "pass": 25,
-        "speed": 59
+        "tackle": 28,
+        "heading": 25,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine champion du monde 1966 : défenseur d'une propreté et d'une lecture rares."
     },
@@ -31,9 +40,18 @@
     "Ashley Cole": {
       "stats": {
         "speed": 76,
-        "defense": 32,
         "stamina": 80,
-        "tackle": 28
+        "attack": 23,
+        "defense": 32,
+        "shot": 17,
+        "pass": 23,
+        "dribble": 23,
+        "block": 22,
+        "intercept": 27,
+        "tackle": 28,
+        "heading": 28,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Arsenal Invincibles, Chelsea, 107 sélections : arrière gauche, vitesse et marquage."
     },
@@ -48,10 +66,18 @@
     "Michael Owen": {
       "stats": {
         "speed": 79,
+        "stamina": 66,
         "attack": 34,
+        "defense": 17,
         "shot": 28,
+        "pass": 18,
         "dribble": 25,
-        "stamina": 66
+        "block": 14,
+        "intercept": 16,
+        "tackle": 16,
+        "heading": 22,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Ballon d'Or 2001 : vitesse de pointe et finition, buts à 18 ans."
     },
@@ -112,16 +138,16 @@
         "speed": 60,
         "stamina": 75,
         "attack": 14,
-        "defense": 37,
+        "defense": 43,
         "shot": 11,
-        "pass": 20,
+        "pass": 26,
         "dribble": 13,
-        "block": 23,
-        "intercept": 26,
+        "block": 29,
+        "intercept": 32,
         "tackle": 17,
         "heading": 16,
         "hand_save": 30,
-        "punch_save": 29
+        "punch_save": 30
       },
       "why": "Champion du monde 1966, auteur de l'arrêt du siècle : réflexes inégalés. Profil relevé (OVR ≈28,5) sous la référence Genzo Wakabayashi (main 33)."
     },
@@ -131,7 +157,7 @@
         "stamina": 80,
         "attack": 38,
         "defense": 22,
-        "shot": 31,
+        "shot": 29,
         "pass": 31,
         "dribble": 29,
         "block": 18,
@@ -149,7 +175,7 @@
         "stamina": 82,
         "attack": 38,
         "defense": 26,
-        "shot": 31,
+        "shot": 29,
         "pass": 33,
         "dribble": 23,
         "block": 21,
@@ -173,12 +199,19 @@
     },
     "Steven Gerrard": {
       "stats": {
+        "speed": 69,
         "stamina": 82,
-        "pass": 28,
-        "shot": 28,
         "attack": 32,
         "defense": 26,
-        "speed": 69
+        "shot": 26,
+        "pass": 28,
+        "dribble": 25,
+        "block": 20,
+        "intercept": 23,
+        "tackle": 25,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Ligue des champions 2005 avec Liverpool : milieu à tout faire, passe et frappe."
     },
@@ -188,7 +221,7 @@
         "stamina": 79,
         "attack": 34,
         "defense": 24,
-        "shot": 27,
+        "shot": 25,
         "pass": 29,
         "dribble": 29,
         "block": 20,
@@ -199,6 +232,60 @@
         "punch_save": 10
       },
       "why": "Relevé à un OVR de 31 : points forts du joueur au maximum, le reste complété avec mesure."
+    },
+    "Wayne Rooney": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 70,
+        "stamina": 78,
+        "attack": 36,
+        "defense": 19,
+        "shot": 29,
+        "pass": 25,
+        "dribble": 26,
+        "block": 16,
+        "intercept": 19,
+        "tackle": 17,
+        "heading": 25,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Gary Lineker": {
+      "why": "Rééquilibrage du niveau de la sélection (OVR du onze).",
+      "stats": {
+        "speed": 72,
+        "stamina": 72,
+        "attack": 34,
+        "defense": 17,
+        "shot": 29,
+        "pass": 19,
+        "dribble": 22,
+        "block": 14,
+        "intercept": 16,
+        "tackle": 16,
+        "heading": 20,
+        "hand_save": 10,
+        "punch_save": 10
+      }
+    },
+    "Peter Shilton": {
+      "why": "Échelle des gardiens réels (classement des meilleurs gardiens de l'histoire).",
+      "stats": {
+        "speed": 58,
+        "stamina": 74,
+        "attack": 14,
+        "defense": 41,
+        "shot": 11,
+        "pass": 25,
+        "dribble": 13,
+        "block": 29,
+        "intercept": 28,
+        "tackle": 17,
+        "heading": 15,
+        "hand_save": 30,
+        "punch_save": 30
+      }
     }
   }
 }
