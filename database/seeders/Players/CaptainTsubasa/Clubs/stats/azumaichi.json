@@ -184,9 +184,19 @@
     },
     "Makoto Soda": {
       "stats": {
+        "speed": 70,
         "stamina": 80,
+        "attack": 23,
+        "defense": 38,
+        "shot": 23,
+        "pass": 23,
+        "dribble": 19,
         "block": 22,
-        "heading": 26
+        "intercept": 28,
+        "tackle": 30,
+        "heading": 26,
+        "hand_save": 15,
+        "punch_save": 15
       },
       "why": "Endurance 80, contre 22, jeu de tête 26 : défenseur puissant mais pas un mur dans les airs."
     }

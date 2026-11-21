@@ -169,11 +169,19 @@
     },
     "Hikaru Matsuyama": {
       "stats": {
-        "defense": 32,
+        "speed": 75,
         "stamina": 85,
-        "block": 22,
-        "intercept": 25,
-        "dribble": 22
+        "attack": 36,
+        "defense": 30,
+        "shot": 27,
+        "pass": 25,
+        "dribble": 22,
+        "block": 21,
+        "intercept": 24,
+        "tackle": 25,
+        "heading": 26,
+        "hand_save": 15,
+        "punch_save": 15
       },
       "why": "Sous Tsubasa : dribble 22 et contre 22 (demandés), défense 32, endurance 85, interception 25."
     }
