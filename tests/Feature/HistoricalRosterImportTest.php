@@ -25,9 +25,15 @@ class HistoricalRosterImportTest extends TestCase
         $this->assertCount(108, array_filter($audit, fn ($r) => $r['status'] === 'à ajouter'));
         $this->seed(PlayerSeeder::class);
         $players = Player::where('origin', 'world_legends')->get();
-        $this->assertCount(602, $players);
-        $this->assertCount(602, $players->unique(fn ($p) => Str::slug($p->full_name)));
+        $this->assertCount(591, $players);
+        $this->assertCount(591, $players->unique(fn ($p) => Str::slug($p->full_name)));
+        // Joueurs retirés ensuite avec leur pays (un seul joueur peu connu), voir la migration remove_single_legend_nations.
+        $removed = ['Roland Juhász', 'Marcin Wasilewski', 'Nastja Čeh', 'Bryan Ruiz', 'Aruna Dindane', 'Milan Jovanović',
+            'Dieumerci Mbokani', 'Tomasz Radzinski', 'Andrés Mendoza', 'Besnik Hasi', 'Souleymane Oularé'];
         foreach ($audit as $row) {
+            if (in_array($row['firstname'].' '.$row['lastname'], $removed, true)) {
+                continue;
+            }
             if ($row['status'] === 'archivé') {
                 $this->assertNull($players->first(fn ($p) => $p->firstname === $row['firstname'] && $p->lastname === $row['lastname']));
                 continue;

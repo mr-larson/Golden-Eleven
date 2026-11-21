@@ -28,19 +28,8 @@ class Nationality
     public const UKRAINE = 'Ukraine';
     public const BULGARIE = 'Bulgarie';
     public const LIBERIA = 'Liberia';
-    public const HONGRIE = 'Hongrie';
-    public const POLOGNE = 'Pologne';
     public const MAROC = 'Maroc';
-    public const SLOVENIE = 'Slovénie';
-    public const COSTA_RICA = 'Costa Rica';
-    public const COTE_IVOIRE = 'Côte d\'Ivoire';
-    public const SERBIE = 'Serbie';
-    public const CONGO_RD = 'RD Congo';
-    public const CANADA = 'Canada';
     public const NORVEGE = 'Norvège';
-    public const PEROU = 'Pérou';
-    public const ALBANIE = 'Albanie';
-    public const GUINEE = 'Guinée';
     public const FINLANDE = 'Finlande';
     public const PAYS_GALLES = 'Pays de Galles';
     public const YOUGOSLAVIE = 'Yougoslavie';
@@ -106,19 +95,8 @@ class Nationality
         self::UKRAINE,
         self::BULGARIE,
         self::LIBERIA,
-        self::HONGRIE,
-        self::POLOGNE,
         self::MAROC,
-        self::SLOVENIE,
-        self::COSTA_RICA,
-        self::COTE_IVOIRE,
-        self::SERBIE,
-        self::CONGO_RD,
-        self::CANADA,
         self::NORVEGE,
-        self::PEROU,
-        self::ALBANIE,
-        self::GUINEE,
         self::FINLANDE,
         self::PAYS_GALLES,
         self::YOUGOSLAVIE,
@@ -139,19 +117,8 @@ class Nationality
         self::UKRAINE => '🇺🇦',
         self::BULGARIE => '🇧🇬',
         self::LIBERIA => '🇱🇷',
-        self::HONGRIE => '🇭🇺',
-        self::POLOGNE => '🇵🇱',
         self::MAROC => '🇲🇦',
-        self::SLOVENIE => '🇸🇮',
-        self::COSTA_RICA => '🇨🇷',
-        self::COTE_IVOIRE => '🇨🇮',
-        self::SERBIE => '🇷🇸',
-        self::CONGO_RD => '🇨🇩',
-        self::CANADA => '🇨🇦',
         self::NORVEGE => '🇳🇴',
-        self::PEROU => '🇵🇪',
-        self::ALBANIE => '🇦🇱',
-        self::GUINEE => '🇬🇳',
         self::FINLANDE => '🇫🇮',
         self::PAYS_GALLES => '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
         self::YOUGOSLAVIE => '🏳️',
