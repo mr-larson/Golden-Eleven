@@ -5,6 +5,7 @@ import ConfigSection from '@/Components/ConfigSection.vue';
 import ConfigRange from '@/Components/ConfigRange.vue';
 import CompetitionTypeCard from '@/Components/CompetitionTypeCard.vue';
 import { COMPETITIONS, isTournamentType } from '@/Pages/GameSaves/competitions.js';
+import { periodAllows, universePreset } from '@/Pages/GameSaves/periods.js';
 import ParticipantCountPicker from '@/Components/ParticipantCountPicker.vue';
 import ConfigToggle from '@/Components/ConfigToggle.vue';
 import { TRAINING_COST_FIELDS as trainingCostFields } from '@/Components/configFields.js';
@@ -165,23 +166,12 @@ const config = reactive({
     legends_countries: null,
 });
 
-// Univers par défaut selon le mode : la Coupe Nation active tous les univers
-// (sélections nationales pioche partout) ; la Ligue garde le catalogue Captain Tsubasa.
-function universePreset(competitionType) {
-    const all = competitionType === 'world_cup';
-    return {
-        visible_origins: {
-            captain_tsubasa: true, captain_tsubasa_international: true, world_legends: all,
-            ecole_des_champions: all, hungry_heart: all, blue_lock: all, ao_ashi: all, original: true,
-        },
-        internationals_visible: all,
-        legends_countries: null,
-    };
-}
 const universeSnapshot = (preset) => JSON.stringify([preset.visible_origins, preset.internationals_visible, preset.legends_countries]);
 
-// Au changement de mode, on adapte les univers sauf si l'utilisateur les a modifiés à la main.
-watch(() => form.competition_type, (next, previous) => {
+// Au changement de période : le format retombe sur la Ligue s'il n'y est plus autorisé, et les univers
+// prennent ceux de la nouvelle période sauf si l'utilisateur les a modifiés à la main.
+watch(() => form.period, (next, previous) => {
+    if (!periodAllows(next, form.competition_type)) form.competition_type = 'college_league';
     const untouched = universeSnapshot(config) === universeSnapshot(universePreset(previous));
     if (untouched) Object.assign(config, universePreset(next));
 });
@@ -221,7 +211,7 @@ function resetDefaults() {
         human_start_budget: props.humanStartBudgets.standard, ai_start_budget: props.aiStartBudget,
         human_weekly_income: props.humanWeeklyIncomes.standard,
         draft_budget: props.draftBudgets.standard, ai_draft_budget: props.aiDraftBudget,
-        ...universePreset(form.competition_type),
+        ...universePreset(form.period),
     });
 }
 
@@ -307,7 +297,7 @@ function submit() {
                                 </div>
 
                                 <!-- Période : effectif standard, ou une période importée qui le remplace entièrement -->
-                                <div v-if="form.competition_type !== 'world_cup'" class="flex flex-col gap-1.5">
+                                <div class="flex flex-col gap-1.5">
                                     <div class="flex items-center justify-between flex-wrap gap-1">
                                         <label for="period_package" class="text-xs font-bold text-slate-500 uppercase tracking-wider">
                                             Période
@@ -353,8 +343,8 @@ function submit() {
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                     <CompetitionTypeCard v-for="(competition, type) in COMPETITIONS" :key="type" v-model="form.competition_type"
                                                          :value="type" :icon="competition.icon" :title="competition.label" :text="competition.text"
-                                                         :tone="competition.tone" :disabled="type === 'club_cup' && !clubCupAvailable"
-                                                         disabled-text="Pas assez de clubs dans cette période (8 minimum)." />
+                                                         :tone="competition.tone" :disabled="!periodAllows(form.period, type) || (type === 'club_cup' && !clubCupAvailable)"
+                                                         :disabled-text="!periodAllows(form.period, type) ? 'Indisponible pour la période Collège : choisis la période Professionnel.' : 'Pas assez de clubs dans cette période (8 minimum).'" />
                                 </div>
                                 <p v-if="form.errors.competition_type" class="text-xs text-rose-500">{{ form.errors.competition_type }}</p>
                             </div>

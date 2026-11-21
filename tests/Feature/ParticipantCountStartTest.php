@@ -92,4 +92,17 @@ class ClubCountStartTest extends TestCase
         $this->assertCount(6, $ids);
         $this->assertNotContains($team->id, $ids);
     }
+
+    public function test_college_period_refuses_the_nation_cup_but_pro_accepts_it(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post(route('game-saves.store'), [
+            'period' => 'college', 'competition_type' => 'world_cup', 'participant_count' => 8,
+        ])->assertSessionHasErrors('competition_type');
+
+        $this->actingAs($user)->post(route('game-saves.store'), [
+            'period' => 'pro', 'competition_type' => 'world_cup', 'participant_count' => 8,
+        ])->assertSessionDoesntHaveErrors('competition_type');
+    }
 }

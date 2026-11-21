@@ -44,6 +44,11 @@ class StoreGameSetupRequest extends FormRequest
     {
         return [
             function ($validator) {
+                $competition = $this->input('competition_type') ?? GameSave::COMPETITION_LEAGUE;
+                if (! in_array($competition, GameSave::PERIOD_COMPETITIONS[$this->input('period')] ?? [], true)) {
+                    $validator->errors()->add('competition_type', 'Ce format de compétition n\'est pas disponible pour cette période.');
+                }
+
                 // Coupe Club : un tournoi a toujours un nombre de clubs, jamais plus que la période n'en compte.
                 if ($this->input('competition_type') === 'club_cup') {
                     $clubs = \App\Models\Team::where('period', $this->input('period'))->count();

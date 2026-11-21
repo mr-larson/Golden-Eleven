@@ -148,6 +148,15 @@ class GameSave extends Model
 
     public const COMPETITION_CLUB_CUP = 'club_cup';
 
+    /**
+     * Formats de compétition autorisés par période. Le Collège n'a pas de Coupe Nation (réservée aux périodes
+     * dont les joueurs viennent d'ailleurs que du Japon). Même règle que resources/js/Pages/GameSaves/periods.js.
+     */
+    public const PERIOD_COMPETITIONS = [
+        'college' => [self::COMPETITION_LEAGUE, self::COMPETITION_CLUB_CUP],
+        'pro'     => [self::COMPETITION_LEAGUE, self::COMPETITION_CLUB_CUP, self::COMPETITION_WORLD_CUP],
+    ];
+
     /** Partie de Coupe Nation (tournoi de sélections nationales). */
     public function isWorldCup(): bool
     {
