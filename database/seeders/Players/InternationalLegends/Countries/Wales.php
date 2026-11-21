@@ -2,15 +2,31 @@
 
 namespace Database\Seeders\Players\InternationalLegends\Countries;
 
+/**
+ * Onze historique du Pays de Galles (toutes époques) : sélection volontairement modeste, avec deux stars
+ * (Bale, Giggs) dans un onze moyen.
+ */
 final class Wales
 {
     public const NATIONALITY = 'Pays de Galles';
     public const ROSTER = [];
     public const ADDITIONS = [];
 
-
     // Compléments des quatre listes historiques ; numéros regroupés par poste, pas des notes.
     public const HISTORICAL_ADDITIONS = [
         ['firstname' => 'Ryan', 'lastname' => 'Giggs', 'profile' => 'winger', 'stats' => [], 'note' => 'Référence de la période des années 1990.'],
+    ];
+
+    public const EXTRA_ADDITIONS = [
+        ['firstname' => 'Neville', 'lastname' => 'Southall', 'profile' => 'keeper', 'position' => 'GB', 'secondary' => null, 'stats' => ['speed' => 56, 'stamina' => 68, 'attack' => 12, 'defense' => 28, 'shot' => 9, 'pass' => 16, 'dribble' => 11, 'block' => 20, 'intercept' => 20, 'tackle' => 16, 'heading' => 14, 'hand_save' => 29, 'punch_save' => 26], 'note' => 'Everton (champion d\'Angleterre 1985 et 1987, Coupe des Coupes 1985) et 92 sélections ; l\'un des plus grands gardiens britanniques.'],
+        ['firstname' => 'John', 'lastname' => 'Charles', 'profile' => 'stopper', 'position' => 'DC', 'secondary' => 'AT', 'stats' => ['speed' => 58, 'stamina' => 70, 'attack' => 18, 'defense' => 28, 'shot' => 14, 'pass' => 16, 'dribble' => 14, 'block' => 24, 'intercept' => 22, 'tackle' => 24, 'heading' => 30, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Le « Gentil Géant » de la Juventus (trois titres de champion d\'Italie), Mondial 1958 avec le Pays de Galles ; aussi redoutable de la tête en défense qu\'en attaque.'],
+        ['firstname' => 'Ashley', 'lastname' => 'Williams', 'profile' => 'stopper', 'position' => 'DC', 'secondary' => null, 'stats' => ['speed' => 54, 'stamina' => 68, 'attack' => 10, 'defense' => 28, 'shot' => 8, 'pass' => 13, 'dribble' => 10, 'block' => 25, 'intercept' => 25, 'tackle' => 25, 'heading' => 26, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Capitaine de Swansea et du Pays de Galles, demi-finaliste de l\'Euro 2016 ; défenseur central solide et meneur d\'hommes.'],
+        ['firstname' => 'Kevin', 'lastname' => 'Ratcliffe', 'profile' => 'stopper', 'position' => 'DC', 'secondary' => null, 'stats' => ['speed' => 64, 'stamina' => 68, 'attack' => 12, 'defense' => 26, 'shot' => 8, 'pass' => 16, 'dribble' => 12, 'block' => 21, 'intercept' => 23, 'tackle' => 23, 'heading' => 19, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Capitaine de l\'Everton champion d\'Angleterre 1985 et 1987 et vainqueur de la Coupe des Coupes 1985, 59 sélections ; défenseur central rapide.'],
+        ['firstname' => 'Ben', 'lastname' => 'Davies', 'profile' => 'fullback', 'position' => 'DG', 'secondary' => null, 'stats' => ['speed' => 65, 'stamina' => 70, 'attack' => 15, 'defense' => 23, 'shot' => 10, 'pass' => 20, 'dribble' => 16, 'block' => 18, 'intercept' => 20, 'tackle' => 20, 'heading' => 15, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Tottenham (finaliste de la Ligue des champions 2019) et demi-finaliste de l\'Euro 2016 ; latéral gauche régulier.'],
+        ['firstname' => 'Joe', 'lastname' => 'Allen', 'profile' => 'holding', 'position' => 'MDC', 'secondary' => null, 'stats' => ['speed' => 57, 'stamina' => 70, 'attack' => 16, 'defense' => 20, 'shot' => 14, 'pass' => 27, 'dribble' => 20, 'block' => 14, 'intercept' => 22, 'tackle' => 20, 'heading' => 12, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Le « Pirlo gallois » de l\'Euro 2016, passé par Swansea, Liverpool et Stoke ; milieu relayeur propre et précis.'],
+        ['firstname' => 'Aaron', 'lastname' => 'Ramsey', 'profile' => 'box_to_box', 'position' => 'MC', 'secondary' => null, 'stats' => ['speed' => 64, 'stamina' => 72, 'attack' => 25, 'defense' => 18, 'shot' => 22, 'pass' => 25, 'dribble' => 23, 'block' => 15, 'intercept' => 20, 'tackle' => 19, 'heading' => 15, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Arsenal (trois FA Cups) puis Juventus, moteur du Pays de Galles à l\'Euro 2016 ; milieu box-to-box qui arrive en finisseur.'],
+        ['firstname' => 'Gareth', 'lastname' => 'Bale', 'profile' => 'winger_forward', 'position' => 'AG', 'secondary' => 'BU', 'stats' => ['speed' => 82, 'stamina' => 70, 'attack' => 36, 'defense' => 14, 'shot' => 30, 'pass' => 24, 'dribble' => 32, 'block' => 11, 'intercept' => 14, 'tackle' => 12, 'heading' => 19, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Tottenham puis Real Madrid (cinq Ligues des champions), meilleur buteur de l\'histoire du Pays de Galles ; ailier explosif à la frappe de loin.'],
+        ['firstname' => 'Ian', 'lastname' => 'Rush', 'profile' => 'striker', 'position' => 'BU', 'secondary' => null, 'stats' => ['speed' => 67, 'stamina' => 72, 'attack' => 34, 'defense' => 14, 'shot' => 30, 'pass' => 20, 'dribble' => 24, 'block' => 11, 'intercept' => 14, 'tackle' => 12, 'heading' => 20, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Liverpool, dont il est le meilleur buteur de l\'histoire (346 buts), et Juventus ; avant-centre opportuniste, rapide dans la surface.'],
+        ['firstname' => 'Mark', 'lastname' => 'Hughes', 'profile' => 'second_striker', 'position' => 'AT', 'secondary' => null, 'stats' => ['speed' => 62, 'stamina' => 70, 'attack' => 28, 'defense' => 16, 'shot' => 22, 'pass' => 20, 'dribble' => 20, 'block' => 12, 'intercept' => 15, 'tackle' => 17, 'heading' => 23, 'hand_save' => 10, 'punch_save' => 10], 'note' => '« Sparky » : Manchester United, Barcelone puis Bayern ; attaquant combatif, spécialiste des reprises de volée.'],
     ];
 }
