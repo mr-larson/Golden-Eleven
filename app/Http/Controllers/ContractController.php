@@ -32,6 +32,8 @@ class ContractController extends Controller
                 'team_logo_path'    => $c->team?->logo_path,
                 'player_name'       => $c->player ? trim(($c->player->firstname ?? '').' '.($c->player->lastname ?? '')) : null,
                 'player_nationality' => $c->player?->nationality instanceof \BackedEnum ? $c->player->nationality->value : $c->player?->nationality,
+                // OVR du joueur (moyenne de ses stats renseignées), affiché dans la liste.
+                'player_ovr'        => self::playerOvr($c->player?->stats ?? []),
                 'salary'            => $c->salary,
                 'matches_total'     => $c->matches_total,
                 'matches_played'    => $c->matches_played,
@@ -48,6 +50,15 @@ class ContractController extends Controller
             'selectedId'  => $request->integer('selected') ?: null,
             'startCreate' => $request->boolean('create'),
         ]);
+    }
+
+    /** OVR d'un joueur : moyenne de ses stats renseignées (> 0), à une décimale ; null sans stats. */
+    private static function playerOvr(array $stats): ?float
+    {
+        $keys = ['speed', 'attack', 'defense', 'stamina', 'shot', 'pass', 'dribble', 'block', 'intercept', 'tackle', 'heading', 'hand_save', 'punch_save'];
+        $values = collect($keys)->map(fn ($k) => (float) ($stats[$k] ?? 0))->filter(fn ($v) => $v > 0);
+
+        return $values->isEmpty() ? null : round($values->avg(), 1);
     }
 
     /** Ancienne URL de création : ouvre l'écran en mode création. */

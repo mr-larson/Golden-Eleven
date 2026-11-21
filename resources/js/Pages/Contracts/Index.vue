@@ -66,6 +66,8 @@
                             {{ item.team_name ?? 'Équipe supprimée' }}
                         </span>
                     </span>
+                    <span v-if="item.player_ovr" class="text-2xs font-semibold tabular-nums shrink-0"
+                          :class="selected ? 'text-white/70' : 'text-slate-500'">{{ Number(item.player_ovr).toFixed(1) }}</span>
                 </template>
 
                 <template #badges>

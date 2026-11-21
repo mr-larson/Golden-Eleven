@@ -55,7 +55,8 @@
             >
                 <template #item="{ item }">
                     <TeamLogo :team="item" />
-                    <span class="truncate text-sm font-medium">{{ item.name }}</span>
+                    <span class="flex-1 truncate text-sm font-medium">{{ item.name }}</span>
+                    <span v-if="item.eleven" class="text-2xs font-semibold tabular-nums text-slate-500 shrink-0">{{ Number(item.eleven.ovr).toFixed(1) }}</span>
                 </template>
 
                 <template #badges>
