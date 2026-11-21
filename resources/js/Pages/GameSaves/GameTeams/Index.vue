@@ -7,17 +7,32 @@
         </template>
 
         <div class="p-4 sm:p-6 max-w-8xl mx-auto flex flex-col gap-4">
-            <EditorSubNav
-                :back="{ href: route('game-saves.Play', { gameSave: gameSave.id }), label: 'Retour à la partie' }"
-                :links="[
-                    { href: route('game-saves.players.index', { gameSave: gameSave.id }), label: 'Joueurs' },
-                    { href: route('game-saves.teams.index', { gameSave: gameSave.id }), label: 'Équipes', active: true },
-                ]"
-            />
+            <div class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4">
+                <EditorSubNav class="shrink-0"
+                    :back="{ href: route('game-saves.Play', { gameSave: gameSave.id }), label: 'Retour à la partie' }"
+                    :links="[
+                        { href: route('game-saves.players.index', { gameSave: gameSave.id }), label: 'Joueurs' },
+                        { href: route('game-saves.teams.index', { gameSave: gameSave.id }), label: 'Équipes', active: true },
+                    ]"
+                />
+
+                <EditorFilterBar label="Filtres des équipes" unit="équipes" class="ml-auto xl:min-w-0"
+                    :count="filteredTeams.length" :total="teams.length" @reset="country = 'ALL'; sortKey = 'name'">
+                    <EditorFilterSelect v-model="country" label="Pays">
+                        <option value="ALL">Tous les pays</option>
+                        <option value="NONE">Non renseigné</option>
+                        <option v-for="c in countries" :key="c" :value="c">{{ c }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-model="sortKey" label="Trier par">
+                        <option value="name">Nom (A → Z)</option>
+                        <option value="country">Pays (A → Z)</option>
+                    </EditorFilterSelect>
+                </EditorFilterBar>
+            </div>
 
             <EntityEditor
                 title="Équipes"
-                :items="teams"
+                :items="filteredTeams"
                 :selected-id="editor.selectedId.value"
                 :creating="editor.creating.value"
                 :search-text="t => t.name || ''"
@@ -76,6 +91,8 @@ import H2 from '@/Components/H2.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
 import { ref, computed } from 'vue';
+import EditorFilterBar from '@/Components/EditorFilterBar.vue';
+import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
 
 import EntityEditor from '@/Components/EntityEditor.vue';
 import EditorSubNav from '@/Components/EditorSubNav.vue';
@@ -95,6 +112,15 @@ const props = defineProps({
     // Ouvre directement une fiche vide (ancienne URL /teams/create).
     startCreate: { type: Boolean, default: false },
 });
+
+// Filtre par pays (nationalité majoritaire des joueurs sous contrat).
+const country = ref('ALL');
+const countries = computed(() => [...new Set(props.teams.map(t => t.country).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')));
+const sortKey = ref('name');
+const filteredTeams = computed(() => props.teams.filter(t => country.value === 'ALL' || (t.country || 'NONE') === country.value)
+    .sort((a, b) => sortKey.value === 'country'
+        ? (a.country ?? '~').localeCompare(b.country ?? '~', 'fr') || (a.name ?? '').localeCompare(b.name ?? '', 'fr')
+        : (a.name ?? '').localeCompare(b.name ?? '', 'fr')));
 
 const BLANK = {
     id: null,

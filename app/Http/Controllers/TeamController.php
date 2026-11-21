@@ -31,12 +31,23 @@ class TeamController extends Controller
                     $team->tactical_style ?? 'balanced',
                     $team->management_philosophy ?? 'collective',
                 ));
+                $team->setAttribute('country', self::dominantNationality($team->players));
                 $team->unsetRelation('players');
             }),
             // Équipe à ouvrir (ex. juste après sa création) / fiche vide demandée.
             'selectedId'  => $request->integer('selected') ?: null,
             'startCreate' => $request->boolean('create'),
         ]);
+    }
+
+
+    /** Pays d'une équipe : nationalité la plus représentée parmi ses joueurs sous contrat (null s'il n'y en a pas). */
+    private static function dominantNationality($players): ?string
+    {
+        $counts = $players->map(fn ($p) => $p->nationality instanceof \BackedEnum ? $p->nationality->value : $p->nationality)
+            ->filter()->countBy()->sortDesc();
+
+        return $counts->keys()->first();
     }
 
     /** Ancienne URL de création : ouvre l'écran en mode création. */

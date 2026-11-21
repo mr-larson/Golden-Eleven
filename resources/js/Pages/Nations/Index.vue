@@ -7,20 +7,43 @@
         </template>
 
         <div class="p-4 sm:p-6 max-w-8xl mx-auto flex flex-col gap-4">
-            <EditorSubNav
-                :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
-                :links="[
-                    { href: route('players.index'), label: 'Joueurs' },
-                    { href: route('teams.index'), label: 'Équipes' },
-                    { href: route('contracts.index'), label: 'Contrats' },
-                    { href: route('nations.index'), label: 'Pays', active: true },
-                    { href: route('users.index'), label: 'Utilisateurs' },
-                ]"
-            />
+            <div class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4">
+                <EditorSubNav class="shrink-0"
+                    :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
+                    :links="[
+                        { href: route('players.index'), label: 'Joueurs' },
+                        { href: route('teams.index'), label: 'Équipes' },
+                        { href: route('contracts.index'), label: 'Contrats' },
+                        { href: route('nations.index'), label: 'Pays', active: true },
+                        { href: route('users.index'), label: 'Utilisateurs' },
+                    ]"
+                />
+
+                <EditorFilterBar label="Filtres des pays" unit="pays" class="ml-auto xl:min-w-0"
+                    :count="filteredNations.length" :total="nations.length" @reset="resetFilters">
+                    <EditorFilterSelect v-model="filters.style" label="Style tactique">
+                        <option value="ALL">Tous les styles</option>
+                        <option v-for="style in TACTICAL_STYLES" :key="style" :value="style">{{ tacticalLabel(style) }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-model="filters.philosophy" label="Philosophie de gestion">
+                        <option value="ALL">Toutes les philosophies</option>
+                        <option v-for="philosophy in PHILOSOPHIES" :key="philosophy" :value="philosophy">{{ philosophyLabel(philosophy) }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-model="filters.sort" label="Trier par">
+                        <option value="name">Nom (A → Z)</option>
+                        <option value="ovr">Note globale du onze</option>
+                        <option v-for="stat in PLAYER_STATS" :key="stat.key" :value="stat.key">{{ stat.label }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-if="filters.sort !== 'name'" v-model="filters.direction" label="Ordre">
+                        <option value="desc">Décroissant</option>
+                        <option value="asc">Croissant</option>
+                    </EditorFilterSelect>
+                </EditorFilterBar>
+            </div>
 
             <EntityEditor
                 title="Pays"
-                :items="nations"
+                :items="filteredNations"
                 :selected-id="editor.selectedId.value"
                 :creating="editor.creating.value"
                 :can-create="false"
@@ -94,7 +117,10 @@ import Badge from '@/Components/Badge.vue';
 import Panel from '@/Components/Panel.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
+import EditorFilterBar from '@/Components/EditorFilterBar.vue';
+import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
+import { PLAYER_STATS } from '@/Enums/playerStats.js';
 
 import H2 from '@/Components/H2.vue';
 import EntityEditor from '@/Components/EntityEditor.vue';
@@ -119,6 +145,19 @@ const { tacticalLabel, tacticalIcon, philosophyLabel, philosophyIcon } = useTeam
 const selectClass = ['mt-1 w-full', fieldClass()];
 
 // Nom : affiché seulement (verrouillé, c'est aussi la valeur de `players.nationality`).
+// Filtres (style, philosophie) et tri de la liste.
+const filters = reactive({ style: 'ALL', philosophy: 'ALL', sort: 'name', direction: 'desc' });
+const nationValue = n => filters.sort === 'ovr' ? Number(n.eleven?.ovr ?? -1) : Number(n.eleven?.stats?.[filters.sort] ?? -1);
+const filteredNations = computed(() => props.nations
+    .filter(n => (filters.style === 'ALL' || (n.tactical_style ?? 'balanced') === filters.style)
+        && (filters.philosophy === 'ALL' || (n.management_philosophy ?? 'collective') === filters.philosophy))
+    .sort((a, b) => {
+        if (filters.sort === 'name') return (a.name ?? '').localeCompare(b.name ?? '', 'fr');
+        const diff = nationValue(b) - nationValue(a);
+        return filters.direction === 'asc' ? -diff : diff;
+    }));
+const resetFilters = () => Object.assign(filters, { style: 'ALL', philosophy: 'ALL', sort: 'name', direction: 'desc' });
+
 const BLANK = { id: null, name: '', tactical_style: 'balanced', management_philosophy: 'collective', description: '' };
 
 const form = useForm(clone(BLANK));

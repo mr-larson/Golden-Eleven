@@ -7,20 +7,41 @@
         </template>
 
         <div class="p-4 sm:p-6 max-w-8xl mx-auto flex flex-col gap-4">
-            <EditorSubNav
-                :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
-                :links="[
-                    { href: route('players.index'), label: 'Joueurs' },
-                    { href: route('teams.index'), label: 'Équipes', active: true },
-                    { href: route('contracts.index'), label: 'Contrats' },
-                    { href: route('nations.index'), label: 'Pays' },
-                    { href: route('users.index'), label: 'Utilisateurs' },
-                ]"
-            />
+            <div class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4">
+                <EditorSubNav class="shrink-0"
+                    :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
+                    :links="[
+                        { href: route('players.index'), label: 'Joueurs' },
+                        { href: route('teams.index'), label: 'Équipes', active: true },
+                        { href: route('contracts.index'), label: 'Contrats' },
+                        { href: route('nations.index'), label: 'Pays' },
+                        { href: route('users.index'), label: 'Utilisateurs' },
+                    ]"
+                />
+
+                <EditorFilterBar label="Filtres des équipes" unit="équipes" class="ml-auto xl:min-w-0"
+                    :count="filteredTeams.length" :total="teams.length" @reset="resetFilters">
+                    <EditorFilterSelect v-model="country" label="Pays">
+                        <option value="ALL">Tous les pays</option>
+                        <option value="NONE">Non renseigné</option>
+                        <option v-for="c in countries" :key="c" :value="c">{{ c }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-model="sort.key" label="Trier par">
+                        <option value="name">Nom (A → Z)</option>
+                        <option value="country">Pays (A → Z)</option>
+                        <option value="ovr">Note globale du onze</option>
+                        <option v-for="stat in PLAYER_STATS" :key="stat.key" :value="stat.key">{{ stat.label }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-if="!['name', 'country'].includes(sort.key)" v-model="sort.direction" label="Ordre">
+                        <option value="desc">Décroissant</option>
+                        <option value="asc">Croissant</option>
+                    </EditorFilterSelect>
+                </EditorFilterBar>
+            </div>
 
             <EntityEditor
                 title="Équipes"
-                :items="teams"
+                :items="filteredTeams"
                 :selected-id="editor.selectedId.value"
                 :creating="editor.creating.value"
                 :search-text="t => t.name || ''"
@@ -84,7 +105,10 @@ import Panel from '@/Components/Panel.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
-import { computed, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
+import { PLAYER_STATS } from '@/Enums/playerStats.js';
+import EditorFilterBar from '@/Components/EditorFilterBar.vue';
+import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
 
 import H2 from '@/Components/H2.vue';
 import EntityEditor from '@/Components/EntityEditor.vue';
@@ -104,6 +128,20 @@ const props = defineProps({
     // Ouvre directement une fiche vide (ancienne URL /teams/create).
     startCreate: { type: Boolean, default: false },
 });
+
+// Filtre par pays (nationalité majoritaire des joueurs sous contrat).
+const country = ref('ALL');
+const countries = computed(() => [...new Set(props.teams.map(t => t.country).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')));
+const sort = reactive({ key: 'name', direction: 'desc' });
+const teamValue = t => sort.key === 'ovr' ? Number(t.eleven?.ovr ?? -1) : Number(t.eleven?.stats?.[sort.key] ?? -1);
+const filteredTeams = computed(() => props.teams.filter(t => country.value === 'ALL' || (t.country || 'NONE') === country.value)
+    .sort((a, b) => {
+        if (sort.key === 'name') return (a.name ?? '').localeCompare(b.name ?? '', 'fr');
+        if (sort.key === 'country') return (a.country ?? '~').localeCompare(b.country ?? '~', 'fr') || (a.name ?? '').localeCompare(b.name ?? '', 'fr');
+        const diff = teamValue(b) - teamValue(a);
+        return sort.direction === 'asc' ? -diff : diff;
+    }));
+const resetFilters = () => { country.value = 'ALL'; Object.assign(sort, { key: 'name', direction: 'desc' }); };
 
 const BLANK = {
     id: null,

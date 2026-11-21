@@ -31,6 +31,7 @@ class ContractController extends Controller
                 'team_name'         => $c->team?->name,
                 'team_logo_path'    => $c->team?->logo_path,
                 'player_name'       => $c->player ? trim(($c->player->firstname ?? '').' '.($c->player->lastname ?? '')) : null,
+                'player_nationality' => $c->player?->nationality instanceof \BackedEnum ? $c->player->nationality->value : $c->player?->nationality,
                 'salary'            => $c->salary,
                 'matches_total'     => $c->matches_total,
                 'matches_played'    => $c->matches_played,

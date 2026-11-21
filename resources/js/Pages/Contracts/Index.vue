@@ -7,20 +7,46 @@
         </template>
 
         <div class="p-4 sm:p-6 max-w-8xl mx-auto flex flex-col gap-4">
-            <EditorSubNav
-                :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
-                :links="[
-                    { href: route('players.index'), label: 'Joueurs' },
-                    { href: route('teams.index'), label: 'Équipes' },
-                    { href: route('contracts.index'), label: 'Contrats', active: true },
-                    { href: route('nations.index'), label: 'Pays' },
-                    { href: route('users.index'), label: 'Utilisateurs' },
-                ]"
-            />
+            <div class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4">
+                <EditorSubNav class="shrink-0"
+                    :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
+                    :links="[
+                        { href: route('players.index'), label: 'Joueurs' },
+                        { href: route('teams.index'), label: 'Équipes' },
+                        { href: route('contracts.index'), label: 'Contrats', active: true },
+                        { href: route('nations.index'), label: 'Pays' },
+                        { href: route('users.index'), label: 'Utilisateurs' },
+                    ]"
+                />
+
+                <EditorFilterBar label="Filtres des contrats" unit="contrats" class="ml-auto xl:min-w-0"
+                    :count="filteredContracts.length" :total="contracts.length" @reset="resetFilters">
+                    <EditorFilterSelect v-model="filters.nationality" label="Nationalité">
+                        <option value="ALL">Toutes les nationalités</option>
+                        <option value="NONE">Non renseignée</option>
+                        <option v-for="nation in nationalities" :key="nation" :value="nation">{{ nation }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-model="filters.team" label="Équipe">
+                        <option value="ALL">Toutes les équipes</option>
+                        <option v-for="team in teams" :key="team.id" :value="String(team.id)">{{ team.name }}</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-model="filters.sort" label="Trier par">
+                        <option value="name">Nom (A → Z)</option>
+                        <option value="team">Équipe (A → Z)</option>
+                        <option value="salary">Salaire</option>
+                        <option value="remaining">Matchs restants</option>
+                        <option value="played">Matchs joués</option>
+                    </EditorFilterSelect>
+                    <EditorFilterSelect v-if="!['name', 'team'].includes(filters.sort)" v-model="filters.direction" label="Ordre">
+                        <option value="desc">Décroissant</option>
+                        <option value="asc">Croissant</option>
+                    </EditorFilterSelect>
+                </EditorFilterBar>
+            </div>
 
             <EntityEditor
                 title="Contrats"
-                :items="contracts"
+                :items="filteredContracts"
                 :selected-id="editor.selectedId.value"
                 :creating="editor.creating.value"
                 :search-text="c => `${c.player_name ?? ''} ${c.team_name ?? ''}`"
@@ -110,7 +136,9 @@ import Panel from '@/Components/Panel.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
+import EditorFilterBar from '@/Components/EditorFilterBar.vue';
+import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
 
 import H2 from '@/Components/H2.vue';
 import EntityEditor from '@/Components/EntityEditor.vue';
@@ -134,6 +162,21 @@ const props = defineProps({
     // Ouvre directement une fiche vide (ancienne URL /contracts/create).
     startCreate: { type: Boolean, default: false },
 });
+
+// Filtres de la liste : nationalité du joueur et équipe du contrat.
+const filters = reactive({ nationality: 'ALL', team: 'ALL', sort: 'name', direction: 'desc' });
+const nationalities = computed(() => [...new Set(props.contracts.map(c => c.player_nationality).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')));
+const SORT_VALUES = { salary: c => Number(c.salary ?? 0), remaining: c => Number(c.matches_remaining ?? 0), played: c => Number(c.matches_played ?? 0) };
+const filteredContracts = computed(() => props.contracts.filter(c =>
+    (filters.nationality === 'ALL' || (c.player_nationality || 'NONE') === filters.nationality)
+    && (filters.team === 'ALL' || String(c.team_id) === filters.team))
+    .sort((a, b) => {
+        if (filters.sort === 'name') return (a.player_name ?? '').localeCompare(b.player_name ?? '', 'fr');
+        if (filters.sort === 'team') return (a.team_name ?? '').localeCompare(b.team_name ?? '', 'fr');
+        const diff = SORT_VALUES[filters.sort](b) - SORT_VALUES[filters.sort](a);
+        return filters.direction === 'asc' ? -diff : diff;
+    }));
+const resetFilters = () => Object.assign(filters, { nationality: 'ALL', team: 'ALL', sort: 'name', direction: 'desc' });
 
 const BLANK = {
     id: null,

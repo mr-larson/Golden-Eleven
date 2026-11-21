@@ -31,8 +31,13 @@ class GameTeamController extends Controller
         $this->authorizeGameSave('view', $gameSave);
 
         $teams = GameTeam::where('game_save_id', $gameSave->id)
+            ->with('players')
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->each(function (GameTeam $team) {
+                $team->setAttribute('country', self::dominantNationality($team->players));
+                $team->unsetRelation('players');
+            });
 
         return Inertia::render('GameSaves/GameTeams/Index', [
             'gameSave' => GameSaveResource::make($gameSave)->toArray(),
@@ -41,6 +46,15 @@ class GameTeamController extends Controller
             'selectedId'  => $request->integer('selected') ?: null,
             'startCreate' => $request->boolean('create'),
         ]);
+    }
+
+    /** Pays d'une équipe : nationalité la plus représentée parmi ses joueurs sous contrat (null s'il n'y en a pas). */
+    private static function dominantNationality($players): ?string
+    {
+        $counts = $players->map(fn ($p) => $p->nationality instanceof \BackedEnum ? $p->nationality->value : $p->nationality)
+            ->filter()->countBy()->sortDesc();
+
+        return $counts->keys()->first();
     }
 
     /**
