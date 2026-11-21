@@ -24,7 +24,7 @@ const counters = [
         <section id="creer" class="mb-10 scroll-mt-6">
             <h2 class="mb-3 text-xl font-bold text-teal-300">1. Créer une partie</h2>
             <ul class="list-disc space-y-2 pl-5 text-slate-300">
-                <li>Choisis une compétition : la <strong>Ligue</strong> (championnat en aller-retour) ou la <strong>Coupe Nation</strong> (poules puis élimination directe).</li>
+                <li>Choisis une compétition : la <strong>Ligue</strong> (championnat en aller-retour), la <strong>Coupe Nation</strong> (sélections nationales) ou la <strong>Coupe Club</strong> (clubs de la période) : poules puis élimination directe.</li>
                 <li>Choisis un mode : <strong>effectifs pré-faits</strong> (chaque équipe a déjà ses joueurs) ou <strong>draft</strong> (toutes les équipes recrutent tour par tour, entre 14 et 18 joueurs).</li>
                 <li>Sélectionne l'équipe que tu pilotes. Pour jouer à plusieurs sur le même appareil, ajoute une équipe par manager humain : chacun joue à son tour.</li>
                 <li>

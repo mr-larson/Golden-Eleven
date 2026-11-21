@@ -145,7 +145,7 @@ class WeekClosingService
         $this->seasonChallengeService->payCompleted($gameSave);
 
         // 6. Coupe Nation : progression du tournoi au lieu de la fin de saison.
-        if ($gameSave->isWorldCup()) {
+        if ($gameSave->isTournament()) {
             $this->tournamentService->advance($gameSave);
             $this->passHandToHumanWithMatch($gameSave);
             if ($this->tournamentService->isTournamentOver($gameSave)) {
@@ -214,7 +214,7 @@ class WeekClosingService
      */
     public static function humanIncomeModel(GameSave $gameSave): array
     {
-        $base = $gameSave->isWorldCup()
+        $base = $gameSave->isTournament()
             ? self::BASE_INCOME
             : (int) $gameSave->getConfig('human_weekly_income', self::BASE_INCOME);
 

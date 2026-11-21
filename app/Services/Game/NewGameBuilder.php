@@ -22,6 +22,7 @@ use App\Services\Draft\DraftService;
 use App\Services\Season\SeasonBootstrapService;
 use App\Services\Season\SeasonService;
 use App\Services\Transfers\AmateurMarketService;
+use App\Services\WorldCup\TournamentService;
 
 /**
  * Construit une nouvelle partie « Ligue » (mode pré-fait ou draft) à partir des
@@ -57,6 +58,7 @@ class NewGameBuilder
         private DraftLineupOrganizer $lineupOrganizer,
         private AmateurMarketService $amateurMarket,
         private SeasonBootstrapService $seasonBootstrap,
+        private TournamentService $tournament,
     ) {
     }
 
@@ -107,6 +109,10 @@ class NewGameBuilder
             if ($isDraft) {
                 $this->startDraft($gameSave, $teams);
             } else {
+                // Coupe Club : poules et calendrier du tournoi (pas de calendrier de ligue).
+                if ($gameSave->isClubCup()) {
+                    $this->tournament->generateGroups($gameSave);
+                }
                 // Semaine 1 : mandat de la direction, défis, calendrier, compositions IA.
                 $this->seasonBootstrap->prepare($gameSave);
             }

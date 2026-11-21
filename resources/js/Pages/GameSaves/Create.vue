@@ -3,6 +3,8 @@ import GameBanknote from '@/Components/GameBanknote.vue';
 import UniverseSelector from '@/Components/UniverseSelector.vue';
 import ConfigSection from '@/Components/ConfigSection.vue';
 import ConfigRange from '@/Components/ConfigRange.vue';
+import CompetitionTypeCard from '@/Components/CompetitionTypeCard.vue';
+import { COMPETITIONS, isTournamentType } from '@/Pages/GameSaves/competitions.js';
 import ParticipantCountPicker from '@/Components/ParticipantCountPicker.vue';
 import ConfigToggle from '@/Components/ConfigToggle.vue';
 import { TRAINING_COST_FIELDS as trainingCostFields } from '@/Components/configFields.js';
@@ -34,7 +36,7 @@ const form = useForm({
     competition_type: 'college_league',
     game_config: null,
     period_package_id: null,
-    participant_count: null,   // Ligue : null = tous les clubs ; Coupe Nation : 8, 16, 24 ou 32 nations
+    participant_count: null,   // Ligue : null = tous les clubs ; Coupe Nation / Coupe Club : 8, 16, 24 ou 32 participants
 });
 
 // Périodes importées proposées dans le sélecteur : aucune en mode Draft (le
@@ -61,11 +63,22 @@ const clubSlider = computed({
     set: (v) => { form.participant_count = v >= totalClubs.value ? null : v; },
 });
 // Un changement de période (ou un package) invalide le nombre de clubs déjà choisi.
-watch([() => form.period, () => form.period_package_id], () => { if (form.competition_type !== 'world_cup') form.participant_count = null; });
-// Valeur de départ du nombre de participants selon la compétition (Coupe : 8 nations ; Ligue : tous les clubs).
-watch(() => form.competition_type, (type) => { form.participant_count = type === 'world_cup' ? 8 : null; });
+watch([() => form.period, () => form.period_package_id], () => {
+    if (form.competition_type === 'club_cup') form.participant_count = Math.min(form.participant_count ?? 8, cupClubsMax.value);
+    else if (form.competition_type !== 'world_cup') form.participant_count = null;
+});
+// Coupe Club : paliers de 8 clubs de la période (jamais plus que ce que la période compte).
+const cupClubsMax = computed(() => Math.max(8, Math.floor(totalClubs.value / 8) * 8));
+const clubCupAvailable = computed(() => totalClubs.value >= 8);
+const isTournament = computed(() => isTournamentType(form.competition_type));
+// Valeur de départ du nombre de participants selon la compétition (Coupe : 8 ; Ligue : tous les clubs).
+// Un tournoi n'a ni draft ni période importée : on revient aux effectifs pré-faits de la période.
+watch(() => form.competition_type, (type) => {
+    form.participant_count = isTournamentType(type) ? 8 : null;
+    if (type !== 'college_league') { form.game_mode = 'prebuilt'; form.period_package_id = null; }
+});
 
-const availablePackages = computed(() => form.game_mode === 'draft' ? [] : props.periodPackages);
+const availablePackages = computed(() => form.game_mode === 'draft' || isTournament.value ? [] : props.periodPackages);
 
 // Exporter la période actuellement choisie (modèle Collège par défaut, ou le
 // package sélectionné) — lien direct, pas de visite Inertia (téléchargement).
@@ -294,12 +307,12 @@ function submit() {
                                 </div>
 
                                 <!-- Période : effectif standard, ou une période importée qui le remplace entièrement -->
-                                <div v-if="form.competition_type === 'college_league'" class="flex flex-col gap-1.5">
+                                <div v-if="form.competition_type !== 'world_cup'" class="flex flex-col gap-1.5">
                                     <div class="flex items-center justify-between flex-wrap gap-1">
                                         <label for="period_package" class="text-xs font-bold text-slate-500 uppercase tracking-wider">
                                             Période
                                         </label>
-                                        <div class="flex items-center gap-2 text-[11px] font-semibold">
+                                        <div v-if="!isTournament" class="flex items-center gap-2 text-[11px] font-semibold">
                                             <a :href="exportHref" download
                                                class="text-teal-600 hover:text-teal-700 hover:underline">
                                                 📤 Exporter{{ form.period_package_id ? ' cette période' : ' un modèle' }}
@@ -337,52 +350,11 @@ function submit() {
                                 <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">
                                     Format de compétition
                                 </label>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <button type="button"
-                                            @click="form.competition_type = 'college_league'"
-                                            class="relative flex flex-col gap-2 p-4 rounded-xl border-2 transition-all text-left"
-                                            :class="form.competition_type === 'college_league'
-                                                ? 'border-teal-500 bg-teal-50 shadow-sm'
-                                                : 'border-slate-300 bg-white hover:border-slate-300'">
-                                        <div class="flex items-center gap-2">
-                                            <span class="text-xl">🏫</span>
-                                            <span class="text-sm font-bold"
-                                                  :class="form.competition_type === 'college_league' ? 'text-teal-700' : 'text-slate-700'">
-                                                Ligue
-                                            </span>
-                                        </div>
-                                        <p class="text-[11px] leading-relaxed"
-                                           :class="form.competition_type === 'college_league' ? 'text-teal-600' : 'text-slate-500'">
-                                            Championnat des collèges en matchs aller-retour. Le mode classique de Captain Tsubasa.
-                                        </p>
-                                        <div v-if="form.competition_type === 'college_league'"
-                                             class="absolute top-2 right-2 w-5 h-5 rounded-full bg-teal-500 flex items-center justify-center">
-                                            <span class="text-white text-2xs font-bold">✓</span>
-                                        </div>
-                                    </button>
-
-                                    <button type="button"
-                                            @click="form.competition_type = 'world_cup'"
-                                            class="relative flex flex-col gap-2 p-4 rounded-xl border-2 transition-all text-left"
-                                            :class="form.competition_type === 'world_cup'
-                                                ? 'border-indigo-500 bg-indigo-50 shadow-sm'
-                                                : 'border-slate-300 bg-white hover:border-slate-300'">
-                                        <div class="flex items-center gap-2">
-                                            <span class="text-xl">🌍</span>
-                                            <span class="text-sm font-bold"
-                                                  :class="form.competition_type === 'world_cup' ? 'text-indigo-700' : 'text-slate-700'">
-                                                Coupe Nation
-                                            </span>
-                                        </div>
-                                        <p class="text-[11px] leading-relaxed"
-                                           :class="form.competition_type === 'world_cup' ? 'text-indigo-600' : 'text-slate-500'">
-                                            Tournoi des sélections nationales : poules puis élimination directe. Mène ta nation au titre.
-                                        </p>
-                                        <div v-if="form.competition_type === 'world_cup'"
-                                             class="absolute top-2 right-2 w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center">
-                                            <span class="text-white text-2xs font-bold">✓</span>
-                                        </div>
-                                    </button>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <CompetitionTypeCard v-for="(competition, type) in COMPETITIONS" :key="type" v-model="form.competition_type"
+                                                         :value="type" :icon="competition.icon" :title="competition.label" :text="competition.text"
+                                                         :tone="competition.tone" :disabled="type === 'club_cup' && !clubCupAvailable"
+                                                         disabled-text="Pas assez de clubs dans cette période (8 minimum)." />
                                 </div>
                                 <p v-if="form.errors.competition_type" class="text-xs text-rose-500">{{ form.errors.competition_type }}</p>
                             </div>
@@ -392,6 +364,11 @@ function submit() {
                                 v-model="form.participant_count"
                                 id="participant_count_cup" label="Nombre de sélections" unit="nations" :min="8" :max="32" :step="8"
                                 hint="Les nations sont choisies à l'étape suivante : celles que tu n'imposes pas sont tirées au sort."
+                                :error="form.errors.participant_count" />
+                            <ParticipantCountPicker v-else-if="form.competition_type === 'club_cup'"
+                                v-model="form.participant_count"
+                                id="participant_count_club_cup" label="Nombre de clubs" unit="clubs" :min="8" :max="cupClubsMax" :step="8"
+                                hint="Ton club en fait toujours partie ; impose des clubs à l'étape suivante, les autres sont tirés au sort."
                                 :error="form.errors.participant_count" />
                             <ParticipantCountPicker v-else-if="form.competition_type === 'college_league' && !form.period_package_id && totalClubs > 4"
                                 v-model="clubSlider"
@@ -466,12 +443,12 @@ function submit() {
                                   class="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50">
                                 ← Retour
                             </Link>
-                            <ButtonPrimary size="lg" :tone="form.competition_type === 'world_cup' ? 'indigo' : 'teal'"
+                            <ButtonPrimary size="lg" :tone="COMPETITIONS[form.competition_type].tone""
                                            :disabled="form.processing">
                                 <span v-if="form.processing">Création...</span>
-                                <span v-else-if="form.competition_type === 'world_cup'">🌍 Choisir ma sélection</span>
+                                <span v-else-if="isTournament">{{ COMPETITIONS[form.competition_type].start }}</span>
                                 <span v-else-if="form.game_mode === 'draft'">🎯 Lancer le draft</span>
-                                <span v-else>⚽ Démarrer la partie</span>
+                                <span v-else>{{ COMPETITIONS.college_league.start }}</span>
                             </ButtonPrimary>
                         </div>
                     </form>
@@ -480,7 +457,7 @@ function submit() {
                     <div v-show="showConfig" class="flex flex-col flex-1 gap-4 overflow-y-auto min-h-0">
 
                         <!-- Mandat de la direction -->
-                        <ConfigSection v-if="form.competition_type !== 'world_cup'" compact icon="🎯" title="Mandat de la direction">
+                        <ConfigSection v-if="!isTournament" compact icon="🎯" title="Mandat de la direction">
                             <p class="text-2xs text-slate-400 -mt-1">
                                 Chaque saison, le board juge 4 piliers : classement, effectif, vestiaire et finances. Réussis assez de saisons pour gagner ta carrière.
                                 Le budget de départ et les revenus se règlent dans « Économie ».
@@ -562,7 +539,7 @@ function submit() {
                             </div>
                         </ConfigSection>
 
-                        <ConfigSection v-if="form.competition_type !== 'world_cup'" compact icon="💰" title="Économie">
+                        <ConfigSection v-if="!isTournament" compact icon="💰" title="Économie">
                             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                 <ConfigRange v-for="field in budgetFields" :key="field.key" v-model="config[field.key]"
                                              :id="field.key" :label="field.label" :min="field.min" :max="20000" :step="250" value-width="w-14">

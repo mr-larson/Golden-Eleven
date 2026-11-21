@@ -209,6 +209,7 @@ import SelectionList from '@/Components/Selection/SelectionList.vue';
 import SelectionRoster from '@/Components/Selection/SelectionRoster.vue';
 import SectionTitle from '@/Components/SectionTitle.vue';
 import Panel from '@/Components/Panel.vue';
+import { competitionLabel } from '@/Pages/GameSaves/competitions.js';
 import SelectionActions from '@/Components/Selection/SelectionActions.vue';
 import SelectionProfileCard from '@/Components/Selection/SelectionProfileCard.vue';
 import HumanManagersPanel from '@/Components/Selection/HumanManagersPanel.vue';
@@ -268,7 +269,7 @@ const humanTeams  = ref([]);
 // Récapitulatif avant lancement (« Ligue · Solo · Effectifs pré-faits · Nankatsu »),
 // pour vérifier ses choix après être passé par la configuration.
 const launchRecap = computed(() => [
-    props.competitionType === 'college_league' ? 'Ligue' : 'Coupe Nation',
+    competitionLabel(props.competitionType),
     humanTeams.value.length > 1 ? `Hot-seat ${humanTeams.value.length} joueurs` : 'Solo',
     props.gameMode === 'draft' ? 'Draft' : 'Effectifs pré-faits',
     (humanTeams.value.length ? humanTeams.value : [selectedTeam.value]).filter(Boolean).map(t => t.name).join(', '),

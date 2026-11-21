@@ -4,11 +4,9 @@ namespace App\Services\WorldCup;
 
 use App\Contracts\Randomizer;
 use App\Enums\GamePhase;
-use App\Enums\Nationality;
 use App\Models\GameSaves\GameMatch;
 use App\Models\GameSaves\GameSave;
 use App\Models\GameSaves\GameTeam;
-use App\Models\Nation;
 
 /**
  * Moteur de tournoi pour le mode Coupe Nation (jumeau de SeasonService) : orchestre les phases.
@@ -287,13 +285,13 @@ class TournamentService
         }
 
         $teams = GameTeam::where('game_save_id', $gameSave->id)->get()->keyBy('id');
-        $flagUrls = Nation::flagUrls(); // drapeaux image (l'emoji reste le repli)
-        $ref = function (?int $id) use ($teams, $flagUrls): ?array {
+        $emblems = TournamentEmblems::for($gameSave); // drapeau (Coupe Nation) ou logo du club (Coupe Club)
+        $ref = function (?int $id) use ($teams, $emblems): ?array {
             if (! $id || ! isset($teams[$id])) {
                 return null;
             }
 
-            return ['team_id' => $id, 'name' => $teams[$id]->name, 'flag' => Nationality::flag($teams[$id]->name), 'flag_url' => $flagUrls[$teams[$id]->name] ?? null];
+            return ['team_id' => $id, 'name' => $teams[$id]->name] + $emblems->get($teams[$id]->name);
         };
 
         // Poules : les 2 premiers passent, plus les meilleurs troisièmes une fois la phase de poules jouée.
@@ -302,8 +300,7 @@ class TournamentService
         foreach (($t['groups'] ?? []) as $key => $teamIds) {
             $rows = $this->standings->table($gameSave, $teamIds, 'group_'.strtolower($key));
             foreach ($rows as $i => &$r) {
-                $r['flag'] = Nationality::flag($r['name']);
-                $r['flag_url'] = $flagUrls[$r['name']] ?? null;
+                $r = array_merge($r, $emblems->get($r['name']));
                 $r['qualified'] = $i < 2 || in_array($r['team_id'], $bestThirds, true);
             }
             unset($r);

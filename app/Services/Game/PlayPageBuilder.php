@@ -111,7 +111,7 @@ class PlayPageBuilder
             return array_key_exists($key, $memo) ? $memo[$key] : $memo[$key] = $make();
         };
 
-        $canRenewContracts = ! $gameSave->isWorldCup() && $gameSave->currentPhase() === GamePhase::Season;
+        $canRenewContracts = ! $gameSave->isTournament() && $gameSave->currentPhase() === GamePhase::Season;
 
         $gameTeams = fn () => $once('teams', fn () => $this->teams($gameSave, $week));
 
@@ -178,7 +178,7 @@ class PlayPageBuilder
             'universeOptions'         => fn () => \App\Support\UniverseOptions::forPlayers(GamePlayer::where('game_save_id', $gameSave->id)),
             'gameConfig'              => $gameSave->getConfig(),
             'aiTrainingInitial'       => fn () => $this->aiTrainingInitial($gameSave),
-            'tournament'              => fn () => $gameSave->isWorldCup()
+            'tournament'              => fn () => $gameSave->isTournament()
                 ? $this->tournament->presentation($gameSave)
                 : null,
             'career'                  => fn () => $this->career->presentation($gameSave),

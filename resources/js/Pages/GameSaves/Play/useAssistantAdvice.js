@@ -27,7 +27,7 @@ const STAT_NAMES = {
 export function useAssistantAdvice({
     roster, formationData, playerForSlot, unavailability,
     remainingTrainings, hasBeenTrained, trainingCost, minStamina, staminaCost,
-    freePlayers, budget, isWorldCup,
+    freePlayers, budget, isTournament,
 }) {
     const { overallOf, keyStatsFor, positionGroup } = usePlayerUtils();
 
@@ -152,7 +152,7 @@ export function useAssistantAdvice({
 
     // ── Recrutement ──────────────────────────────────────────
     const recruit = computed(() => {
-        if (toValue(isWorldCup)) return null;
+        if (toValue(isTournament)) return null;
         const starters = (toValue(roster) ?? []).filter(p => p.is_starter);
         if (!starters.length) return null;
 

@@ -4,6 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
 import H2 from '@/Components/H2.vue';
+import { competitionLabel, isTournamentType } from '@/Pages/GameSaves/competitions.js';
 
 defineProps({
     gameSaves: { type: Array, required: true },
@@ -77,7 +78,7 @@ const periodLabel = (p) => ({ college: 'Collège', highschool: 'Lycée', pro: 'P
                                 </div>
                                 <div class="text-xs text-slate-400 mt-0.5">
                                     {{ periodLabel(save.period) }}
-                                    · {{ save.competition_type === 'world_cup' ? 'Coupe Nation' : `Saison ${save.season}` }} · Semaine {{ save.week }}
+                                    · {{ isTournamentType(save.competition_type) ? competitionLabel(save.competition_type) : `Saison ${save.season}` }} · Semaine {{ save.week }}
                                     <span v-if="save.phase === 'draft' || save.phase === 'intersaison_draft'"
                                           class="ml-1 px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700 font-semibold">Draft en cours</span>
                                     · <span class="text-slate-300">{{ formatDateTime(save.updated_at) }}</span>

@@ -159,7 +159,7 @@ class MatchScreenBuilder
         return [
             'gameSaveId'       => $gameSave->id,
             'matchId'          => $match->id,
-            'isWorldCup'       => $gameSave->isWorldCup(),
+            'isWorldCup'       => $gameSave->isWorldCup(), // drapeaux (cadre large) uniquement en Coupe Nation
             'week'             => $match->week,
             'maxTurns'         => (int) $gameSave->getConfig('match_max_turns', 30),
             'criticalsEnabled' => (bool) $gameSave->getConfig('match_criticals_enabled'),
@@ -218,7 +218,7 @@ class MatchScreenBuilder
             'id'                   => $team->id,
             'name'                 => $team->name,
             'description'          => $team->description,
-            'rank'                 => $gameSave->isWorldCup() ? null : $ranks->get($team->id), // pas de classement de ligue en Coupe Nation
+            'rank'                 => $gameSave->isTournament() ? null : $ranks->get($team->id), // pas de classement de ligue en Coupe Nation
             'logo_path'            => $team->logo_path,
             'formation'            => $team->formation ?? '3-2-3-2',
             'tacticalStyle'        => $team->tactical_style,

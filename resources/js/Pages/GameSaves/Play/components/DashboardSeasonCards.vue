@@ -14,7 +14,7 @@ const props = defineProps({
     season:        { type: Number,  required: true },
     week:          { type: Number,  required: true },
     career:        { type: Object,  default: null },
-    isWorldCup:    { type: Boolean, default: false },
+    isTournament:    { type: Boolean, default: false },
     budget:        { type: Number,  default: 0 },
     incomeModel:   { type: Object,  default: null },       // { base, win_bonus, draw_bonus }
     trainingCost:  { type: Number,  default: 0 },
@@ -73,7 +73,7 @@ const weeklyTrainingCost = computed(() => props.trainingCost * props.maxTraining
 <template>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <!-- Trajectoire -->
-        <Panel as="div" v-if="!isWorldCup" class="md:col-span-2">
+        <Panel as="div" v-if="!isTournament" class="md:col-span-2">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <SectionTitle>Trajectoire</SectionTitle>
                 <div v-if="objective" class="flex flex-wrap items-center gap-2 text-[11px]">
@@ -145,7 +145,7 @@ const weeklyTrainingCost = computed(() => props.trainingCost * props.maxTraining
         </Panel>
 
         <!-- Finances -->
-        <Panel as="div" id="dashboard-finances" class="scroll-mt-4" :class="isWorldCup ? 'md:col-span-3' : ''">
+        <Panel as="div" id="dashboard-finances" class="scroll-mt-4" :class="isTournament ? 'md:col-span-3' : ''">
             <SectionTitle class="mb-2">Finances</SectionTitle>
             <div class="space-y-1.5 text-xs text-slate-600">
                 <div class="flex justify-between"><span>Budget</span><span class="font-black text-slate-700 tabular-nums"><Money :amount="budget" /></span></div>
@@ -160,9 +160,9 @@ const weeklyTrainingCost = computed(() => props.trainingCost * props.maxTraining
                     <span>Entraînements / sem.</span>
                     <span class="font-bold text-slate-700 tabular-nums"><Money :amount="weeklyTrainingCost" prefix="−" /></span>
                 </div>
-                <p v-if="isWorldCup" class="text-2xs text-slate-500 leading-snug">
+                <p v-if="isTournament" class="text-2xs text-slate-500 leading-snug">
                     Le budget finance les entraînements, les cartes bonus et les demandes des joueurs (soins).
-                    Pas de transferts ni de salaires en Coupe Nation. Chaque sélection part avec le même montant.
+                    Pas de transferts ni de salaires en tournoi.
                 </p>
                 <div v-if="projection" class="pt-2 mt-1 border-t border-slate-200">
                     <div class="flex justify-between">

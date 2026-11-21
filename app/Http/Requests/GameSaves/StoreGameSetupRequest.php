@@ -28,11 +28,11 @@ class StoreGameSetupRequest extends FormRequest
             'label'             => ['nullable', 'string', 'max:255'],
             'period'            => ['required', 'string', 'in:college,pro'],
             'game_mode'         => ['nullable', 'string', 'in:prebuilt,draft'],
-            'competition_type'  => ['nullable', 'string', 'in:college_league,world_cup'],
+            'competition_type'  => ['nullable', 'string', 'in:college_league,world_cup,club_cup'],
             'game_config'       => ['nullable', 'array'],
             'period_package_id' => ['nullable', 'integer', 'exists:period_packages,id'],
             // Nombre de participants (clubs d'une ligue, nations d'une coupe) et façon de les choisir.
-            'participant_count' => ['nullable', 'integer', $this->input('competition_type') === 'world_cup'
+            'participant_count' => ['nullable', 'integer', in_array($this->input('competition_type'), ['world_cup', 'club_cup'], true)
                 ? \Illuminate\Validation\Rule::in(\App\Services\WorldCup\NewWorldCupBuilder::TOURNAMENT_SIZES)
                 : 'between:4,64'],
             ...GameConfig::rules('game_config.'),
@@ -44,6 +44,15 @@ class StoreGameSetupRequest extends FormRequest
     {
         return [
             function ($validator) {
+                // Coupe Club : un tournoi a toujours un nombre de clubs, jamais plus que la période n'en compte.
+                if ($this->input('competition_type') === 'club_cup') {
+                    $clubs = \App\Models\Team::where('period', $this->input('period'))->count();
+                    $count = (int) $this->input('participant_count');
+                    if ($count < 8 || $count > $clubs) {
+                        $validator->errors()->add('participant_count', "Cette période compte {$clubs} clubs : choisis 8 participants ou plus, sans dépasser ce nombre.");
+                    }
+                }
+
                 $config = $this->input('game_config');
                 if (is_array($config)) {
                     $this->checkTrainingGains($validator, GameConfig::sanitize($config), 'game_config');
@@ -57,6 +66,12 @@ class StoreGameSetupRequest extends FormRequest
     {
         $data = $this->validated();
         $data['game_config'] = GameConfig::sanitize($data['game_config'] ?? null) ?: null;
+
+        // Un tournoi n'a ni draft ni période importée : effectifs pré-faits de la période.
+        if (in_array($data['competition_type'] ?? null, ['world_cup', 'club_cup'], true)) {
+            $data['game_mode'] = 'prebuilt';
+            $data['period_package_id'] = null;
+        }
 
         return $data;
     }

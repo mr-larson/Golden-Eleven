@@ -146,10 +146,27 @@ class GameSave extends Model
 
     public const COMPETITION_WORLD_CUP = 'world_cup';
 
-    /** Partie de Coupe Nation (tournoi de sélections) plutôt que mode Ligue. */
+    public const COMPETITION_CLUB_CUP = 'club_cup';
+
+    /** Partie de Coupe Nation (tournoi de sélections nationales). */
     public function isWorldCup(): bool
     {
         return $this->competition_type === self::COMPETITION_WORLD_CUP;
+    }
+
+    /** Partie de Coupe Club (même tournoi, mais entre clubs de la période). */
+    public function isClubCup(): bool
+    {
+        return $this->competition_type === self::COMPETITION_CLUB_CUP;
+    }
+
+    /**
+     * Partie au format tournoi (poules puis élimination directe) : Coupe Nation ou Coupe Club.
+     * C'est ce test qui coupe le calendrier de ligue, les transferts, les contrats, etc.
+     */
+    public function isTournament(): bool
+    {
+        return $this->isWorldCup() || $this->isClubCup();
     }
 
     /** Draft initial ou d'intersaison. */

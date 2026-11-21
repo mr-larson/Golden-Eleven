@@ -41,7 +41,7 @@ const props = defineProps({
     canSimulateMatch: { type: Boolean, default: false },
     matches:        { type: Array,   default: () => [] },
     tournament:         { type: Object, default: null },
-    isWorldCup:         { type: Boolean, default: false },
+    isTournament:         { type: Boolean, default: false },
     playerSeasonStats:  { type: Object,  default: () => ({}) },
     career:             { type: Object,  default: null },
     seasonChallenges:   { type: Object,  default: null },
@@ -87,7 +87,7 @@ const totalWeeks = computed(() => {
     if (weeks.length) {
         // Coupe Nation : les demies et la finale sont créées au fil du tournoi.
         // On ajoute les tours restants pour que la barre ne retombe pas à chaque phase.
-        return Math.max(...weeks) + (props.isWorldCup ? remainingWeeks(props.tournament) : 0);
+        return Math.max(...weeks) + (props.isTournament ? remainingWeeks(props.tournament) : 0);
     }
     const n = props.standings.length;
     if (n < 2) return 28;
@@ -95,7 +95,7 @@ const totalWeeks = computed(() => {
 });
 
 const seasonProgress = computed(() =>
-    props.isWorldCup && props.tournament?.stage === 'done'
+    props.isTournament && props.tournament?.stage === 'done'
         ? 100
         : Math.min(100, Math.round(((props.week - 1) / Math.max(totalWeeks.value, 1)) * 100))
 );
@@ -154,7 +154,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
                 </div>
 
                 <div class="flex items-center gap-6">
-                    <div v-if="!isWorldCup" class="text-center">
+                    <div v-if="!isTournament" class="text-center">
                         <div class="text-lg font-black text-slate-700">{{ season }}</div>
                         <div class="text-2xs text-slate-400 font-semibold">Saison</div>
                     </div>
@@ -187,7 +187,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
             <div ref="seasonProgressRoot">
                 <div class="flex justify-between text-2xs text-slate-400 mb-1">
                     <span>Semaine 1</span>
-                    <span class="font-semibold text-teal-500">{{ animatedSeasonProgress('progress') }}% {{ isWorldCup ? 'du tournoi' : 'de la saison' }}</span>
+                    <span class="font-semibold text-teal-500">{{ animatedSeasonProgress('progress') }}% {{ isTournament ? 'du tournoi' : 'de la saison' }}</span>
                     <span>Semaine {{ totalWeeks }}</span>
                 </div>
                 <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
@@ -199,7 +199,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
         </Panel>
 
         <!-- Coupe Nation : bannière champion -->
-        <div v-if="isWorldCup && wcChampion"
+        <div v-if="isTournament && wcChampion"
              class="flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-gradient-to-r from-amber-100 to-yellow-50 border border-amber-300">
             <span class="text-4xl">🏆</span>
             <div class="text-center">
@@ -219,7 +219,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
 
             <!-- Classement — Coupe Nation : position dans la poule -->
-            <DashboardWorldCupTile v-if="isWorldCup" :tournament="tournament" :team="team" @open="emit('change-tab', 'standings')" />
+            <DashboardWorldCupTile v-if="isTournament" :tournament="tournament" :team="team" @open="emit('change-tab', 'standings')" />
 
             <!-- Classement — Ligue : position, points, évolution, objectif -->
             <button v-else type="button" :class="KPI" class="flex flex-col items-center gap-1"
@@ -271,7 +271,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
                     @click="scrollToFinances" title="Voir le détail des finances">
                 <SectionTitle as="span">Budget</SectionTitle>
                 <span class="text-3xl font-black text-teal-600 tabular-nums">{{ Number(teamBudget).toLocaleString('fr-FR') }}</span>
-                <span v-if="projection && !isWorldCup" class="text-2xs text-slate-400">
+                <span v-if="projection && !isTournament" class="text-2xs text-slate-400">
                     ≈ {{ projection.likely.toLocaleString('fr-FR') }} en S{{ seasonEndWeek }}
                 </span>
             </button>
@@ -284,7 +284,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
                                 :nextMatchInfo="nextMatchInfo" :isByeWeek="isByeWeek"
                                 :midseasonBreakRecovery="midseasonBreakRecovery" :simulating="simulating"
                                 :launchingMatch="launchingMatch" :canSimulateMatch="canSimulateMatch"
-                                :isWorldCup="isWorldCup" :tournament="tournament" :clubStanding="clubStanding"
+                                :isTournament="isTournament" :tournament="tournament" :clubStanding="clubStanding"
                                 :standings="standings" :matches="matches" :week="week"
                                 @play-next-match="emit('play-next-match')" @simulate-match="emit('simulate-match')"
                                 @simulate-week="emit('simulate-week')" />
@@ -320,7 +320,7 @@ const { root: seasonProgressRoot, value: animatedSeasonProgress, width: seasonPr
         <!-- LIGNE 6 : Trajectoire + finances            -->
         <!-- ============================================ -->
         <DashboardSeasonCards :team="clubStanding ?? team" :teams="standings" :matches="matches"
-                              :season="season" :week="week" :career="career" :isWorldCup="isWorldCup"
+                              :season="season" :week="week" :career="career" :isTournament="isTournament"
                               :budget="teamBudget" :incomeModel="incomeModel"
                               :trainingCost="trainingCost" :maxTrainings="maxTrainings" />
 

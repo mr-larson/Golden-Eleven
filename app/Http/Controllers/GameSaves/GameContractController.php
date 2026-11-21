@@ -91,7 +91,7 @@ class GameContractController extends Controller
 
             $week = (int) ($gameSave->week ?? 1);
             $seasonEnd = $seasons->getSeasonLength($gameSave);
-            if ($gameSave->isWorldCup() || $gameSave->currentPhase() !== GamePhase::Season
+            if ($gameSave->isTournament() || $gameSave->currentPhase() !== GamePhase::Season
                 || !$contract->isActive($week) || $contract->end_week === null || $contract->end_week >= $seasonEnd) {
                 return back()->withErrors(['weeks' => 'Ce contrat ne peut pas être prolongé.']);
             }

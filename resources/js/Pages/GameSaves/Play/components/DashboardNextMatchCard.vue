@@ -21,7 +21,7 @@ const props = defineProps({
     simulating: { type: Boolean, default: false },
     launchingMatch: { type: Boolean, default: false },
     canSimulateMatch: { type: Boolean, default: false },
-    isWorldCup: { type: Boolean, default: false },
+    isTournament: { type: Boolean, default: false },
     tournament: { type: Object, default: null },
     clubStanding: { type: Object, default: null },
     standings: { type: Array, default: () => [] },
@@ -90,7 +90,7 @@ const lastHeadToHead = computed(() => {
                         <span v-else class="text-2xl">🏟️</span>
                     </div>
                     <div class="text-sm font-bold text-slate-700 text-center">{{ team?.name ?? '—' }}</div>
-                    <div class="text-2xs text-slate-400">{{ isWorldCup ? (groupRankLabel(tournament, team?.id) ?? '') : (clubStanding ? `${clubStanding.position}e au classement` : '') }}</div>
+                    <div class="text-2xs text-slate-400">{{ isTournament ? (groupRankLabel(tournament, team?.id) ?? '') : (clubStanding ? `${clubStanding.position}e au classement` : '') }}</div>
                     <div v-if="myForm.length" class="flex gap-1" aria-label="Forme récente">
                         <span v-for="(r, i) in myForm" :key="i" :title="r.title"
                               class="w-5 h-5 rounded text-2xs font-black flex items-center justify-center" :class="FORM_STYLE[r.label]">{{ r.label }}</span>
@@ -132,7 +132,7 @@ const lastHeadToHead = computed(() => {
                     </div>
                     <div class="text-sm font-bold text-slate-700 text-center">{{ nextMatchInfo.opponentName }}</div>
                     <div class="text-2xs text-slate-400">
-                        {{ isWorldCup ? (groupRankLabel(tournament, opponentTeam?.id) ?? '')
+                        {{ isTournament ? (groupRankLabel(tournament, opponentTeam?.id) ?? '')
                         : (standings.findIndex(r => r.id === opponentTeam?.id) + 1 > 0
                             ? `${standings.findIndex(r => r.id === opponentTeam?.id) + 1}e au classement`
                             : '') }}
@@ -146,7 +146,7 @@ const lastHeadToHead = computed(() => {
         </div>
 
         <!-- Coupe Nation terminée : plus de semaine à simuler -->
-        <div v-else-if="isWorldCup && tournament?.stage === 'done'" class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div v-else-if="isTournament && tournament?.stage === 'done'" class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
                 <div class="text-sm font-semibold text-slate-600">Tournoi terminé</div>
                 <div class="text-xs text-slate-400 mt-0.5">Plus aucun match à jouer : consulte le bilan du tournoi.</div>

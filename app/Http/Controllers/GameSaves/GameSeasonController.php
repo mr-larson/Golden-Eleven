@@ -80,7 +80,7 @@ class GameSeasonController extends Controller
     {
         $this->authorizeGameSave('view', $gameSave);
 
-        $summary = $gameSave->isWorldCup() ? $summaries->summary($gameSave) : null;
+        $summary = $gameSave->isTournament() ? $summaries->summary($gameSave) : null;
         if ($summary === null) {
             return redirect()->route('game-saves.Play', $gameSave);
         }

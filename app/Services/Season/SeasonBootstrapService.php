@@ -71,7 +71,7 @@ class SeasonBootstrapService
             }
         }
 
-        return ! $gameSave->isWorldCup() && ! $gameSave->matches()->exists();
+        return ! $gameSave->isTournament() && ! $gameSave->matches()->exists();
     }
 
     /** Génère le calendrier de championnat aller-retour (algorithme du round-robin, équipes mélangées, domicile alterné) s'il n'existe pas encore. Ignoré en Coupe Nation, gérée par TournamentService. */
@@ -79,7 +79,7 @@ class SeasonBootstrapService
     {
         // En Coupe Nation, le calendrier (poules + élimination directe) est
         // géré par le moteur de tournoi (Phase 4), pas par le round-robin de ligue.
-        if ($gameSave->isWorldCup()) return;
+        if ($gameSave->isTournament()) return;
 
         if ($gameSave->matches()->exists()) return;
 

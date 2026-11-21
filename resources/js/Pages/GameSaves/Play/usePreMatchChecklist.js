@@ -22,7 +22,7 @@ const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
 
 export function usePreMatchChecklist({
     roster: roster_, lineupIssues, remainingTrainings, availableCards, unboughtCardsCount,
-    freePlayersCount, isWorldCup, playerPromises, sponsorChallenges, playerYellowCards,
+    freePlayersCount, isTournament, playerPromises, sponsorChallenges, playerYellowCards,
     suspensionOn3Yellows, week, playerInjury, playerSuspension, playerRequests,
 }) {
     const playerById = computed(() =>
@@ -104,7 +104,7 @@ export function usePreMatchChecklist({
                 text: `🛒 ${plural(shop, 'carte')} en boutique` });
         }
         const free = Number(toValue(freePlayersCount));
-        if (free > 0 && !toValue(isWorldCup)) {
+        if (free > 0 && !toValue(isTournament)) {
             items.push({ key: 'market', level: 'info', tab: 'transfers',
                 text: `💼 ${plural(free, 'joueur')} libre${free > 1 ? 's' : ''} sur le marché` });
         }

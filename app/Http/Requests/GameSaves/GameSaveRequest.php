@@ -65,7 +65,7 @@ class GameSaveRequest extends FormRequest
 
             'game_mode' => ['nullable', 'string', 'in:prebuilt,draft'],
 
-            'competition_type' => ['nullable', 'string', 'in:college_league,world_cup'],
+            'competition_type' => ['nullable', 'string', 'in:college_league,world_cup,club_cup'],
 
             'game_config'      => ['nullable', 'array'],
             ...GameConfig::rules('game_config.'),
@@ -91,6 +91,16 @@ class GameSaveRequest extends FormRequest
     {
         return [
             function ($validator) {
+                // Coupe Club : tournoi de 8, 16, 24 ou 32 clubs, effectifs pré-faits, sans période importée.
+                if ($this->input('competition_type') === 'club_cup') {
+                    if (! in_array((int) $this->input('participant_count'), \App\Services\WorldCup\NewWorldCupBuilder::TOURNAMENT_SIZES, true)) {
+                        $validator->errors()->add('participant_count', 'Une Coupe Club réunit 8, 16, 24 ou 32 clubs.');
+                    }
+                    if ($this->input('game_mode') === 'draft' || $this->filled('period_package_id')) {
+                        $validator->errors()->add('competition_type', 'La Coupe Club se joue avec les effectifs pré-faits de la période.');
+                    }
+                }
+
                 $participants = $this->input('participant_ids');
                 if (is_array($participants) && $participants !== []) {
                     $humans = array_map('intval', $this->input('team_ids') ?? array_filter([$this->input('team_id')]));

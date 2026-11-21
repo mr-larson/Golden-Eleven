@@ -49,7 +49,7 @@ class BonusCardShopService
         }
         // Coupe Nation : pas de classement de ligue, donc ni cartes réservées au bas du
         // tableau, ni cartes visant « l'équipe de devant ».
-        if ($gameSave->isWorldCup()) {
+        if ($gameSave->isTournament()) {
             $allCards = $allCards->reject(fn (BonusCard $card) => $card->dependsOnStandings());
         }
         if ($allCards->isEmpty()) return;
@@ -83,7 +83,7 @@ class BonusCardShopService
             $offersByTeam[(string) $team->id] = $offers;
 
             // Caisse à objets : une carte gratuite pour les 3 derniers (hors Coupe Nation).
-            if ($behindLeader && ! $gameSave->isWorldCup()
+            if ($behindLeader && ! $gameSave->isTournament()
                 && self::isInBottomThree($position, $total)
                 && ! in_array((int) $team->id, $alreadyGifted, true)) {
                 $free = $this->grantFreeCard($gameSave, $team, $catalog, $weights, array_column($offers, 'bonus_card_id'));

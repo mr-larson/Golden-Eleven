@@ -3,14 +3,12 @@
 namespace App\Services\WorldCup;
 
 use App\Enums\MatchStatus;
-use App\Enums\Nationality;
 use App\Models\GameSaves\GameContract;
 use App\Models\GameSaves\GameMatch;
 use App\Models\GameSaves\GameMatchPlayerStat;
 use App\Models\GameSaves\GamePlayer;
 use App\Models\GameSaves\GameSave;
 use App\Models\GameSaves\GameTeam;
-use App\Models\Nation;
 
 /**
  * Bilan d'une Coupe Nation terminée, pour l'écran de fin de tournoi.
@@ -47,14 +45,14 @@ class TournamentSummaryService
         }
 
         $teams = GameTeam::where('game_save_id', $gameSave->id)->get()->keyBy('id');
-        $flagUrls = Nation::flagUrls();
+        $emblems = TournamentEmblems::for($gameSave);
         $matches = GameMatch::where('game_save_id', $gameSave->id)->where('status', MatchStatus::Played)->orderBy('week')->orderBy('id')->get();
 
         return [
             'champion' => $presentation['champion'],
             'podium' => $this->podium($presentation),
-            'managers' => $this->managers($gameSave, $presentation, $teams, $matches, $flagUrls),
-            'scorers' => $this->scorers($gameSave, $matches, $teams, $flagUrls),
+            'managers' => $this->managers($gameSave, $presentation, $teams, $matches, $emblems),
+            'scorers' => $this->scorers($gameSave, $matches, $teams, $emblems),
             'figures' => $this->figures($matches, $teams),
         ];
     }
@@ -100,7 +98,7 @@ class TournamentSummaryService
      *
      * @return array<int, array<string, mixed>>
      */
-    private function managers(GameSave $gameSave, array $presentation, $teams, $matches, array $flagUrls): array
+    private function managers(GameSave $gameSave, array $presentation, $teams, $matches, TournamentEmblems $emblems): array
     {
         $out = [];
         foreach ($gameSave->controlledGameTeams()->get() as $team) {
@@ -119,8 +117,7 @@ class TournamentSummaryService
                 $games[] = [
                     'round' => $m->round,
                     'opponent' => $teams[$oppId]->name ?? '?',
-                    'flag' => Nationality::flag($teams[$oppId]->name ?? ''),
-                    'flag_url' => $flagUrls[$teams[$oppId]->name ?? ''] ?? null,
+                    ...$emblems->get($teams[$oppId]->name ?? ''),
                     'for' => $for,
                     'against' => $against,
                     'shootout' => ($m->match_stats['shootout']['winner_team_id'] ?? null) !== null && $for === $against
@@ -132,8 +129,7 @@ class TournamentSummaryService
             $out[] = [
                 'team_id' => $id,
                 'name' => $team->name,
-                'flag' => Nationality::flag($team->name),
-                'flag_url' => $flagUrls[$team->name] ?? null,
+                ...$emblems->get($team->name),
                 'seat' => (int) $team->human_seat,
                 'result' => $this->resultLabel($id, $presentation),
                 'is_champion' => ($presentation['champion']['team_id'] ?? null) === $id,
@@ -163,7 +159,7 @@ class TournamentSummaryService
      *
      * @return array<int, array{name:string, team:string, flag:string, goals:int}>
      */
-    private function scorers(GameSave $gameSave, $matches, $teams, array $flagUrls): array
+    private function scorers(GameSave $gameSave, $matches, $teams, TournamentEmblems $emblems): array
     {
         $rows = GameMatchPlayerStat::where('game_save_id', $gameSave->id)
             ->whereIn('game_match_id', $matches->pluck('id'))
@@ -181,15 +177,14 @@ class TournamentSummaryService
         $teamOf = GameContract::where('game_save_id', $gameSave->id)->whereIn('game_player_id', $rows->pluck('game_player_id'))
             ->pluck('game_team_id', 'game_player_id');
 
-        return $rows->map(function ($row) use ($players, $teamOf, $teams, $flagUrls) {
+        return $rows->map(function ($row) use ($players, $teamOf, $teams, $emblems) {
             $player = $players[$row->game_player_id] ?? null;
             $team = $teams[$teamOf[$row->game_player_id] ?? 0] ?? null;
 
             return [
                 'name' => $player ? trim($player->firstname.' '.$player->lastname) : '?',
                 'team' => $team->name ?? '?',
-                'flag' => Nationality::flag($team->name ?? ''),
-                'flag_url' => $flagUrls[$team->name ?? ''] ?? null,
+                ...$emblems->get($team->name ?? ''),
                 'goals' => (int) $row->goals,
             ];
         })->all();

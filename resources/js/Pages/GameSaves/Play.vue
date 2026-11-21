@@ -40,6 +40,7 @@ import TabTransfers  from '@/Pages/GameSaves/Play/TabTransfers.vue';
 import TabBonusCards     from '@/Pages/GameSaves/Play/TabBonusCards.vue';
 import TabManagement from '@/Pages/GameSaves/Play/TabManagement.vue';
 import CareerMandateCard from '@/Pages/GameSaves/Play/CareerMandateCard.vue';
+import { competitionLabel, isTournamentType } from '@/Pages/GameSaves/competitions.js';
 
 // ==========================
 //   PROPS INERTIA
@@ -82,9 +83,10 @@ const props = defineProps({
     incomeModel:        { type: Object, required: false, default: null },
 });
 
-// Mode Coupe Nation : adapte l'UI (onglet Classement → poules+bracket,
+// Mode tournoi (Coupe Nation ou Coupe Club) : adapte l'UI (onglet Classement → poules+bracket,
 // masquage de l'onglet Transferts, sans objet pour des sélections).
-const isWorldCup = computed(() => props.gameSave?.competition_type === 'world_cup');
+const isTournament = computed(() => isTournamentType(props.gameSave?.competition_type));
+const cupLabel = computed(() => competitionLabel(props.gameSave?.competition_type));
 
 // Promesse au joueur (relation coach) — type : playing_time | starter | renewal
 const makePromise = (player, type = 'playing_time') => {
@@ -433,7 +435,7 @@ const { actions: checklistActions, squad: checklistSquad } = usePreMatchChecklis
     availableCards,
     unboughtCardsCount,
     freePlayersCount,
-    isWorldCup,
+    isTournament,
     playerPromises:       () => props.playerPromises,
     playerRequests:       () => props.playerRequests,
     sponsorChallenges:    () => props.sponsorChallenges,
@@ -457,7 +459,7 @@ const { advice: assistantAdvice } = useAssistantAdvice({
     staminaCost:        () => props.gameConfig?.training_stamina_cost ?? 0,
     freePlayers:        availableFreePlayers,
     budget:             teamBudget,
-    isWorldCup,
+    isTournament,
 });
 
 const applyAdvice = (a) => {
@@ -482,7 +484,7 @@ const transferFocus = ref(null);
 // En Coupe Nation : « Classement » devient « Tournoi » (poules + bracket),
 // et l'onglet Transferts (sans objet pour des sélections) est masqué.
 const tabs = computed(() => {
-    const wc = isWorldCup.value;
+    const wc = isTournament.value;
     return [
         { key: 'dashboard',   label: 'Dashboard'                      },
         { key: 'my-team',     label: 'Mon équipe'                     },
@@ -662,7 +664,7 @@ const saveGame = () => {
                                   :canSimulateMatch="canSimulateMatch"
                                   :matches="matches"
                                   :tournament="tournament"
-                                  :isWorldCup="isWorldCup"
+                                  :isTournament="isTournament"
                                   @change-tab="setTab"
                                   @play-next-match="playNextMatch"
                                   @simulate-match="simulateMatch"
@@ -749,7 +751,7 @@ const saveGame = () => {
 
                     <!-- ======== AUTRES ÉQUIPES ======== -->
                     <TabOtherTeams v-else-if="activeTab === 'other-teams'"
-                                   :isWorldCup="isWorldCup"
+                                   :isTournament="isTournament"
                                    :nextOpponentId="nextMatch ? (nextMatch.home_team_id === team?.id ? nextMatch.away_team_id : nextMatch.home_team_id) : null"
                                    :otherTeams="otherTeams"
                                    :selectedOtherTeam="selectedOtherTeam"
@@ -834,8 +836,8 @@ const saveGame = () => {
                     />
 
                     <!-- ======== CLASSEMENT ======== -->
-                    <TabTournament v-else-if="activeTab === 'standings' && isWorldCup"
-                                   :tournament="tournament"
+                    <TabTournament v-else-if="activeTab === 'standings' && isTournament"
+                                   :tournament="tournament" :label="cupLabel"
                     />
 
                     <TabStandings v-else-if="activeTab === 'standings'"
