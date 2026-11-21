@@ -4,8 +4,19 @@
   "players": {
     "Henning Berg": {
       "stats": {
-        "defense": 31,
-        "intercept": 27
+        "speed": 65,
+        "stamina": 78,
+        "attack": 20,
+        "defense": 32,
+        "shot": 15,
+        "pass": 23,
+        "dribble": 19,
+        "block": 22,
+        "intercept": 27,
+        "tackle": 27,
+        "heading": 26,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Manchester United, Blackburn (Premier League 1995) : défenseur propre."
     },
@@ -14,7 +25,7 @@
         "speed": 72,
         "stamina": 77,
         "attack": 21,
-        "defense": 34,
+        "defense": 35,
         "shot": 16,
         "pass": 24,
         "dribble": 20,
@@ -32,7 +43,7 @@
         "speed": 70,
         "stamina": 76,
         "attack": 20,
-        "defense": 32,
+        "defense": 33,
         "shot": 16,
         "pass": 23,
         "dribble": 19,
@@ -67,7 +78,7 @@
       "stats": {
         "speed": 71,
         "stamina": 70,
-        "attack": 34,
+        "attack": 35,
         "defense": 18,
         "shot": 28,
         "pass": 23,
@@ -124,7 +135,7 @@
         "attack": 24,
         "defense": 24,
         "shot": 19,
-        "pass": 27,
+        "pass": 28,
         "dribble": 26,
         "block": 20,
         "intercept": 25,
@@ -140,7 +151,7 @@
         "speed": 60,
         "stamina": 78,
         "attack": 26,
-        "defense": 28,
+        "defense": 29,
         "shot": 26,
         "pass": 26,
         "dribble": 22,
@@ -155,12 +166,19 @@
     },
     "Martin Ødegaard": {
       "stats": {
+        "speed": 68,
+        "stamina": 76,
+        "attack": 33,
+        "defense": 22,
+        "shot": 26,
         "pass": 30,
         "dribble": 28,
-        "attack": 32,
-        "shot": 26,
-        "speed": 68,
-        "stamina": 76
+        "block": 16,
+        "intercept": 22,
+        "tackle": 18,
+        "heading": 17,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Capitaine d'Arsenal, ex-prodige du Real : meneur de jeu, passes et dribbles."
     },
@@ -170,7 +188,7 @@
         "speed": 56,
         "stamina": 74,
         "attack": 18,
-        "defense": 32,
+        "defense": 33,
         "shot": 15,
         "pass": 20,
         "dribble": 16,

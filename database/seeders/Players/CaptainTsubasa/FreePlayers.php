@@ -49,8 +49,8 @@ class FreePlayers
             [
                 'Nobuyuki', 'Yumikura', 13, 'Midfielder', 310,
                 [
-                    'speed' => 66, 'stamina' => 71, 'defense' => 31, 'attack' => 28,
-                    'shot' => 26, 'pass' => 27, 'dribble' => 26,
+                    'speed' => 66, 'stamina' => 71, 'defense' => 29, 'attack' => 28,
+                    'shot' => 25, 'pass' => 27, 'dribble' => 26,
                     'block' => 22, 'intercept' => 23, 'tackle' => 22,
                     'hand_save' => 15, 'punch_save' => 15
                 ],

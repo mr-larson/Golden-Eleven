@@ -103,11 +103,19 @@
     },
     "Mário Coluna": {
       "stats": {
+        "speed": 67,
         "stamina": 82,
-        "defense": 30,
+        "attack": 30,
+        "defense": 28,
+        "shot": 26,
         "pass": 28,
-        "shot": 28,
-        "attack": 30
+        "dribble": 25,
+        "block": 22,
+        "intercept": 25,
+        "tackle": 25,
+        "heading": 18,
+        "hand_save": 10,
+        "punch_save": 10
       },
       "why": "Le Monstre sacré de Benfica, deux Coupes d'Europe, 3e du Mondial 1966 : milieu complet et puissant."
     },
