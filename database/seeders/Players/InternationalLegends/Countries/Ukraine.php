@@ -2,15 +2,31 @@
 
 namespace Database\Seeders\Players\InternationalLegends\Countries;
 
+/**
+ * Onze historique d'Ukraine (toutes époques, URSS comprise pour les joueurs ukrainiens) : sélection volontairement
+ * modeste, avec trois stars (Shevchenko, Blokhin, Belanov) dans un onze moyen.
+ */
 final class Ukraine
 {
     public const NATIONALITY = 'Ukraine';
     public const ROSTER = [];
     public const ADDITIONS = [];
 
-
     // Compléments des quatre listes historiques ; numéros regroupés par poste, pas des notes.
     public const HISTORICAL_ADDITIONS = [
         ['firstname' => 'Andriy', 'lastname' => 'Shevchenko', 'profile' => 'striker', 'stats' => ['attack' => 34, 'shot' => 28, 'speed' => 76], 'note' => 'Référence de la période 1994–2002.'],
+    ];
+
+    public const EXTRA_ADDITIONS = [
+        ['firstname' => 'Oleksandr', 'lastname' => 'Shovkovskyi', 'profile' => 'keeper', 'position' => 'GB', 'secondary' => null, 'stats' => ['speed' => 56, 'stamina' => 68, 'attack' => 12, 'defense' => 28, 'shot' => 9, 'pass' => 16, 'dribble' => 11, 'block' => 20, 'intercept' => 20, 'tackle' => 16, 'heading' => 14, 'hand_save' => 29, 'punch_save' => 26], 'note' => 'Gardien emblématique du Dynamo Kiev, titulaire de l\'Ukraine quart de finaliste du Mondial 2006 ; gardien régulier et fiable sur sa ligne.'],
+        ['firstname' => 'Oleh', 'lastname' => 'Luzhny', 'profile' => 'fullback', 'position' => 'DD', 'secondary' => null, 'stats' => ['speed' => 65, 'stamina' => 71, 'attack' => 15, 'defense' => 23, 'shot' => 10, 'pass' => 19, 'dribble' => 16, 'block' => 19, 'intercept' => 21, 'tackle' => 21, 'heading' => 12, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Capitaine de l\'Ukraine, Dynamo Kiev puis Arsenal (doublé championnat-Coupe 2002) ; latéral droit endurant et rigoureux.'],
+        ['firstname' => 'Oleh', 'lastname' => 'Kuznetsov', 'profile' => 'stopper', 'position' => 'DC', 'secondary' => null, 'stats' => ['speed' => 55, 'stamina' => 68, 'attack' => 11, 'defense' => 27, 'shot' => 8, 'pass' => 15, 'dribble' => 11, 'block' => 24, 'intercept' => 24, 'tackle' => 25, 'heading' => 24, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Dynamo Kiev (Coupe des Coupes 1986) et finaliste de l\'Euro 1988 avec l\'URSS ; défenseur central dur au marquage.'],
+        ['firstname' => 'Anatoliy', 'lastname' => 'Demyanenko', 'profile' => 'fullback', 'position' => 'DG', 'secondary' => null, 'stats' => ['speed' => 66, 'stamina' => 70, 'attack' => 15, 'defense' => 24, 'shot' => 10, 'pass' => 20, 'dribble' => 17, 'block' => 19, 'intercept' => 20, 'tackle' => 20, 'heading' => 11, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Dynamo Kiev (Coupe des Coupes 1986) et défenseur gauche de l\'URSS ; latéral appliqué et rapide.'],
+        ['firstname' => 'Dmytro', 'lastname' => 'Chygrynskiy', 'profile' => 'stopper', 'position' => 'DC', 'secondary' => null, 'stats' => ['speed' => 54, 'stamina' => 66, 'attack' => 11, 'defense' => 26, 'shot' => 8, 'pass' => 14, 'dribble' => 10, 'block' => 22, 'intercept' => 22, 'tackle' => 23, 'heading' => 23, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Shakhtar Donetsk (Coupe UEFA 2009) puis Barcelone (Coupe du monde des clubs 2009) ; défenseur central grand et propre à la relance.'],
+        ['firstname' => 'Anatoliy', 'lastname' => 'Tymoshchuk', 'profile' => 'holding', 'position' => 'MDC', 'secondary' => null, 'stats' => ['speed' => 58, 'stamina' => 74, 'attack' => 17, 'defense' => 24, 'shot' => 14, 'pass' => 24, 'dribble' => 18, 'block' => 18, 'intercept' => 23, 'tackle' => 22, 'heading' => 13, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Recordman de sélections de l\'Ukraine, Shakhtar, Zenit puis Bayern Munich (finaliste de la Ligue des champions 2010 et 2012) ; milieu récupérateur et organisateur.'],
+        ['firstname' => 'Oleksiy', 'lastname' => 'Mykhaylychenko', 'profile' => 'box_to_box', 'position' => 'MC', 'secondary' => null, 'stats' => ['speed' => 62, 'stamina' => 70, 'attack' => 22, 'defense' => 20, 'shot' => 18, 'pass' => 25, 'dribble' => 21, 'block' => 15, 'intercept' => 20, 'tackle' => 20, 'heading' => 12, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Dynamo Kiev (Coupe des Coupes 1986) puis Sampdoria (champion d\'Italie 1991), URSS ; milieu technique et complet.'],
+        ['firstname' => 'Oleksandr', 'lastname' => 'Zavarov', 'profile' => 'playmaker', 'position' => 'MOC', 'secondary' => null, 'stats' => ['speed' => 63, 'stamina' => 67, 'attack' => 29, 'defense' => 16, 'shot' => 24, 'pass' => 31, 'dribble' => 30, 'block' => 11, 'intercept' => 18, 'tackle' => 15, 'heading' => 14, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Dynamo Kiev (Coupe des Coupes 1986), finaliste de l\'Euro 1988 avec l\'URSS puis Juventus ; meneur de jeu créatif à la passe fine.'],
+        ['firstname' => 'Oleh', 'lastname' => 'Blokhin', 'profile' => 'winger_forward', 'position' => 'AG', 'secondary' => 'AT', 'stats' => ['speed' => 79, 'stamina' => 73, 'attack' => 35, 'defense' => 13, 'shot' => 28, 'pass' => 21, 'dribble' => 29, 'block' => 11, 'intercept' => 14, 'tackle' => 12, 'heading' => 16, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Ballon d\'Or 1975 et meilleur buteur de l\'histoire du championnat soviétique, Dynamo Kiev ; ailier gauche explosif et buteur.'],
+        ['firstname' => 'Ihor', 'lastname' => 'Belanov', 'profile' => 'second_striker', 'position' => 'AT', 'secondary' => null, 'stats' => ['speed' => 68, 'stamina' => 68, 'attack' => 32, 'defense' => 14, 'shot' => 28, 'pass' => 24, 'dribble' => 28, 'block' => 11, 'intercept' => 15, 'tackle' => 13, 'heading' => 17, 'hand_save' => 10, 'punch_save' => 10], 'note' => 'Ballon d\'Or 1986 et Coupe des Coupes avec le Dynamo Kiev, Mondial 1986 avec l\'URSS ; attaquant rapide et dribbleur.'],
     ];
 }
