@@ -408,16 +408,6 @@ class Roster
                 'description' => 'Attaquant très physique et stratège, il force la finition au cœur de la surface.',
             ]],
 
-            'peter-shilton' => [[
-                'key'         => 'shilton_iron_wall',
-                'mode'        => 'defense',
-                'label'       => 'Muraille anglaise',
-                'short_label' => 'Muraille',
-                'cooldown'    => 2,
-                'base_action' => 'block',
-                'description' => 'Défenseur imposant et autoritaire, capitaine de l’Angleterre, infranchissable dans l’axe.',
-            ]],
-
             'marcel-beauregard' => [[
                 'key'         => 'beauregard_precision_pass',
                 'mode'        => 'attack',

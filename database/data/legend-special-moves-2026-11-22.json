@@ -1,0 +1,3108 @@
+{
+    "franz-beckenbauer": [
+        {
+            "key": "beckenbauer_kaiser",
+            "mode": "defense",
+            "label": "Libéro de l’Empereur",
+            "short_label": "Empereur",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il lit l’attaque avant qu’elle ne se déclenche et récupère le ballon avec une élégance tranquille."
+        }
+    ],
+    "lothar-matthaus": [
+        {
+            "key": "matthaus_long_range",
+            "mode": "attack",
+            "label": "Frappe de Lothar",
+            "short_label": "Longue portée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Milieu complet, il arme une frappe puissante de loin au moment où la défense recule."
+        }
+    ],
+    "philipp-lahm": [
+        {
+            "key": "lahm_clean_tackle",
+            "mode": "defense",
+            "label": "Tacle de Philipp",
+            "short_label": "Propre",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle net, sans faute, qui coupe la trajectoire de l’ailier."
+        }
+    ],
+    "andreas-brehme": [
+        {
+            "key": "brehme_two_footed",
+            "mode": "attack",
+            "label": "Centre ambidextre",
+            "short_label": "Deux pieds",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Aussi à l’aise du gauche que du droit, il centre sans que le défenseur sache de quel côté il va jouer."
+        }
+    ],
+    "pierre-littbarski": [
+        {
+            "key": "littbarski_slalom",
+            "mode": "attack",
+            "label": "Slalom du Kölner",
+            "short_label": "Slalom",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Petit gabarit et appuis vifs : il se faufile entre les défenseurs sans jamais perdre le ballon."
+        }
+    ],
+    "miroslav-klose": [
+        {
+            "key": "klose_salto",
+            "mode": "attack",
+            "label": "Salto de Klose",
+            "short_label": "Salto",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une reprise de volée dans la surface, conclue par son salto pour célébrer."
+        }
+    ],
+    "karl-heinz-rummenigge": [
+        {
+            "key": "rummenigge_cannon",
+            "mode": "attack",
+            "label": "Canon bavarois",
+            "short_label": "Canon",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe sèche, du pied droit comme du gauche, lancée en pleine accélération."
+        }
+    ],
+    "gerd-muller": [
+        {
+            "key": "gerd_muller_bomber",
+            "mode": "attack",
+            "label": "Bombardier",
+            "short_label": "Bombardier",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un geste bref et instinctif dans la surface : le ballon est au fond avant que la défense ne réagisse."
+        }
+    ],
+    "thomas-muller": [
+        {
+            "key": "thomas_muller_raumdeuter",
+            "mode": "attack",
+            "label": "Chasseur d’espaces",
+            "short_label": "Espaces",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il se glisse dans le trou que personne n’a vu et conclut au dernier moment."
+        }
+    ],
+    "manuel-neuer": [
+        {
+            "key": "neuer_sweeper_keeper",
+            "mode": "defense",
+            "label": "Gardien-libéro",
+            "short_label": "Libéro",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il sort loin de sa surface pour couper la passe dans le dos de la défense."
+        }
+    ],
+    "oliver-kahn": [
+        {
+            "key": "kahn_titan",
+            "mode": "defense",
+            "label": "Arrêt du Titan",
+            "short_label": "Titan",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Une intensité féroce et un plongeon sans retenue pour repousser le tir."
+        }
+    ],
+    "sepp-maier": [
+        {
+            "key": "maier_cat",
+            "mode": "defense",
+            "label": "Chat de Bavière",
+            "short_label": "Chat",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Des réflexes de chat : il détourne le ballon d’une détente à bout de bras."
+        }
+    ],
+    "gunter-netzer": [
+        {
+            "key": "netzer_long_pass",
+            "mode": "attack",
+            "label": "Long ballon de Netzer",
+            "short_label": "Long ballon",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une ouverture à soixante mètres qui transforme une récupération en occasion."
+        }
+    ],
+    "toni-kroos": [
+        {
+            "key": "kroos_metronome",
+            "mode": "attack",
+            "label": "Métronome",
+            "short_label": "Métronome",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Toucher de balle précis et tempo parfait : la passe arrive toujours dans le bon pied."
+        }
+    ],
+    "uwe-seeler": [
+        {
+            "key": "seeler_header",
+            "mode": "attack",
+            "label": "Tête d’Uwe",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Petit mais explosif de la tête, il saute plus haut que les défenseurs sur chaque centre."
+        }
+    ],
+    "michael-ballack": [
+        {
+            "key": "ballack_late_run",
+            "mode": "attack",
+            "label": "Arrivée lancée",
+            "short_label": "Arrivée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il surgit de la deuxième ligne et frappe de volée au point de penalty."
+        }
+    ],
+    "fabien-barthez": [
+        {
+            "key": "barthez_divine",
+            "mode": "defense",
+            "label": "Réflexe du Divin",
+            "short_label": "Divin",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un arrêt extravagant, à la limite de la folie, qui sauve ce qui semblait perdu."
+        }
+    ],
+    "hugo-lloris": [
+        {
+            "key": "lloris_reflex",
+            "mode": "defense",
+            "label": "Réflexe de Lloris",
+            "short_label": "Réflexe",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Capitaine des Bleus, il détend son corps entier pour repousser la frappe."
+        }
+    ],
+    "marcel-desailly": [
+        {
+            "key": "desailly_rock",
+            "mode": "defense",
+            "label": "Le Roc",
+            "short_label": "Roc",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Puissant et placé, il stoppe net l’attaquant adverse dans son duel."
+        }
+    ],
+    "patrick-vieira": [
+        {
+            "key": "vieira_long_stride",
+            "mode": "defense",
+            "label": "Grandes foulées",
+            "short_label": "Foulées",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Ses longues jambes reprennent le ballon en pleine course, puis relancent aussitôt."
+        }
+    ],
+    "claude-makelele": [
+        {
+            "key": "makelele_screen",
+            "mode": "defense",
+            "label": "Écran de Makélélé",
+            "short_label": "Écran",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il se place juste devant la défense et coupe chaque ligne de passe vers les attaquants."
+        }
+    ],
+    "zinedine-zidane": [
+        {
+            "key": "zidane_roulette",
+            "mode": "attack",
+            "label": "Roulette",
+            "short_label": "Roulette",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une rotation sur le ballon qui efface l’adversaire sans le toucher."
+        },
+        {
+            "key": "zidane_volley",
+            "mode": "attack",
+            "label": "Volée de Zizou",
+            "short_label": "Volée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une reprise de volée du gauche, parfaite de gestuelle."
+        }
+    ],
+    "michel-platini": [
+        {
+            "key": "platini_free_kick",
+            "mode": "attack",
+            "label": "Coup franc de Michel",
+            "short_label": "Coup franc",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un mur contourné, un ballon qui tombe à l’exact endroit voulu."
+        },
+        {
+            "key": "platini_vision",
+            "mode": "attack",
+            "label": "Passe de maître",
+            "short_label": "Maître",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il voit la solution deux touches avant tout le monde."
+        }
+    ],
+    "kylian-mbappe": [
+        {
+            "key": "mbappe_turbo",
+            "mode": "attack",
+            "label": "Turbo",
+            "short_label": "Turbo",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une pointe de vitesse qui laisse le défenseur sur place."
+        },
+        {
+            "key": "mbappe_flash_shot",
+            "mode": "attack",
+            "label": "Tir éclair",
+            "short_label": "Éclair",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe sèche prise à pleine vitesse, avant que le gardien ne s’organise."
+        }
+    ],
+    "just-fontaine": [
+        {
+            "key": "fontaine_record",
+            "mode": "attack",
+            "label": "Buteur de record",
+            "short_label": "Record",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un sens du but immédiat : une occasion, un but."
+        }
+    ],
+    "eric-cantona": [
+        {
+            "key": "cantona_king",
+            "mode": "attack",
+            "label": "Frappe du Roi",
+            "short_label": "Roi",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un geste fier, un tir audacieux : le Roi Éric conclut avec panache."
+        }
+    ],
+    "thierry-henry": [
+        {
+            "key": "henry_lightning",
+            "mode": "attack",
+            "label": "Course de Titi",
+            "short_label": "Éclair",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il lance son accélération depuis le côté gauche et déborde plein axe."
+        },
+        {
+            "key": "henry_curler",
+            "mode": "attack",
+            "label": "Enroulé de Thierry",
+            "short_label": "Enroulé",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Le ballon file au second poteau, enroulé du pied droit."
+        }
+    ],
+    "david-trezeguet": [
+        {
+            "key": "trezeguet_volley",
+            "mode": "attack",
+            "label": "Volée d’or",
+            "short_label": "Volée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un ballon frappé de volée, sans contrôle, qui finit dans la lucarne."
+        }
+    ],
+    "jean-pierre-papin": [
+        {
+            "key": "papin_papinade",
+            "mode": "attack",
+            "label": "Papinade",
+            "short_label": "Papinade",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une volée instantanée, sans contrôle préalable, que l’on retient sous son nom."
+        }
+    ],
+    "franck-ribery": [
+        {
+            "key": "ribery_percussion",
+            "mode": "attack",
+            "label": "Percussion de Franck",
+            "short_label": "Percussion",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il fonce sur son vis-à-vis et le dépasse par la seule vitesse du geste."
+        }
+    ],
+    "karim-benzema": [
+        {
+            "key": "benzema_subtle_touch",
+            "mode": "attack",
+            "label": "Remise subtile",
+            "short_label": "Remise",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une remise du talon ou de l’extérieur qui lance son partenaire."
+        }
+    ],
+    "antoine-griezmann": [
+        {
+            "key": "griezmann_link",
+            "mode": "attack",
+            "label": "Relais intelligent",
+            "short_label": "Relais",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il décroche, touche une fois et relance l’attaque dans l’espace libre."
+        }
+    ],
+    "paul-pogba": [
+        {
+            "key": "pogba_diagonal",
+            "mode": "attack",
+            "label": "Longue diagonale",
+            "short_label": "Diagonale",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Un changement de jeu en une touche, du pied à l’aile opposée."
+        }
+    ],
+    "ngolo-kante": [
+        {
+            "key": "kante_tireless",
+            "mode": "defense",
+            "label": "Récupérateur infatigable",
+            "short_label": "Infatigable",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il couvre autant de terrain que deux joueurs et ferme chaque ligne de passe."
+        }
+    ],
+    "raphael-varane": [
+        {
+            "key": "varane_cover",
+            "mode": "defense",
+            "label": "Couverture de Varane",
+            "short_label": "Couverture",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Rapide dans le dos de la défense, il rattrape l’attaquant avant qu’il ne tire."
+        }
+    ],
+    "raymond-kopa": [
+        {
+            "key": "kopa_dribble",
+            "mode": "attack",
+            "label": "Dribble de Raymond",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un dribble court et vif, à la limite de la cheville de l’adversaire."
+        }
+    ],
+    "bixente-lizarazu": [
+        {
+            "key": "lizarazu_overlap",
+            "mode": "attack",
+            "label": "Débordement de Liza",
+            "short_label": "Débordement",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Il remonte la ligne à pleine allure et centre sans ralentir."
+        }
+    ],
+    "diego-maradona": [
+        {
+            "key": "maradona_slalom",
+            "mode": "attack",
+            "label": "Slalom du siècle",
+            "short_label": "Slalom",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il traverse la moitié du terrain, tous les défenseurs semés un à un."
+        },
+        {
+            "key": "maradona_magic_pass",
+            "mode": "attack",
+            "label": "Passe magique",
+            "short_label": "Magie",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe du gauche, au millimètre, que personne n’avait envisagée."
+        }
+    ],
+    "lionel-messi": [
+        {
+            "key": "messi_pulga",
+            "mode": "attack",
+            "label": "Dribble de la Pulga",
+            "short_label": "Pulga",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Centre de gravité bas et ballon collé : il élimine en un seul crochet."
+        },
+        {
+            "key": "messi_left_curler",
+            "mode": "attack",
+            "label": "Enroulé du gauche",
+            "short_label": "Enroulé",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe enroulée du pied gauche, imparable dans l’angle opposé."
+        }
+    ],
+    "mario-kempes": [
+        {
+            "key": "kempes_matador",
+            "mode": "attack",
+            "label": "Matador",
+            "short_label": "Matador",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il perce la défense et achève le ballon d’un tir puissant."
+        }
+    ],
+    "gabriel-batistuta": [
+        {
+            "key": "batistuta_batigol",
+            "mode": "attack",
+            "label": "Batigol",
+            "short_label": "Batigol",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe terrible, tirée de loin, qui fait trembler le filet."
+        }
+    ],
+    "claudio-caniggia": [
+        {
+            "key": "caniggia_wind",
+            "mode": "attack",
+            "label": "Sprint du vent",
+            "short_label": "Vent",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Cheveux au vent, il file en contre-attaque et laisse les défenseurs sur place."
+        }
+    ],
+    "alfredo-di-stefano": [
+        {
+            "key": "di_stefano_total",
+            "mode": "attack",
+            "label": "Jeu total",
+            "short_label": "Total",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il joue partout sur le terrain, défend, relance et distribue."
+        }
+    ],
+    "juan-roman-riquelme": [
+        {
+            "key": "riquelme_pause",
+            "mode": "attack",
+            "label": "La pause",
+            "short_label": "Pause",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il ralentit le jeu, fige la défense et distille la passe décisive."
+        }
+    ],
+    "angel-di-maria": [
+        {
+            "key": "di_maria_chip",
+            "mode": "attack",
+            "label": "Lob de Fideo",
+            "short_label": "Lob",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un lob délicat par-dessus le gardien sorti."
+        }
+    ],
+    "sergio-aguero": [
+        {
+            "key": "aguero_kun_shot",
+            "mode": "attack",
+            "label": "Frappe du Kun",
+            "short_label": "Kun",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un appui rapide, un tir sec : le gardien n’a pas le temps de réagir."
+        }
+    ],
+    "emiliano-martinez": [
+        {
+            "key": "martinez_penalty_stopper",
+            "mode": "defense",
+            "label": "Chasseur de penalty",
+            "short_label": "Penalty",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Il joue avec les nerfs du tireur et détourne le ballon au dernier moment."
+        }
+    ],
+    "javier-mascherano": [
+        {
+            "key": "mascherano_jefecito",
+            "mode": "defense",
+            "label": "Jefecito",
+            "short_label": "Jefecito",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un glissé désespéré qui coupe la course de l’attaquant."
+        }
+    ],
+    "diego-simeone": [
+        {
+            "key": "simeone_cholo_rage",
+            "mode": "defense",
+            "label": "Rage du Cholo",
+            "short_label": "Cholo",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle engagé, dur sur l’homme, qui lance le ton du match."
+        }
+    ],
+    "juan-sebastian-veron": [
+        {
+            "key": "veron_brujita",
+            "mode": "attack",
+            "label": "Passe de la Sorcière",
+            "short_label": "Sorcière",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe longue et tendue, parfaitement dosée."
+        }
+    ],
+    "fernando-redondo": [
+        {
+            "key": "redondo_heel",
+            "mode": "attack",
+            "label": "Talonnade de Redondo",
+            "short_label": "Talonnade",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il passe le ballon derrière lui du talon pour éliminer le défenseur."
+        }
+    ],
+    "daniel-passarella": [
+        {
+            "key": "passarella_free_kick",
+            "mode": "attack",
+            "label": "Frappe du capitaine",
+            "short_label": "Capitaine",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Défenseur buteur, il frappe les coups francs avec autorité."
+        }
+    ],
+    "johan-cruyff": [
+        {
+            "key": "cruyff_turn",
+            "mode": "attack",
+            "label": "Virage de Cruyff",
+            "short_label": "Virage",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il feint de centrer, tourne sur le ballon et laisse le défenseur dans son dos."
+        },
+        {
+            "key": "cruyff_total_football",
+            "mode": "attack",
+            "label": "Football total",
+            "short_label": "Total",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il se déplace partout et organise le mouvement collectif."
+        }
+    ],
+    "marco-van-basten": [
+        {
+            "key": "van_basten_volley",
+            "mode": "attack",
+            "label": "Volée du cygne",
+            "short_label": "Volée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une volée acrobatique en pleine course, à l’angle impossible."
+        }
+    ],
+    "ruud-gullit": [
+        {
+            "key": "gullit_power_run",
+            "mode": "attack",
+            "label": "Puissance de Ruud",
+            "short_label": "Puissance",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Grand et rapide, il porte le ballon à travers la défense."
+        }
+    ],
+    "dennis-bergkamp": [
+        {
+            "key": "bergkamp_first_touch",
+            "mode": "attack",
+            "label": "Première touche",
+            "short_label": "Touche",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il contrôle le ballon du pied d’une seule touche, élimine le défenseur sans effort."
+        }
+    ],
+    "arjen-robben": [
+        {
+            "key": "robben_cut_inside",
+            "mode": "attack",
+            "label": "Crochet intérieur",
+            "short_label": "Crochet",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il part de la droite, rentre sur son pied gauche et déborde."
+        },
+        {
+            "key": "robben_curler",
+            "mode": "attack",
+            "label": "Enroulé de Robben",
+            "short_label": "Enroulé",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Après son crochet, une frappe enroulée au second poteau."
+        }
+    ],
+    "wesley-sneijder": [
+        {
+            "key": "sneijder_long_shot",
+            "mode": "attack",
+            "label": "Frappe de Wesley",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe lourde prise à l’entrée de la surface."
+        }
+    ],
+    "robin-van-persie": [
+        {
+            "key": "van_persie_flying_header",
+            "mode": "attack",
+            "label": "Tête plongeante",
+            "short_label": "Plongeante",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un plongeon de la tête, le corps horizontal, pour envoyer le ballon au fond."
+        }
+    ],
+    "virgil-van-dijk": [
+        {
+            "key": "van_dijk_wall",
+            "mode": "defense",
+            "label": "Mur de Virgil",
+            "short_label": "Mur",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Grand et puissant, il ferme l’axe et bloque le tir adverse."
+        }
+    ],
+    "jaap-stam": [
+        {
+            "key": "stam_colossus",
+            "mode": "defense",
+            "label": "Colosse",
+            "short_label": "Colosse",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle massif qui ne laisse aucune chance à l’attaquant."
+        }
+    ],
+    "ronald-koeman": [
+        {
+            "key": "koeman_free_kick",
+            "mode": "attack",
+            "label": "Coup franc de Koeman",
+            "short_label": "Coup franc",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Défenseur à la frappe de feu, il arme des coups francs terribles."
+        }
+    ],
+    "edgar-davids": [
+        {
+            "key": "davids_pitbull",
+            "mode": "defense",
+            "label": "Pitbull",
+            "short_label": "Pitbull",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Lunettes sur le nez, il mord dans chaque duel jusqu’à récupérer le ballon."
+        }
+    ],
+    "marc-overmars": [
+        {
+            "key": "overmars_speed",
+            "mode": "attack",
+            "label": "Flèche néerlandaise",
+            "short_label": "Flèche",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une accélération foudroyante qui scie les défenses."
+        }
+    ],
+    "edwin-van-der-sar": [
+        {
+            "key": "van_der_sar_calm",
+            "mode": "defense",
+            "label": "Calme olympien",
+            "short_label": "Calme",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Placement parfait et sang-froid : l’arrêt paraît facile."
+        }
+    ],
+    "frank-de-boer": [
+        {
+            "key": "de_boer_long_pass",
+            "mode": "attack",
+            "label": "Longue transversale",
+            "short_label": "Transversale",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe lobée de quarante mètres, qui lance l’aile opposée."
+        }
+    ],
+    "clarence-seedorf": [
+        {
+            "key": "seedorf_long_shot",
+            "mode": "attack",
+            "label": "Frappe de Clarence",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe puissante de loin, venue de nulle part."
+        }
+    ],
+    "luis-suarez": [
+        {
+            "key": "suarez_pistolero",
+            "mode": "attack",
+            "label": "Pistolero",
+            "short_label": "Pistolero",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un appétit féroce de but, il frappe toujours le premier."
+        }
+    ],
+    "diego-forlan": [
+        {
+            "key": "forlan_knuckleball",
+            "mode": "attack",
+            "label": "Frappe flottante",
+            "short_label": "Flottante",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un ballon sans rotation qui fuit dans les airs, imprévisible pour le gardien."
+        }
+    ],
+    "edinson-cavani": [
+        {
+            "key": "cavani_header",
+            "mode": "attack",
+            "label": "Tête d’Edi",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un saut puissant au point de penalty, qui domine la défense."
+        }
+    ],
+    "juan-alberto-schiaffino": [
+        {
+            "key": "schiaffino_maestro",
+            "mode": "attack",
+            "label": "Maestro",
+            "short_label": "Maestro",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il lit le jeu comme personne et délivre la passe décisive."
+        }
+    ],
+    "enzo-francescoli": [
+        {
+            "key": "francescoli_prince",
+            "mode": "attack",
+            "label": "Élégance du Prince",
+            "short_label": "Prince",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe élégante, du plat du pied, qui libère l’attaquant."
+        }
+    ],
+    "diego-godin": [
+        {
+            "key": "godin_garra",
+            "mode": "defense",
+            "label": "Garra charrúa",
+            "short_label": "Garra",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il se jette dans chaque duel, tout l’orgueil de l’Uruguay dans la jambe."
+        }
+    ],
+    "obdulio-varela": [
+        {
+            "key": "varela_black_chief",
+            "mode": "defense",
+            "label": "Chef noir",
+            "short_label": "Chef",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Le capitaine règne sur le milieu et refuse tout recul."
+        }
+    ],
+    "alcides-ghiggia": [
+        {
+            "key": "ghiggia_maracana",
+            "mode": "attack",
+            "label": "Frappe du Maracanã",
+            "short_label": "Maracanã",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il déborde sur l’aile et conclut au premier poteau quand on attend le centre."
+        }
+    ],
+    "federico-valverde": [
+        {
+            "key": "valverde_falcon",
+            "mode": "attack",
+            "label": "Course du Faucon",
+            "short_label": "Faucon",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une cavalcade de quarante mètres qui change le sens du match."
+        }
+    ],
+    "alvaro-recoba": [
+        {
+            "key": "recoba_chino",
+            "mode": "attack",
+            "label": "Gaucher du Chino",
+            "short_label": "Chino",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe du gauche d’une rare précision, de loin ou en coup franc."
+        }
+    ],
+    "guillermo-ochoa": [
+        {
+            "key": "ochoa_wall",
+            "mode": "defense",
+            "label": "Mur d’Ochoa",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Des arrêts impossibles quand tout semble perdu."
+        }
+    ],
+    "hugo-sanchez": [
+        {
+            "key": "hugo_sanchez_overhead",
+            "mode": "attack",
+            "label": "Ciseau d’Hugo",
+            "short_label": "Ciseau",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une bicyclette en pleine surface, sa signature."
+        }
+    ],
+    "cuauhtemoc-blanco": [
+        {
+            "key": "blanco_hop",
+            "mode": "attack",
+            "label": "Cuauhtemiña",
+            "short_label": "Saut",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il coince le ballon entre ses chevilles et saute par-dessus le défenseur."
+        }
+    ],
+    "rafael-marquez": [
+        {
+            "key": "marquez_captain",
+            "mode": "defense",
+            "label": "Capitaine de fer",
+            "short_label": "Capitaine",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il lit la trajectoire et coupe la passe avec autorité."
+        }
+    ],
+    "javier-hernandez": [
+        {
+            "key": "chicharito_poacher",
+            "mode": "attack",
+            "label": "Renard de la surface",
+            "short_label": "Renard",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un appel dans le dos du défenseur et une frappe de renard."
+        }
+    ],
+    "hirving-lozano": [
+        {
+            "key": "lozano_sprint",
+            "mode": "attack",
+            "label": "Sprint du Chucky",
+            "short_label": "Sprint",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il lance sa course dans les espaces et dépasse la défense à toute allure."
+        }
+    ],
+    "pele": [
+        {
+            "key": "pele_bicycle",
+            "mode": "attack",
+            "label": "Bicyclette de Pelé",
+            "short_label": "Bicyclette",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une reprise acrobatique, le corps en l’air, qui s’abat dans le filet."
+        },
+        {
+            "key": "pele_dummy",
+            "mode": "attack",
+            "label": "Feinte de Pelé",
+            "short_label": "Feinte",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il laisse filer le ballon, trompe le gardien et le contourne."
+        }
+    ],
+    "ronaldo": [
+        {
+            "key": "ronaldo_phenomenon_run",
+            "mode": "attack",
+            "label": "Course du Phénomène",
+            "short_label": "Phénomène",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une accélération irrésistible, ballon collé au pied, jusque dans la surface."
+        },
+        {
+            "key": "ronaldo_power_shot",
+            "mode": "attack",
+            "label": "Frappe du Phénomène",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un tir puissant et net, croisé avec froideur face au gardien."
+        }
+    ],
+    "garrincha": [
+        {
+            "key": "garrincha_bird",
+            "mode": "attack",
+            "label": "Dribble de l’oiseau",
+            "short_label": "Oiseau",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Ses jambes arquées trompent l’adversaire à chaque feinte."
+        }
+    ],
+    "didi": [
+        {
+            "key": "didi_dry_leaf",
+            "mode": "attack",
+            "label": "Feuille morte",
+            "short_label": "Feuille morte",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un coup franc qui plonge brutalement juste avant le but."
+        }
+    ],
+    "jairzinho": [
+        {
+            "key": "jairzinho_hurricane",
+            "mode": "attack",
+            "label": "Ouragan",
+            "short_label": "Ouragan",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un débordement sur l’aile et une frappe qui emporte tout."
+        }
+    ],
+    "romario": [
+        {
+            "key": "romario_baixinho",
+            "mode": "attack",
+            "label": "Frappe du Baixinho",
+            "short_label": "Baixinho",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Petit mais létal : un geste rapide, un but sûr."
+        }
+    ],
+    "leonidas": [
+        {
+            "key": "leonidas_bicycle",
+            "mode": "attack",
+            "label": "Bicyclette de Leônidas",
+            "short_label": "Bicyclette",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "La reprise acrobatique qu’on lui attribue, lancée de dos au but."
+        }
+    ],
+    "rivaldo": [
+        {
+            "key": "rivaldo_scissors",
+            "mode": "attack",
+            "label": "Ciseau de Rivaldo",
+            "short_label": "Ciseau",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une volée retournée à la dernière seconde pour arracher le but."
+        }
+    ],
+    "ronaldinho": [
+        {
+            "key": "ronaldinho_elastico",
+            "mode": "attack",
+            "label": "Élastico",
+            "short_label": "Élastico",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il feint du dehors, puis de l’intérieur : le défenseur est déjà battu."
+        },
+        {
+            "key": "ronaldinho_no_look",
+            "mode": "attack",
+            "label": "Passe aveugle",
+            "short_label": "Aveugle",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Le regard à droite, la passe à gauche : tout le monde est surpris."
+        }
+    ],
+    "neymar": [
+        {
+            "key": "neymar_ginga",
+            "mode": "attack",
+            "label": "Ginga",
+            "short_label": "Ginga",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Des feintes de corps répétées au rythme de la samba."
+        }
+    ],
+    "kaka": [
+        {
+            "key": "kaka_run",
+            "mode": "attack",
+            "label": "Cavalcade de Kaká",
+            "short_label": "Cavalcade",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Ballon au pied, il avale le terrain avec une élégance fluide."
+        }
+    ],
+    "zico": [
+        {
+            "key": "zico_free_kick",
+            "mode": "attack",
+            "label": "Coup franc de Zico",
+            "short_label": "Coup franc",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Le ballon contourne le mur et retombe dans la lucarne."
+        }
+    ],
+    "socrates": [
+        {
+            "key": "socrates_heel_pass",
+            "mode": "attack",
+            "label": "Passe du talon",
+            "short_label": "Talon",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe du talon, sans regarder, qui libère son partenaire."
+        }
+    ],
+    "vinicius-junior": [
+        {
+            "key": "vinicius_samba",
+            "mode": "attack",
+            "label": "Samba de Vini",
+            "short_label": "Samba",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une série de feintes endiablées pour éliminer son vis-à-vis."
+        }
+    ],
+    "roberto-carlos": [
+        {
+            "key": "roberto_carlos_banana",
+            "mode": "attack",
+            "label": "Coup franc en banane",
+            "short_label": "Banane",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe qui contourne le mur de l’extérieur du pied avant de retomber au but."
+        }
+    ],
+    "marcos-cafu": [
+        {
+            "key": "cafu_express",
+            "mode": "attack",
+            "label": "Cafu Express",
+            "short_label": "Express",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Il remonte l’aile droite sans cesse et centre à pleine allure."
+        }
+    ],
+    "claudio-taffarel": [
+        {
+            "key": "taffarel_penalty",
+            "mode": "defense",
+            "label": "Mains de Taffarel",
+            "short_label": "Mains",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Calme dans les séances décisives, il détourne le tir adverse."
+        }
+    ],
+    "alisson": [
+        {
+            "key": "alisson_reflex",
+            "mode": "defense",
+            "label": "Réflexe d’Alisson",
+            "short_label": "Réflexe",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un réflexe à bout de bras sur un tir à bout portant."
+        }
+    ],
+    "carlos-dunga": [
+        {
+            "key": "dunga_fighter",
+            "mode": "defense",
+            "label": "Combattant",
+            "short_label": "Combattant",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle sans concession qui impose le rythme et l’état d’esprit."
+        }
+    ],
+    "casemiro": [
+        {
+            "key": "casemiro_destroyer",
+            "mode": "defense",
+            "label": "Destructeur",
+            "short_label": "Destructeur",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il ferme l’axe devant la défense et casse chaque attaque."
+        }
+    ],
+    "thiago-silva": [
+        {
+            "key": "thiago_silva_reading",
+            "mode": "defense",
+            "label": "Lecture de Thiago",
+            "short_label": "Lecture",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il anticipe la passe longtemps avant de réagir."
+        }
+    ],
+    "roberto-baggio": [
+        {
+            "key": "baggio_free_kick",
+            "mode": "attack",
+            "label": "Coup franc du Divin",
+            "short_label": "Divin",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un ballon posé à la perfection, qui plonge sous la barre."
+        },
+        {
+            "key": "baggio_dribble",
+            "mode": "attack",
+            "label": "Dribble du Divin",
+            "short_label": "Queue-de-cheval",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il efface deux défenseurs d’un geste souple avant de se présenter devant le gardien."
+        }
+    ],
+    "francesco-totti": [
+        {
+            "key": "totti_cucchiaio",
+            "mode": "attack",
+            "label": "Cuillère",
+            "short_label": "Cuillère",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un lob en cuillère, audacieux, qui trompe le gardien."
+        }
+    ],
+    "alessandro-del-piero": [
+        {
+            "key": "del_piero_zone",
+            "mode": "attack",
+            "label": "Zone Del Piero",
+            "short_label": "Zone",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un enroulé du pied droit depuis le côté gauche, vers le second poteau."
+        }
+    ],
+    "andrea-pirlo": [
+        {
+            "key": "pirlo_maestro",
+            "mode": "attack",
+            "label": "Maestro",
+            "short_label": "Maestro",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Du fond du terrain, il dicte le jeu d’une passe lumineuse."
+        },
+        {
+            "key": "pirlo_free_kick",
+            "mode": "attack",
+            "label": "Coup franc de Pirlo",
+            "short_label": "Coup franc",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une feuille morte aérienne sur coup franc."
+        }
+    ],
+    "paolo-maldini": [
+        {
+            "key": "maldini_perfect_tackle",
+            "mode": "defense",
+            "label": "Tacle parfait",
+            "short_label": "Parfait",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle à la précision d’horloger : il prend le ballon, pas l’homme."
+        }
+    ],
+    "fabio-cannavaro": [
+        {
+            "key": "cannavaro_wall_2006",
+            "mode": "defense",
+            "label": "Muraille",
+            "short_label": "Muraille",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Petit mais indomptable, il bloque chaque tir adverse."
+        }
+    ],
+    "alessandro-nesta": [
+        {
+            "key": "nesta_anticipation",
+            "mode": "defense",
+            "label": "Anticipation de Nesta",
+            "short_label": "Anticipation",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il intercepte le ballon d’un tacle propre, souvent avant qu’il ne parvienne à l’attaquant."
+        }
+    ],
+    "franco-baresi": [
+        {
+            "key": "baresi_libero",
+            "mode": "defense",
+            "label": "Libéro de Milan",
+            "short_label": "Libéro",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il commande la ligne défensive et anticipe chaque ballon."
+        }
+    ],
+    "gianluigi-buffon": [
+        {
+            "key": "buffon_gigi",
+            "mode": "defense",
+            "label": "Mains de Gigi",
+            "short_label": "Mains",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un arrêt à la détente, d’une main, qui refuse le but."
+        }
+    ],
+    "dino-zoff": [
+        {
+            "key": "zoff_veteran",
+            "mode": "defense",
+            "label": "Doyen de 82",
+            "short_label": "Doyen",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Sang-froid absolu : il capte chaque tir sans sourciller."
+        }
+    ],
+    "gennaro-gattuso": [
+        {
+            "key": "gattuso_ringhio",
+            "mode": "defense",
+            "label": "Ringhio",
+            "short_label": "Ringhio",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il grogne, il mord, il ne lâche jamais le ballon."
+        }
+    ],
+    "giorgio-chiellini": [
+        {
+            "key": "chiellini_stopper",
+            "mode": "defense",
+            "label": "Stoppeur de fer",
+            "short_label": "Stoppeur",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Un corps-à-corps de chaque instant qui étouffe l’attaquant."
+        }
+    ],
+    "paolo-rossi": [
+        {
+            "key": "rossi_pablito",
+            "mode": "attack",
+            "label": "Pablito",
+            "short_label": "Pablito",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il se trouve toujours au bon endroit, au bon moment."
+        }
+    ],
+    "giuseppe-meazza": [
+        {
+            "key": "meazza_feint",
+            "mode": "attack",
+            "label": "Feinte de Meazza",
+            "short_label": "Feinte",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une feinte de corps géniale qui fait basculer le défenseur."
+        }
+    ],
+    "gigi-riva": [
+        {
+            "key": "riva_thunder",
+            "mode": "attack",
+            "label": "Coup de tonnerre",
+            "short_label": "Tonnerre",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe de gauche d’une puissance monstrueuse."
+        }
+    ],
+    "gianni-rivera": [
+        {
+            "key": "rivera_golden_boy",
+            "mode": "attack",
+            "label": "Golden Boy",
+            "short_label": "Golden",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe d’une élégance rare, glissée entre deux lignes."
+        }
+    ],
+    "filippo-inzaghi": [
+        {
+            "key": "inzaghi_offside",
+            "mode": "attack",
+            "label": "Maître du hors-jeu",
+            "short_label": "Hors-jeu",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il joue sur le fil de la ligne et conclut d’une touche opportuniste."
+        }
+    ],
+    "christian-vieri": [
+        {
+            "key": "vieri_bomber",
+            "mode": "attack",
+            "label": "Bobo bomber",
+            "short_label": "Bomber",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Épaule contre défenseur puis frappe puissante des vingt mètres."
+        }
+    ],
+    "eusebio": [
+        {
+            "key": "eusebio_black_panther",
+            "mode": "attack",
+            "label": "Panthère noire",
+            "short_label": "Panthère",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un tir foudroyant déclenché en pleine course, d’une puissance féline."
+        }
+    ],
+    "cristiano-ronaldo": [
+        {
+            "key": "cr7_stepover",
+            "mode": "attack",
+            "label": "Passement de jambes",
+            "short_label": "Passements",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une succession de passements qui désorientent le défenseur avant l’accélération."
+        },
+        {
+            "key": "cr7_knuckle",
+            "mode": "attack",
+            "label": "Frappe flottante",
+            "short_label": "Flottante",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un ballon sans rotation, tiré de loin, qui dévie en l’air."
+        }
+    ],
+    "luis-figo": [
+        {
+            "key": "figo_cross",
+            "mode": "attack",
+            "label": "Centre de Luís",
+            "short_label": "Centre",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Il dribble puis centre à ras de terre dans la course du partenaire."
+        }
+    ],
+    "rui-costa": [
+        {
+            "key": "rui_costa_maestro",
+            "mode": "attack",
+            "label": "Maestro de Lisbonne",
+            "short_label": "Maestro",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe sans regarder, glissée dans l’espace entre deux défenseurs."
+        }
+    ],
+    "deco": [
+        {
+            "key": "deco_magician",
+            "mode": "attack",
+            "label": "Magicien",
+            "short_label": "Magicien",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Toujours au bon endroit, il redistribue le ballon d’un geste simple."
+        }
+    ],
+    "pauleta": [
+        {
+            "key": "pauleta_poacher",
+            "mode": "attack",
+            "label": "Pauleta tueur",
+            "short_label": "Tueur",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Petit mouvement, frappe immédiate : le but est là."
+        }
+    ],
+    "paulo-futre": [
+        {
+            "key": "futre_dribble",
+            "mode": "attack",
+            "label": "Dribble de Paulo",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un jeu de jambes enlevé qui force la faute."
+        }
+    ],
+    "bernardo-silva": [
+        {
+            "key": "bernardo_silva_tight",
+            "mode": "attack",
+            "label": "Dribble en espace réduit",
+            "short_label": "Espace réduit",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il garde le ballon dans un mouchoir de poche et sort indemne."
+        }
+    ],
+    "bruno-fernandes": [
+        {
+            "key": "bruno_laser_pass",
+            "mode": "attack",
+            "label": "Passe laser",
+            "short_label": "Laser",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe tendue, rapide et précise, qui coupe la défense."
+        }
+    ],
+    "ruben-dias": [
+        {
+            "key": "ruben_dias_wall",
+            "mode": "defense",
+            "label": "Mur de Rúben",
+            "short_label": "Mur",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Il tient son axe avec autorité et bloque l’attaquant."
+        }
+    ],
+    "pepe": [
+        {
+            "key": "pepe_hard_tackle",
+            "mode": "defense",
+            "label": "Tacle de Pepe",
+            "short_label": "Tacle",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle appuyé et sans pitié, qui décourage l’attaquant."
+        }
+    ],
+    "david-beckham": [
+        {
+            "key": "beckham_free_kick",
+            "mode": "attack",
+            "label": "Coup franc de Becks",
+            "short_label": "Coup franc",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un ballon enroulé par-dessus le mur et retombé dans l’angle."
+        },
+        {
+            "key": "beckham_cross",
+            "mode": "attack",
+            "label": "Centre de Becks",
+            "short_label": "Centre",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Un centre tendu du pied droit, à l’endroit exact du receveur."
+        }
+    ],
+    "michael-owen": [
+        {
+            "key": "owen_acceleration",
+            "mode": "attack",
+            "label": "Accélération d’Owen",
+            "short_label": "Accélération",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il lance sa course dans le dos de la défense et lui échappe."
+        }
+    ],
+    "alan-shearer": [
+        {
+            "key": "shearer_thunder",
+            "mode": "attack",
+            "label": "Tonnerre de Newcastle",
+            "short_label": "Tonnerre",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe lourde, bras levé, juste après la déviation du gardien."
+        }
+    ],
+    "paul-scholes": [
+        {
+            "key": "scholes_through_ball",
+            "mode": "attack",
+            "label": "Passe en profondeur",
+            "short_label": "Profondeur",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe longue et précise qui perce la défense adverse."
+        }
+    ],
+    "steven-gerrard": [
+        {
+            "key": "gerrard_rocket",
+            "mode": "attack",
+            "label": "Fusée de Steven",
+            "short_label": "Fusée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe de trente mètres qui jaillit sans prévenir."
+        }
+    ],
+    "frank-lampard": [
+        {
+            "key": "lampard_late_arrival",
+            "mode": "attack",
+            "label": "Arrivée de Frank",
+            "short_label": "Arrivée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il surgit de derrière et frappe du droit à l’entrée de la surface."
+        }
+    ],
+    "paul-gascoigne": [
+        {
+            "key": "gascoigne_slalom",
+            "mode": "attack",
+            "label": "Slalom de Gazza",
+            "short_label": "Slalom",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il s’invente un chemin, balle au pied, parmi les défenseurs."
+        }
+    ],
+    "bobby-charlton": [
+        {
+            "key": "charlton_cannon",
+            "mode": "attack",
+            "label": "Canon des Red Devils",
+            "short_label": "Canon",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe lourde du droit, de loin, qui enflamme le stade."
+        }
+    ],
+    "bobby-moore": [
+        {
+            "key": "moore_clean_tackle",
+            "mode": "defense",
+            "label": "Tacle de Bobby",
+            "short_label": "Tacle",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle d’une rare pureté, sans le moindre geste inutile."
+        }
+    ],
+    "gordon-banks": [
+        {
+            "key": "banks_save_century",
+            "mode": "defense",
+            "label": "Arrêt du siècle",
+            "short_label": "Arrêt du siècle",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Une détente stupéfiante pour détourner une tête qui semblait au fond."
+        }
+    ],
+    "peter-shilton": [
+        {
+            "key": "shilton_last_wall",
+            "mode": "defense",
+            "label": "Dernier rempart",
+            "short_label": "Rempart",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Gardien imposant, il tient son but jusqu’au bout."
+        }
+    ],
+    "wayne-rooney": [
+        {
+            "key": "rooney_bicycle",
+            "mode": "attack",
+            "label": "Ciseau de Wayne",
+            "short_label": "Ciseau",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une bicyclette inattendue, mise d’un ballon en cloche."
+        }
+    ],
+    "harry-kane": [
+        {
+            "key": "kane_deflection",
+            "mode": "attack",
+            "label": "Déviation de Kane",
+            "short_label": "Déviation",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il décroche, joue en une touche et lance ses coéquipiers."
+        }
+    ],
+    "gary-lineker": [
+        {
+            "key": "lineker_instinct",
+            "mode": "attack",
+            "label": "Instinct de Gary",
+            "short_label": "Instinct",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un appel de balle, une touche, un but : la surface est son territoire."
+        }
+    ],
+    "jude-bellingham": [
+        {
+            "key": "bellingham_late_run",
+            "mode": "attack",
+            "label": "Arrivée de Jude",
+            "short_label": "Arrivée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il suit l’action, surgit dans la surface et conclut de volée."
+        }
+    ],
+    "rio-ferdinand": [
+        {
+            "key": "ferdinand_elegant",
+            "mode": "defense",
+            "label": "Défense élégante",
+            "short_label": "Élégance",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il intercepte sans effort apparent, puis relance proprement."
+        }
+    ],
+    "john-terry": [
+        {
+            "key": "terry_captain_block",
+            "mode": "defense",
+            "label": "Tête de Terry",
+            "short_label": "Tête",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Il se jette devant le tir, de la tête ou du corps, pour sauver son but."
+        }
+    ],
+    "ashley-cole": [
+        {
+            "key": "ashley_cole_recovery",
+            "mode": "defense",
+            "label": "Retour d’Ashley",
+            "short_label": "Retour",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il rattrape son vis-à-vis et lui reprend le ballon d’un tacle glissé."
+        }
+    ],
+    "xavi-hernandez": [
+        {
+            "key": "xavi_tiki_taka",
+            "mode": "attack",
+            "label": "Tiki-taka",
+            "short_label": "Tiki-taka",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une succession de passes courtes qui épuise l’adversaire."
+        }
+    ],
+    "andres-iniesta": [
+        {
+            "key": "iniesta_croqueta",
+            "mode": "attack",
+            "label": "Croqueta",
+            "short_label": "Croqueta",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un petit pas de côté, le ballon passe d’un pied à l’autre et le défenseur est battu."
+        }
+    ],
+    "iker-casillas": [
+        {
+            "key": "casillas_san_iker",
+            "mode": "defense",
+            "label": "Saint Iker",
+            "short_label": "Saint",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Des arrêts presque miraculeux dans les moments qui comptent."
+        }
+    ],
+    "rodri": [
+        {
+            "key": "rodri_pivot",
+            "mode": "defense",
+            "label": "Pivot de Rodri",
+            "short_label": "Pivot",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il gère les transitions et coupe les passes dans l’axe."
+        }
+    ],
+    "sergio-ramos": [
+        {
+            "key": "ramos_tackle",
+            "mode": "defense",
+            "label": "Tacle de Ramos",
+            "short_label": "Tacle",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle engagé, souvent à la limite, qui stoppe l’attaque."
+        },
+        {
+            "key": "ramos_header",
+            "mode": "attack",
+            "label": "Tête sauveuse",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une tête puissante sur corner, qui arrive tard et fait mouche."
+        }
+    ],
+    "carles-puyol": [
+        {
+            "key": "puyol_captain",
+            "mode": "defense",
+            "label": "Capitaine de fer",
+            "short_label": "Capitaine",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Crinière au vent, il se jette devant chaque tir."
+        }
+    ],
+    "sergio-busquets": [
+        {
+            "key": "busquets_pivot",
+            "mode": "defense",
+            "label": "Pivot de Sergio",
+            "short_label": "Pivot",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il lit le jeu comme un livre ouvert et coupe la passe adverse."
+        }
+    ],
+    "xabi-alonso": [
+        {
+            "key": "alonso_diagonal",
+            "mode": "attack",
+            "label": "Diagonale de Xabi",
+            "short_label": "Diagonale",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe longue et tendue, de l’autre bout du terrain."
+        }
+    ],
+    "cesc-fabregas": [
+        {
+            "key": "fabregas_assist",
+            "mode": "attack",
+            "label": "Passe de Cesc",
+            "short_label": "Passe",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il glisse un ballon décisif entre deux défenseurs."
+        }
+    ],
+    "david-villa": [
+        {
+            "key": "villa_guaje",
+            "mode": "attack",
+            "label": "Guaje",
+            "short_label": "Guaje",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il frappe du gauche, du droit, de loin, de près, toujours dans le cadre."
+        }
+    ],
+    "fernando-torres": [
+        {
+            "key": "torres_nino",
+            "mode": "attack",
+            "label": "Frappe du Niño",
+            "short_label": "Niño",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un appel en profondeur, une frappe vive : le Niño est déjà passé."
+        }
+    ],
+    "raul-gonzalez": [
+        {
+            "key": "raul_instinct",
+            "mode": "attack",
+            "label": "Instinct de Raúl",
+            "short_label": "Instinct",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un sens du but affûté : il flaire le ballon et conclut d’une touche."
+        }
+    ],
+    "emilio-butragueno": [
+        {
+            "key": "butragueno_vulture",
+            "mode": "attack",
+            "label": "Vautour",
+            "short_label": "Vautour",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il rôde dans la surface, attend la moindre erreur et fond sur le ballon."
+        }
+    ],
+    "pep-guardiola": [
+        {
+            "key": "guardiola_pivot",
+            "mode": "attack",
+            "label": "Pivot catalan",
+            "short_label": "Pivot",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il orchestre le jeu depuis la base du milieu avec une passe juste."
+        }
+    ],
+    "fernando-hierro": [
+        {
+            "key": "hierro_free_kick",
+            "mode": "attack",
+            "label": "Frappe de Hierro",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Défenseur buteur, il frappe fort sur coup franc ou penalty."
+        }
+    ],
+    "jordi-alba": [
+        {
+            "key": "alba_overlap",
+            "mode": "attack",
+            "label": "Débordement d’Alba",
+            "short_label": "Débordement",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Une course sur toute la ligne de touche et un centre à ras de terre."
+        }
+    ],
+    "lamine-yamal": [
+        {
+            "key": "yamal_dribble",
+            "mode": "attack",
+            "label": "Dribble de Lamine",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il élimine son vis-à-vis dès la première touche, avec une maturité déconcertante."
+        }
+    ],
+    "pedri": [
+        {
+            "key": "pedri_touch",
+            "mode": "attack",
+            "label": "Touche de Pedri",
+            "short_label": "Touche",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Un contrôle orienté puis une passe en une touche entre les lignes."
+        }
+    ],
+    "luka-modric": [
+        {
+            "key": "modric_outside_pass",
+            "mode": "attack",
+            "label": "Passe de l’extérieur",
+            "short_label": "Extérieur",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe de l’extérieur du pied, courbe, qui trouve son partenaire dans le dos de la défense."
+        },
+        {
+            "key": "modric_turn",
+            "mode": "attack",
+            "label": "Rotation de Luka",
+            "short_label": "Rotation",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un pivot serré qui élimine le pressing."
+        }
+    ],
+    "davor-suker": [
+        {
+            "key": "suker_chip",
+            "mode": "attack",
+            "label": "Lob de Davor",
+            "short_label": "Lob",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un lob par-dessus le gardien, d’un geste d’une désinvolture élégante."
+        }
+    ],
+    "robert-prosinecki": [
+        {
+            "key": "prosinecki_pass",
+            "mode": "attack",
+            "label": "Passe de Robert",
+            "short_label": "Passe",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe lumineuse qui change l’orientation du jeu."
+        }
+    ],
+    "ivan-rakitic": [
+        {
+            "key": "rakitic_metronome",
+            "mode": "attack",
+            "label": "Tempo de Rakitić",
+            "short_label": "Tempo",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Il dicte le rythme, redistribue et temporise."
+        }
+    ],
+    "mario-mandzukic": [
+        {
+            "key": "mandzukic_header",
+            "mode": "attack",
+            "label": "Tête de Mario",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un puissant coup de tête, dos au but, qui surprend le gardien."
+        }
+    ],
+    "ivan-perisic": [
+        {
+            "key": "perisic_volley",
+            "mode": "attack",
+            "label": "Volée de Ivan",
+            "short_label": "Volée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une reprise de volée du pied gauche, tendue et précise."
+        }
+    ],
+    "darijo-srna": [
+        {
+            "key": "srna_cross",
+            "mode": "attack",
+            "label": "Centre de Darijo",
+            "short_label": "Centre",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Un centre sec du droit, frappé à pleine puissance."
+        }
+    ],
+    "josko-gvardiol": [
+        {
+            "key": "gvardiol_stopper",
+            "mode": "defense",
+            "label": "Stoppeur de Joško",
+            "short_label": "Stoppeur",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Rapide et puissant, il gagne son duel dans le dos de la défense."
+        }
+    ],
+    "peter-schmeichel": [
+        {
+            "key": "schmeichel_star",
+            "mode": "defense",
+            "label": "Étoile de mer",
+            "short_label": "Étoile",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Bras et jambes écartés, il occupe tout l’angle face à l’attaquant."
+        }
+    ],
+    "michael-laudrup": [
+        {
+            "key": "laudrup_no_look",
+            "mode": "attack",
+            "label": "Passe aveugle de Michael",
+            "short_label": "Aveugle",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe en profondeur sans regard, qui laisse tout le monde derrière."
+        }
+    ],
+    "brian-laudrup": [
+        {
+            "key": "b_laudrup_feint",
+            "mode": "attack",
+            "label": "Feinte de Brian",
+            "short_label": "Feinte",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un jeu de jambes tranchant sur l’aile qui efface le latéral."
+        }
+    ],
+    "christian-eriksen": [
+        {
+            "key": "eriksen_set_piece",
+            "mode": "attack",
+            "label": "Corner direct",
+            "short_label": "Corner",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Un centre enroulé au millimètre, qui tombe dans le dos de la défense."
+        }
+    ],
+    "preben-elkjaer-larsen": [
+        {
+            "key": "elkjaer_boot",
+            "mode": "attack",
+            "label": "Frappe de Vérone",
+            "short_label": "Vérone",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il garde sa course et frappe, même chaussure perdue."
+        }
+    ],
+    "kasper-schmeichel": [
+        {
+            "key": "k_schmeichel_reflex",
+            "mode": "defense",
+            "label": "Réflexe de Kasper",
+            "short_label": "Réflexe",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un réflexe de chat sur un tir à bout portant."
+        }
+    ],
+    "jose-luis-chilavert": [
+        {
+            "key": "chilavert_free_kick",
+            "mode": "attack",
+            "label": "Gardien buteur",
+            "short_label": "Buteur",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Le gardien s’avance et arme un coup franc ou un penalty d’une frappe puissante."
+        }
+    ],
+    "miguel-almiron": [
+        {
+            "key": "almiron_run",
+            "mode": "attack",
+            "label": "Course d’Almirón",
+            "short_label": "Course",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une accélération rapide qui prend la défense à contre-pied."
+        }
+    ],
+    "carlos-gamarra": [
+        {
+            "key": "gamarra_clean_tackle",
+            "mode": "defense",
+            "label": "Tacle propre",
+            "short_label": "Propre",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un tacle qui prend le ballon sans jamais commettre la faute."
+        }
+    ],
+    "pavel-nedved": [
+        {
+            "key": "nedved_furia",
+            "mode": "attack",
+            "label": "Furia Ceca",
+            "short_label": "Furia",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe puissante de loin, lancée avec toute sa rage."
+        }
+    ],
+    "jan-koller": [
+        {
+            "key": "koller_tower",
+            "mode": "attack",
+            "label": "Tour de contrôle",
+            "short_label": "Tour",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Très grand, il domine les airs et conclut de la tête."
+        }
+    ],
+    "petr-cech": [
+        {
+            "key": "cech_wall",
+            "mode": "defense",
+            "label": "Mur de Petr",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un placement impeccable : le tir finit dans ses gants."
+        }
+    ],
+    "tomas-rosicky": [
+        {
+            "key": "rosicky_mozart",
+            "mode": "attack",
+            "label": "Petit Mozart",
+            "short_label": "Mozart",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Un jeu fluide et créatif, des passes qui jouent la mélodie."
+        }
+    ],
+    "karel-poborsky": [
+        {
+            "key": "poborsky_chip",
+            "mode": "attack",
+            "label": "Lob de Karel",
+            "short_label": "Lob",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un lob délicat par-dessus le gardien, venu de loin."
+        }
+    ],
+    "antonin-panenka": [
+        {
+            "key": "panenka_penalty",
+            "mode": "attack",
+            "label": "Panenka",
+            "short_label": "Panenka",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un penalty piqué en douceur au milieu du but, pendant que le gardien plonge."
+        }
+    ],
+    "roy-keane": [
+        {
+            "key": "keane_captain_tackle",
+            "mode": "defense",
+            "label": "Capitaine de combat",
+            "short_label": "Capitaine",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il récupère tout, avec une intensité qui impose le respect."
+        }
+    ],
+    "paul-mcgrath": [
+        {
+            "key": "mcgrath_wall",
+            "mode": "defense",
+            "label": "Mur de McGrath",
+            "short_label": "Mur",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Il bloque chaque centre et chaque tir malgré tout."
+        }
+    ],
+    "robbie-keane": [
+        {
+            "key": "r_keane_finisher",
+            "mode": "attack",
+            "label": "Frappe de Robbie",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un sens du placement qui lui fait trouver le bon coin."
+        }
+    ],
+    "liam-brady": [
+        {
+            "key": "brady_left_foot",
+            "mode": "attack",
+            "label": "Gaucher de Liam",
+            "short_label": "Gaucher",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Un pied gauche d’orfèvre qui distribue chaque ballon."
+        }
+    ],
+    "niall-quinn": [
+        {
+            "key": "quinn_head",
+            "mode": "attack",
+            "label": "Tête de Niall",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un géant qui gagne tous les ballons aériens."
+        }
+    ],
+    "damien-duff": [
+        {
+            "key": "duff_dribble",
+            "mode": "attack",
+            "label": "Dribble de Damien",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Des feintes courtes et rapides sur l’aile gauche."
+        }
+    ],
+    "gheorghe-hagi": [
+        {
+            "key": "hagi_carpathes",
+            "mode": "attack",
+            "label": "Gaucher des Carpates",
+            "short_label": "Gaucher",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe du pied gauche d’une puissance et d’une précision spectaculaires."
+        }
+    ],
+    "dan-petrescu": [
+        {
+            "key": "petrescu_cross",
+            "mode": "attack",
+            "label": "Centre de Dan",
+            "short_label": "Centre",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Il remonte sur son côté droit et centre sans faiblir."
+        }
+    ],
+    "andriy-shevchenko": [
+        {
+            "key": "shevchenko_sheva",
+            "mode": "attack",
+            "label": "Sheva",
+            "short_label": "Sheva",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Vitesse et puissance : une frappe nette qui surprend le gardien."
+        }
+    ],
+    "oleh-blokhin": [
+        {
+            "key": "blokhin_speed",
+            "mode": "attack",
+            "label": "Vitesse de Blokhin",
+            "short_label": "Vitesse",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il file dans le couloir, plus vite que son vis-à-vis."
+        }
+    ],
+    "hristo-stoichkov": [
+        {
+            "key": "stoichkov_free_kick",
+            "mode": "attack",
+            "label": "Coup franc de Hristo",
+            "short_label": "Coup franc",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un pied gauche rageur, un mur contourné."
+        }
+    ],
+    "dimitar-berbatov": [
+        {
+            "key": "berbatov_touch",
+            "mode": "attack",
+            "label": "Contrôle de Dimitar",
+            "short_label": "Contrôle",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un contrôle nonchalant qui désoriente le défenseur."
+        }
+    ],
+    "george-weah": [
+        {
+            "key": "weah_run",
+            "mode": "attack",
+            "label": "Cavalcade de Milan",
+            "short_label": "Cavalcade",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il part de sa surface et traverse tout le terrain, ballon au pied."
+        }
+    ],
+    "dejan-savicevic": [
+        {
+            "key": "savicevic_feint",
+            "mode": "attack",
+            "label": "Feinte du Génie",
+            "short_label": "Génie",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un déhanché nonchalant et deux défenseurs ont changé de sens."
+        }
+    ],
+    "jari-litmanen": [
+        {
+            "key": "litmanen_pass",
+            "mode": "attack",
+            "label": "Passe de Jari",
+            "short_label": "Passe",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Un jeu intelligent, une passe qui perce là où personne ne regarde."
+        }
+    ],
+    "ryan-giggs": [
+        {
+            "key": "giggs_run",
+            "mode": "attack",
+            "label": "Cavalcade de Ryan",
+            "short_label": "Cavalcade",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une course folle depuis le milieu du terrain, plusieurs défenseurs semés."
+        }
+    ],
+    "gareth-bale": [
+        {
+            "key": "bale_sprint",
+            "mode": "attack",
+            "label": "Course de Gareth",
+            "short_label": "Course",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une pointe de vitesse qui dépasse le défenseur dans la ligne."
+        },
+        {
+            "key": "bale_rocket",
+            "mode": "attack",
+            "label": "Frappe de Gareth",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un missile du pied gauche, de trente mètres."
+        }
+    ],
+    "ian-rush": [
+        {
+            "key": "rush_poacher",
+            "mode": "attack",
+            "label": "Instinct d’Ian",
+            "short_label": "Instinct",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il rôde, anticipe et conclut en un clin d’œil."
+        }
+    ],
+    "zlatan-ibrahimovic": [
+        {
+            "key": "ibrahimovic_zlatan",
+            "mode": "attack",
+            "label": "Geste de Zlatan",
+            "short_label": "Zlatan",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un geste acrobatique de sa taille, une volée ou un ciseau inattendu."
+        }
+    ],
+    "henrik-larsson": [
+        {
+            "key": "larsson_henke",
+            "mode": "attack",
+            "label": "Frappe de Henrik",
+            "short_label": "Henke",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une volée précise ou une tête vive, signée Henrik."
+        }
+    ],
+    "tomas-brolin": [
+        {
+            "key": "brolin_feint",
+            "mode": "attack",
+            "label": "Feinte de Tomas",
+            "short_label": "Feinte",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il garde le ballon et fait basculer le défenseur."
+        }
+    ],
+    "alexander-isak": [
+        {
+            "key": "isak_glide",
+            "mode": "attack",
+            "label": "Glissade d’Alexander",
+            "short_label": "Glissade",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Grand mais fluide, il enchaîne les contrôles et déborde d’un seul mouvement."
+        }
+    ],
+    "gunnar-nordahl": [
+        {
+            "key": "nordahl_goal_machine",
+            "mode": "attack",
+            "label": "Machine à buts",
+            "short_label": "Machine",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un avant-centre massif qui accumule les buts, méthodiquement."
+        }
+    ],
+    "thomas-ravelli": [
+        {
+            "key": "ravelli_wall",
+            "mode": "defense",
+            "label": "Mur de Thomas",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un gardien imperturbable, les tirs finissent dans ses mains."
+        }
+    ],
+    "erling-haaland": [
+        {
+            "key": "haaland_terminator",
+            "mode": "attack",
+            "label": "Terminator",
+            "short_label": "Terminator",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe sèche et puissante, déclenchée dès qu’il a la place."
+        },
+        {
+            "key": "haaland_power_run",
+            "mode": "attack",
+            "label": "Course de buffle",
+            "short_label": "Buffle",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il lance sa course et personne ne peut l’arrêter."
+        }
+    ],
+    "martin-odegaard": [
+        {
+            "key": "odegaard_through_ball",
+            "mode": "attack",
+            "label": "Passe de Martin",
+            "short_label": "Passe",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe décisive glissée entre deux défenseurs."
+        }
+    ],
+    "ole-gunnar-solskjaer": [
+        {
+            "key": "solskjaer_supersub",
+            "mode": "attack",
+            "label": "Supersub",
+            "short_label": "Supersub",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il entre en cours de jeu et marque presque immédiatement."
+        }
+    ],
+    "john-arne-riise": [
+        {
+            "key": "riise_left_cannon",
+            "mode": "attack",
+            "label": "Canon gauche",
+            "short_label": "Canon",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe de gauche à bout de bras, sans prévenir."
+        }
+    ],
+    "kjetil-rekdal": [
+        {
+            "key": "rekdal_long_shot",
+            "mode": "attack",
+            "label": "Frappe de Kjetil",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un tir lointain, plein de rage, qui s’invite dans la lucarne."
+        }
+    ],
+    "jay-jay-okocha": [
+        {
+            "key": "okocha_triple_feint",
+            "mode": "attack",
+            "label": "Triple feinte",
+            "short_label": "Triple feinte",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une feinte puis une autre, et encore une : le défenseur est resté sur place."
+        }
+    ],
+    "nwankwo-kanu": [
+        {
+            "key": "kanu_lanky",
+            "mode": "attack",
+            "label": "Dribble de Kanu",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Grand et souple, il garde le ballon à bout de jambe, d’un geste déroutant."
+        }
+    ],
+    "rashidi-yekini": [
+        {
+            "key": "yekini_header",
+            "mode": "attack",
+            "label": "Tête de Rashidi",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un ballon dévié d’une tête puissante dans la surface."
+        }
+    ],
+    "victor-osimhen": [
+        {
+            "key": "osimhen_aerial",
+            "mode": "attack",
+            "label": "Détente d’Osimhen",
+            "short_label": "Détente",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un saut explosif qui domine tous les défenseurs."
+        }
+    ],
+    "vincent-enyeama": [
+        {
+            "key": "enyeama_wall",
+            "mode": "defense",
+            "label": "Mur d’Enyeama",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Plongeon en extension, arrêt du bout des gants."
+        }
+    ],
+    "sunday-oliseh": [
+        {
+            "key": "oliseh_long_shot",
+            "mode": "attack",
+            "label": "Frappe d’Oliseh",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe lointaine, directe, qui surprend le gardien."
+        }
+    ],
+    "finidi-george": [
+        {
+            "key": "finidi_cross",
+            "mode": "attack",
+            "label": "Centre de Finidi",
+            "short_label": "Centre",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Un centre vif du pied droit, tiré depuis l’aile."
+        }
+    ],
+    "roger-milla": [
+        {
+            "key": "milla_lion",
+            "mode": "attack",
+            "label": "Lion indomptable",
+            "short_label": "Lion",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un vétéran qui arrive en cours de match et conclut avec une fraîcheur insolente."
+        }
+    ],
+    "samuel-etoo": [
+        {
+            "key": "etoo_counter",
+            "mode": "attack",
+            "label": "Contre-attaque d’Eto’o",
+            "short_label": "Contre",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Il part en profondeur, seul, et conclut avec un calme féroce."
+        }
+    ],
+    "thomas-nkono": [
+        {
+            "key": "nkono_dive",
+            "mode": "defense",
+            "label": "Plongeon de N’Kono",
+            "short_label": "Plongeon",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un envol à l’horizontale pour détourner le tir."
+        }
+    ],
+    "geremi-njitap": [
+        {
+            "key": "geremi_cross",
+            "mode": "attack",
+            "label": "Centre de Geremi",
+            "short_label": "Centre",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Un centre long et lourd, tiré du pied droit."
+        }
+    ],
+    "sadio-mane": [
+        {
+            "key": "mane_dash",
+            "mode": "attack",
+            "label": "Accélération de Sadio",
+            "short_label": "Accélération",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une explosion de vitesse qui laisse le défenseur dans son sillage."
+        }
+    ],
+    "kalidou-koulibaly": [
+        {
+            "key": "koulibaly_wall",
+            "mode": "defense",
+            "label": "Mur de Naples",
+            "short_label": "Mur",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il gagne ses duels dos au but comme face à l’attaquant."
+        }
+    ],
+    "edouard-mendy": [
+        {
+            "key": "mendy_reflex",
+            "mode": "defense",
+            "label": "Réflexe d’Édouard",
+            "short_label": "Réflexe",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un grand gabarit : il couvre le but et capte le tir d’une main."
+        }
+    ],
+    "idrissa-gueye": [
+        {
+            "key": "gueye_ball_winner",
+            "mode": "defense",
+            "label": "Récupérateur d’Idrissa",
+            "short_label": "Récupérateur",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il prend le ballon à l’adversaire et relance sans perdre de temps."
+        }
+    ],
+    "papa-bouba-diop": [
+        {
+            "key": "diop_2002",
+            "mode": "attack",
+            "label": "Frappe de Papa",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe lourde au bon endroit, qui bouscule le favori."
+        }
+    ],
+    "achraf-hakimi": [
+        {
+            "key": "hakimi_rocket",
+            "mode": "attack",
+            "label": "Fusée d’Achraf",
+            "short_label": "Fusée",
+            "cooldown": 3,
+            "base_action": "cross",
+            "description": "Une course de feu sur le côté droit, un centre qui arrive avant la défense."
+        }
+    ],
+    "hakim-ziyech": [
+        {
+            "key": "ziyech_left_foot",
+            "mode": "attack",
+            "label": "Gaucher de Hakim",
+            "short_label": "Gaucher",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe du pied gauche, tendue, qui fend les lignes."
+        }
+    ],
+    "larbi-benbarek": [
+        {
+            "key": "benbarek_black_pearl",
+            "mode": "attack",
+            "label": "Perle noire",
+            "short_label": "Perle",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un dribble inspiré et plein de grâce."
+        }
+    ],
+    "yassine-bounou": [
+        {
+            "key": "bounou_wall",
+            "mode": "defense",
+            "label": "Mur de Yassine",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un arrêt réflexe qui sauve le résultat."
+        }
+    ],
+    "sofyan-amrabat": [
+        {
+            "key": "amrabat_tackle",
+            "mode": "defense",
+            "label": "Récupération de Sofyan",
+            "short_label": "Récupération",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Il court, il gratte, il rend le ballon propre."
+        }
+    ],
+    "youssef-en-nesyri": [
+        {
+            "key": "en_nesyri_aerial",
+            "mode": "attack",
+            "label": "Détente d’Atlas",
+            "short_label": "Détente",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un saut puissant, une tête puissante, un but."
+        }
+    ],
+    "hidetoshi-nakata": [
+        {
+            "key": "nakata_through_pass",
+            "mode": "attack",
+            "label": "Passe de Hide",
+            "short_label": "Passe",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe tendue et rapide qui ouvre la défense."
+        }
+    ],
+    "bum-kun-cha": [
+        {
+            "key": "cha_power",
+            "mode": "attack",
+            "label": "Frappe de Cha",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe tendue du pied droit, très puissante."
+        }
+    ],
+    "heung-min-son": [
+        {
+            "key": "son_curler",
+            "mode": "attack",
+            "label": "Enroulé de Sonny",
+            "short_label": "Enroulé",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe enroulée du pied droit comme du gauche, au second poteau."
+        }
+    ],
+    "ji-sung-park": [
+        {
+            "key": "park_three_lungs",
+            "mode": "defense",
+            "label": "Trois poumons",
+            "short_label": "Poumons",
+            "cooldown": 2,
+            "base_action": "tackle",
+            "description": "Un pressing perpétuel qui épuise l’adversaire."
+        }
+    ],
+    "myung-bo-hong": [
+        {
+            "key": "hong_libero",
+            "mode": "defense",
+            "label": "Libéro de Séoul",
+            "short_label": "Libéro",
+            "cooldown": 2,
+            "base_action": "intercept",
+            "description": "Il lit le jeu et nettoie les ballons dans son dos."
+        }
+    ],
+    "saeed-al-owairan": [
+        {
+            "key": "owairan_solo",
+            "mode": "attack",
+            "label": "Solo légendaire",
+            "short_label": "Solo",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Il traverse tout le terrain, dribblant adversaire après adversaire."
+        }
+    ],
+    "tim-howard": [
+        {
+            "key": "howard_wall",
+            "mode": "defense",
+            "label": "Mur de Tim",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un gardien aux réflexes affûtés, qui détourne les tirs."
+        }
+    ],
+    "rene-higuita": [
+        {
+            "key": "higuita_scorpion",
+            "mode": "defense",
+            "label": "Scorpion",
+            "short_label": "Scorpion",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un dégagement acrobatique, les deux pieds en arrière, qui arrête le ballon."
+        }
+    ],
+    "carlos-valderrama": [
+        {
+            "key": "valderrama_pibe",
+            "mode": "attack",
+            "label": "Passe d’El Pibe",
+            "short_label": "Pibe",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Un tempo lent, une passe parfaitement dosée."
+        }
+    ],
+    "faustino-asprilla": [
+        {
+            "key": "asprilla_dribble",
+            "mode": "attack",
+            "label": "Dribble de Tino",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un dribble imprévisible qui coupe la défense en deux."
+        }
+    ],
+    "radamel-falcao": [
+        {
+            "key": "falcao_tiger",
+            "mode": "attack",
+            "label": "Tigre",
+            "short_label": "Tigre",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un saut de tigre, une tête puissante au point de penalty."
+        }
+    ],
+    "james-rodriguez": [
+        {
+            "key": "james_volley",
+            "mode": "attack",
+            "label": "Volée de James",
+            "short_label": "Volée",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une volée du pied gauche, sur un ballon qui tombe, d’une pureté rare."
+        }
+    ],
+    "luis-diaz": [
+        {
+            "key": "diaz_sprint",
+            "mode": "attack",
+            "label": "Sprint de Lucho",
+            "short_label": "Sprint",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une accélération électrique, ballon au pied, côté gauche."
+        }
+    ],
+    "kevin-de-bruyne": [
+        {
+            "key": "de_bruyne_laser",
+            "mode": "attack",
+            "label": "Passe laser",
+            "short_label": "Laser",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe tendue et rapide qui perce toutes les lignes."
+        },
+        {
+            "key": "de_bruyne_curler",
+            "mode": "attack",
+            "label": "Enroulé de Kevin",
+            "short_label": "Enroulé",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe enroulée du pied droit, dans la lucarne."
+        }
+    ],
+    "eden-hazard": [
+        {
+            "key": "hazard_dribble",
+            "mode": "attack",
+            "label": "Dribble d’Eden",
+            "short_label": "Dribble",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Un changement de direction soudain qui fait basculer le défenseur."
+        }
+    ],
+    "thibaut-courtois": [
+        {
+            "key": "courtois_wall",
+            "mode": "defense",
+            "label": "Mur de Thibaut",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Très grand, il couvre tout son but et capte tous les tirs."
+        }
+    ],
+    "vincent-kompany": [
+        {
+            "key": "kompany_captain",
+            "mode": "defense",
+            "label": "Capitaine de fer",
+            "short_label": "Capitaine",
+            "cooldown": 2,
+            "base_action": "block",
+            "description": "Il se jette devant le tir, sans jamais hésiter."
+        }
+    ],
+    "enzo-scifo": [
+        {
+            "key": "scifo_genius",
+            "mode": "attack",
+            "label": "Génie d’Anderlecht",
+            "short_label": "Génie",
+            "cooldown": 2,
+            "base_action": "pass",
+            "description": "Une passe magnifique, créative, qui libère l’attaque."
+        }
+    ],
+    "jan-ceulemans": [
+        {
+            "key": "ceulemans_head",
+            "mode": "attack",
+            "label": "Tête de Jan",
+            "short_label": "Tête",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un coup de tête puissant sur un centre tendu."
+        }
+    ],
+    "romelu-lukaku": [
+        {
+            "key": "lukaku_power",
+            "mode": "attack",
+            "label": "Force de la nature",
+            "short_label": "Force",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Un corps-à-corps gagné, puis une frappe puissante."
+        }
+    ],
+    "michel-preudhomme": [
+        {
+            "key": "preud_homme_wall",
+            "mode": "defense",
+            "label": "Mur de Michel",
+            "short_label": "Mur",
+            "cooldown": 3,
+            "base_action": "hand_save",
+            "description": "Un gardien placé à la perfection, qui détourne les tirs les plus durs."
+        }
+    ],
+    "jeremy-doku": [
+        {
+            "key": "doku_sprint",
+            "mode": "attack",
+            "label": "Sprint de Jérémy",
+            "short_label": "Sprint",
+            "cooldown": 2,
+            "base_action": "dribble",
+            "description": "Une pointe de vitesse qui prend de court n’importe quel latéral."
+        }
+    ],
+    "youri-tielemans": [
+        {
+            "key": "tielemans_long_shot",
+            "mode": "attack",
+            "label": "Frappe de Youri",
+            "short_label": "Frappe",
+            "cooldown": 3,
+            "base_action": "shot",
+            "description": "Une frappe lointaine, tendue, vers la lucarne."
+        }
+    ]
+}

@@ -99,6 +99,24 @@ class PlayerSeeder extends Seeder
     }
 
     /**
+     * Techniques spéciales d'un joueur. Les légendes réelles ont leur propre catalogue : le slug partagé
+     * ferait sinon hériter un joueur réel (Pepe, Shilton…) des techniques d'un personnage homonyme.
+     *
+     * @param array<string, array> $specialMovesByPlayerSlug
+     */
+    private function specialMovesFor(string $origin, string $slug, array $specialMovesByPlayerSlug): array
+    {
+        if ($origin === 'world_legends') {
+            static $legendMoves = null;
+            $legendMoves ??= Players\InternationalLegends\Support\LegendSpecialMoves::specialMoves();
+
+            return $legendMoves[$slug] ?? [];
+        }
+
+        return $specialMovesByPlayerSlug[$slug] ?? [];
+    }
+
+    /**
      * Ligne `players` d'un joueur de référence.
      * $player = [prénom, nom, âge, poste, (réservé), stats de base, description?, postes secondaires?].
      *
@@ -129,7 +147,7 @@ class PlayerSeeder extends Seeder
         }
 
         [$fullStats, $specialMoves] = ReferenceRosterBalance::apply(
-            $origin, trim($firstname . ' ' . $lastname), $position, $fullStats, $specialMovesByPlayerSlug[$slug] ?? [],
+            $origin, trim($firstname . ' ' . $lastname), $position, $fullStats, $this->specialMovesFor($origin, $slug, $specialMovesByPlayerSlug),
         );
         if ($headingOverride === null && !isset($baseStats['heading'])
             && $fullStats['heading'] === HeadingRating::estimate($position, $fullStats)) {
