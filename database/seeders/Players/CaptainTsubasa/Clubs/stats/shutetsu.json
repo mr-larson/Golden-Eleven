@@ -64,6 +64,21 @@
     },
     "Akiyoshi Osaki": {
       "stats": {
+        "attack": 25,
+        "defense": 23,
+        "shot": 22,
+        "pass": 24,
+        "dribble": 23,
+        "tackle": 18,
+        "intercept": 19,
+        "block": 19,
+        "speed": 61,
+        "heading": 17
+      },
+      "why": "Baissé d'un point de note : trop fort pour un remplaçant."
+    },
+    "Kitajima Inamura": {
+      "stats": {
         "attack": 26,
         "defense": 24,
         "shot": 23,
@@ -71,26 +86,11 @@
         "dribble": 24,
         "tackle": 19,
         "intercept": 20,
-        "block": 19,
-        "speed": 61,
-        "heading": 17
-      },
-      "why": "Calibré au niveau du club — coefficient 1.17 sur les stats de duel, vitesse selon le profil."
-    },
-    "Kitajima Inamura": {
-      "stats": {
-        "attack": 27,
-        "defense": 25,
-        "shot": 24,
-        "pass": 26,
-        "dribble": 25,
-        "tackle": 20,
-        "intercept": 21,
         "block": 20,
         "speed": 63,
         "heading": 17
       },
-      "why": "Calibré au niveau du club — coefficient 1.17 sur les stats de duel, vitesse selon le profil."
+      "why": "Baissé d'un point de note : trop fort pour un remplaçant."
     },
     "Hiroki Fujii": {
       "stats": {

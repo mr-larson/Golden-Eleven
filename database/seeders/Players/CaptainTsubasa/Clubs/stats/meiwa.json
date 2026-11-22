@@ -169,6 +169,20 @@
         "hand_save": 15,
         "punch_save": 15
       }
+    },
+    "Shinishi Sakamoto": {
+      "stats": {
+        "attack": 26,
+        "defense": 29,
+        "shot": 24,
+        "pass": 24,
+        "dribble": 23,
+        "tackle": 21,
+        "intercept": 22,
+        "block": 21,
+        "speed": 63
+      },
+      "why": "Baissé d'un point de note : trop fort pour un remplaçant."
     }
   }
 }
