@@ -1,0 +1,94 @@
+{
+    "ao_ashi": {
+        "nagisa-akutsu": [
+            {
+                "key": "akutsu_back_line_boss",
+                "mode": "defense",
+                "label": "Autorité d’Akutsu",
+                "short_label": "Autorité",
+                "cooldown": 2,
+                "base_action": "block",
+                "description": "Défenseur central autoritaire de l’équipe A d’Esperion, il ferme l’axe et bloque les frappes."
+            }
+        ],
+        "haruhisa-kuribayashi": [
+            {
+                "key": "kuribayashi_tempo",
+                "mode": "attack",
+                "label": "Tempo de meneur",
+                "short_label": "Tempo",
+                "cooldown": 2,
+                "base_action": "pass",
+                "description": "Meneur lucide de l’équipe A d’Esperion : il dicte le rythme et délivre la passe qui lance l’attaque."
+            }
+        ],
+        "yoichi-kiriki": [
+            {
+                "key": "kiriki_all_round_recovery",
+                "mode": "defense",
+                "label": "Récupération complète",
+                "short_label": "Récupération",
+                "cooldown": 2,
+                "base_action": "intercept",
+                "description": "Milieu complet entre récupération et construction, il coupe la passe puis relance."
+            }
+        ],
+        "eita-takasugi": [
+            {
+                "key": "takasugi_rigorous_marking",
+                "mode": "defense",
+                "label": "Marquage rigoureux",
+                "short_label": "Marquage",
+                "cooldown": 2,
+                "base_action": "tackle",
+                "description": "Défenseur rigoureux de l’équipe A d’Esperion, il colle son vis-à-vis et le dépossède d’un tacle net."
+            }
+        ],
+        "kenta-yoshitsune": [
+            {
+                "key": "yoshitsune_last_wall",
+                "mode": "defense",
+                "label": "Dernier rempart",
+                "short_label": "Rempart",
+                "cooldown": 3,
+                "base_action": "hand_save",
+                "description": "Gardien de l’équipe A d’Esperion, il tient son but et détourne le tir à bout de bras."
+            }
+        ]
+    },
+    "blue_lock": {
+        "sae-itoshi": [
+            {
+                "key": "sae_itoshi_precision_pass",
+                "mode": "attack",
+                "label": "Passe glaciale",
+                "short_label": "Glaciale",
+                "cooldown": 2,
+                "base_action": "pass",
+                "description": "Un calme absolu et une précision hors normes : la passe de Sae dicte le rythme de tout le match."
+            }
+        ],
+        "noel-noa": [
+            {
+                "key": "noa_world_class_shot",
+                "mode": "attack",
+                "label": "Frappe de classe mondiale",
+                "short_label": "Mondial",
+                "cooldown": 3,
+                "base_action": "shot",
+                "description": "Puissance, technique et sang-froid du meilleur attaquant du monde : une finition sans faille."
+            }
+        ],
+        "michael-kaiser": [
+            {
+                "key": "kaiser_impact",
+                "mode": "attack",
+                "label": "Kaiser Impact",
+                "short_label": "Impact",
+                "cooldown": 3,
+                "base_action": "shot",
+                "description": "L’Empereur arme une frappe dominatrice dans la surface, avec toute son arrogance."
+            }
+        ]
+    }
+}

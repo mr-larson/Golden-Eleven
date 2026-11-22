@@ -252,6 +252,56 @@ class Roster
                 'description' => 'Solide dans les duels et bien organisé, il ferme l’axe et bloque les frappes.',
             ]],
 
+            'nagisa-akutsu' => [[
+                'key'         => 'akutsu_back_line_boss',
+                'mode'        => 'defense',
+                'label'       => 'Autorité d’Akutsu',
+                'short_label' => 'Autorité',
+                'cooldown'    => 2,
+                'base_action' => 'block',
+                'description' => 'Défenseur central autoritaire de l’équipe A d’Esperion, il ferme l’axe et bloque les frappes.',
+            ]],
+
+            'haruhisa-kuribayashi' => [[
+                'key'         => 'kuribayashi_tempo',
+                'mode'        => 'attack',
+                'label'       => 'Tempo de meneur',
+                'short_label' => 'Tempo',
+                'cooldown'    => 2,
+                'base_action' => 'pass',
+                'description' => 'Meneur lucide de l’équipe A d’Esperion : il dicte le rythme et délivre la passe qui lance l’attaque.',
+            ]],
+
+            'yoichi-kiriki' => [[
+                'key'         => 'kiriki_all_round_recovery',
+                'mode'        => 'defense',
+                'label'       => 'Récupération complète',
+                'short_label' => 'Récupération',
+                'cooldown'    => 2,
+                'base_action' => 'intercept',
+                'description' => 'Milieu complet entre récupération et construction, il coupe la passe puis relance.',
+            ]],
+
+            'eita-takasugi' => [[
+                'key'         => 'takasugi_rigorous_marking',
+                'mode'        => 'defense',
+                'label'       => 'Marquage rigoureux',
+                'short_label' => 'Marquage',
+                'cooldown'    => 2,
+                'base_action' => 'tackle',
+                'description' => 'Défenseur rigoureux de l’équipe A d’Esperion, il colle son vis-à-vis et le dépossède d’un tacle net.',
+            ]],
+
+            'kenta-yoshitsune' => [[
+                'key'         => 'yoshitsune_last_wall',
+                'mode'        => 'defense',
+                'label'       => 'Dernier rempart',
+                'short_label' => 'Rempart',
+                'cooldown'    => 3,
+                'base_action' => 'hand_save',
+                'description' => 'Gardien de l’équipe A d’Esperion, il tient son but et détourne le tir à bout de bras.',
+            ]],
+
             // =======================
         ];
     }

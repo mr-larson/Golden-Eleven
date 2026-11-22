@@ -289,6 +289,36 @@ class Roster
                 'description' => 'Une allonge surprenante et des réflexes d’ancien attaquant pour détourner un tir surpuissant.',
             ]],
 
+            'sae-itoshi' => [[
+                'key'         => 'sae_itoshi_precision_pass',
+                'mode'        => 'attack',
+                'label'       => 'Passe glaciale',
+                'short_label' => 'Glaciale',
+                'cooldown'    => 2,
+                'base_action' => 'pass',
+                'description' => 'Un calme absolu et une précision hors normes : la passe de Sae dicte le rythme de tout le match.',
+            ]],
+
+            'noel-noa' => [[
+                'key'         => 'noa_world_class_shot',
+                'mode'        => 'attack',
+                'label'       => 'Frappe de classe mondiale',
+                'short_label' => 'Mondial',
+                'cooldown'    => 3,
+                'base_action' => 'shot',
+                'description' => 'Puissance, technique et sang-froid du meilleur attaquant du monde : une finition sans faille.',
+            ]],
+
+            'michael-kaiser' => [[
+                'key'         => 'kaiser_impact',
+                'mode'        => 'attack',
+                'label'       => 'Kaiser Impact',
+                'short_label' => 'Impact',
+                'cooldown'    => 3,
+                'base_action' => 'shot',
+                'description' => 'L’Empereur arme une frappe dominatrice dans la surface, avec toute son arrogance.',
+            ]],
+
             // =======================
         ];
     }
