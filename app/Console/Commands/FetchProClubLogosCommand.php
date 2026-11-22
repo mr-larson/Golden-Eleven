@@ -29,7 +29,7 @@ class FetchProClubLogosCommand extends Command
     /** Nom de recherche anglais quand il diffère du nom affiché dans le jeu. */
     private const ALIASES = [
         'FC Barcelone'       => 'Barcelona',
-        'Paris Saint-Germain' => 'Paris SG',
+        'Paris Saint-Germain' => 'Paris Saint Germain',
         'Bayern Munich'      => 'Bayern Munich',
         'SL Benfica'         => 'Benfica',
         'Atlético de Madrid' => 'Atletico Madrid',
