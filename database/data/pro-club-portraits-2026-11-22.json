@@ -1,0 +1,117 @@
+[
+  {
+    "firstname": "Gareth",
+    "lastname": "Bale",
+    "photo_path": "players/gareth-bale.jpg"
+  },
+  {
+    "firstname": "Safet",
+    "lastname": "Sušić",
+    "photo_path": "players/safet-susic.jpg"
+  },
+  {
+    "firstname": "",
+    "lastname": "Pauleta",
+    "photo_path": "players/pauleta.jpg"
+  },
+  {
+    "firstname": "Gaetano",
+    "lastname": "Scirea",
+    "photo_path": "players/gaetano-scirea.jpg"
+  },
+  {
+    "firstname": "Dejan",
+    "lastname": "Stanković",
+    "photo_path": "players/dejan-stankovic.jpg"
+  },
+  {
+    "firstname": "Gianni",
+    "lastname": "Rivera",
+    "photo_path": "players/gianni-rivera.jpg"
+  },
+  {
+    "firstname": "Siniša",
+    "lastname": "Mihajlović",
+    "photo_path": "players/sinisa-mihajlovic.jpg"
+  },
+  {
+    "firstname": "Ronald",
+    "lastname": "de Boer",
+    "photo_path": "players/ronald-de-boer.jpg"
+  },
+  {
+    "firstname": "Nemanja",
+    "lastname": "Vidić",
+    "photo_path": "players/nemanja-vidic.jpg"
+  },
+  {
+    "firstname": "Joe",
+    "lastname": "Allen",
+    "photo_path": "players/joe-allen.jpg"
+  },
+  {
+    "firstname": "Luis",
+    "lastname": "Díaz",
+    "photo_path": "players/luis-diaz.jpg"
+  },
+  {
+    "firstname": "Ian",
+    "lastname": "Rush",
+    "photo_path": "players/ian-rush.jpg"
+  },
+  {
+    "firstname": "Oleksandr",
+    "lastname": "Zinchenko",
+    "photo_path": "players/oleksandr-zinchenko.jpg"
+  },
+  {
+    "firstname": "Aaron",
+    "lastname": "Ramsey",
+    "photo_path": "players/aaron-ramsey.jpg"
+  },
+  {
+    "firstname": "Mark",
+    "lastname": "Hughes",
+    "photo_path": "players/mark-hughes.jpg"
+  },
+  {
+    "firstname": "Carlos Alberto",
+    "lastname": "Torres",
+    "photo_path": "players/carlos-alberto-torres.jpg"
+  },
+  {
+    "firstname": "",
+    "lastname": "Branco",
+    "photo_path": "players/branco.jpg"
+  },
+  {
+    "firstname": "Francisco",
+    "lastname": "Arce",
+    "photo_path": "players/francisco-arce.jpg"
+  },
+  {
+    "firstname": "Ben",
+    "lastname": "Davies",
+    "photo_path": "players/ben-davies.jpg"
+  },
+  {
+    "firstname": "Joe",
+    "lastname": "Ledley",
+    "photo_path": "players/joe-ledley.jpg"
+  },
+  {
+    "firstname": "Iván",
+    "lastname": "Córdoba",
+    "photo_path": "players/ivan-cordoba.jpg"
+  },
+  {
+    "firstname": "Mario",
+    "lastname": "Yepes",
+    "photo_path": "players/mario-yepes.jpg"
+  },
+  {
+    "firstname": "Radamel",
+    "lastname": "Falcao",
+    "photo_path": "players/radamel-falcao.jpg"
+  }
+]
