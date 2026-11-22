@@ -36,7 +36,7 @@ const form = useForm({
     competition_type: 'college_league',
     game_config: null,
     period_package_id: null,
-    participant_count: null,   // Ligue : null = tous les clubs ; Coupe Nation / Coupe Club : 8, 16, 24 ou 32 participants
+    participant_count: null,   // Ligue : null = tous les clubs ; Coupe Nation / Coupe Club : 4 à 32 participants (paliers de 4)
 });
 
 // Périodes importées proposées dans le sélecteur : aucune en mode Draft (le
@@ -68,7 +68,7 @@ watch([() => form.period, () => form.period_package_id], () => {
     else if (form.competition_type !== 'world_cup') form.participant_count = null;
 });
 // Coupe Club : paliers de 8 clubs de la période (jamais plus que ce que la période compte).
-const cupClubsMax = computed(() => Math.max(8, Math.floor(totalClubs.value / 8) * 8));
+const cupClubsMax = computed(() => Math.max(8, Math.min(32, Math.floor(totalClubs.value / 4) * 4)));
 const clubCupAvailable = computed(() => totalClubs.value >= 8);
 const isTournament = computed(() => isTournamentType(form.competition_type));
 // Valeur de départ du nombre de participants selon la compétition (Coupe : 8 ; Ligue : tous les clubs).
@@ -347,15 +347,15 @@ function submit() {
                                 <p v-if="form.errors.competition_type" class="text-xs text-rose-500">{{ form.errors.competition_type }}</p>
                             </div>
 
-                            <!-- Nombre de participants (Coupe : nations par paliers de 8 ; Ligue : clubs de référence) -->
+                            <!-- Nombre de participants (Coupe : nations par paliers de 4 ; Ligue : clubs de référence) -->
                             <ParticipantCountPicker v-if="form.competition_type === 'world_cup'"
                                 v-model="form.participant_count"
-                                id="participant_count_cup" label="Nombre de sélections" unit="nations" :min="8" :max="32" :step="8"
+                                id="participant_count_cup" label="Nombre de sélections" unit="nations" :min="4" :max="32" :step="4"
                                 hint="Les nations sont choisies à l'étape suivante : celles que tu n'imposes pas sont tirées au sort."
                                 :error="form.errors.participant_count" />
                             <ParticipantCountPicker v-else-if="form.competition_type === 'club_cup'"
                                 v-model="form.participant_count"
-                                id="participant_count_club_cup" label="Nombre de clubs" unit="clubs" :min="8" :max="cupClubsMax" :step="8"
+                                id="participant_count_club_cup" label="Nombre de clubs" unit="clubs" :min="4" :max="cupClubsMax" :step="4"
                                 hint="Ton club en fait toujours partie ; impose des clubs à l'étape suivante, les autres sont tirés au sort."
                                 :error="form.errors.participant_count" />
                             <ParticipantCountPicker v-else-if="form.competition_type === 'college_league' && !form.period_package_id && totalClubs > 4"

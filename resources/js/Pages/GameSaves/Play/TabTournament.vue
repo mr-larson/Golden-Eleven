@@ -99,7 +99,7 @@ function isWinner(match, side) {
                 </table>
                 </div>
                 <div class="px-4 py-1.5 text-2xs text-emerald-600 bg-emerald-50/40 border-t border-slate-200">
-                    Les 2 premiers sont qualifiés<template v-if="tournament.third_slots"> ainsi que les {{ tournament.third_slots }} meilleurs troisièmes</template>.
+                    <template v-if="tournament.qualify_per_group === 1">Le premier est qualifié</template><template v-else>Les 2 premiers sont qualifiés</template><template v-if="tournament.third_slots"> ainsi que les {{ tournament.third_slots }} meilleurs troisièmes</template><template v-if="tournament.second_slots"> ainsi que le meilleur deuxième</template>.
                 </div>
             </div>
         </div>

@@ -90,10 +90,10 @@ class GameSaveRequest extends FormRequest
     {
         return [
             function ($validator) {
-                // Coupe Club : tournoi de 8, 16, 24 ou 32 clubs, effectifs pré-faits, sans période importée.
+                // Coupe Club : tournoi de 4 à 32 clubs, par paliers de 4, effectifs pré-faits, sans période importée.
                 if ($this->input('competition_type') === 'club_cup') {
                     if (! in_array((int) $this->input('participant_count'), \App\Services\WorldCup\NewWorldCupBuilder::TOURNAMENT_SIZES, true)) {
-                        $validator->errors()->add('participant_count', 'Une Coupe Club réunit 8, 16, 24 ou 32 clubs.');
+                        $validator->errors()->add('participant_count', 'Une Coupe Club réunit 4 à 32 clubs, par paliers de 4.');
                     }
                     if ($this->input('game_mode') === 'draft' || $this->filled('period_package_id')) {
                         $validator->errors()->add('competition_type', 'La Coupe Club se joue avec les effectifs pré-faits de la période.');

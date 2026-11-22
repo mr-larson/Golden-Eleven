@@ -53,8 +53,8 @@ class StoreGameSetupRequest extends FormRequest
                 if ($this->input('competition_type') === 'club_cup') {
                     $clubs = \App\Models\Team::where('period', $this->input('period'))->count();
                     $count = (int) $this->input('participant_count');
-                    if ($count < 8 || $count > $clubs) {
-                        $validator->errors()->add('participant_count', "Cette période compte {$clubs} clubs : choisis 8 participants ou plus, sans dépasser ce nombre.");
+                    if ($count < 4 || $count > $clubs) {
+                        $validator->errors()->add('participant_count', "Cette période compte {$clubs} clubs : choisis 4 participants ou plus, sans dépasser ce nombre.");
                     }
                 }
 

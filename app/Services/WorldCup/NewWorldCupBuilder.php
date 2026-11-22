@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\DB;
 class NewWorldCupBuilder
 {
     /** Tailles de tournoi proposées (nombre de sélections) : 2, 4, 6 ou 8 groupes de 4. */
-    public const TOURNAMENT_SIZES = [8, 16, 24, 32];
+    public const TOURNAMENT_SIZES = [4, 8, 12, 16, 20, 24, 28, 32];
 
     /** Taille par défaut d'un tournoi. */
     public const DEFAULT_SIZE = 8;
@@ -152,7 +152,7 @@ class NewWorldCupBuilder
      * étape échoue, aucune partie à moitié créée n'apparaît dans la liste.
      *
      * Déroulé :
-     *   1. tirage au sort des adversaires parmi les autres nations jouables (8 ou 16 sélections) ;
+     *   1. tirage au sort des adversaires parmi les autres nations jouables (4 à 32 sélections, par paliers de 4) ;
      *   2. création de la sauvegarde (phase « world_cup », semaine 1) ;
      *   3. montage de chaque sélection (équipes, joueurs, contrats) ;
      *   4. tirage des poules et calendrier de la phase de groupes ;

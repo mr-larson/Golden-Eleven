@@ -48,7 +48,7 @@ class TournamentServiceTest extends TestCase
     public function test_generate_groups_creates_two_groups_and_fixtures(): void
     {
         $save = $this->makeSave(['competition_type' => 'world_cup']);
-        foreach (range(1, 4) as $i) {
+        foreach (range(1, 8) as $i) {
             $this->makeTeam($save);
         }
 
@@ -58,17 +58,17 @@ class TournamentServiceTest extends TestCase
         $t = $save->state['tournament'];
         $this->assertSame('group', $t['stage']);
         $this->assertSame(GamePhase::Group, $save->phase);
-        $this->assertCount(2, $t['groups']); // 4 sélections → 2 poules
+        $this->assertCount(2, $t['groups']); // 8 sélections → 2 poules de 4
 
-        // Une poule de 2 → 1 match par poule → 2 matchs de poule.
-        $this->assertSame(2, GameMatch::where('game_save_id', $save->id)->whereIn('round', ['group_a', 'group_b'])->count());
+        // Une poule de 4 → 6 matchs par poule → 12 matchs de poule.
+        $this->assertSame(12, GameMatch::where('game_save_id', $save->id)->whereIn('round', ['group_a', 'group_b'])->count());
         $this->assertFalse($this->service->isTournamentOver($save));
     }
 
     public function test_advance_is_noop_until_current_stage_is_complete(): void
     {
         $save = $this->makeSave(['competition_type' => 'world_cup']);
-        foreach (range(1, 4) as $i) {
+        foreach (range(1, 8) as $i) {
             $this->makeTeam($save);
         }
         $this->service->generateGroups($save);
@@ -83,7 +83,7 @@ class TournamentServiceTest extends TestCase
     public function test_full_tournament_progresses_to_a_champion(): void
     {
         $save = $this->makeSave(['competition_type' => 'world_cup']);
-        foreach (range(1, 4) as $i) {
+        foreach (range(1, 8) as $i) {
             $this->makeTeam($save);
         }
         $this->service->generateGroups($save);
@@ -125,7 +125,7 @@ class TournamentServiceTest extends TestCase
         $this->assertNull($this->service->presentation($save));
     }
 
-    /** Monte un tournoi à 4 équipes jusqu'à la fin des poules (les demies sont créées). */
+    /** Monte un tournoi à 8 équipes jusqu'à la fin des poules (les demies sont créées). */
     private function tournamentAtSemis(): GameSave
     {
         $save = $this->makeSave(['competition_type' => 'world_cup']);
@@ -356,6 +356,96 @@ class TournamentServiceTest extends TestCase
         $this->assertSame(4, $this->service->presentation($save)['third_slots']);
 
         foreach ([['round16'], ['quarter'], ['semi'], ['final', 'third']] as $rounds) {
+            $this->playRounds($save->id, $rounds);
+            $this->service->advance($save);
+        }
+        $this->assertTrue($this->service->isTournamentOver($save->refresh()));
+    }
+
+    public function test_a_4_team_tournament_is_straight_knockout(): void
+    {
+        $save = $this->makeSave(['competition_type' => 'world_cup']);
+        foreach (range(1, 4) as $i) {
+            $this->makeTeam($save);
+        }
+        $this->service->generateGroups($save);
+        $t = $save->refresh()->state['tournament'];
+
+        $this->assertSame('semi', $t['stage']);
+        $this->assertSame([], $t['groups']);
+        $this->assertSame(GamePhase::Knockout, $save->phase);
+        $this->assertSame(0, GameMatch::where('game_save_id', $save->id)->where('round', 'like', 'group_%')->count());
+        $this->assertSame(2, GameMatch::where('game_save_id', $save->id)->where('round', 'semi')->count());
+
+        foreach ([['semi'], ['final', 'third']] as $rounds) {
+            $this->playRounds($save->id, $rounds);
+            $this->service->advance($save);
+        }
+        $this->assertTrue($this->service->isTournamentOver($save->refresh()));
+    }
+
+    public function test_a_12_team_tournament_has_four_groups_of_three_and_starts_knockout_at_the_quarters(): void
+    {
+        [$save, $stages] = $this->playWholeTournament(12);
+
+        $this->assertSame(['quarter', 'semi', 'final', 'done'], array_slice($stages, 1));
+        $this->assertSame(4, count($save->state['tournament']['groups']));
+        $this->assertSame(12, GameMatch::where('game_save_id', $save->id)->where('round', 'like', 'group_%')->count()); // 4 poules x 3 matchs
+        $this->assertSame(4, GameMatch::where('game_save_id', $save->id)->where('round', 'quarter')->count());
+    }
+
+    public function test_a_20_team_tournament_has_four_groups_of_five(): void
+    {
+        [$save] = $this->playWholeTournament(20);
+
+        foreach ($save->state['tournament']['groups'] as $ids) {
+            $this->assertCount(5, $ids);
+        }
+        $this->assertSame(40, GameMatch::where('game_save_id', $save->id)->where('round', 'like', 'group_%')->count()); // 4 poules x 10 matchs
+        $this->assertSame(4, GameMatch::where('game_save_id', $save->id)->where('round', 'quarter')->count());
+    }
+
+    public function test_a_28_team_tournament_qualifies_the_seven_winners_and_the_best_runner_up(): void
+    {
+        $save = $this->makeSave(['competition_type' => 'world_cup']);
+        foreach (range(1, 28) as $i) {
+            $this->makeTeam($save);
+        }
+        $this->service->generateGroups($save);
+        $groups = $save->refresh()->state['tournament']['groups'];
+        $this->assertCount(7, $groups);
+        foreach ($groups as $ids) {
+            $this->assertCount(4, $ids);
+        }
+
+        $this->playRounds($save->id, array_map(fn ($k) => 'group_'.$k, range('a', 'g')));
+        $this->service->advance($save);
+        $t = $save->refresh()->state['tournament'];
+
+        $this->assertSame('quarter', $t['stage']);
+        $this->assertCount(1, $t['best_seconds']);
+        $quarters = GameMatch::where('game_save_id', $save->id)->where('round', 'quarter')->orderBy('id')->get();
+        $this->assertCount(4, $quarters);
+        $ids = $quarters->flatMap(fn ($m) => [$m->home_team_id, $m->away_team_id]);
+        $this->assertCount(8, $ids->unique());
+
+        // Le repêché joue le premier quart, contre un vainqueur d'un autre groupe ; le vainqueur de
+        // son groupe est dans l'autre moitié du tableau (2ᵉ ou 3ᵉ quart... le dernier).
+        $groupOf = fn (int $id) => collect($groups)->search(fn ($g) => in_array($id, $g, true));
+        $second = $t['best_seconds'][0];
+        $first = $quarters[0];
+        $this->assertSame($second, (int) $first->home_team_id);
+        $this->assertNotSame($groupOf($second), $groupOf($first->away_team_id));
+        $ownWinnerIndex = $quarters->search(fn ($m) => collect([$m->home_team_id, $m->away_team_id])->contains(fn ($id) => $id !== $second && $groupOf($id) === $groupOf($second)));
+        $this->assertGreaterThanOrEqual(2, $ownWinnerIndex);
+
+        // Présentation : un seul qualifié par poule + le meilleur deuxième.
+        $p = $this->service->presentation($save);
+        $this->assertSame(1, $p['qualify_per_group']);
+        $this->assertSame(1, $p['second_slots']);
+        $this->assertCount(8, collect($p['groups'])->flatMap(fn ($g) => $g['rows'])->where('qualified', true));
+
+        foreach ([['quarter'], ['semi'], ['final', 'third']] as $rounds) {
             $this->playRounds($save->id, $rounds);
             $this->service->advance($save);
         }

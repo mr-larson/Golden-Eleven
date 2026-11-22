@@ -32,13 +32,14 @@ class KnockoutService
      *   - 2 groupes : demies A1-B2 / B1-A2 ;
      *   - 4 groupes : quarts A1-B2, C1-D2, B1-A2, D1-C2 ;
      *   - 8 groupes : 8es A1-B2, C1-D2, E1-F2, G1-H2, B1-A2, D1-C2, F1-E2, H1-G2 ;
-     *   - 6 groupes : 8es avec les 4 meilleurs troisièmes (voir sixGroupPairs).
+     *   - 6 groupes : 8es avec les 4 meilleurs troisièmes (voir sixGroupPairs) ;
+     *   - 7 groupes : quarts avec les 7 premiers et le meilleur deuxième (voir sevenGroupPairs).
      * Les affiches sont ordonnées pour que les tours suivants (vainqueurs 1-2, 3-4…) ne recroisent pas
      * deux équipes d'un même groupe avant la finale.
      *
      * @param  array<int, array<int, int>>  $qual  qualifiés par groupe (1ᵉʳ, 2ᵉ), dans l'ordre A, B, C…
-     * @param  array<int, int>  $thirds  meilleurs troisièmes (format à 6 groupes), du meilleur au moins bon
-     * @param  array<int, int>  $groupOfThird  team_id d'un troisième => index de son groupe (0 = A), pour éviter les revanches de poule
+     * @param  array<int, int>  $thirds  repêchés : meilleurs troisièmes (6 groupes) ou meilleur deuxième (7 groupes)
+     * @param  array<int, int>  $groupOfThird  team_id d'un repêché => index de son groupe (0 = A), pour éviter les revanches de poule
      * @return array{0: string, 1: array<int, array{0:int,1:int}>} [tour, affiches]
      */
     public function firstRound(array $qual, array $thirds = [], array $groupOfThird = []): array
@@ -48,6 +49,9 @@ class KnockoutService
         }
         if (count($qual) === 6) {
             return ['round16', $this->sixGroupPairs($qual, $thirds, $groupOfThird)];
+        }
+        if (count($qual) === 7) {
+            return ['quarter', $this->sevenGroupPairs($qual, $thirds[0] ?? null, $groupOfThird)];
         }
 
         $first = $second = [];
@@ -85,6 +89,38 @@ class KnockoutService
             [$c[0], $x[2]], [$a[1], $b[1]],
             [$d[0], $x[3]], [$f[0], $e[1]],
         ];
+    }
+
+    /**
+     * Quarts du format à 7 groupes : le meilleur deuxième affronte un vainqueur d'un autre groupe (le dernier
+     * par ordre de poule), les six autres vainqueurs se croisent. Le vainqueur du groupe du repêché est placé
+     * dans la moitié de tableau opposée pour ne pas le retrouver avant la finale.
+     *
+     * @param  array<int, array<int, int>>  $qual  7 groupes de [1ᵉʳ, 2ᵉ]
+     * @param  array<int, int>  $groupOfSecond  team_id du repêché => index de son groupe
+     * @return array<int, array{0:int,1:int}>
+     */
+    private function sevenGroupPairs(array $qual, ?int $second, array $groupOfSecond): array
+    {
+        $winners = array_map(fn ($pair) => $pair[0], $qual);
+        if ($second === null) {
+            return array_chunk(array_slice($winners, 0, 8), 2);
+        }
+
+        $ownGroup = $groupOfSecond[$second] ?? -1;
+        $opponentIndex = collect(array_keys($winners))->reverse()->first(fn ($i) => $i !== $ownGroup);
+        $opponent = $winners[$opponentIndex];
+        unset($winners[$opponentIndex]);
+
+        $rest = array_values($winners);
+        // Le vainqueur du groupe du repêché en dernier : son match tombe dans l'autre moitié du tableau.
+        $ownWinner = $qual[$ownGroup][0] ?? null;
+        $rest = array_values(array_filter($rest, fn ($id) => $id !== $ownWinner));
+        if ($ownWinner !== null) {
+            $rest[] = $ownWinner;
+        }
+
+        return array_merge([[$second, $opponent]], array_chunk($rest, 2));
     }
 
     /**

@@ -11,12 +11,15 @@ use App\Models\GameSaves\GameTeam;
 /**
  * Moteur de tournoi pour le mode Coupe Nation (jumeau de SeasonService) : orchestre les phases.
  *
- * Format : phase de poules (round-robin simple par groupe de 4) puis élimination directe, les 2 premiers
- * de chaque groupe se qualifiant.
- *   - 8 sélections  : 2 groupes → demies → finale + match pour la 3e place ;
- *   - 16 sélections : 4 groupes → quarts → demies → finale + 3e place ;
- *   - 24 sélections : 6 groupes → 8es (les 2 premiers + les 4 meilleurs troisièmes) → quarts → demies → finale + 3e place ;
- *   - 32 sélections : 8 groupes → 8es → quarts → demies → finale + 3e place.
+ * Format : phase de poules (round-robin simple) puis élimination directe, par paliers de 4 sélections.
+ *   - 4 sélections  : pas de poule, élimination directe → demies → finale + match pour la 3e place ;
+ *   - 8 sélections  : 2 poules de 4 → demies → finale + 3e place ;
+ *   - 12 sélections : 4 poules de 3 → quarts (les 2 premiers) → demies → finale + 3e place ;
+ *   - 16 sélections : 4 poules de 4 → quarts → demies → finale + 3e place ;
+ *   - 20 sélections : 4 poules de 5 → quarts → demies → finale + 3e place ;
+ *   - 24 sélections : 6 poules de 4 → 8es (les 2 premiers + les 4 meilleurs troisièmes) → quarts → demies → finale + 3e place ;
+ *   - 28 sélections : 7 poules de 4 → quarts (les 7 premiers + le meilleur deuxième) → demies → finale + 3e place ;
+ *   - 32 sélections : 8 poules de 4 → 8es → quarts → demies → finale + 3e place.
  *
  * Le détail est réparti entre trois classes :
  *   - TournamentService (ici)  : tirage des poules, calendrier, progression des tours (advance), présentation ;
@@ -43,16 +46,30 @@ class TournamentService
         private KnockoutService $knockout,
     ) {}
 
-    /** Nombre de groupes selon le nombre de sélections : 8 dès 32, 6 dès 24, 4 dès 16, 2 dès 4, sinon 1. */
+    /** Meilleurs deuxièmes repêchés dans le format à 7 poules (28 sélections) : un seul, pour compléter les quarts. */
+    private const BEST_SECONDS = 1;
+
+    /**
+     * Nombre de poules selon le nombre de sélections : 8 dès 32, 7 dès 28, 6 dès 24, 4 dès 12, 2 dès 5,
+     * aucune à 4 (élimination directe), sinon 1.
+     */
     public static function groupCountFor(int $teams): int
     {
         return match (true) {
             $teams >= 32 => 8,
+            $teams >= 28 => 7,
             $teams >= 24 => 6,
-            $teams >= 16 => 4,
-            $teams >= 4 => 2,
+            $teams >= 12 => 4,
+            $teams >= 5 => 2,
+            $teams === 4 => 0,
             default => 1,
         };
+    }
+
+    /** Qualifiés par poule : le seul vainqueur dans le format à 7 poules (+ le meilleur deuxième), les 2 premiers sinon. */
+    public static function qualifiersPerGroup(int $groupCount): int
+    {
+        return $groupCount === 7 ? 1 : 2;
     }
 
     /**
@@ -70,6 +87,11 @@ class TournamentService
         }
 
         $groupCount = self::groupCountFor($count);
+        if ($groupCount === 0) {
+            $this->generateDirectKnockout($gameSave, $teamIds);
+
+            return;
+        }
         $keys = array_slice(self::GROUP_KEYS, 0, $groupCount);
 
         $groups = array_fill_keys($keys, []);
@@ -93,6 +115,28 @@ class TournamentService
             'champion_team_id' => null,
         ]);
         $gameSave->phase = GamePhase::Group;
+        $gameSave->save();
+    }
+
+    /**
+     * Tournoi à 4 sélections : pas de poules, les demies se jouent dès la première semaine
+     * (tirage au sort : 1-2 et 3-4). Passe la partie directement en phase à élimination.
+     *
+     * @param  array<int, int>  $teamIds  les 4 équipes, déjà mélangées
+     */
+    private function generateDirectKnockout(GameSave $gameSave, array $teamIds): void
+    {
+        $this->createMatch($gameSave, 1, $teamIds[0], $teamIds[1], 'semi');
+        $this->createMatch($gameSave, 1, $teamIds[2], $teamIds[3], 'semi');
+
+        $gameSave->gameState()->putTournament([
+            'groups' => [],
+            'stage' => 'semi',
+            'group_last_week' => 0,
+            'knockout_week' => 1,
+            'champion_team_id' => null,
+        ]);
+        $gameSave->phase = GamePhase::Knockout;
         $gameSave->save();
     }
 
@@ -129,6 +173,18 @@ class TournamentService
             }
             $thirds = count($qual) === 6 ? $this->standings->bestThirds($gameSave, $t['groups'], self::BEST_THIRDS) : [];
             $t['best_thirds'] = $thirds;
+            if (count($qual) === 7) {
+                // 7 poules : les 7 premiers + le meilleur deuxième ; ce repêché prend la place du « troisième » dans les affiches.
+                $seconds = $this->standings->bestSeconds($gameSave, $t['groups'], self::BEST_SECONDS);
+                $t['best_seconds'] = $seconds;
+                $thirds = $seconds;
+                $groupOfThird = [];
+                foreach ($qual as $index => $pair) {
+                    if (isset($pair[1], $seconds[0]) && $pair[1] === $seconds[0]) {
+                        $groupOfThird[$seconds[0]] = $index;
+                    }
+                }
+            }
 
             $week = ($t['group_last_week'] ?? 1) + 1;
             [$round, $pairs] = $this->knockout->firstRound($qual, $thirds, $groupOfThird);
@@ -294,14 +350,15 @@ class TournamentService
             return ['team_id' => $id, 'name' => $teams[$id]->name] + $emblems->get($teams[$id]->name);
         };
 
-        // Poules : les 2 premiers passent, plus les meilleurs troisièmes une fois la phase de poules jouée.
-        $bestThirds = $t['best_thirds'] ?? [];
+        // Poules : les premiers passent (2, ou 1 à 7 poules), plus les repêchés (meilleurs troisièmes ou deuxième) une fois la phase de poules jouée.
+        $bestThirds = array_merge($t['best_thirds'] ?? [], $t['best_seconds'] ?? []);
+        $perGroup = self::qualifiersPerGroup(count($t['groups'] ?? []));
         $groups = [];
         foreach (($t['groups'] ?? []) as $key => $teamIds) {
             $rows = $this->standings->table($gameSave, $teamIds, 'group_'.strtolower($key));
             foreach ($rows as $i => &$r) {
                 $r = array_merge($r, $emblems->get($r['name']));
-                $r['qualified'] = $i < 2 || in_array($r['team_id'], $bestThirds, true);
+                $r['qualified'] = $i < $perGroup || in_array($r['team_id'], $bestThirds, true);
             }
             unset($r);
             $groups[] = ['key' => $key, 'rows' => $rows];
@@ -313,6 +370,8 @@ class TournamentService
             'stage' => $t['stage'] ?? 'group',
             'groups' => $groups,
             'third_slots' => count($t['groups'] ?? []) === 6 ? self::BEST_THIRDS : 0,
+            'second_slots' => count($t['groups'] ?? []) === 7 ? self::BEST_SECONDS : 0,
+            'qualify_per_group' => $perGroup,
             'bracket' => $bracket,
             'champion' => $ref($t['champion_team_id'] ?? null),
             'eliminated' => $this->knockout->eliminated($t['stage'] ?? 'group', $groups, $bracket),

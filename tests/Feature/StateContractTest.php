@@ -108,7 +108,7 @@ class StateContractTest extends TestCase
     public function test_tournament_state_shape(): void
     {
         $save = $this->makeSave(['competition_type' => 'world_cup']);
-        foreach (range(1, 4) as $i) {
+        foreach (range(1, 8) as $i) {
             $this->makeTeam($save);
         }
 

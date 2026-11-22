@@ -105,16 +105,39 @@ class GroupStandingsService
      */
     public function bestThirds(GameSave $gameSave, array $groups, int $take): array
     {
-        $thirds = [];
+        return $this->bestAtPosition($gameSave, $groups, 2, $take);
+    }
+
+    /**
+     * Meilleurs deuxièmes de tous les groupes (format à 28 : 7 poules de 4, 1 repêché), mêmes critères
+     * que les meilleurs troisièmes. Les poules ayant toutes la même taille, la comparaison est équitable.
+     *
+     * @param  array<string, array<int, int>>  $groups  groupe => ids d'équipes
+     * @return array<int, int> ids des $take meilleurs deuxièmes, du meilleur au moins bon
+     */
+    public function bestSeconds(GameSave $gameSave, array $groups, int $take): array
+    {
+        return $this->bestAtPosition($gameSave, $groups, 1, $take);
+    }
+
+    /**
+     * Meilleures équipes d'un même rang de poule ($position : 0 = 1ᵉʳ, 1 = 2ᵉ, 2 = 3ᵉ), toutes poules confondues.
+     *
+     * @param  array<string, array<int, int>>  $groups
+     * @return array<int, int>
+     */
+    private function bestAtPosition(GameSave $gameSave, array $groups, int $position, int $take): array
+    {
+        $rows = [];
         foreach ($groups as $key => $teamIds) {
-            $row = $this->table($gameSave, $teamIds, 'group_'.strtolower($key))[2] ?? null;
+            $row = $this->table($gameSave, $teamIds, 'group_'.strtolower($key))[$position] ?? null;
             if ($row) {
-                $thirds[] = $row;
+                $rows[] = $row;
             }
         }
-        usort($thirds, fn ($x, $y) => $this->generalKey($y, $gameSave) <=> $this->generalKey($x, $gameSave));
+        usort($rows, fn ($x, $y) => $this->generalKey($y, $gameSave) <=> $this->generalKey($x, $gameSave));
 
-        return array_slice(array_column($thirds, 'team_id'), 0, $take);
+        return array_slice(array_column($rows, 'team_id'), 0, $take);
     }
 
     /**
