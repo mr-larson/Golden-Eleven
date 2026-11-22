@@ -1,6 +1,7 @@
 <script setup>
 import { contractPlayer } from '@/Pages/GameSaves/Play/teamRoster.js';
 import TabBar from '@/Components/TabBar.vue';
+import ContentTransition from '@/Components/ContentTransition.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import LoadingOverlay from '@/Components/LoadingOverlay.vue';
 import { Head, router } from '@inertiajs/vue3';
@@ -642,6 +643,11 @@ const saveGame = () => {
                         <TabBar v-model="activeTab" :tabs="tabs" stretch label="Sections de la partie" style="border-radius: 0" />
                     </div>
 
+                    <ContentTransition
+                        :panel-key="activeTab"
+                        class="flex-1 min-h-0"
+                        panel-class="flex h-full min-h-0 flex-col bg-white"
+                    >
                     <!-- ======== DASHBOARD ======== -->
                     <TabDashboard v-if="activeTab === 'dashboard'"
                                   :gameSave="gameSave"
@@ -945,6 +951,7 @@ const saveGame = () => {
                                    @select-club="id => clubStatusTeamId = id"
                                    @open-player="openClubStatusPlayer"
                     />
+                    </ContentTransition>
 
                 </div>
             </div>
