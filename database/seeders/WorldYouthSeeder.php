@@ -57,7 +57,7 @@ class WorldYouthSeeder extends Seeder
         return [
             'São Paulo' => ['Le club brésilien de Tsubasa, aux côtés de Pepe.', TeamStyle::TACTICAL_OFFENSIVE, TeamStyle::PHILOSOPHY_STARS, '4-3-3', 'Tsubasa Ozora', [
                 ' Salinas', ' Giorgi', ' Senardo', 'Marcos Cafu', 'Ash Rodrigues',
-                ' Branco', ' Rivaldo', ' Sócrates', 'Tsubasa Ozora', ' Pepe|Brésil', ' Romário',
+                ' Branco', ' Rivaldo', ' Sócrates', 'Tsubasa Ozora', 'Pepe Santos', ' Romário',
                 ' Jairzinho', ' Kaká', ' Casemiro',
             ]],
             'Flamengo' => ['Le club de Santana et Leo, rivaux brésiliens de Tsubasa.', TeamStyle::TACTICAL_COUNTER, TeamStyle::PHILOSOPHY_BALANCED, '4-3-3', 'Zico', [

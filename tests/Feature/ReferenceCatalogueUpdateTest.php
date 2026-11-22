@@ -125,7 +125,7 @@ class ReferenceCatalogueUpdateTest extends TestCase
                 ? 'players/ole-gunnar-solskjaer-1999.webp' : $portrait['photo_path'];
             $this->assertSame($expectedPath, $player->photo_path);
         }
-        $this->assertDatabaseHas('players', ['lastname' => 'Pepe', 'origin' => 'captain_tsubasa_international', 'photo_path' => PlayerPhotos::pathFor('pepe', 'captain_tsubasa_international')]);
+        $this->assertDatabaseHas('players', ['firstname' => 'Pepe', 'lastname' => 'Santos', 'origin' => 'captain_tsubasa_international', 'nationality' => 'Brésil', 'photo_path' => 'players/pepe-world-fighters.png']);
         $this->assertDatabaseHas('players', ['lastname' => 'Pepe', 'origin' => 'world_legends', 'nationality' => 'Portugal', 'photo_path' => 'players/pepe-portugal-2008.jpg']);
     }
 }

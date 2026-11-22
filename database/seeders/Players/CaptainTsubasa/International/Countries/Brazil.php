@@ -129,7 +129,7 @@ final class Brazil
                 'Star de la Seleção et grand rival de Tsubasa. Technique féline et finition redoutable, l’attaquant vedette de Flamengo.',
             ],
             [
-                '', 'Pepe', 13, 'Forward', 480,
+                'Pepe', 'Santos', 13, 'Forward', 480,
                 [
                     'speed' => 75, 'stamina' => 78, 'defense' => 24, 'attack' => 36,
                     'shot' => 28, 'pass' => 23, 'dribble' => 26,

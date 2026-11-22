@@ -107,8 +107,8 @@ utilisent les mêmes portraits via le seeder ; les nouvelles parties reprennent
 les images du catalogue. La production nécessite le déploiement et les migrations.
 
 Les homonymes entre univers sont isolés à l'initialisation. Le Pepe portugais
-utilise `players/pepe-portugal-2008.jpg` et celui de Captain Tsubasa conserve
-`players/pepe.webp`. La liste d'édition affiche l'univers et la nationalité
+utilise `players/pepe-portugal-2008.jpg` ; celui de Captain Tsubasa a été
+renommé Pepe Santos (portrait `players/pepe-world-fighters.png`). La liste d'édition affiche l'univers et la nationalité
 des homonymes ; la recherche accepte aussi ces informations. Les deux identités
 et leurs identifiants restent distincts.
 

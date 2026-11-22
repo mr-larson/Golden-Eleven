@@ -151,7 +151,7 @@ class Roster
                 'description' => 'Une succession de feintes imprévisibles, instinctives comme la nature elle-même.',
             ]],
 
-            'pepe' => [[
+            'pepe-santos' => [[
                 'key'         => 'pepe_skylab_shot',
                 'mode'        => 'attack',
                 'label'       => 'Tir Skylab',
@@ -270,7 +270,7 @@ class Roster
             'jovan-lensenblink' => 'Pays-Bas',
             'hugo-ramirez' => 'Mexique',
             'branco' => 'Brésil',
-            'captain_tsubasa:pepe' => 'Brésil', // distinct du Pepe portugais des légendes réelles (même slug)
+            'pepe-santos'          => 'Brésil', // renommé pour ne plus partager le slug du Pepe portugais des légendes réelles
             'luciano-leo'          => 'Brésil',
             // Argentine
             'juan-diaz'            => 'Argentine',
