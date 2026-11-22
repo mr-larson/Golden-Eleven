@@ -48,8 +48,8 @@
                 search-placeholder="Rechercher une équipe"
                 empty-label="Aucune équipe trouvée."
                 add-title="Créer une équipe"
-                :tabs="[{ key: 'team', label: 'Fiche équipe' }]"
-                active-tab="team"
+                :tabs="panelTabs"
+                v-model:active-tab="activePanel"
                 @select="editor.select"
                 @create="editor.startCreating"
             >
@@ -63,7 +63,23 @@
                     <Badge v-if="eleven">OVR {{ Number(eleven.ovr).toFixed(1) }}</Badge>
                 </template>
 
-                <Panel as="div" class="sm:p-6">
+                <Panel v-if="activePanel !== 'team' && !editor.creating.value" as="div" class="sm:p-6">
+ 
+                    <div v-if="activePanel === 'players'" class="mb-4">
+                        <button type="button" class="rounded-full bg-teal-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-600" @click="addingPlayer = !addingPlayer">
+                            {{ addingPlayer ? 'Fermer' : '+ Ajouter un joueur' }}
+                        </button>
+                    </div>
+
+                    <!-- Effectif à gauche, joueurs libres à droite : deux colonnes quand « Ajouter un joueur » est ouvert -->
+                    <div :class="activePanel === 'players' && addingPlayer ? 'grid items-start gap-4 lg:grid-cols-2' : ''">
+                        <SelectionRoster v-if="activePanel === 'players'" :players="rosterPlayers" empty-text="Aucun joueur sous contrat" />
+                        <TeamRosterPanel v-else :roster="roster" />
+                        <FreePlayerPicker v-if="activePanel === 'players' && addingPlayer" :team-id="form.id" :players="freePlayers" />
+                    </div>
+                </Panel>
+
+                <Panel v-show="activePanel === 'team' || editor.creating.value" as="div" class="sm:p-6">
                     <template v-if="!editor.creating.value">
                         <PlayerStatsPreview v-if="eleven" :stats="eleven.stats" :player-id="form.id" />
                         <p v-if="eleven" class="-mt-2 mb-4 text-[11px] text-slate-400">
@@ -106,7 +122,7 @@ import Panel from '@/Components/Panel.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { PLAYER_STATS } from '@/Enums/playerStats.js';
 import EditorFilterBar from '@/Components/EditorFilterBar.vue';
 import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
@@ -116,6 +132,9 @@ import EntityEditor from '@/Components/EntityEditor.vue';
 import EditorSubNav from '@/Components/EditorSubNav.vue';
 import PlayerStatsPreview from '@/Components/PlayerStatsPreview.vue';
 import TeamLogo from '@/Components/TeamLogo.vue';
+import FreePlayerPicker from '@/Components/FreePlayerPicker.vue';
+import SelectionRoster from '@/Components/Selection/SelectionRoster.vue';
+import TeamRosterPanel from '@/Components/TeamRosterPanel.vue';
 import ButtonGroup from '@/Components/ButtonGroup.vue';
 import ButtonPrimary from '@/Components/ButtonPrimary.vue';
 import ButtonDanger from '@/Components/ButtonDanger.vue';
@@ -128,6 +147,8 @@ const props = defineProps({
     teams: { type: Array, required: true },
     // Équipe à sélectionner à l'ouverture (ex. juste après sa création).
     selectedId: { type: Number, default: null },
+    // Joueurs sans contrat dans la période, fournis à la demande (ouverture de « Ajouter un joueur »).
+    freePlayers: { type: Array, default: null },
     // Ouvre directement une fiche vide (ancienne URL /teams/create).
     startCreate: { type: Boolean, default: false },
 });
@@ -161,6 +182,23 @@ const form = useForm(clone(BLANK));
 // Profil du onze type du club sélectionné (null : pas de onze possible).
 const eleven = computed(() => props.teams.find(t => t.id === form.id)?.eleven ?? null);
 
+// Contrats de l'équipe sélectionnée (onglets Joueurs et Contrats : seuls ceux liés à cette équipe).
+const roster = computed(() => props.teams.find(t => t.id === form.id)?.roster ?? []);
+
+// Joueurs de l'équipe sous la forme attendue par l'effectif partagé (cartes + fiche détaillée au clic).
+const rosterPlayers = computed(() => roster.value.map(r => r.player));
+
+// Onglets de la fiche : l'équipe, puis ses joueurs et ses contrats (pas en création, l'équipe n'existe pas encore).
+const activePanel = ref('team');
+const addingPlayer = ref(false);   // panneau « Ajouter un joueur » ouvert à côté de l'effectif
+const panelTabs = computed(() => editor.creating.value
+    ? [{ key: 'team', label: 'Fiche équipe' }]
+    : [
+        { key: 'team', label: 'Fiche équipe' },
+        { key: 'players', label: `Joueurs (${roster.value.length})` },
+        { key: 'contracts', label: `Contrats (${roster.value.length})` },
+    ]);
+
 // Logo enregistré : affiché seulement, jamais renvoyé au serveur (il gère seul logo_path).
 const logoPath = ref(null);
 
@@ -186,6 +224,9 @@ const editor = useEntityEditor({
         logoPath.value = null;
     },
 });
+
+// Une équipe en création n'a pas encore de joueurs ni de contrats : retour à la fiche.
+watch(() => editor.creating.value, creating => { if (creating) activePanel.value = 'team'; });
 
 function removeLogo() {
     form.remove_logo = true;

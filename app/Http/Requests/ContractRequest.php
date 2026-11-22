@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Contract;
+use App\Models\Team;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Requête de création ou d'édition d'un contrat du roster de référence (hors sauvegarde). */
@@ -37,6 +38,27 @@ class ContractRequest extends FormRequest
             // Dates → optionnelles / pas utilisées pour le gameplay
             'start_date' => ['nullable', 'date'],
             'end_date'   => ['nullable', 'date'],
+        ];
+    }
+
+    /** À la création : un joueur n'a qu'un contrat par période (celle du club). */
+    public function after(): array
+    {
+        return [
+            function ($validator) {
+                if ($this->route('contract') || $validator->errors()->isNotEmpty()) {
+                    return;
+                }
+
+                $period = Team::whereKey($this->input('team_id'))->value('period');
+                $already = Contract::where('player_id', $this->input('player_id'))
+                    ->whereHas('team', fn ($q) => $q->where('period', $period))
+                    ->exists();
+
+                if ($already) {
+                    $validator->errors()->add('player_id', 'Ce joueur a déjà un contrat dans cette période.');
+                }
+            },
         ];
     }
 }

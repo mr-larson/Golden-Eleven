@@ -39,9 +39,26 @@ class TeamController extends Controller
 
         $period = EditorPeriod::current($request);
 
+        // Contrats de chaque club de la période (onglets Joueurs et Contrats de la fiche), joueur compris.
+        $teams = Team::where('period', $period)->orderBy('name')->get();
+        $contractsByTeam = \App\Models\Contract::with('player')->whereIn('team_id', $teams->modelKeys())->get()->groupBy('team_id');
+
         return Inertia::render('Teams/Index', [
             'period'      => $period,
-            'teams'       => Team::where('period', $period)->orderBy('name')->get()->each(function (Team $team) use ($profiles) {
+            // Joueurs sans contrat dans cette période, chargés seulement quand on ouvre « Ajouter un joueur ».
+            'freePlayers' => Inertia::lazy(fn () => \App\Models\Player::whereDoesntHave('contracts', fn ($q) => $q->whereHas('team', fn ($t) => $t->where('period', $period)))
+                ->orderBy('firstname')->orderBy('lastname')->get()
+                ->map(fn ($p) => $p->toDetailCard() + ['salary' => $p->suggestedSalary()])->values()->all()),
+            'teams'       => $teams->each(function (Team $team) use ($profiles, $contractsByTeam) {
+                $team->setAttribute('roster', ($contractsByTeam[$team->id] ?? collect())->filter(fn ($c) => $c->player)->map(fn ($c) => [
+                    'contract_id' => $c->id,
+                    'player_id'   => $c->player_id,
+                    'name'        => trim("{$c->player->firstname} {$c->player->lastname}"),
+                    'nationality' => $c->player->toDetailCard()['nationality'],
+                    'salary'      => $c->salary,
+                    'is_captain'  => (bool) $c->is_captain,
+                    'player'      => $c->player->toDetailCard(),
+                ])->sortBy(fn ($r) => mb_strtolower($r['name']))->values()->all());
                 $team->setAttribute('eleven', $profiles[$team->id]['eleven'] ?? null);
                 $team->setAttribute('country', $profiles[$team->id]['country'] ?? null);
             }),

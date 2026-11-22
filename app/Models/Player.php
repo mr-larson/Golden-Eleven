@@ -7,6 +7,7 @@ use App\Helpers\HeadingRating;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\CalculatesWeeklyCost;
 use App\Models\Traits\HasFullName;
 use App\Models\Traits\HasPhotoUrl;
 use App\Models\Traits\HasSoccerStats;
@@ -26,6 +27,7 @@ class Player extends Model
     use HasSoccerStats;
     use HasFullName;
     use HasPhotoUrl;
+    use CalculatesWeeklyCost;
 
     protected $table = 'players';
 
@@ -94,6 +96,46 @@ class Player extends Model
     }
 
     /** Joueurs convocables en sélection nationale (les figurants des effectifs de clubs en sont exclus). */
+    /**
+     * Joueur du catalogue mis en forme pour les écrans d'effectif et la fiche détaillée (PlayerDetailModal) :
+     * identité, poste, photo, stats complétées par DEFAULT_STATS, coups spéciaux, description.
+     *
+     * @return array<string, mixed>
+     */
+    public function toDetailCard(): array
+    {
+        return [
+            'id'                  => $this->id,
+            'name'                => trim("{$this->firstname} {$this->lastname}"),
+            'firstname'           => $this->firstname,
+            'lastname'            => $this->lastname,
+            'age'                 => $this->age,
+            'photo_path'          => $this->photo_path,
+            'nationality'         => $this->nationality instanceof \BackedEnum ? $this->nationality->value : $this->nationality,
+            'position'            => $this->position?->value,
+            'secondary_positions' => $this->secondary_positions ?? [],
+            'special_moves'       => $this->special_moves ?? [],
+            'description'         => $this->description,
+            'stats'               => array_merge(self::DEFAULT_STATS, $this->stats ?? []),
+            'ovr'                 => self::statsAverage($this->stats ?? []),
+        ];
+    }
+
+    /** Salaire hebdomadaire proposé pour un nouveau contrat : calculé d'après les stats du catalogue (comme les contrats de référence). */
+    public function suggestedSalary(): int
+    {
+        return $this->calculateWeeklyCost($this->stats ?? [], $this->position?->value);
+    }
+
+    /** OVR d'un joueur : moyenne de ses stats renseignées (> 0), à une décimale ; null sans stats. */
+    public static function statsAverage(array $stats): ?float
+    {
+        $keys = ['speed', 'attack', 'defense', 'stamina', 'shot', 'pass', 'dribble', 'block', 'intercept', 'tackle', 'heading', 'hand_save', 'punch_save'];
+        $values = collect($keys)->map(fn ($k) => (float) ($stats[$k] ?? 0))->filter(fn ($v) => $v > 0);
+
+        return $values->isEmpty() ? null : round($values->avg(), 1);
+    }
+
     public function scopeNationalEligible($query)
     {
         return $query->where('national_eligible', true);
