@@ -26,6 +26,13 @@ class DuelModifiers
     /** Points ajoutés à la défense : la défense « attendue » (interception, tacle, gardien) compte comme un bon contre. */
     public const GOOD_COUNTER_BONUS = 2;
 
+    /**
+     * Dribbles enchaînés : chaque dribble réussi d'affilée renforce le suivant de 5 %, jusqu'à 3 paliers (+15 %).
+     * Miroir de DUEL_RULES.DRIBBLE_STREAK_STEP / DRIBBLE_STREAK_MAX_STEPS côté client.
+     */
+    public const DRIBBLE_STREAK_STEP      = 0.05;
+    public const DRIBBLE_STREAK_MAX_STEPS = 3;
+
     /** Points ajoutés au score de l'équipe qui joue à domicile, qu'elle attaque ou défende. */
     public const HOME_BONUS = 0.5;
 
@@ -200,6 +207,12 @@ class DuelModifiers
     private function speedDuelMultiplier($player): float
     {
         return 1.0 + ((float) ($player->speed ?? 0) / 100) * self::SPEED_DUEL_WEIGHT;
+    }
+
+    /** Multiplicateur d'un dribble qui suit `$streak` dribbles réussis d'affilée (1,0 sans série). */
+    public function dribbleStreakMultiplier(int $streak): float
+    {
+        return 1.0 + self::DRIBBLE_STREAK_STEP * min(max(0, $streak), self::DRIBBLE_STREAK_MAX_STEPS);
     }
 
     /** `block` : dernier rempart anti-tir, d'autant plus fort que la défense est basse. */

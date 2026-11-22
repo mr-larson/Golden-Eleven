@@ -316,6 +316,7 @@ class MatchSimulator
                 $s->playerStats, $s->teamStats, $s->events, $s->goalEvents,
                 $s->side, $defSide, $s->zone, $s->frontOfKeeper, $turn, $isHomeAttacking
             );
+            $s->dribbleStreak = 0;
             return;
         }
 
@@ -344,6 +345,9 @@ class MatchSimulator
         $this->rollExhaustionInjuries($s, $action, $attacker, $defender);
 
         $this->advanceBall($s, $action, $success, $defSide);
+
+        // Série de dribbles : +1 sur un dribble réussi, remise à zéro sur toute autre issue.
+        $s->dribbleStreak = ($action === 'dribble' && $success) ? $s->dribbleStreak + 1 : 0;
     }
 
     /** Usure passive : chaque titulaire perd un peu d'endurance à chaque tour (en plus des coûts d'action). Placé en tête de tour pour s'appliquer aussi aux tours centre / passe longue. */
@@ -402,6 +406,11 @@ class MatchSimulator
         $attackBase = $this->mods->statForAction($attacker, $action, 'attack')
             * $this->mods->attackContextMultiplier($attacker, $action, $s->zone)
             * $this->mods->staminaFactorOf($attacker, $s->stamina, $s->staminaMax);
+
+        // Dribbles enchaînés : la série de dribbles réussis renforce le dribble suivant.
+        if ($action === 'dribble') {
+            $attackBase *= $this->mods->dribbleStreakMultiplier($s->dribbleStreak);
+        }
 
         if ($action === 'shot' && !$s->frontOfKeeper) {
             $zonesToGoal = self::MAX_ZONE_INDEX - $s->zone;

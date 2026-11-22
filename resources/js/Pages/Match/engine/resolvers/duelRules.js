@@ -24,6 +24,19 @@ export function dribbleLayoffBonus({ attackType, isBackPass = false, carrierRole
 }
 
 // -----------------------------------------------------------
+//   Dribbles enchaînés (encourage le dribble)
+// -----------------------------------------------------------
+/**
+ * Avantage d'un dribble qui suit `streak` dribbles réussis d'affilée par le même porteur.
+ * Retourne `null` (aucun avantage) ou `{ label, factor }` : +5 % par dribble réussi, 3 paliers au plus.
+ */
+export function dribbleStreakBonus({ attackType, streak = 0 }) {
+    if (attackType !== "dribble" || streak < 1) return null;
+    const steps = Math.min(streak, DUEL_RULES.DRIBBLE_STREAK_MAX_STEPS);
+    return { label: "Dribbles enchaînés ×" + steps, factor: 1 + DUEL_RULES.DRIBBLE_STREAK_STEP * steps };
+}
+
+// -----------------------------------------------------------
 //   RPS
 // -----------------------------------------------------------
 // null indique un duel automatique, sans bonus de choix défensif.

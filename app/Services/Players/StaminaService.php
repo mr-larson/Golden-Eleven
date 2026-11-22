@@ -9,7 +9,7 @@ use App\Models\GameSaves\GameSave;
 use App\Models\GameSaves\GameTeam;
 use Illuminate\Support\Facades\DB;
 
-/** Stamina des joueurs en fin de semaine : ceux qui ont joué en perdent, les autres en récupèrent ; les agents libres (hors Coupe Nation) récupèrent un peu aussi. Coût et récupération sont réglables dans la configuration de la partie. */
+/** Stamina des joueurs en fin de semaine : ceux qui ont joué en perdent (au prorata de leur temps de jeu), les autres en récupèrent ; les agents libres (hors Coupe Nation) récupèrent un peu aussi. Coût et récupération sont réglables dans la configuration de la partie. */
 class StaminaService
 {
     /** Stamina perdue par un joueur ayant joué (valeur par défaut). */
@@ -27,9 +27,7 @@ class StaminaService
     {
         if (!$match) return;
 
-        $playedPlayerIds = self::resolvePlayedPlayerIds($match);
-
-        self::applyStaminaChanges($gameSave, $playedPlayerIds);
+        self::applyStaminaChanges($gameSave, self::resolvePlaytimeShares($match));
     }
 
     /**
@@ -44,14 +42,15 @@ class StaminaService
             ->with('playerStats')
             ->get();
 
-        $playedPlayerIds = [];
+        // Part de match jouée par joueur sur la semaine (plusieurs matchs : on additionne, plafonné à un match plein).
+        $shares = [];
         foreach ($matches as $match) {
-            foreach (self::resolvePlayedPlayerIds($match) as $pid) {
-                $playedPlayerIds[$pid] = true;
+            foreach (self::resolvePlaytimeShares($match) as $pid => $share) {
+                $shares[$pid] = min(1.0, ($shares[$pid] ?? 0.0) + $share);
             }
         }
 
-        self::applyStaminaChanges($gameSave, array_keys($playedPlayerIds));
+        self::applyStaminaChanges($gameSave, $shares);
 
         if (! $gameSave->isTournament()) {
             $recovery = self::FREE_AGENT_RECOVERY;
@@ -63,6 +62,32 @@ class StaminaService
                     'stamina' => DB::raw("CASE WHEN stamina + {$recovery} > 100 THEN 100 ELSE stamina + {$recovery} END"),
                 ]);
         }
+    }
+
+    /**
+     * Part du match jouée par chaque joueur ayant joué (0 à 1, id en chaîne), d'après match_stats.playtime :
+     * un titulaire remplacé à la mi-temps vaut 0,5, comme le remplaçant qui le relaie. Sans temps de jeu
+     * enregistré (anciens matchs), tout joueur ayant joué compte pour un match plein.
+     *
+     * @return array<string, float>
+     */
+    public static function resolvePlaytimeShares(GameMatch $match): array
+    {
+        $playtime = $match->match_stats['playtime'] ?? null;
+        if (is_array($playtime) && $playtime !== []) {
+            $total = max(1, (int) max($playtime));
+
+            $shares = [];
+            foreach ($playtime as $pid => $turns) {
+                if ($turns > 0) {
+                    $shares[(string) $pid] = min(1.0, $turns / $total);
+                }
+            }
+
+            return $shares;
+        }
+
+        return array_fill_keys(self::resolvePlayedPlayerIds($match), 1.0);
     }
 
     /**
@@ -93,12 +118,14 @@ class StaminaService
     }
 
     /**
-     * Applique -2 aux joueurs ayant joué, +10 aux autres, sur toutes les
-     * équipes de la save.
+     * Retire le coût de match (au prorata du temps de jeu) aux joueurs ayant joué et fait
+     * récupérer les autres, sur toutes les équipes de la save.
+     *
+     * @param array<string, float> $playShares part de match jouée par joueur (id en chaîne => 0..1)
      */
-    protected static function applyStaminaChanges(GameSave $gameSave, array $playedPlayerIds): void
+    protected static function applyStaminaChanges(GameSave $gameSave, array $playShares): void
     {
-        $playedSet = array_flip($playedPlayerIds);
+        $playedSet = $playShares;
 
         $matchCost = (int) $gameSave->getConfig('match_stamina_cost', self::MATCH_STAMINA_COST);
         $restRecov = (int) $gameSave->getConfig('rest_stamina_recovery', self::REST_STAMINA_RECOVERY);
@@ -119,9 +146,16 @@ class StaminaService
         [$played, $rested] = $playerIds->partition(fn($id) => isset($playedSet[(string) $id]));
 
         if ($played->isNotEmpty() && $matchCost !== 0) {
-            GamePlayer::whereIn('id', $played->values())->update([
-                'stamina' => DB::raw('CASE WHEN stamina < ' . $matchCost . ' THEN 0 ELSE stamina - ' . $matchCost . ' END'),
-            ]);
+            // Coût propre à chaque joueur (match plein = coût de la config) : un UPDATE par valeur de coût distincte.
+            $byCost = $played->groupBy(fn ($id) => (int) round($matchCost * $playedSet[(string) $id]));
+            foreach ($byCost as $cost => $ids) {
+                if ((int) $cost === 0) {
+                    continue;
+                }
+                GamePlayer::whereIn('id', $ids->values())->update([
+                    'stamina' => DB::raw('CASE WHEN stamina < ' . (int) $cost . ' THEN 0 ELSE stamina - ' . (int) $cost . ' END'),
+                ]);
+            }
         }
         if ($rested->isNotEmpty() && $restRecov !== 0) {
             GamePlayer::whereIn('id', $rested->values())->update([

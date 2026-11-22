@@ -26,6 +26,10 @@ export const DUEL_RULES = {
     //  - décalage : un non-attaquant a dribblé jusqu'à la ligne d'attaque et sert un attaquant à sa hauteur ;
     //  - retrait  : le porteur a dribblé la défense (face au gardien) et remet en retrait.
     DRIBBLE_LAYOFF_FACTOR: 1.05,
+    // Dribbles enchaînés : chaque dribble réussi d'affilée par le même porteur renforce le suivant
+    // (+5 % par palier, 3 paliers au plus). Miroir de DuelModifiers côté serveur.
+    DRIBBLE_STREAK_STEP: 0.05,
+    DRIBBLE_STREAK_MAX_STEPS: 3,
 };
 
 // ==========================

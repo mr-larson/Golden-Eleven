@@ -204,8 +204,9 @@ describe('enchaînement des révélations et du terrain', () => {
 
         const [[finishGoal]] = animateAndThen.mock.calls;
         finishGoal();
+        // Le coup d'envoi (ballon au joueur n°8 ou au premier disponible) est posé par _applyKickoffFn lui-même.
         expect(state._applyKickoffFn).toHaveBeenCalledOnce();
-        expect(state._moveBallFn).toHaveBeenCalledWith('external', 8);
+        expect(state._applyKickoffFn).toHaveBeenCalledWith('external');
     });
 
     it('garde la défense bleue à gauche et montre le verdict rapide pendant 1,5 seconde', async () => {

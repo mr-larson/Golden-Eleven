@@ -39,6 +39,9 @@ class MatchState
     public int $zone = 0;
     public bool $frontOfKeeper = false;
 
+    /** Dribbles réussis d'affilée par l'équipe qui a le ballon (0 dès qu'une autre action est jouée ou que le ballon est perdu). */
+    public int $dribbleStreak = 0;
+
     /** @param mixed $homeGK gardien à domicile (ou null) @param mixed $awayGK gardien visiteur (ou null) */
     public function __construct(
         public readonly GameTeam $home,

@@ -64,8 +64,11 @@ export function continueDribble(attackTeam, defenseTeam, attackType, defenseActi
         playPlayerAnimation(attackTeam, b.number, 'dribble');
         if (duo) playPlayerAnimation(attackTeam, duo.slot, 'dribble');
 
+        // Série : compte les dribbles réussis d'affilée du même porteur (lue avant la remise à zéro).
+        const previousStreak = shared.state.lastDribblerId === carrierId ? (shared.state.dribbleStreak ?? 0) : 0;
         resetLastDribbler();
         shared.state.lastDribblerId = carrierId;
+        shared.state.dribbleStreak = previousStreak + 1;
 
         if (oldZone < MAX_ZONE_INDEX) {
             const newZone = Math.min(MAX_ZONE_INDEX, oldZone + 1);

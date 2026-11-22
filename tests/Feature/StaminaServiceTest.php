@@ -38,6 +38,35 @@ class StaminaServiceTest extends TestCase
         $this->assertSame(60, (int) $rested->fresh()->stamina); // +10 par défaut
     }
 
+    public function test_stamina_cost_follows_playing_time(): void
+    {
+        $save = $this->makeSave(['week' => 1]);
+        $team = $this->makeTeam($save);
+        $save->setConfig(['match_stamina_cost' => 10]);
+        $save->save();
+        [$full, $replaced, $substitute, $unused] = [
+            $this->makePlayer($save, ['stamina' => 50]), $this->makePlayer($save, ['stamina' => 50]),
+            $this->makePlayer($save, ['stamina' => 50]), $this->makePlayer($save, ['stamina' => 50]),
+        ];
+        foreach ([$full, $replaced, $substitute, $unused] as $p) {
+            $this->makeContract($save, $team, $p);
+        }
+
+        $this->makeMatch($save, $team, $team, [
+            'week' => 1, 'status' => 'played',
+            'match_stats' => ['playtime' => [
+                (string) $full->id => 30, (string) $replaced->id => 15, (string) $substitute->id => 15, (string) $unused->id => 0,
+            ]],
+        ]);
+
+        StaminaService::applyAfterWeek($save, 1);
+
+        $this->assertSame(40, (int) $full->fresh()->stamina);        // match plein : -10
+        $this->assertSame(45, (int) $replaced->fresh()->stamina);    // remplacé à la mi-temps : -5
+        $this->assertSame(45, (int) $substitute->fresh()->stamina);  // entré à la mi-temps : -5
+        $this->assertSame(60, (int) $unused->fresh()->stamina);      // jamais entré : récupère
+    }
+
     public function test_fallback_uses_starters_when_no_match_stats(): void
     {
         $save = $this->makeSave(['week' => 1]);

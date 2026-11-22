@@ -3,7 +3,7 @@
 import { FIELD_RULES, TEXTS } from '../constants.js';
 import { runAfterDiceAnimation } from '../dice.js';
 import { applyBallMotion, getCarrierElement, getPlayerId, isGoalkeeperId, pickWeightedPlayerInZone, setBallToKeeperVisual } from '../field.js';
-import { dribbleLayoffBonus } from './duelRules.js';
+import { dribbleLayoffBonus, dribbleStreakBonus } from './duelRules.js';
 import { setMessage } from '../ui.js';
 
 // Dépendances injectées par initResolversModule (resolvers.js), partagées par
@@ -68,7 +68,19 @@ export function currentDribbleLayoff(attackTeam, attackType) {
     });
 }
 
+/**
+ * Avantage « dribbles enchaînés » du porteur actuel (cf. dribbleStreakBonus) : la série compte seulement si
+ * c'est le même joueur qui vient de dribbler. À appeler avant resetLastDribbler().
+ */
+export function currentDribbleStreak(attackTeam, attackType) {
+    const b = ball();
+    const sameCarrier = !!shared.state.lastDribblerId
+        && shared.state.lastDribblerId === getPlayerId(attackTeam, b.number);
+    return dribbleStreakBonus({ attackType, streak: sameCarrier ? (shared.state.dribbleStreak ?? 0) : 0 });
+}
+
 export function resetLastDribbler() {
+    shared.state.dribbleStreak = 0;
     if (!shared.state.lastDribblerId) return;
     const pos = shared.basePos[shared.state.lastDribblerId];
     const el  = shared.rootEl.querySelector('[data-player="' + shared.state.lastDribblerId + '"]');
