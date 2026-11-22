@@ -15,76 +15,45 @@ class AoAshiRosterTest extends TestCase
     use RefreshDatabase;
     use BuildsGameWorld;
 
-    public function test_fresh_catalog_includes_a_balanced_nakamura_with_his_illustration(): void
+    private const NEW_A_TEAM = ['Akutsu', 'Kuribayashi', 'Kiriki', 'Takasugi', 'Yoshitsune'];
+
+    public function test_fresh_catalog_has_the_a_team_and_no_coach_as_player(): void
     {
         $this->seed(PlayerSeeder::class);
 
-        $taira = Player::where('origin', 'ao_ashi')->where('firstname', 'Taira')->where('lastname', 'Nakamura')->sole();
-        $this->assertSame(9, Player::where('origin', 'ao_ashi')->count());
-        $this->assertSame('Japon', $taira->nationality);
-        $this->assertSame('Midfielder', $taira->position->value);
-        $this->assertContains('Defender', $taira->secondary_positions);
-        $this->assertGreaterThan($taira->stats['attack'], $taira->stats['defense']);
-        $finisher = Player::where('origin', 'ao_ashi')->where('firstname', 'Soichiro')->sole();
-        $this->assertLessThan($finisher->stats['shot'], $taira->stats['shot']);
-        $this->assertSame('pass', $taira->special_moves[0]['base_action']);
-        $this->assertSame('players/taira-nakamura.png', $taira->photo_path);
-
-        $credits = json_decode(file_get_contents(resource_path('data/player-illustration-credits.json')), true, 512, JSON_THROW_ON_ERROR);
-        $credit = collect($credits)->firstWhere('slug', 'taira-nakamura');
-        $this->assertNotNull($credit);
-        $file = public_path('storage/'.$taira->photo_path);
-        $this->assertSame($credit['sha256'], hash_file('sha256', $file));
-        $this->assertNotFalse(getimagesize($file));
-        $this->assertSame('aoashi-pr.com', parse_url($credit['source_url'], PHP_URL_HOST));
-        $this->assertSame('center top', $credit['object_position']);
+        $this->assertSame(13, Player::where('origin', 'ao_ashi')->count());
+        $this->assertSame(0, Player::where('origin', 'ao_ashi')->where('lastname', 'Nakamura')->count(), 'Taira Nakamura est un entraîneur');
+        $this->assertSame(self::NEW_A_TEAM, Player::where('origin', 'ao_ashi')->whereIn('lastname', self::NEW_A_TEAM)->orderBy('id')->pluck('lastname')->all());
+        $this->assertSame('Goalkeeper', Player::where('lastname', 'Yoshitsune')->sole()->position->value);
+        $this->assertSame('Japon', Player::where('lastname', 'Akutsu')->sole()->nationality);
     }
 
-    public function test_migration_only_adds_the_missing_reference_and_preserves_edits_archives_and_saved_players(): void
+    public function test_migration_adds_the_a_team_archives_nakamura_and_preserves_the_rest(): void
     {
         $seeder = new PlayerSeeder();
-        $moves = Roster::specialMoves();
+        $moves  = Roster::specialMoves();
+        // Catalogue « existant » : les 8 joueurs historiques + Nakamura, sans l'équipe A.
         foreach (Roster::players() as $profile) {
-            if ($profile[0] !== 'Taira' || $profile[1] !== 'Nakamura') {
+            if (! in_array($profile[1], self::NEW_A_TEAM, true)) {
                 DB::table('players')->insert($seeder->row('ao_ashi', $profile, [], $moves));
             }
         }
+        $nakamura = Player::create(['firstname' => 'Taira', 'lastname' => 'Nakamura', 'age' => 13, 'position' => 'Midfielder',
+            'origin' => 'ao_ashi', 'nationality' => 'Japon', 'cost' => 46, 'stats' => ['speed' => 60], 'heading' => 18]);
         $reference = Player::where('firstname', 'Eisaku')->sole();
-        $reference->update(['cost' => 123, 'photo_path' => 'players/manual.png']);
+        $reference->update(['cost' => 123]);
         $saved = $this->makePlayer($this->makeSave(), ['base_player_id' => $reference->id, 'origin' => 'ao_ashi', 'shot' => 37]);
-        $before = DB::table('players')->orderBy('id')->get()->keyBy('id');
-        $savedBefore = $saved->fresh()->getAttributes();
+        $referenceBefore = $reference->fresh()->getAttributes();
+        $savedBefore     = $saved->fresh()->getAttributes();
 
-        $migration = require database_path('migrations/2026_11_17_230000_add_taira_nakamura.php');
+        $migration = require database_path('migrations/2026_11_22_120000_add_esperion_a_team_remove_nakamura.php');
         $migration->up();
-        $this->assertSame(9, Player::where('origin', 'ao_ashi')->count());
-        foreach ($before as $id => $row) {
-            $this->assertEquals($row, DB::table('players')->find($id));
-        }
-        // La revue du 20 novembre met Nakamura à jour : son profil final est comparé au catalogue actuel.
-        (require database_path('migrations/2026_11_20_230000_review_ao_ashi_players.php'))->up();
-        $taira = Player::where('firstname', 'Taira')->sole();
-        $profile = collect(Roster::players())->first(fn ($p) => $p[0] === 'Taira' && $p[1] === 'Nakamura');
-        $expected = $seeder->row('ao_ashi', $profile, [], $moves);
-        foreach ($expected as $key => $value) {
-            $actual = $taira->getRawOriginal($key);
-            if (in_array($key, ['stats', 'secondary_positions', 'special_moves'], true)) {
-                // MySQL normalise l'ordre des clés et l'espacement des colonnes JSON.
-                $this->assertEquals(json_decode($value, true), json_decode($actual, true), $key);
-            } else {
-                $this->assertEquals($value, $actual, $key);
-            }
-        }
+        $migration->up();   // rejouable
 
-        $taira->update(['cost' => 17, 'photo_path' => 'players/personal.png', 'stats' => array_replace($taira->stats, ['shot' => 31])]);
-        $edited = $taira->fresh()->getAttributes();
-        $migration->up();
-        $this->assertSame($edited, $taira->fresh()->getAttributes());
-        $taira->delete();
-        $migration->up();
-        $migration->down();
-        $this->assertSame(9, Player::withTrashed()->where('origin', 'ao_ashi')->count());
-        $this->assertSoftDeleted('players', ['id' => $taira->id]);
+        $this->assertSame(13, Player::where('origin', 'ao_ashi')->count());
+        $this->assertSoftDeleted('players', ['id' => $nakamura->id]);
+        $this->assertSame(5, Player::whereIn('lastname', self::NEW_A_TEAM)->count());
+        $this->assertSame($referenceBefore, $reference->fresh()->getAttributes());
         $this->assertSame($savedBefore, $saved->fresh()->getAttributes());
     }
 }

@@ -104,16 +104,62 @@ class Roster
                 'Défenseur central formé à l\'académie Esperion. Solide dans les duels et bien organisé, il est l\'un des piliers de la défense de l\'équipe B.'
             ],
 
+            //-------------------------------
+            // Équipe A d'Esperion (postes de Kiriki, Takasugi et Yoshitsune à confirmer)
+            //-------------------------------
             [
-                'Taira', 'Nakamura', 13, 'Midfielder', 360,
+                'Nagisa', 'Akutsu', 15, 'Defender', 0,
                 [
-                    'speed' => 60, 'stamina' => 70, 'defense' => 28, 'attack' => 23,
-                    'shot' => 19, 'pass' => 27, 'dribble' => 22,
-                    'block' => 21, 'intercept' => 26, 'tackle' => 24,
+                    'speed' => 62, 'stamina' => 72, 'defense' => 36, 'attack' => 20,
+                    'shot' => 15, 'pass' => 22, 'dribble' => 16,
+                    'block' => 32, 'intercept' => 28, 'tackle' => 33,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Milieu de l\'équipe B d\'Esperion, formé au club et aîné d\'Ashito. Attentif à ses coéquipiers, il apporte de l\'équilibre à la récupération et à la relance, et conseille les nouveaux joueurs.',
-                ['Defender']
+                'Défenseur central de l\'équipe A d\'Esperion. Autoritaire et solide dans les duels, il organise la ligne arrière.'
+            ],
+
+            [
+                'Haruhisa', 'Kuribayashi', 15, 'Midfielder', 0,
+                [
+                    'speed' => 66, 'stamina' => 72, 'defense' => 26, 'attack' => 30,
+                    'shot' => 24, 'pass' => 36, 'dribble' => 30,
+                    'block' => 17, 'intercept' => 26, 'tackle' => 22,
+                    'hand_save' => 10, 'punch_save' => 10,
+                ],
+                'Meneur de jeu de l\'équipe A d\'Esperion. Technique et lucide, il dicte le tempo et distribue le jeu.'
+            ],
+
+            [
+                'Yoichi', 'Kiriki', 15, 'Midfielder', 0,
+                [
+                    'speed' => 66, 'stamina' => 70, 'defense' => 27, 'attack' => 28,
+                    'shot' => 22, 'pass' => 30, 'dribble' => 26,
+                    'block' => 19, 'intercept' => 26, 'tackle' => 23,
+                    'hand_save' => 10, 'punch_save' => 10,
+                ],
+                'Milieu de l\'équipe A d\'Esperion, au profil complet entre récupération et construction.'
+            ],
+
+            [
+                'Eita', 'Takasugi', 15, 'Defender', 0,
+                [
+                    'speed' => 62, 'stamina' => 68, 'defense' => 33, 'attack' => 20,
+                    'shot' => 14, 'pass' => 21, 'dribble' => 16,
+                    'block' => 28, 'intercept' => 26, 'tackle' => 30,
+                    'hand_save' => 10, 'punch_save' => 10,
+                ],
+                'Défenseur de l\'équipe A d\'Esperion, rigoureux dans le marquage et les tacles.'
+            ],
+
+            [
+                'Kenta', 'Yoshitsune', 15, 'Goalkeeper', 0,
+                [
+                    'speed' => 50, 'stamina' => 62, 'defense' => 14, 'attack' => 8,
+                    'shot' => 8, 'pass' => 20, 'dribble' => 8,
+                    'block' => 10, 'intercept' => 12, 'tackle' => 8,
+                    'hand_save' => 33, 'punch_save' => 30,
+                ],
+                'Gardien de l\'équipe A d\'Esperion, fiable sur sa ligne et dans les sorties aériennes.'
             ],
 
         ];
@@ -204,17 +250,6 @@ class Roster
                 'cooldown'    => 2,
                 'base_action' => 'block',
                 'description' => 'Solide dans les duels et bien organisé, il ferme l’axe et bloque les frappes.',
-            ]],
-
-            // Adaptation de son rôle collectif au jeu, sans technique canonique inventée.
-            'taira-nakamura' => [[
-                'key'         => 'nakamura_composed_distribution',
-                'mode'        => 'attack',
-                'label'       => 'Relance maîtrisée',
-                'short_label' => 'Relance',
-                'cooldown'    => 2,
-                'base_action' => 'pass',
-                'description' => 'Une passe appliquée pour ressortir le ballon et remettre ses partenaires dans le bon sens.',
             ]],
 
             // =======================
