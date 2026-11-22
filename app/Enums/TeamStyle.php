@@ -24,7 +24,7 @@ class TeamStyle
         self::TACTICAL_OFFENSIVE  => 'Offensif',
         self::TACTICAL_DEFENSIVE  => 'Défensif',
         self::TACTICAL_POSSESSION => 'Possession',
-        self::TACTICAL_COUNTER    => 'Contre-attaque',
+        self::TACTICAL_COUNTER    => 'Contre',
         self::TACTICAL_BALANCED   => 'Équilibré',
     ];
 

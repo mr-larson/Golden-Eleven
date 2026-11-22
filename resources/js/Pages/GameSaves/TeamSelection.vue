@@ -220,6 +220,7 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import H2 from '@/Components/H2.vue';
 import TeamStyleBadges from '@/Pages/GameSaves/Play/components/TeamStyleBadges.vue';
+import { useTeamStyles } from '@/Pages/GameSaves/Play/useTeamStyles.js';
 import { usePlayerUtils } from '@/Pages/GameSaves/Play/usePlayerUtils.js';
 import { useTeamStrength } from '@/Composables/useTeamStrength.js';
 
@@ -322,20 +323,11 @@ const roster = computed(() => {
     return selectedTeam.value.contracts.map(c => c.player).filter(Boolean);
 });
 
-const styleLabel = (key) => ({
-    offensive:  '⚔️ Offensif',
-    defensive:  '🛡️ Défensif',
-    possession: '🎯 Possession',
-    counter:    '⚡ Contre-attaque',
-    balanced:   '⚖️ Équilibré',
-}[key] ?? key ?? '—');
+const { tacticalLabel, tacticalIcon, philosophyLabel: philosophyName, philosophyIcon } = useTeamStyles();
 
-const philosophyLabel = (key) => ({
-    stars:      '⭐ Stars',
-    collective: '👥 Collectif',
-    balanced:   '⚖️ Équilibré',
-    economist:  '💰 Économe',
-}[key] ?? key ?? '—');
+// Libellés et icônes viennent de l'enum TeamStyle (props Inertia partagées)
+const styleLabel = (key) => `${tacticalIcon(key)} ${tacticalLabel(key)}`.trim();
+const philosophyLabel = (key) => `${philosophyIcon(key)} ${philosophyName(key)}`.trim();
 
 const philosophyDescription = (key) => ({
     stars:      'mise sur 2-3 joueurs vedettes et complète avec des profils modestes.',
