@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Ajoute le club Esperion (Ao Ashi) aux trois périodes (Collège, World Youth, Professionnel) et
+ * Ajoute le club Esperion (Ao Ashi) aux périodes World Youth et Professionnel (pas au Collège, incohérent avec l'époque) et
  * met à jour les joueurs de l'univers : Yoshitsune (avant-centre capitaine) et Takasugi (ailier) changent
  * de poste, quatre joueurs sont créés (Akiyama, Yamada, Nikaido, Shimura) et les descriptions sont revues.
  * Instantané dans `database/data/esperion-roster-2026-11-23.json` ; une base neuve est peuplée par les
@@ -37,7 +37,7 @@ return new class extends Migration
 
         DB::transaction(function () use ($rows): void {
             $this->syncPlayers($rows);
-            foreach (['college', 'world_youth', 'pro'] as $period) {
+            foreach (['world_youth', 'pro'] as $period) {
                 $this->syncClub($period);
             }
         });

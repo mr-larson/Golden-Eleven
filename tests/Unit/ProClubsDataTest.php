@@ -22,11 +22,11 @@ class ProClubsDataTest extends TestCase
         }
     }
 
-    public function test_a_player_has_a_single_pro_contract_and_names_do_not_clash_with_college_clubs_except_esperion(): void
+    public function test_a_player_has_a_single_pro_contract_and_names_do_not_clash_with_college_clubs(): void
     {
         $all = array_merge(...array_values(ProClubs::players()));
         $this->assertSame($all, array_values(array_unique($all)), 'joueur présent dans deux clubs pro');
-        // Le nom d'un club n'est unique que par période : Esperion existe volontairement dans les trois.
-        $this->assertSame(['Esperion'], array_values(array_intersect(array_column(ProClubs::teams(), 0), array_keys(ClubRosters::players()))));
+        // Esperion n'existe pas au Collège (période incohérente avec le club).
+        $this->assertSame([], array_values(array_intersect(array_column(ProClubs::teams(), 0), array_keys(ClubRosters::players()))));
     }
 }

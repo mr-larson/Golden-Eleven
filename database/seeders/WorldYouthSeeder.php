@@ -79,6 +79,12 @@ class WorldYouthSeeder extends Seeder
                 'Franz Schester', 'Andreas Möller', 'Thomas Hässler', 'Manfred Margus', 'Rudi Völler', 'Miroslav Klose',
                 'Karl-Heinz Riedle', 'Michael Kaiser', 'Günter Netzer',
             ]],
+            'Esperion' => ['Le club formateur d\'Ao Ashi : jeu technique, lecture tactique et jeunes talents.', TeamStyle::TACTICAL_POSSESSION, TeamStyle::PHILOSOPHY_COLLECTIVE, '4-3-3', 'Kenta Yoshitsune', [
+                'Enshin Akiyama', 'Ashito Aoi', 'Nagisa Akutsu', 'Keiji Togashi', 'Yutaka Yamada',
+                'Eisaku Ohtomo', 'Yoichi Kiriki', 'Haruhisa Kuribayashi',
+                'Eita Takasugi', 'Kenta Yoshitsune', 'Yuma Motoki',
+                'Kanji Nikaido', 'Kyo Shimura', 'Jun Asari', 'Soichiro Tachibana',
+            ]],
         ];
     }
 

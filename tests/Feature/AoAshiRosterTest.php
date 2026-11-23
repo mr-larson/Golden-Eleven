@@ -77,7 +77,7 @@ class AoAshiRosterTest extends TestCase
 
         $this->assertSame(17, Player::where('origin', 'ao_ashi')->count());
         $this->assertSame('Forward', Player::where('lastname', 'Yoshitsune')->sole()->position->value);
-        foreach (['college', 'world_youth', 'pro'] as $period) {
+        foreach (['world_youth', 'pro'] as $period) {
             $team = Team::where('period', $period)->where('name', 'Esperion')->sole();
             $this->assertSame(15, DB::table('contracts')->where('team_id', $team->id)->count(), $period);
             $this->assertSame(1, DB::table('contracts')->where('team_id', $team->id)->where('is_captain', 1)->count(), $period);
