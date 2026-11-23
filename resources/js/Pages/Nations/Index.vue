@@ -19,31 +19,30 @@
                     ]"
                 />
 
-                <EditorFilterBar label="Filtres des pays" unit="pays" class="ml-auto xl:min-w-0"
-                    :count="filteredNations.length" :total="nations.length" @reset="resetFilters">
-                    <EditorFilterSelect v-model="filters.style" label="Style tactique">
-                        <option value="ALL">Tous les styles</option>
-                        <option v-for="style in TACTICAL_STYLES" :key="style" :value="style">{{ tacticalLabel(style) }}</option>
-                    </EditorFilterSelect>
-                    <EditorFilterSelect v-model="filters.philosophy" label="Philosophie de gestion">
-                        <option value="ALL">Toutes les philosophies</option>
-                        <option v-for="philosophy in PHILOSOPHIES" :key="philosophy" :value="philosophy">{{ philosophyLabel(philosophy) }}</option>
-                    </EditorFilterSelect>
-                    <EditorFilterSelect v-model="filters.sort" label="Trier par">
+                <EditorFilterBar label="Filtres des pays" class="ml-auto xl:min-w-0"
+                                 v-model:sort="filters.sort" v-model:direction="filters.direction" @reset="resetFilters">
+                    <template #extra>
+                        <EditorFilterSelect v-model="filters.style" label="Style tactique">
+                            <option value="ALL">Style</option>
+                            <option v-for="style in TACTICAL_STYLES" :key="style" :value="style">{{ tacticalLabel(style) }}</option>
+                        </EditorFilterSelect>
+                        <EditorFilterSelect v-model="filters.philosophy" label="Philosophie de gestion">
+                            <option value="ALL">Philosophie</option>
+                            <option v-for="philosophy in PHILOSOPHIES" :key="philosophy" :value="philosophy">{{ philosophyLabel(philosophy) }}</option>
+                        </EditorFilterSelect>
+                    </template>
+                    <template #sort>
                         <option value="name">Nom (A → Z)</option>
                         <option value="ovr">Note globale du onze</option>
                         <option v-for="stat in PLAYER_STATS" :key="stat.key" :value="stat.key">{{ stat.label }}</option>
-                    </EditorFilterSelect>
-                    <EditorFilterSelect v-if="filters.sort !== 'name'" v-model="filters.direction" label="Ordre">
-                        <option value="desc">Décroissant</option>
-                        <option value="asc">Croissant</option>
-                    </EditorFilterSelect>
+                    </template>
                 </EditorFilterBar>
             </div>
 
             <EntityEditor
                 title="Pays"
                 :items="filteredNations"
+                :total="nations.length"
                 :selected-id="editor.selectedId.value"
                 :creating="editor.creating.value"
                 :can-create="false"

@@ -1,6 +1,8 @@
 <script setup>
 import EditorFilterBar from '@/Components/EditorFilterBar.vue';
-import { fieldClass } from '@/Components/fieldStyles';
+import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
+import EditorNationFilter from '@/Components/EditorNationFilter.vue';
+import EditorClubFilter from '@/Components/EditorClubFilter.vue';
 import { POSITION_GROUPS } from '@/Enums/positionBadges.js';
 import { PLAYER_STATS } from '@/Enums/playerStats.js';
 
@@ -9,61 +11,34 @@ defineProps({
     origins: { type: Array, required: true },
     nationalities: { type: Array, default: () => [] },
     teams: { type: Array, required: true },
-    count: { type: Number, required: true },
-    total: { type: Number, required: true },
+    period: { type: String, default: null },
 });
 defineEmits(['reset']);
-const field = fieldClass({ size: 'sm', border: 'border-slate-300' });
 </script>
 
 <template>
-    <EditorFilterBar label="Filtres des joueurs" unit="joueurs" :count="count" :total="total" @reset="$emit('reset')">
-        <label class="text-xs text-slate-500 xl:min-w-0 xl:shrink">
-            <span class="sr-only">Poste</span>
-            <select v-model="filters.position" class="block w-full" :class="field">
-                <option value="ALL">Tous les postes</option>
-                <option v-for="group in POSITION_GROUPS" :key="group.key" :value="group.key">{{ group.plural }}</option>
-            </select>
-        </label>
-        <label class="text-xs text-slate-500 xl:min-w-0 xl:shrink">
-            <span class="sr-only">Univers</span>
-            <select v-model="filters.origin" class="block w-full" :class="field">
-                <option value="ALL">Tous les univers</option>
+    <EditorFilterBar label="Filtres des joueurs" :period="period"
+                     v-model:sort="filters.sort" v-model:direction="filters.direction" @reset="$emit('reset')">
+        <template #origin>
+            <EditorFilterSelect v-model="filters.origin" label="Univers">
+                <option value="ALL">Univers</option>
                 <option v-for="origin in origins" :key="origin.key" :value="origin.key">{{ origin.label }}</option>
-            </select>
-        </label>
-        <label class="text-xs text-slate-500 xl:min-w-0 xl:shrink">
-            <span class="sr-only">Nationalité</span>
-            <select v-model="filters.nationality" class="block w-full" :class="field">
-                <option value="ALL">Toutes les nationalités</option>
-                <option value="NONE">Non renseignée</option>
-                <option v-for="nation in nationalities" :key="nation" :value="nation">{{ nation }}</option>
-            </select>
-        </label>
-        <label class="text-xs text-slate-500 xl:min-w-0 xl:shrink">
-            <span class="sr-only">Équipe sous contrat</span>
-            <select v-model="filters.team" class="block w-full max-w-[220px]" :class="field">
-                <option value="ALL">Toutes les équipes</option>
-                <option value="FREE">Joueurs libres</option>
-                <option v-for="team in teams" :key="team.id" :value="String(team.id)">{{ team.name }}</option>
-            </select>
-        </label>
-        <label class="text-xs text-slate-500 xl:min-w-0 xl:shrink">
-            <span class="sr-only">Trier par</span>
-            <select v-model="filters.sort" class="block w-full" :class="field">
-                <option value="name">Nom (A → Z)</option>
-                <option value="overall">Note globale</option>
-                <option value="profile">Profil au poste</option>
-                <option value="cost">Coût</option>
-                <option v-for="stat in PLAYER_STATS" :key="stat.key" :value="stat.key">{{ stat.label }}</option>
-            </select>
-        </label>
-        <label v-if="filters.sort !== 'name'" class="text-xs text-slate-500 xl:min-w-0 xl:shrink">
-            <span class="sr-only">Ordre</span>
-            <select v-model="filters.direction" class="block w-full" :class="field">
-                <option value="desc">Décroissant</option>
-                <option value="asc">Croissant</option>
-            </select>
-        </label>
+            </EditorFilterSelect>
+        </template>
+        <template #nation><EditorNationFilter v-model="filters.nationality" :nations="nationalities" /></template>
+        <template #club><EditorClubFilter v-model="filters.team" :teams="teams" with-free /></template>
+        <template #position>
+            <EditorFilterSelect v-model="filters.position" label="Poste">
+                <option value="ALL">Poste</option>
+                <option v-for="group in POSITION_GROUPS" :key="group.key" :value="group.key">{{ group.plural }}</option>
+            </EditorFilterSelect>
+        </template>
+        <template #sort>
+            <option value="name">Nom (A → Z)</option>
+            <option value="overall">Note globale</option>
+            <option value="profile">Profil au poste</option>
+            <option value="cost">Coût</option>
+            <option v-for="stat in PLAYER_STATS" :key="stat.key" :value="stat.key">{{ stat.label }}</option>
+        </template>
     </EditorFilterBar>
 </template>

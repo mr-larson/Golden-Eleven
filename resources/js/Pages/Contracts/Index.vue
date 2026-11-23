@@ -8,7 +8,7 @@
 
         <div class="p-4 sm:p-6 max-w-8xl mx-auto flex flex-col gap-4">
             <div class="flex flex-wrap xl:flex-nowrap items-center justify-between gap-4">
-                <EditorSubNav class="shrink-0" :period="period"
+                <EditorSubNav class="shrink-0"
                     :back="{ href: route('dataBaseMenu'), label: 'Base de données' }"
                     :links="[
                         { href: route('players.index'), label: 'Joueurs' },
@@ -19,34 +19,25 @@
                     ]"
                 />
 
-                <EditorFilterBar label="Filtres des contrats" unit="contrats" class="ml-auto xl:min-w-0"
-                    :count="filteredContracts.length" :total="contracts.length" @reset="resetFilters">
-                    <EditorFilterSelect v-model="filters.nationality" label="Nationalité">
-                        <option value="ALL">Toutes les nationalités</option>
-                        <option value="NONE">Non renseignée</option>
-                        <option v-for="nation in nationalities" :key="nation" :value="nation">{{ nation }}</option>
-                    </EditorFilterSelect>
-                    <EditorFilterSelect v-model="filters.team" label="Équipe">
-                        <option value="ALL">Toutes les équipes</option>
-                        <option v-for="team in teams" :key="team.id" :value="String(team.id)">{{ team.name }}</option>
-                    </EditorFilterSelect>
-                    <EditorFilterSelect v-model="filters.sort" label="Trier par">
+                <EditorFilterBar label="Filtres des contrats" class="ml-auto xl:min-w-0" :period="period"
+                                 v-model:sort="filters.sort" v-model:direction="filters.direction" :sort-no-direction="['name', 'team']"
+                                 @reset="resetFilters">
+                    <template #nation><EditorNationFilter v-model="filters.nationality" :nations="nationalities" /></template>
+                    <template #club><EditorClubFilter v-model="filters.team" :teams="teams" /></template>
+                    <template #sort>
                         <option value="name">Nom (A → Z)</option>
                         <option value="team">Équipe (A → Z)</option>
                         <option value="salary">Salaire</option>
                         <option value="remaining">Matchs restants</option>
                         <option value="played">Matchs joués</option>
-                    </EditorFilterSelect>
-                    <EditorFilterSelect v-if="!['name', 'team'].includes(filters.sort)" v-model="filters.direction" label="Ordre">
-                        <option value="desc">Décroissant</option>
-                        <option value="asc">Croissant</option>
-                    </EditorFilterSelect>
+                    </template>
                 </EditorFilterBar>
             </div>
 
             <EntityEditor
                 title="Contrats"
                 :items="filteredContracts"
+                :total="contracts.length"
                 :selected-id="editor.selectedId.value"
                 :creating="editor.creating.value"
                 :search-text="c => `${c.player_name ?? ''} ${c.team_name ?? ''}`"
@@ -140,7 +131,8 @@ import { Head, useForm } from '@inertiajs/vue3';
 import { confirmDialog } from '@/Composables/useDialog.js';
 import { computed, reactive } from 'vue';
 import EditorFilterBar from '@/Components/EditorFilterBar.vue';
-import EditorFilterSelect from '@/Components/EditorFilterSelect.vue';
+import EditorNationFilter from '@/Components/EditorNationFilter.vue';
+import EditorClubFilter from '@/Components/EditorClubFilter.vue';
 
 import H2 from '@/Components/H2.vue';
 import EntityEditor from '@/Components/EntityEditor.vue';

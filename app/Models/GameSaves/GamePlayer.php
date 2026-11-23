@@ -94,6 +94,66 @@ class GamePlayer extends Model
         return $this->belongsTo(Player::class, 'base_player_id');
     }
 
+    /** Clés des stats d'un joueur (colonnes à plat de la partie). */
+    private const STAT_KEYS = ['speed', 'attack', 'defense', 'stamina', 'shot', 'pass', 'dribble', 'block', 'intercept', 'tackle', 'heading', 'hand_save', 'punch_save'];
+
+    /** Stats à plat sous forme de tableau clé → valeur. */
+    public function statsArray(): array
+    {
+        return collect(self::STAT_KEYS)->mapWithKeys(fn ($k) => [$k => (int) ($this->{$k} ?? 0)])->all();
+    }
+
+    /**
+     * Joueur de la partie mis en forme pour les écrans d'effectif et la fiche détaillée
+     * (même forme que Player::toDetailCard : l'éditeur d'équipes est partagé avec la base).
+     *
+     * @return array<string, mixed>
+     */
+    public function toDetailCard(): array
+    {
+        $stats = $this->statsArray();
+
+        return [
+            'id'                  => $this->id,
+            'name'                => trim("{$this->firstname} {$this->lastname}"),
+            'firstname'           => $this->firstname,
+            'lastname'            => $this->lastname,
+            'age'                 => null,
+            'photo_path'          => $this->photo_path,
+            'nationality'         => $this->nationality instanceof \BackedEnum ? $this->nationality->value : $this->nationality,
+            'position'            => $this->position instanceof \BackedEnum ? $this->position->value : $this->position,
+            'secondary_positions' => $this->secondary_positions ?? [],
+            'special_moves'       => $this->special_moves ?? [],
+            'description'         => $this->description,
+            'stats'               => $stats,
+            'ovr'                 => Player::statsAverage($stats),
+        ];
+    }
+
+    /** Salaire hebdomadaire proposé pour un nouveau contrat, calculé d'après les stats du joueur. */
+    public function suggestedSalary(): int
+    {
+        return $this->calculateWeeklyCost($this->statsArray(), $this->position instanceof \BackedEnum ? $this->position->value : $this->position);
+    }
+
+    /**
+     * Copie transitoire sous forme de joueur du catalogue (non enregistrée) : permet de réutiliser
+     * les services de composition de la base (onze type de l'IA) sur un effectif de partie.
+     * L'id du catalogue est repris quand il existe (liens entre joueurs), sinon un id négatif.
+     */
+    public function toCatalogPlayer(): Player
+    {
+        return (new Player())->forceFill([
+            'id'                  => $this->base_player_id ?? -$this->id,
+            'firstname'           => $this->firstname,
+            'lastname'            => $this->lastname,
+            'position'            => $this->position instanceof \BackedEnum ? $this->position->value : $this->position,
+            'secondary_positions' => $this->secondary_positions ?? [],
+            'nationality'         => $this->nationality instanceof \BackedEnum ? $this->nationality->value : $this->nationality,
+            'stats'               => $this->statsArray(),
+        ]);
+    }
+
     // (optionnel mais conseillé) : contrats dans la partie
     public function contracts()
     {

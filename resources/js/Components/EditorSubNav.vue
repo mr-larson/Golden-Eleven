@@ -1,21 +1,24 @@
 <script setup>
-import { Link, router } from '@inertiajs/vue3';
-import { PERIODS as PERIOD_META } from '@/Pages/GameSaves/periods.js';
+import { Link } from '@inertiajs/vue3';
 
-// Sous-navigation des écrans d'édition : lien retour + pastilles de section,
-// et (si `period` est fourni) le sélecteur de période de la base (Collège / Professionnel).
+// Sous-navigation des écrans d'édition : lien retour + une icône par section.
+// (Le sélecteur de période est dans la barre de filtres : EditorFilterBar.)
+// Les sections sont des icônes (plus compactes, plus de place pour les filtres) ; le libellé reste
+// en infobulle et pour les lecteurs d'écran. L'icône d'une section se choisit ici, par son libellé :
+// un libellé inconnu s'affiche en texte.
 defineProps({
     back: { type: Object, required: true }, // { href, label }
     links: { type: Array, required: true }, // [{ href, label, active }]
-    period: { type: String, default: null }, // période affichée ; null = pas de sélecteur
 });
 
-const PERIODS = Object.entries(PERIOD_META).map(([key, p]) => ({ key, label: p.label }));
-
-// Recharge l'écran courant sur la période choisie (le choix est mémorisé en session côté serveur).
-function changePeriod(event) {
-    router.get(window.location.pathname, { period: event.target.value }, { preserveScroll: true });
-}
+// Tracés SVG (24×24, trait) par libellé de section.
+const ICONS = {
+    Joueurs: ['M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z', 'M4 21a8 8 0 0 1 16 0'],
+    Équipes: ['M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z', 'M2.5 20a6.5 6.5 0 0 1 13 0', 'M16 4.3a3.5 3.5 0 0 1 0 6.4', 'M17.5 14a6.5 6.5 0 0 1 4 6'],
+    Contrats: ['M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z', 'M14 3v5h5', 'M9 13h6', 'M9 17h6'],
+    Pays: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z', 'M3 12h18', 'M12 3a14 14 0 0 1 0 18', 'M12 3a14 14 0 0 0 0 18'],
+    Utilisateurs: ['M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z', 'M5 20a7 7 0 0 1 14 0', 'M12 14v3', 'M9.5 16l2.5 2 2.5-2'],
+};
 </script>
 
 <template>
@@ -25,22 +28,20 @@ function changePeriod(event) {
             ← {{ back.label }}
         </Link>
         <span class="w-px h-5 bg-slate-200"></span>
-        <Link v-for="l in links" :key="l.href" :href="l.href"
-              class="text-xs font-bold px-3 py-1.5 rounded-full transition-all"
-              :class="l.active
-                  ? 'bg-teal-500 text-white shadow-sm'
-                  : 'border border-slate-300 bg-white text-slate-600 hover:bg-slate-50'">
-            {{ l.label }}
+        <Link v-for="l in links" :key="l.href" :href="l.href" :title="l.label" :aria-label="l.label"
+              :aria-current="l.active ? 'page' : undefined"
+              class="inline-flex items-center justify-center rounded-full transition-all"
+              :class="[
+                  ICONS[l.label] ? 'h-9 w-9' : 'text-xs font-bold px-3 py-1.5',
+                  l.active
+                      ? 'bg-teal-500 text-white shadow-sm'
+                      : 'border border-slate-300 bg-white text-slate-600 hover:bg-slate-50',
+              ]">
+            <svg v-if="ICONS[l.label]" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path v-for="d in ICONS[l.label]" :key="d" :d="d" />
+            </svg>
+            <template v-else>{{ l.label }}</template>
         </Link>
-        <template v-if="period">
-            <span class="w-px h-5 bg-slate-200"></span>
-            <label class="flex items-center gap-1.5 text-xs font-bold text-slate-500">
-                Période
-                <select :value="period" @change="changePeriod" aria-label="Période de la base"
-                        class="rounded-full border border-slate-300 bg-white py-1 pl-3 pr-7 text-xs font-bold text-slate-600">
-                    <option v-for="p in PERIODS" :key="p.key" :value="p.key">{{ p.label }}</option>
-                </select>
-            </label>
-        </template>
     </div>
 </template>

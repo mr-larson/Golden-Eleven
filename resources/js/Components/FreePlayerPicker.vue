@@ -9,11 +9,15 @@ import { positionBadgeClass, positionShort } from '@/Enums/positionBadges.js';
  * en un clic (salaire proposé d'après les stats, modifiable ensuite depuis l'onglet Contrats).
  *
  *  - teamId  : équipe qui signe le joueur ;
- *  - players : joueurs libres (prop `freePlayers`, chargée à l'ouverture) ou null tant qu'elle n'est pas arrivée.
+ *  - players : joueurs libres (prop `freePlayers`, chargée à l'ouverture) ou null tant qu'elle n'est pas arrivée ;
+ *  - signUrl / signPayload : route et données du contrat créé (la partie a ses propres contrats).
  */
 const props = defineProps({
     teamId:  { type: Number, required: true },
     players: { type: Array, default: null },
+    // Signature : adresse et charge utile d'un contrat (défaut : contrats de la base).
+    signUrl:     { type: Function, default: () => route('contracts.store') },
+    signPayload: { type: Function, default: null },
 });
 
 const query = ref('');
@@ -40,9 +44,10 @@ const filtered = computed(() => {
 function sign(player) {
     signing.value = player.id;
     error.value = '';
-    router.post(route('contracts.store'), {
-        team_id: props.teamId, player_id: player.id, salary: player.salary, matches_total: MATCHES_TOTAL,
-    }, {
+    const payload = props.signPayload
+        ? props.signPayload(player, props.teamId)
+        : { team_id: props.teamId, player_id: player.id, salary: player.salary, matches_total: MATCHES_TOTAL };
+    router.post(props.signUrl(player), payload, {
         preserveScroll: true,
         onSuccess: () => router.reload({ only: ['freePlayers'] }),
         onError: (errors) => { error.value = Object.values(errors)[0] ?? 'Signature impossible.'; },

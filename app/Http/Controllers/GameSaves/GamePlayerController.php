@@ -47,6 +47,9 @@ class GamePlayerController extends Controller
             'players'  => $players,
             'nationalities' => \App\Models\Nation::names(),
             'teams'    => $teams,
+            'origins'        => \App\Enums\PlayerOrigin::LABELS,
+            'positions'      => \App\Enums\PlayerPosition::values(),
+            'positionLabels' => \App\Enums\PlayerPosition::labels(),
             // Joueur à ouvrir (ex. juste après sa création) / fiche vide demandée.
             'selectedId'  => $request->integer('selected') ?: null,
             'startCreate' => $request->boolean('create'),

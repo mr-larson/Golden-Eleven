@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Concerns\AuthorizesGameSave;
 use App\Http\Controllers\Concerns\LocksGameSave;
 use App\Http\Requests\GameSaves\GameTeamRequest;
+use App\Models\GameSaves\GameContract;
+use App\Models\GameSaves\GamePlayer;
 use App\Models\GameSaves\GameSave;
+use App\Services\WorldCup\NationalTeamAssembler;
 use App\Models\GameSaves\GameTeam;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,22 +29,56 @@ class GameTeamController extends Controller
     /**
      * Liste des équipes d'une sauvegarde.
      */
-    public function index(Request $request, GameSave $gameSave): Response
+    public function index(Request $request, GameSave $gameSave, NationalTeamAssembler $assembler): Response
     {
         $this->authorizeGameSave('view', $gameSave);
 
+        $week = (int) $gameSave->week;
+
+        // Contrats en vigueur de la partie, joueur compris (onglets Joueurs et Contrats de la fiche).
+        $contractsByTeam = GameContract::with('gamePlayer')
+            ->where('game_save_id', $gameSave->id)
+            ->activeAt($week)
+            ->get()
+            ->filter(fn (GameContract $c) => $c->gamePlayer)
+            ->groupBy('game_team_id');
+
         $teams = GameTeam::where('game_save_id', $gameSave->id)
-            ->with('players')
             ->orderBy('name')
             ->get()
-            ->each(function (GameTeam $team) {
-                $team->setAttribute('country', self::dominantNationality($team->players));
-                $team->unsetRelation('players');
+            ->each(function (GameTeam $team) use ($contractsByTeam, $assembler) {
+                $contracts = $contractsByTeam[$team->id] ?? collect();
+                $players = $contracts->map(fn (GameContract $c) => $c->gamePlayer);
+
+                $team->setAttribute('roster', $contracts->map(fn (GameContract $c) => [
+                    'contract_id' => $c->id,
+                    'player_id'   => $c->game_player_id,
+                    'name'        => trim("{$c->gamePlayer->firstname} {$c->gamePlayer->lastname}"),
+                    'nationality' => $c->gamePlayer->nationality,
+                    'salary'      => $c->salary,
+                    'is_captain'  => (bool) $c->is_captain,
+                    'player'      => $c->gamePlayer->toDetailCard(),
+                ])->sortBy(fn ($r) => mb_strtolower($r['name']))->values()->all());
+
+                // Profil du onze type que l'IA aligne (comme pour les clubs de la base).
+                $team->setAttribute('eleven', $assembler->elevenProfile(
+                    $players->map(fn (GamePlayer $p) => $p->toCatalogPlayer())->values(),
+                    $team->formation,
+                    $team->tactical_style ?? 'balanced',
+                    $team->management_philosophy ?? 'collective',
+                ));
+                $team->setAttribute('country', self::dominantNationality($players));
             });
 
         return Inertia::render('GameSaves/GameTeams/Index', [
             'gameSave' => GameSaveResource::make($gameSave)->toArray(),
             'teams'    => $teams,
+            // Joueurs sans contrat en vigueur, chargés seulement quand on ouvre « Ajouter un joueur ».
+            'freePlayers' => Inertia::lazy(fn () => GamePlayer::where('game_save_id', $gameSave->id)
+                ->whereDoesntHave('contracts', fn ($q) => $q->activeAt($week))
+                ->orderBy('firstname')->orderBy('lastname')->get()
+                ->map(fn (GamePlayer $p) => $p->toDetailCard() + ['salary' => $p->suggestedSalary()])
+                ->values()->all()),
             // Équipe à ouvrir (ex. juste après sa création) / fiche vide demandée.
             'selectedId'  => $request->integer('selected') ?: null,
             'startCreate' => $request->boolean('create'),

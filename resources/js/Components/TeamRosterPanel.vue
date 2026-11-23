@@ -10,6 +10,8 @@ import { positionBadgeClass, positionShort } from '@/Enums/positionBadges.js';
  */
 defineProps({
     roster: { type: Array, required: true },
+    // Lien d'une ligne (défaut : l'écran des contrats de la base).
+    rowHref: { type: Function, default: row => route('contracts.index', { selected: row.contract_id }) },
 });
 </script>
 
@@ -19,7 +21,7 @@ defineProps({
     </div>
     <ul v-else class="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
         <li v-for="row in roster" :key="row.contract_id">
-            <Link :href="route('contracts.index', { selected: row.contract_id })"
+            <Link :href="rowHref(row)"
                   class="flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-slate-50">
                 <span v-if="row.player.position" :class="positionBadgeClass(row.player.position)" class="w-12 shrink-0 rounded-full px-2 py-0.5 text-center text-2xs font-bold">
                     {{ positionShort(row.player.position) }}

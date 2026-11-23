@@ -10,6 +10,8 @@ import { computed, ref } from 'vue';
 const props = defineProps({
     title: { type: String, required: true },
     items: { type: Array, required: true },
+    // Nombre total avant filtres : affiche « filtrés / total » dans le titre quand il diffère.
+    total: { type: Number, default: null },
     selectedId: { type: [Number, String], default: null },
     creating: { type: Boolean, default: false },
     searchPlaceholder: { type: String, default: 'Rechercher' },
@@ -42,7 +44,7 @@ const isSelected = (item) => !props.creating && props.selectedId === item.id;
         <div class="lg:w-72 shrink-0 border border-slate-200 rounded-xl bg-slate-50 p-3 flex flex-col gap-3 max-h-[60vh] lg:max-h-none lg:h-full shadow-card">
             <div class="flex items-center justify-between">
                 <h3 class="text-sm font-semibold text-slate-700">
-                    {{ title }} <span class="text-slate-400 font-normal">({{ items.length }})</span>
+                    {{ title }} <span class="text-slate-400 font-normal">({{ total !== null && total !== items.length ? `${items.length} / ${total}` : items.length }})</span>
                 </h3>
                 <button
                     v-if="canCreate"
