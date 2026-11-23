@@ -169,7 +169,7 @@
                                         <div class="space-y-2 text-xs text-slate-600">
                                             <div class="flex items-start gap-2">
                                                 <span class="text-amber-500 font-bold shrink-0">1.</span>
-                                                <p>L'ordre de pioche est tiré au sort entre les 15 équipes.</p>
+                                                <p>L'ordre de pioche est tiré au sort entre les {{ participantTotal }} équipes.</p>
                                             </div>
                                             <div class="flex items-start gap-2">
                                                 <span class="text-amber-500 font-bold shrink-0">2.</span>

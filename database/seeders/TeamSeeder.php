@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
- * Catalogue des 15 équipes de Captain Tsubasa (collège, période `college`) : nom, description, style
+ * Catalogue des 15 équipes de Captain Tsubasa + Esperion d'Ao Ashi (collège, période `college`) : nom, description, style
  * tactique, philosophie de gestion, formation par défaut et logo. Vide la table
  * `teams` avant de la remplir (garde-fou en production : voir GuardsReferenceReseed).
  */
@@ -20,7 +20,7 @@ class TeamSeeder extends Seeder
     use GuardsReferenceReseed;
 
     /**
-     * Vide la table `teams` puis insère les 15 équipes (les clubs pro sont semés à part : ProClubSeeder), avec leur logo s'il existe dans
+     * Vide la table `teams` puis insère les 16 équipes (les clubs pro sont semés à part : ProClubSeeder), avec leur logo s'il existe dans
      * public/storage/teams/ (fichier nommé d'après le slug du nom). Budget de départ
      * 5 000 et bilan à zéro pour toutes.
      */
@@ -89,6 +89,9 @@ class TeamSeeder extends Seeder
 
             ['Shimada',   'Équipe neutre, disciplinée, bloc compact.',
                 TeamStyle::TACTICAL_DEFENSIVE,  TeamStyle::PHILOSOPHY_COLLECTIVE, '5-3-1-1'],
+
+            ['Esperion',  'Le club formateur d\'Ao Ashi : jeu technique, lecture tactique et jeunes talents.',
+                TeamStyle::TACTICAL_POSSESSION, TeamStyle::PHILOSOPHY_COLLECTIVE, '4-3-3'],
         ];
 
 

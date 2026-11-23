@@ -23,7 +23,7 @@ class Roster
                     'block' => 17, 'intercept' => 32, 'tackle' => 25,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Milieu d\'Esperion, d\'abord latéral gauche puis reconverti d\'attaquant par le coach Fukuda : il joue aussi bien en défense qu\'en attaque. Sa vision exceptionnelle du jeu et sa détermination sans faille en font un meneur polyvalent.',
+                'Latéral gauche d\'Esperion, d\'abord attaquant reconverti par le coach Fukuda. Cœur tactique de l\'équipe, il orchestre le jeu depuis la défense grâce à sa vision panoramique et à sa détermination sans faille.',
                 ['Defender', 'Forward']
             ],
 
@@ -35,7 +35,7 @@ class Roster
                     'block' => 20, 'intercept' => 23, 'tackle' => 22,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Milieu défensif de l\'équipe B d\'Esperion et premier ami d\'Ashito. Derrière une apparence de couard se cache un meneur composé, salué pour sa vision du jeu et sa capacité à faire le lien.'
+                'Sentinelle d\'Esperion et premier ami d\'Ashito. Toujours calme sous pression, il fluidifie les transitions et compense les montées d\'Ashito : un régulateur précieux.'
             ],
 
             [
@@ -46,7 +46,7 @@ class Roster
                     'block' => 14, 'intercept' => 15, 'tackle' => 15,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Avant-centre de l\'équipe B d\'Esperion, ancien joueur de Tokyo Musashino. Ami d\'Ashito, il apporte de la présence dans la surface et un bon sens du placement.'
+                'Attaquant d\'Esperion, ancien joueur de Tokyo Musashino et ami d\'Ashito. Super-remplaçant par excellence : une énergie débordante et un don pour marquer des buts improbables en fin de match.'
             ],
 
             [
@@ -57,7 +57,7 @@ class Roster
                     'block' => 25, 'intercept' => 21, 'tackle' => 27,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Défenseur central de l\'équipe B d\'Esperion et colocataire d\'Ashito. Physique et offensif, il combine impact dans les duels, bonnes bases techniques et frappe puissante pour soutenir les attaques.'
+                'Défenseur central d\'Esperion et colocataire d\'Ashito. Solide dans les duels et bon relanceur, il forme avec Akutsu un duo complémentaire (et explosif).'
             ],
 
             [
@@ -79,7 +79,8 @@ class Roster
                     'block' => 23, 'intercept' => 21, 'tackle' => 23,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Latéral formé à l\'académie Esperion. Polyvalent et appliqué, il peut évoluer des deux côtés de la défense et participe activement aux phases offensives.'
+                'Latéral et milieu formé à l\'académie Esperion. La polyvalence technique incarnée : il verrouille un couloir ou renforce le milieu et participe aux phases offensives.',
+                ['Midfielder']
             ],
 
             [
@@ -90,7 +91,7 @@ class Roster
                     'block' => 14, 'intercept' => 16, 'tackle' => 15,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Attaquant promu en équipe A d\'Esperion. Formé à l\'académie, il a su s\'imposer par sa technique et son efficacité offensive pour franchir le cap vers l\'équipe première.'
+                'Ailier droit d\'Esperion, électron libre au flair instinctif. Promu en équipe A, il combine à la perfection avec Kuribayashi et Ashito.'
             ],
 
             [
@@ -105,7 +106,7 @@ class Roster
             ],
 
             //-------------------------------
-            // Équipe A d'Esperion (postes de Kiriki, Takasugi et Yoshitsune à confirmer)
+            // Équipe A d'Esperion
             //-------------------------------
             [
                 'Nagisa', 'Akutsu', 15, 'Defender', 0,
@@ -115,51 +116,98 @@ class Roster
                     'block' => 32, 'intercept' => 28, 'tackle' => 33,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Défenseur central de l\'équipe A d\'Esperion. Autoritaire et solide dans les duels, il organise la ligne arrière.'
+                'Défenseur central d\'Esperion, patron de la défense. Monstrueux physiquement, doté d\'une lecture défensive hors norme et d\'un mental d\'acier.'
             ],
 
             [
                 'Haruhisa', 'Kuribayashi', 15, 'Midfielder', 0,
                 [
-                    'speed' => 66, 'stamina' => 72, 'defense' => 26, 'attack' => 30,
-                    'shot' => 24, 'pass' => 36, 'dribble' => 30,
+                    'speed' => 66, 'stamina' => 72, 'defense' => 26, 'attack' => 32,
+                    'shot' => 26, 'pass' => 37, 'dribble' => 31,
                     'block' => 17, 'intercept' => 26, 'tackle' => 22,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Meneur de jeu de l\'équipe A d\'Esperion. Technique et lucide, il dicte le tempo et distribue le jeu.'
+                'Meneur offensif d\'Esperion, génie absolu déjà au niveau professionnel. Capable de débloquer n\'importe quelle défense.',
+                ['Forward']
             ],
 
             [
                 'Yoichi', 'Kiriki', 15, 'Midfielder', 0,
                 [
                     'speed' => 66, 'stamina' => 70, 'defense' => 27, 'attack' => 28,
-                    'shot' => 22, 'pass' => 30, 'dribble' => 26,
+                    'shot' => 22, 'pass' => 32, 'dribble' => 27,
                     'block' => 19, 'intercept' => 26, 'tackle' => 23,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Milieu de l\'équipe A d\'Esperion, au profil complet entre récupération et construction.'
+                'Milieu relayeur gauche d\'Esperion, maestro technique capable de dicter le tempo et de trouver des angles de passe impossibles.'
             ],
 
             [
-                'Eita', 'Takasugi', 15, 'Defender', 0,
+                'Eita', 'Takasugi', 15, 'Forward', 0,
                 [
-                    'speed' => 62, 'stamina' => 68, 'defense' => 33, 'attack' => 20,
-                    'shot' => 14, 'pass' => 21, 'dribble' => 16,
-                    'block' => 28, 'intercept' => 26, 'tackle' => 30,
+                    'speed' => 72, 'stamina' => 70, 'defense' => 17, 'attack' => 31,
+                    'shot' => 27, 'pass' => 24, 'dribble' => 29,
+                    'block' => 13, 'intercept' => 16, 'tackle' => 14,
                     'hand_save' => 10, 'punch_save' => 10,
                 ],
-                'Défenseur de l\'équipe A d\'Esperion, rigoureux dans le marquage et les tacles.'
+                'Ailier gauche d\'Esperion et international U18. Redoutable dans les déplacements sans ballon et dans la finition.',
+                ['Midfielder']
             ],
 
             [
-                'Kenta', 'Yoshitsune', 15, 'Goalkeeper', 0,
+                'Kenta', 'Yoshitsune', 15, 'Forward', 0,
+                [
+                    'speed' => 66, 'stamina' => 72, 'defense' => 18, 'attack' => 33,
+                    'shot' => 32, 'pass' => 28, 'dribble' => 28,
+                    'block' => 14, 'intercept' => 18, 'tackle' => 16,
+                    'hand_save' => 10, 'punch_save' => 10,
+                ],
+                'Avant-centre et capitaine d\'Esperion. Leader naturel doté d\'un QI footballistique immense et d\'une finition chirurgicale.'
+            ],
+
+            [
+                'Enshin', 'Akiyama', 15, 'Goalkeeper', 0,
                 [
                     'speed' => 50, 'stamina' => 62, 'defense' => 14, 'attack' => 8,
-                    'shot' => 8, 'pass' => 20, 'dribble' => 8,
+                    'shot' => 8, 'pass' => 22, 'dribble' => 8,
                     'block' => 10, 'intercept' => 12, 'tackle' => 8,
-                    'hand_save' => 33, 'punch_save' => 30,
+                    'hand_save' => 34, 'punch_save' => 31,
                 ],
-                'Gardien de l\'équipe A d\'Esperion, fiable sur sa ligne et dans les sorties aériennes.'
+                'Gardien titulaire d\'Esperion. Mur décisif et relanceur précieux lors des grands rendez-vous.'
+            ],
+
+            [
+                'Yutaka', 'Yamada', 15, 'Defender', 0,
+                [
+                    'speed' => 68, 'stamina' => 72, 'defense' => 30, 'attack' => 26,
+                    'shot' => 17, 'pass' => 27, 'dribble' => 24,
+                    'block' => 22, 'intercept' => 25, 'tackle' => 27,
+                    'hand_save' => 10, 'punch_save' => 10,
+                ],
+                'Latéral droit d\'Esperion, l\'un des meilleurs latéraux du pays chez les jeunes. Ultra-complet, offensivement comme défensivement.',
+                ['Midfielder']
+            ],
+
+            [
+                'Kanji', 'Nikaido', 15, 'Goalkeeper', 0,
+                [
+                    'speed' => 48, 'stamina' => 60, 'defense' => 13, 'attack' => 8,
+                    'shot' => 8, 'pass' => 19, 'dribble' => 8,
+                    'block' => 10, 'intercept' => 11, 'tackle' => 8,
+                    'hand_save' => 31, 'punch_save' => 29,
+                ],
+                'Gardien d\'Esperion, numéro 2 du poste. Son expérience et son leadership vocal sécurisent la défense.'
+            ],
+
+            [
+                'Kyo', 'Shimura', 15, 'Defender', 0,
+                [
+                    'speed' => 66, 'stamina' => 68, 'defense' => 33, 'attack' => 18,
+                    'shot' => 13, 'pass' => 21, 'dribble' => 15,
+                    'block' => 29, 'intercept' => 27, 'tackle' => 30,
+                    'hand_save' => 10, 'punch_save' => 10,
+                ],
+                'Défenseur central d\'Esperion, titulaire indiscutable en équipe A. Rigueur tactique et vitesse précieuses en défense.'
             ],
 
         ];
@@ -283,23 +331,63 @@ class Roster
             ]],
 
             'eita-takasugi' => [[
-                'key'         => 'takasugi_rigorous_marking',
-                'mode'        => 'defense',
-                'label'       => 'Marquage rigoureux',
-                'short_label' => 'Marquage',
+                'key'         => 'takasugi_off_ball_run',
+                'mode'        => 'attack',
+                'label'       => 'Appel dans le dos',
+                'short_label' => 'Appel',
                 'cooldown'    => 2,
-                'base_action' => 'tackle',
-                'description' => 'Défenseur rigoureux de l’équipe A d’Esperion, il colle son vis-à-vis et le dépossède d’un tacle net.',
+                'base_action' => 'shot',
+                'description' => 'International U18 redoutable sans ballon : il se démarque dans le dos de la défense et conclut.',
             ]],
 
             'kenta-yoshitsune' => [[
-                'key'         => 'yoshitsune_last_wall',
+                'key'         => 'yoshitsune_captain_finish',
+                'mode'        => 'attack',
+                'label'       => 'Finition du capitaine',
+                'short_label' => 'Capitaine',
+                'cooldown'    => 3,
+                'base_action' => 'shot',
+                'description' => 'Un QI football immense et une finition chirurgicale : le capitaine d’Esperion ne laisse rien au hasard devant le but.',
+            ]],
+
+            'enshin-akiyama' => [[
+                'key'         => 'akiyama_decisive_wall',
                 'mode'        => 'defense',
-                'label'       => 'Dernier rempart',
-                'short_label' => 'Rempart',
+                'label'       => 'Mur décisif',
+                'short_label' => 'Mur',
                 'cooldown'    => 3,
                 'base_action' => 'hand_save',
-                'description' => 'Gardien de l’équipe A d’Esperion, il tient son but et détourne le tir à bout de bras.',
+                'description' => 'Gardien d’Esperion, il devient un mur sur les grands rendez-vous et relance aussitôt.',
+            ]],
+
+            'yutaka-yamada' => [[
+                'key'         => 'yamada_complete_fullback',
+                'mode'        => 'attack',
+                'label'       => 'Latéral complet',
+                'short_label' => 'Complet',
+                'cooldown'    => 2,
+                'base_action' => 'cross',
+                'description' => 'Ultra-complet sur son couloir droit, il déborde puis centre avec précision.',
+            ]],
+
+            'kanji-nikaido' => [[
+                'key'         => 'nikaido_vocal_leader',
+                'mode'        => 'defense',
+                'label'       => 'Leader vocal',
+                'short_label' => 'Leader',
+                'cooldown'    => 3,
+                'base_action' => 'hand_save',
+                'description' => 'Son expérience et sa voix organisent la défense et sécurisent le but.',
+            ]],
+
+            'kyo-shimura' => [[
+                'key'         => 'shimura_tactical_rigor',
+                'mode'        => 'defense',
+                'label'       => 'Rigueur tactique',
+                'short_label' => 'Rigueur',
+                'cooldown'    => 2,
+                'base_action' => 'intercept',
+                'description' => 'Titulaire en équipe A, il anticipe et coupe les trajectoires grâce à son placement et sa vitesse.',
             ]],
 
             // =======================

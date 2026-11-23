@@ -128,6 +128,14 @@ final class ClubRosters
                 // Remplaçants (3)
                 'Hiroshi Okamoto', 'Kenji Tsuda', 'Takuya Nozaki',
             ],
+            'Esperion' => [
+                // Titulaires (11)
+                'Enshin Akiyama', 'Ashito Aoi', 'Nagisa Akutsu', 'Keiji Togashi', 'Yutaka Yamada',
+                'Eisaku Ohtomo', 'Yoichi Kiriki', 'Haruhisa Kuribayashi',
+                'Eita Takasugi', 'Kenta Yoshitsune', 'Yuma Motoki',
+                // Remplaçants (4)
+                'Kanji Nikaido', 'Kyo Shimura', 'Jun Asari', 'Soichiro Tachibana',
+            ],
         ];
     }
 
@@ -154,6 +162,7 @@ final class ClubRosters
             'Minawi'   => 'Tetsuo Ishida',
             'Shimizu'  => 'Morimichi Kawakami',
             'Shimada'  => 'Masayuki Jinbo',
+            'Esperion' => 'Kenta Yoshitsune',
         ];
     }
 }

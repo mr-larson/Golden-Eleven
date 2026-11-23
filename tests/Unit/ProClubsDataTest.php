@@ -12,19 +12,21 @@ class ProClubsDataTest extends TestCase
     public function test_every_club_has_a_full_roster_and_a_captain_from_it(): void
     {
         $teams = array_column(ProClubs::teams(), 0);
-        $this->assertCount(20, $teams);
+        $this->assertCount(21, $teams);
         $this->assertSame($teams, array_keys(ProClubs::players()));
 
         foreach (ProClubs::players() as $club => $names) {
-            $this->assertCount(14, $names, $club);
+            // 14 joueurs, 15 pour Esperion (4 remplaçants dans le groupe d'Ao Ashi).
+            $this->assertCount($club === 'Esperion' ? 15 : 14, $names, $club);
             $this->assertContains(ProClubs::captains()[$club], $names, "capitaine de {$club}");
         }
     }
 
-    public function test_a_player_has_a_single_pro_contract_and_names_do_not_clash_with_college_clubs(): void
+    public function test_a_player_has_a_single_pro_contract_and_names_do_not_clash_with_college_clubs_except_esperion(): void
     {
         $all = array_merge(...array_values(ProClubs::players()));
         $this->assertSame($all, array_values(array_unique($all)), 'joueur présent dans deux clubs pro');
-        $this->assertSame([], array_intersect(array_column(ProClubs::teams(), 0), array_keys(ClubRosters::players())));
+        // Le nom d'un club n'est unique que par période : Esperion existe volontairement dans les trois.
+        $this->assertSame(['Esperion'], array_values(array_intersect(array_column(ProClubs::teams(), 0), array_keys(ClubRosters::players()))));
     }
 }

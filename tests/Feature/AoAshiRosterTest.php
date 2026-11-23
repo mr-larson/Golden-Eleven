@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Player;
+use App\Models\Team;
 use Database\Seeders\PlayerSeeder;
 use Database\Seeders\Players\AoAshi\Roster;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,10 +22,11 @@ class AoAshiRosterTest extends TestCase
     {
         $this->seed(PlayerSeeder::class);
 
-        $this->assertSame(13, Player::where('origin', 'ao_ashi')->count());
+        $this->assertSame(17, Player::where('origin', 'ao_ashi')->count());
         $this->assertSame(0, Player::where('origin', 'ao_ashi')->where('lastname', 'Nakamura')->count(), 'Taira Nakamura est un entraîneur');
         $this->assertSame(self::NEW_A_TEAM, Player::where('origin', 'ao_ashi')->whereIn('lastname', self::NEW_A_TEAM)->orderBy('id')->pluck('lastname')->all());
-        $this->assertSame('Goalkeeper', Player::where('lastname', 'Yoshitsune')->sole()->position->value);
+        $this->assertSame('Forward', Player::where('lastname', 'Yoshitsune')->sole()->position->value);
+        $this->assertSame('Goalkeeper', Player::where('lastname', 'Akiyama')->sole()->position->value);
         $this->assertSame('Japon', Player::where('lastname', 'Akutsu')->sole()->nationality);
     }
 
@@ -50,10 +52,35 @@ class AoAshiRosterTest extends TestCase
         $migration->up();
         $migration->up();   // rejouable
 
-        $this->assertSame(13, Player::where('origin', 'ao_ashi')->count());
+        $this->assertSame(17, Player::where('origin', 'ao_ashi')->count());
         $this->assertSoftDeleted('players', ['id' => $nakamura->id]);
         $this->assertSame(5, Player::whereIn('lastname', self::NEW_A_TEAM)->count());
         $this->assertSame($referenceBefore, $reference->fresh()->getAttributes());
         $this->assertSame($savedBefore, $saved->fresh()->getAttributes());
+    }
+
+    public function test_esperion_migration_creates_the_club_in_the_three_periods_and_fixes_positions(): void
+    {
+        $seeder = new PlayerSeeder();
+        $moves  = Roster::specialMoves();
+        // Catalogue « existant » : sans les quatre nouveaux joueurs, Yoshitsune encore gardien.
+        foreach (Roster::players() as $profile) {
+            if (! in_array($profile[1], ['Akiyama', 'Yamada', 'Nikaido', 'Shimura'], true)) {
+                DB::table('players')->insert($seeder->row('ao_ashi', $profile, [], $moves));
+            }
+        }
+        Player::where('lastname', 'Yoshitsune')->update(['position' => 'Goalkeeper']);
+
+        $migration = require database_path('migrations/2026_11_23_100000_add_esperion_club_to_all_periods.php');
+        $migration->up();
+        $migration->up();   // rejouable
+
+        $this->assertSame(17, Player::where('origin', 'ao_ashi')->count());
+        $this->assertSame('Forward', Player::where('lastname', 'Yoshitsune')->sole()->position->value);
+        foreach (['college', 'world_youth', 'pro'] as $period) {
+            $team = Team::where('period', $period)->where('name', 'Esperion')->sole();
+            $this->assertSame(15, DB::table('contracts')->where('team_id', $team->id)->count(), $period);
+            $this->assertSame(1, DB::table('contracts')->where('team_id', $team->id)->where('is_captain', 1)->count(), $period);
+        }
     }
 }

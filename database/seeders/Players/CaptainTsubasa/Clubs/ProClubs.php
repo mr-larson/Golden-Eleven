@@ -65,6 +65,8 @@ final class ProClubs
                 TeamStyle::TACTICAL_DEFENSIVE, TeamStyle::PHILOSOPHY_ECONOMIST, '5-3-1-1'],
             ['RSC Anderlecht', 'Le grand club belge, vivier de talents.',
                 TeamStyle::TACTICAL_BALANCED, TeamStyle::PHILOSOPHY_ECONOMIST, '4-3-1-2'],
+            ['Esperion', 'Le club formateur d\'Ao Ashi : jeu technique, lecture tactique et jeunes talents.',
+                TeamStyle::TACTICAL_POSSESSION, TeamStyle::PHILOSOPHY_COLLECTIVE, '4-3-3'],
         ];
     }
 
@@ -192,6 +194,14 @@ final class ProClubs
                 // Remplaçants (3)
                 'Johan Walem', 'Lucas Biglia', 'Olivier Deschacht',
             ],
+            'Esperion' => [
+                // Titulaires (11)
+                'Enshin Akiyama', 'Ashito Aoi', 'Nagisa Akutsu', 'Keiji Togashi', 'Yutaka Yamada',
+                'Eisaku Ohtomo', 'Yoichi Kiriki', 'Haruhisa Kuribayashi',
+                'Eita Takasugi', 'Kenta Yoshitsune', 'Yuma Motoki',
+                // Remplaçants (4)
+                'Kanji Nikaido', 'Kyo Shimura', 'Jun Asari', 'Soichiro Tachibana',
+            ],
         ];
     }
 
@@ -219,6 +229,7 @@ final class ProClubs
             'Manchester City' => 'Kevin De Bruyne',
             'Atlético de Madrid' => 'Diego Simeone',
             'RSC Anderlecht' => 'Enzo Scifo',
+            'Esperion' => 'Kenta Yoshitsune',
         ];
     }
 }
