@@ -28,7 +28,7 @@ class WorldYouthSeeder extends Seeder
     private const PERIOD = 'world_youth';
 
     /** Clubs du Collège absents de la période World Youth (leurs joueurs deviennent agents libres). */
-    private const REMOVED_CLUBS = ['Shimada', 'Minawi', 'Meiwa', 'Nakahara', 'Shimizu', 'Naniwa', 'Otomo', 'Shutetsu'];
+    private const REMOVED_CLUBS = ['Shimada', 'Minawi', 'Nakahara', 'Shimizu', 'Naniwa', 'Otomo', 'Shutetsu'];
 
     /** Transferts « Prénom Nom » => club d'arrivée (ces clubs étant supprimés, les autres joueurs sont libérés). */
     private const MOVES = [
@@ -42,6 +42,10 @@ class WorldYouthSeeder extends Seeder
         'Mamoru Izawa'     => 'Nankatsu',
         'Hajime Taki'      => 'Nankatsu',
         'Teppei Kisugi'    => 'Nankatsu',
+        'Tetsuo Ishida'    => 'Azumaichi',   // Minawi
+        'Kazuto Takei'     => 'Azumaichi',   // Minawi
+        'Morimichi Kawakami' => 'Hirado',    // gardien de Shimizu
+        'Junichi Nagasaki' => 'Hanawa',      // Shimada
     ];
 
     /** Joueurs sans club en World Youth (Tsubasa quitte Nankatsu). */
