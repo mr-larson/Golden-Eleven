@@ -38,16 +38,26 @@ use Inertia\Inertia;
 Route::get('/', function () {
     // Page publique : le classement JSON_EXTRACT sur tous les joueurs ne doit
     // pas tourner à chaque visite. Les données de référence changent rarement.
-    $reference = Cache::remember('welcome:reference', now()->addMinutes(10), fn () => [
-        'teams' => Team::select('id','name','budget','logo_path')->orderBy('name')->get()->toArray(),
-        'players' => Player::select('id','firstname','lastname','position','photo_path','stats')
-            ->orderByRaw("JSON_EXTRACT(stats, '$.attack') DESC")
-            ->take(50)
-            ->get()
-            ->toArray(),
-        // Compteur réel (l'échantillon ci-dessus est limité à 50).
-        'playerCount' => Player::count(),
-    ]);
+    // La vitrine montre la période Collège (clubs japonais d'origine) : équipes, joueurs (avec leur
+    // club) et données de la démo viennent tous de là. Compteurs, eux, couvrent toute la base.
+    $reference = Cache::remember('welcome:reference:college', now()->addMinutes(10), function () {
+        $teams = Team::select('id','name','budget','logo_path')->where('period', 'college')->orderBy('name')->get();
+
+        return [
+            'teams' => $teams->toArray(),
+            'players' => Player::select('players.id','firstname','lastname','position','photo_path','stats','contracts.team_id')
+                ->join('contracts', 'contracts.player_id', '=', 'players.id')
+                ->whereNull('contracts.deleted_at')
+                ->whereIn('contracts.team_id', $teams->pluck('id'))
+                ->whereNotNull('photo_path')
+                ->orderByRaw("JSON_EXTRACT(stats, '$.attack') DESC")
+                ->get()
+                ->toArray(),
+            // Compteurs réels de toute la base.
+            'playerCount' => Player::count(),
+            'teamCount' => Team::count(),
+        ];
+    });
 
     return Inertia::render('Welcome', [
         ...$reference,

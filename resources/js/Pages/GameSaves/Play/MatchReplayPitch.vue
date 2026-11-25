@@ -15,6 +15,8 @@ const props = defineProps({
     // Effectifs pour la reconstitution : { formation, players: [{id, lastname, number, position, is_starter}] }
     homeSquad:     { type: Object, default: null },
     awaySquad:     { type: Object, default: null },
+    // false : pas de barre de progression ni de boutons (lecture pilotée de l'extérieur via seek(), ex. démo de l'accueil).
+    controls:      { type: Boolean, default: true },
 });
 
 // ==========================
@@ -374,6 +376,9 @@ watch(() => props.events, () => {
 });
 
 onUnmounted(() => clearTimer());
+
+// Pilotage externe : se placer sur l'action `n` (0 = avant la première).
+defineExpose({ seek });
 </script>
 
 <template>
@@ -446,10 +451,10 @@ onUnmounted(() => clearTimer());
             </div>
 
             <!-- pas encore démarré -->
-            <div v-if="cursor === 0" class="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-xs font-bold z-30">
+            <div v-if="cursor === 0 && controls" class="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-xs font-bold z-30">
                 Appuie sur ▶ pour lancer le replay
             </div>
-            <div v-else-if="isFinished" class="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-xs font-bold z-30">
+            <div v-else-if="isFinished && controls" class="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-xs font-bold z-30">
                 🏁 Match terminé
             </div>
         </div>
@@ -485,7 +490,7 @@ onUnmounted(() => clearTimer());
         </div>
 
         <!-- Barre de progression -->
-        <div class="flex items-center gap-2 pt-2">
+        <div v-if="controls" class="flex items-center gap-2 pt-2">
             <span class="text-2xs text-slate-400 tabular-nums w-10 text-right">{{ cursor }}/{{ totalSteps }}</span>
             <div class="relative flex-1">
                 <input type="range" min="0" :max="totalSteps" :value="cursor"
@@ -501,7 +506,7 @@ onUnmounted(() => clearTimer());
         </div>
 
         <!-- Contrôles -->
-        <div class="flex flex-wrap items-center justify-center gap-2">
+        <div v-if="controls" class="flex flex-wrap items-center justify-center gap-2">
             <button type="button" @click="restart"
                     class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs transition-all"
                     title="Revenir au début">⏮</button>
