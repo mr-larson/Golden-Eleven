@@ -3,7 +3,7 @@
 namespace Database\Seeders\Players\CaptainTsubasa\Clubs;
 
 /**
- * Effectifs officiels des 15 clubs de Captain Tsubasa (collège) pour les
+ * Effectifs officiels des 16 clubs de Captain Tsubasa (collège) pour les
  * contrats de référence : quels joueurs jouent dans quel club, et qui est
  * capitaine. Lu par ContractSeeder, qui les transforme en lignes `contracts`.
  *
@@ -128,6 +128,14 @@ final class ClubRosters
                 // Remplaçants (3)
                 'Hiroshi Okamoto', 'Kenji Tsuda', 'Takuya Nozaki',
             ],
+            // Club d'invention (joueurs « originaux ») : un seul remplaçant.
+            'Nishigaoka' => [
+                'Kenji Nakashima', 'Ayumu Fukazawa', 'Ayato Nakatsuji', 'Daichi Inafune',
+                'Ao Sakuma', 'Keita Hara', 'Ayano Uchiyama', 'Ryota Kondo',
+                'Kai Kaga', 'Aito Katayama', 'Hikaru Tamura',
+                // Remplaçant (1)
+                'Sakura Ikoma',
+            ],
         ];
     }
 
@@ -154,6 +162,7 @@ final class ClubRosters
             'Minawi'   => 'Tetsuo Ishida',
             'Shimizu'  => 'Morimichi Kawakami',
             'Shimada'  => 'Masayuki Jinbo',
+            'Nishigaoka' => 'Ayato Nakatsuji',
         ];
     }
 }

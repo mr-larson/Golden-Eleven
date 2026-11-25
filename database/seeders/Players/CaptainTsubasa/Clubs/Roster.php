@@ -20,7 +20,7 @@ use Database\Seeders\Players\CaptainTsubasa\Clubs\Shimada;
 use Database\Seeders\Players\CaptainTsubasa\Clubs\TeamCoreSpecialMoves;
 
 /**
- * Données joueurs — groupe : les 15 clubs de Captain Tsubasa (collège).
+ * Données joueurs — groupe : les 16 clubs de Captain Tsubasa (collège).
  *
  * Point d'entrée lu par PlayerSeeder. Les données vivent dans une classe par club
  * (database/seeders/Players/CaptainTsubasa/Clubs/) ; cette classe les assemble dans l'ordre exact

@@ -34,6 +34,7 @@ class Roster
             ['Yuta', 'Sakai', 12, 'Midfielder', 90, ['speed' => 28, 'stamina' => 20, 'defense' => 15, 'attack' => 15, 'shot' => 15, 'pass' => 15, 'dribble' => 15, 'block' => 16, 'intercept' => 16, 'tackle' => 16, 'hand_save' => 15, 'punch_save' => 15]],
             ['Itsuki', 'Sugiura', 12, 'Defender', 85, ['speed' => 25, 'stamina' => 18, 'defense' => 15, 'attack' => 15, 'shot' => 15, 'pass' => 15, 'dribble' => 15, 'block' => 16, 'intercept' => 16, 'tackle' => 16, 'hand_save' => 15, 'punch_save' => 15]],
             ['Haru', 'Ogawa', 12, 'Midfielder', 60, ['speed' => 26, 'stamina' => 14, 'defense' => 15, 'attack' => 15, 'shot' => 15, 'pass' => 15, 'dribble' => 15, 'block' => 16, 'intercept' => 16, 'tackle' => 16, 'hand_save' => 15, 'punch_save' => 15]],
+            ['Hikaru', 'Tamura', 13, 'Forward', 205, ['speed' => 55, 'stamina' => 54, 'defense' => 17, 'attack' => 25, 'shot' => 24, 'pass' => 18, 'dribble' => 22, 'block' => 15, 'intercept' => 15, 'tackle' => 15, 'hand_save' => 15, 'punch_save' => 15]],
         ];
     }
 
