@@ -104,7 +104,7 @@ onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
                 <image :href="displaySrc" :width="credit.w" :height="credit.h" :clip-path="`url(#${cropClipId}-zoom)`" />
             </svg>
             <img v-else :src="displaySrc" :alt="alt" class="max-w-[92vw] max-h-[88vh] object-contain rounded-2xl shadow-2xl"
-                 :class="isPixel ? 'w-[min(80vw,80vh,640px)] h-auto' : ''" @click.stop />
+                 :class="isPixel ? 'w-[min(80vw,80vh,640px)] h-auto' : ''" @click.stop @error="onError" />
         </div>
     </Teleport>
 </template>

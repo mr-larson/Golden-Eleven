@@ -115,7 +115,7 @@ class PublishImagesCommand extends Command
 
     /**
      * Génère players/pixel/slug.png pour chaque photo joueur publiée (manquante
-     * ou plus ancienne que sa source WebP).
+     * ou plus ancienne que le portrait servi).
      */
     private function publishPixelVariants(bool $dry, bool $force): int
     {
@@ -126,12 +126,20 @@ class PublishImagesCommand extends Command
         }
         File::ensureDirectoryExists($dst);
 
-        $count = 0;
+        $sources = [];
         foreach (File::files($src) as $file) {
-            if (strtolower($file->getExtension()) !== 'webp') {
+            $ext = strtolower($file->getExtension());
+            if (! in_array($ext, self::SOURCE_EXTENSIONS, true)) {
                 continue;
             }
-            $slug   = $file->getFilenameWithoutExtension();
+            $slug = $file->getFilenameWithoutExtension();
+            if ($ext === 'webp' || ! isset($sources[$slug])) {
+                $sources[$slug] = $file;
+            }
+        }
+
+        $count = 0;
+        foreach ($sources as $slug => $file) {
             $target = "{$dst}/{$slug}.png";
             if (! $force && is_file($target) && filemtime($target) >= $file->getMTime()) {
                 continue;
