@@ -30,7 +30,7 @@ class UniverseConfigurationTest extends TestCase
         foreach ([$illustrated, $personal, $other] as $player) $this->assertFalse($player->fresh()->trashed());
         $this->assertSame($before, $saved->fresh()->getAttributes());
         $names = collect(Roster::players())->map(fn ($p) => $p[0].' '.$p[1]);
-        $this->assertCount(26, $names);
+        $this->assertCount(27, $names);
         $this->assertContains('Nico Perera', $names);
         $this->assertContains('Gauthier Leblanc', $names);
         $this->assertNotContains('Hiroki Matsunaga', $names);
