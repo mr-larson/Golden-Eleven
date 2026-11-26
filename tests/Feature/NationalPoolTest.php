@@ -34,7 +34,7 @@ class NationalPoolTest extends TestCase
 
         // Sae Itoshi est inséré par la migration de revue Blue Lock.
         $this->assertSame(13, Player::nationalEligible()->where('nationality', 'Japon')->count());
-        $this->assertSame(18, Player::where('nationality', 'Japon')->count(), 'les figurants restent en base, donc jouables en club');
+        $this->assertSame(25, Player::where('nationality', 'Japon')->count(), 'les figurants restent en base, donc jouables en club');
 
         $preview = app(NationalTeamAssembler::class)->preview('Japon');
         $this->assertNotNull($preview);
